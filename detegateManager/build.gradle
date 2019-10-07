@@ -25,11 +25,10 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.2.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     implementation project(path: ':core')
+    implementation project(path: ':tabShop')
+    implementation project(path: ':tabMall')
+    implementation project(path: ':tabHome')
+    implementation project(path: ':tabMine')
+    implementation project(path: ':tabDiscover')
 }

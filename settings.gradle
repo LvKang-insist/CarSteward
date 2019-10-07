@@ -1,1 +1,1 @@
-include ':app', ':core', ':subassembly', ':detegateManager'
+include ':app', ':core', ':subassembly', ':detegateManager', ':tabHome', ':tabShop', ':tabDiscover', ':tabMall', ':tabMine'

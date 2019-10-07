@@ -7,6 +7,7 @@ import com.car.core.delegate.base.BaseDelegate;
 import com.car.core.mvp.factory.CreatePresenter;
 import com.car.core.mvp.mvpdefault.DefaultPresenterImpl;
 import com.car.core.mvp.view.BaseMvpActivity;
+import com.car.detegatemanager.BottomDelegate;
 import com.car.detegatemanager.BottomSlideDelegate;
 
 /**
@@ -22,7 +23,7 @@ public class ExampleActivity extends BaseMvpActivity {
 
     @Override
     public BaseDelegate setRootDelegate() {
-        return new BottomSlideDelegate();
+        return new BottomDelegate();
     }
 
     @Override

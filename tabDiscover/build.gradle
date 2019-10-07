@@ -1,16 +1,20 @@
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.1"
+
+
     defaultConfig {
-        applicationId "com.car.carsteward"
         minSdkVersion 15
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
+
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -21,10 +25,10 @@ android {
         sourceCompatibility = '1.8'
         targetCompatibility = '1.8'
     }
+
 }
 
 dependencies {
 
-compile project(path: ':core')
-    compile project(path: ':detegateManager')
+implementation project(path: ':core')
 }

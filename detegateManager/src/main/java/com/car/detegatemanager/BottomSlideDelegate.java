@@ -9,6 +9,12 @@ import com.car.core.delegate.ItemBuilder;
 import com.car.core.delegate.TabItemSlideDelegate;
 import com.car.core.mvp.factory.CreatePresenter;
 import com.car.core.mvp.mvpdefault.DefaultPresenterImpl;
+import com.car.tabdiscover.DiscoverDelegate;
+import com.car.tabhome.HomeDelegate;
+import com.car.tabmall.MallDelegate;
+import com.car.tabmine.MineDelegate;
+import com.car.tabshop.ShopDelegate;
+
 import java.util.LinkedHashMap;
 
 /**
@@ -23,7 +29,11 @@ public class BottomSlideDelegate extends TabItemSlideDelegate {
 
     @Override
     public LinkedHashMap<BottomTabBean, BottomItemDelegate> setItems(ItemBuilder builder) {
-
+        builder.addItem(new BottomTabBean(R.drawable.fragmentation_help,"首页"),new HomeDelegate());
+        builder.addItem(new BottomTabBean(R.drawable.fragmentation_help,"门店"),new ShopDelegate());
+        builder.addItem(new BottomTabBean(R.drawable.fragmentation_help,"发现"),new DiscoverDelegate());
+        builder.addItem(new BottomTabBean(R.drawable.fragmentation_help,"商城"),new MallDelegate());
+        builder.addItem(new BottomTabBean(R.drawable.fragmentation_help,"我的"),new MineDelegate());
         return builder.build();
     }
 
