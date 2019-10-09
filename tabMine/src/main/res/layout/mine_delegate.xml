@@ -1,13 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
 
-    <TextView
+    <View
+        android:id="@+id/view_person_fm_bg"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:textSize="30sp"
-        android:text="我的"
-        android:gravity="center"/>
+        android:layout_height="192dp"
+        android:background="@drawable/mine_background" />
 
-</LinearLayout>
+    <RelativeLayout
+        android:id="@+id/mine_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/set_up_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:padding="10dp"
+            android:src="@drawable/shezhi" />
+
+        <cn.bingoogolapple.badgeview.BGABadgeImageView
+            android:id="@+id/news_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:padding="10dp"
+            android:src="@drawable/news"
+            app:badge_bgColor="#fff000"
+            app:badge_gravity="rightTop"
+            app:badge_horizontalMargin="0dp"
+            app:badge_padding="4dp"
+            app:badge_textColor="#FFFFFF"
+            app:badge_textSize="8dp"
+            app:badge_verticalMargin="0dp" />
+    </RelativeLayout>
+
+
+</FrameLayout>

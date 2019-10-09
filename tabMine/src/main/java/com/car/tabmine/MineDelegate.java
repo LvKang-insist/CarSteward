@@ -7,6 +7,9 @@ import com.car.core.mvp.factory.CreatePresenter;
 import com.car.core.mvp.mvpdefault.DefaultContract;
 import com.car.core.mvp.mvpdefault.DefaultPresenterImpl;
 
+import cn.bingoogolapple.badgeview.BGABadgeImageView;
+import cn.bingoogolapple.badgeview.BGABadgeLinearLayout;
+
 /**
  * @author 345 QQ:1831712732
  * @name CarSteward
@@ -24,7 +27,13 @@ public class MineDelegate extends BottomItemDelegate<DefaultPresenterImpl>
 
     @Override
     public void BindView(View view) {
+        BGABadgeImageView badge=view.findViewById(R.id.news_img);
+        badge.showTextBadge("20");
+    }
 
+    @Override
+    public int getToolbar() {
+        return R.id.mine_toolbar;
     }
 
     @Override

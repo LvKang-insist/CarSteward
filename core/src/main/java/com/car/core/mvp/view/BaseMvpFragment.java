@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.CallSuper;
 import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,6 +14,7 @@ import com.car.core.delegate.base.PermissionCheckerDelegate;
 import com.car.core.latte.Latte;
 import com.car.core.mvp.factory.PresenterFactoryImpl;
 import com.car.core.mvp.presenter.IBasePresenter;
+import com.gyf.immersionbar.ImmersionBar;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -38,6 +40,11 @@ public abstract class BaseMvpFragment<P extends IBasePresenter> extends Permissi
 
     private View rootView;
 
+    /**
+     * 状态栏沉浸
+     */
+    private ImmersionBar mImmersionBar;
+
     public <T extends BaseMvpFragment> T getParentDelegate(){
         return (T)getParentFragment();
     }
@@ -60,7 +67,7 @@ public abstract class BaseMvpFragment<P extends IBasePresenter> extends Permissi
         }
         mPresenter.onMvpAttachView(this, savedInstanceState);
         Latte.getBaseMvpActivity().setOnBackPressListener(this);
-
+        initImmersion();
 //        绑定 ButterKnife
         unbinder = ButterKnife.bind(this,rootView);
         BindView(rootView);
@@ -102,6 +109,62 @@ public abstract class BaseMvpFragment<P extends IBasePresenter> extends Permissi
 
     public View getRootView(){
         return rootView;
+    }
+
+    public ImmersionBar getStatusBarConfig() {
+        return mImmersionBar;
+    }
+
+    /**
+     * 是否使用沉浸式状态栏
+     */
+    public boolean isStatusBarEnabled() {
+        return true;
+    }
+
+    /**
+     * 初始化沉浸式
+     */
+    protected void initImmersion() {
+        // 初始化沉浸式状态栏
+        if (isStatusBarEnabled()) {
+            statusBarConfig().init();
+        }
+
+
+        // 设置标题栏沉浸
+        /*if (getTitleId() > 0) {
+            ImmersionBar.setTitleBar(this, findViewById(getTitleId()));
+        } else if (mTitleBar != null) {
+            ImmersionBar.setTitleBar(this, mTitleBar);
+        }*/
+    }
+    /**
+     * 初始化沉浸式状态栏
+     */
+    protected ImmersionBar statusBarConfig() {
+        // 在BaseActivity里初始化
+        mImmersionBar = ImmersionBar.with(this)
+                .transparentStatusBar()
+                .titleBarMarginTop(getToolView())
+                // 默认状态栏字体颜色为黑色
+                .statusBarDarkFont(true);
+        return mImmersionBar;
+    }
+
+    private View getToolView(){
+        int id = getToolbar();
+        if (id != 0){
+            return rootView.findViewById(id);
+        }
+        return null;
+    }
+
+    /**
+     * 需要被重写
+     */
+    public int getToolbar(){
+        return 0;
     }
 
     /**

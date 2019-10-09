@@ -1,14 +1,16 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 29
+
+    compileSdkVersion compile_sdk_version
     buildToolsVersion "29.0.1"
+
     defaultConfig {
         applicationId "com.car.carsteward"
-        minSdkVersion 15
-        targetSdkVersion 29
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion min_sdk_version
+        targetSdkVersion target_sdk_version
+        versionCode version_code
+        versionName version_name
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -25,6 +27,6 @@ android {
 
 dependencies {
 
-compile project(path: ':core')
-    compile project(path: ':detegateManager')
+    implementation project(path: ':core')
+    implementation project(path: ':detegateManager')
 }

@@ -11,6 +11,7 @@ import com.car.core.delegate.base.BaseDelegate;
 import com.car.core.latte.Latte;
 import com.car.core.mvp.factory.PresenterFactoryImpl;
 import com.car.core.mvp.presenter.IBasePresenter;
+import com.gyf.immersionbar.ImmersionBar;
 
 /**
  * @author 345 QQ:1831712732
@@ -20,6 +21,12 @@ import com.car.core.mvp.presenter.IBasePresenter;
  * @description 抽象类， Activity 必须继承此类
  */
 public abstract class BaseMvpActivity<P extends IBasePresenter> extends BaseActivity implements IBaseView {
+
+    /**
+     * 状态栏沉浸
+     */
+    private ImmersionBar mImmersionBar;
+
 
     public P mPresenter;
 
@@ -59,6 +66,7 @@ public abstract class BaseMvpActivity<P extends IBasePresenter> extends BaseActi
         Latte.init(this)
                 .withBaseMvpActivity(this)
                 .configure();
+//        initImmersion();
         BindView();
 //        将 Lifecycle 对象和LifecycleObserver 对象进行绑定
         getLifecycle().addObserver(mPresenter);
@@ -72,7 +80,50 @@ public abstract class BaseMvpActivity<P extends IBasePresenter> extends BaseActi
         }
     }
 
+    public ImmersionBar getStatusBarConfig() {
+        return mImmersionBar;
+    }
 
+    /**
+     * 是否使用沉浸式状态栏
+     */
+    public boolean isStatusBarEnabled() {
+        return true;
+    }
+
+    /**
+     * 初始化沉浸式
+     */
+    protected void initImmersion() {
+        // 初始化沉浸式状态栏
+        if (isStatusBarEnabled()) {
+            statusBarConfig().init();
+        }
+
+
+        // 设置标题栏沉浸
+        /*if (getTitleId() > 0) {
+            ImmersionBar.setTitleBar(this, findViewById(getTitleId()));
+        } else if (mTitleBar != null) {
+            ImmersionBar.setTitleBar(this, mTitleBar);
+        }*/
+    }
+    /**
+     * 初始化沉浸式状态栏
+     */
+    protected ImmersionBar statusBarConfig() {
+        // 在BaseActivity里初始化
+        mImmersionBar = ImmersionBar.with(this)
+                .transparentNavigationBar()
+                // 默认状态栏字体颜色为黑色
+                .statusBarDarkFont(true);
+        return mImmersionBar;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
 
     /*  @Override
     public boolean onKeyUp(int keyCode, KeyEvent event) {

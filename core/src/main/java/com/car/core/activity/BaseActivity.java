@@ -5,6 +5,8 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.gyf.immersionbar.ImmersionBar;
+
 import me.yokeyword.fragmentation.ExtraTransaction;
 import me.yokeyword.fragmentation.ISupportActivity;
 import me.yokeyword.fragmentation.SupportActivityDelegate;
@@ -19,6 +21,7 @@ import me.yokeyword.fragmentation.anim.FragmentAnimator;
  */
 public abstract class BaseActivity extends AppCompatActivity implements ISupportActivity {
 
+
     public final SupportActivityDelegate DELEGATE = new SupportActivityDelegate(this);
 
     @Override
@@ -26,6 +29,8 @@ public abstract class BaseActivity extends AppCompatActivity implements ISupport
         super.onCreate(savedInstanceState);
         DELEGATE.onCreate(savedInstanceState);
     }
+
+
 
     @Override
     protected void onDestroy() {
@@ -74,5 +79,7 @@ public abstract class BaseActivity extends AppCompatActivity implements ISupport
     public void onBackPressed() {
         DELEGATE.onBackPressed();
     }
+
+
 
 }

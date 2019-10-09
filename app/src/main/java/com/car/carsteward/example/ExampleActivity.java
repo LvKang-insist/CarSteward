@@ -8,7 +8,8 @@ import com.car.core.mvp.factory.CreatePresenter;
 import com.car.core.mvp.mvpdefault.DefaultPresenterImpl;
 import com.car.core.mvp.view.BaseMvpActivity;
 import com.car.detegatemanager.BottomDelegate;
-import com.car.detegatemanager.BottomSlideDelegate;
+import com.gyf.immersionbar.BarHide;
+import com.gyf.immersionbar.ImmersionBar;
 
 /**
  * @author 345 QQ:1831712732
@@ -28,6 +29,11 @@ public class ExampleActivity extends BaseMvpActivity {
 
     @Override
     public void BindView() {
-
+        // 设置状态栏和导航栏参数
+       /* getStatusBarConfig()
+                .hideBar(BarHide.FLAG_HIDE_STATUS_BAR)
+                .init();*/
     }
+
+
 }
