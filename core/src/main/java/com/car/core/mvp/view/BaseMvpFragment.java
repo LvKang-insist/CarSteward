@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.annotation.CallSuper;
 import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -34,7 +33,7 @@ public abstract class BaseMvpFragment<P extends IBasePresenter> extends Permissi
 
     public abstract Object setLayout();
 
-    public abstract void BindView(View view);
+    public abstract void bindView(View view);
 
     private Unbinder unbinder = null;
 
@@ -70,7 +69,7 @@ public abstract class BaseMvpFragment<P extends IBasePresenter> extends Permissi
         initImmersion();
 //        绑定 ButterKnife
         unbinder = ButterKnife.bind(this,rootView);
-        BindView(rootView);
+        bindView(rootView);
 //        将 Lifecycle 对象和LifecycleObserver 对象进行绑定
         getLifecycle().addObserver(mPresenter);
         return rootView;

@@ -1,47 +1,179 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.car.core.ui.view.MyNestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:fillViewport="true">
 
-    <View
-        android:id="@+id/view_person_fm_bg"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="192dp"
-        android:background="@drawable/mine_background" />
+        android:layout_height="match_parent">
 
-    <RelativeLayout
-        android:id="@+id/mine_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp">
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/set_up_img"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:padding="10dp"
-            android:src="@drawable/shezhi" />
-
-        <cn.bingoogolapple.badgeview.BGABadgeImageView
-            android:id="@+id/news_img"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:padding="10dp"
-            android:src="@drawable/news"
-            app:badge_bgColor="#fff000"
-            app:badge_gravity="rightTop"
-            app:badge_horizontalMargin="0dp"
-            app:badge_padding="4dp"
-            app:badge_textColor="#FFFFFF"
-            app:badge_textSize="8dp"
-            app:badge_verticalMargin="0dp" />
-    </RelativeLayout>
+        <View
+            android:id="@+id/view_person_fm_bg"
+            android:layout_width="match_parent"
+            android:layout_height="210dp"
+            android:background="@drawable/mine_background" />
 
 
-</FrameLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <include layout="@layout/mine_toolbar" />
+
+            <RelativeLayout
+                android:id="@+id/min_account_rl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/mine_toolbar"
+                android:layout_marginTop="5dp"
+                android:paddingLeft="22dp"
+                android:paddingRight="22dp"
+                android:paddingBottom="10dp">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/mine_head_circle_iv"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/mine_account_number_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="9dp"
+                    android:layout_marginLeft="9dp"
+                    android:layout_toRightOf="@id/mine_head_circle_iv"
+                    android:text="@string/please_login"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    tools:ignore="RelativeOverlap,RtlHardcoded" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/mine_account_vip_iv"
+                    android:layout_width="61dp"
+                    android:layout_height="18dp"
+                    android:layout_below="@id/mine_account_number_tv"
+                    android:layout_marginStart="9dp"
+                    android:layout_marginLeft="9dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_toEndOf="@id/mine_head_circle_iv"
+                    android:layout_toRightOf="@id/mine_head_circle_iv"
+                    android:scaleType="fitXY" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/mine_sign_tv"
+                    android:layout_width="34dp"
+                    android:layout_height="34dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/mine_back_circle"
+                    android:gravity="center"
+                    android:text="@string/sign_in"
+                    android:textColor="#ffffff"
+                    android:textSize="12sp" />
+
+            </RelativeLayout>
+
+            <GridView
+                android:id="@+id/mine_gv_one"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_below="@id/min_account_rl"
+                android:numColumns="4" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/mine_card_view_one"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/mine_gv_one"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="10dp"
+                android:background="@color/white"
+                app:cardCornerRadius="4dp"
+                app:cardElevation="0dp">
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:id="@+id/my_order_rl"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="11dp"
+                            android:layout_marginLeft="11dp"
+                            android:layout_marginTop="15dp"
+                            android:text="@string/my_order"
+                            android:textColor="#000"
+                            android:textSize="13sp" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/main_my_order_tv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginTop="17dp"
+                            android:layout_marginEnd="11dp"
+                            android:layout_marginRight="11dp"
+                            android:drawableEnd="@drawable/back_right"
+                            android:drawableRight="@drawable/back_right"
+                            android:drawablePadding="5dp"
+                            android:text="@string/all_order"
+                            android:textSize="12sp"
+                            tools:ignore="RelativeOverlap" />
+                    </RelativeLayout>
+
+
+                    <GridView
+                        android:id="@+id/mine_gv_two"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/my_order_rl"
+                        android:background="@color/black"
+                        android:numColumns="5" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/mine_card_view_one"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@color/white"
+                app:cardCornerRadius="4dp"
+                app:cardElevation="0dp">
+
+                <GridView
+                    android:id="@+id/mine_gv_three"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/my_order_rl"
+                    android:verticalSpacing="15dp"
+                    android:numColumns="4"
+                    android:paddingBottom="20dp"/>
+
+            </androidx.cardview.widget.CardView>
+
+        </RelativeLayout>
+
+    </FrameLayout>
+
+
+
+</com.car.core.ui.view.MyNestedScrollView>

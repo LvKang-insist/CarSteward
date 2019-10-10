@@ -23,7 +23,7 @@ public class MallDelegate extends BottomItemDelegate<DefaultPresenterImpl>
     }
 
     @Override
-    public void BindView(View view) {
+    public void bindView(View view) {
 
     }
 

@@ -3,7 +3,7 @@ if (isDebug.toBoolean()){
 }else {
     apply plugin: 'com.android.library'
 }
-
+apply plugin: 'com.jakewharton.butterknife'
 android {
     compileSdkVersion compile_sdk_version
     buildToolsVersion "29.0.1"
@@ -44,4 +44,5 @@ android {
 dependencies {
     implementation project(path: ':core')
     annotationProcessor "cn.bingoogolapple:bga-badgeview-compiler:1.1.8"
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.1.0'
 }

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/mine_toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/min_setting_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:padding="10dp"
+        android:src="@drawable/shezhi" />
+
+    <cn.bingoogolapple.badgeview.BGABadgeImageView
+        android:id="@+id/mine_news_bgab_iv"
+        app:badge_bgColor="#fff000"
+        app:badge_gravity="rightTop"
+        app:badge_horizontalMargin="0dp"
+        app:badge_padding="4dp"
+        app:badge_textColor="#FFFFFF"
+        app:badge_textSize="8dp"
+        app:badge_verticalMargin="0dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:padding="10dp"
+        android:src="@drawable/news" />
+</RelativeLayout>

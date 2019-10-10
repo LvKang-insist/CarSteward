@@ -66,6 +66,10 @@ dependencies {
     //卡片布局
     api 'androidx.cardview:cardview:1.0.0'
 
+    //徽章布局
     api 'cn.bingoogolapple:bga-badgeview:1.1.3@aar'
     api 'cn.bingoogolapple:bga-adapter:1.1.5@aar'
+
+    //图片圆形化
+    api 'de.hdodenhof:circleimageview:2.1.0'
 }

@@ -96,7 +96,7 @@ public abstract class TabItemDelegate<P extends IBasePresenter> extends BaseMvpF
     }
 
     @Override
-    public void BindView(View view) {
+    public void bindView(View view) {
         final int size = ITEMS.size();
         for (int i = 0; i < size; i++) {
             //第一个参数 布局，第二个参数 为给第一个参数加载的布局 设置一个父布局
