@@ -7,15 +7,20 @@ package com.car.tabmine.mvp;
  * @time 2019/10/10 23:04
  * @description
  */
-public class FunctionItemBean {
+public class TextImageBean {
     private int image;
     private String title;
+    private int bga;
 
-
-    public FunctionItemBean(int imageId, String title) {
+    public TextImageBean(int imageId, String title) {
         this.image = imageId;
         this.title = title;
+    }
 
+    public TextImageBean(int image, String title, int bga) {
+        this.image = image;
+        this.title = title;
+        this.bga = bga;
     }
 
     public int getImage() {
@@ -35,4 +40,10 @@ public class FunctionItemBean {
     }
 
 
+    public int getBga() {
+        return bga;
+    }
+    public void setBga(int bga) {
+        this.bga = bga;
+    }
 }

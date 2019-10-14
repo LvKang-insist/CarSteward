@@ -3,7 +3,7 @@ package com.car.core.net.download;
 import android.content.Intent;
 import android.os.AsyncTask;
 
-import com.car.core.file.FileUtils;
+import com.car.core.utils.file.FileUtils;
 import com.car.core.latte.Latte;
 import com.car.core.net.callback.IRequest;
 import com.car.core.net.callback.ISuccess;

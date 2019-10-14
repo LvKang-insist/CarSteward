@@ -1,6 +1,5 @@
 package com.car.tabmine.mvp;
 
-import com.car.core.mvp.mvpdefault.DefaultContract;
 import com.car.core.mvp.presenter.IBasePresenter;
 import com.car.core.mvp.view.BaseMvpFragment;
 import com.car.core.mvp.view.IBaseView;
@@ -19,7 +18,13 @@ public class MineContract {
 
     public interface IMineView extends IBaseView{
         void onResult(boolean flag, String result);
-        void setGvThree(List<FunctionItemBean> list);
+        /**
+         * gradview 数据
+         * @param list 数据
+         */
+        void setGvOne(List<TextIntegerBean> list);
+        void setGvTwo(List<TextImageBean> list);
+        void setGvThree(List<TextImageBean> list);
     }
 
     public interface IMinePresenter extends IBasePresenter<IMineView> {

@@ -1,7 +1,7 @@
 package com.car.core.net.interceptors;
 
 import androidx.annotation.RawRes;
-import com.car.core.file.FileUtils;
+import com.car.core.utils.file.FileUtils;
 import java.io.IOException;
 import okhttp3.Interceptor;
 import okhttp3.MediaType;

@@ -8,11 +8,14 @@ import android.view.ViewGroup;
 import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
 
+import com.car.core.R;
 import com.car.core.delegate.base.PermissionCheckerDelegate;
 import com.car.core.latte.Latte;
 import com.car.core.mvp.factory.PresenterFactoryImpl;
 import com.car.core.mvp.presenter.IBasePresenter;
+import com.google.gson.Gson;
 import com.gyf.immersionbar.ImmersionBar;
 
 import butterknife.ButterKnife;
@@ -27,12 +30,22 @@ import butterknife.Unbinder;
  */
 
 public abstract class BaseMvpFragment<P extends IBasePresenter> extends PermissionCheckerDelegate
-        implements IBaseView,  BaseMvpActivity.OnBackPressListener{
+        implements IBaseView, BaseMvpActivity.OnBackPressListener {
 
     private P mPresenter;
-
+    public Gson gson = new Gson();
+    /**
+     * 设置布局
+     *
+     * @return 可以是一个View ，也可以是一个Layout的Id，代表一个视图
+     */
     public abstract Object setLayout();
 
+    /**
+     * 必须重写此方法，他在 onCreateView 执行后调用。
+     *
+     * @view 当前fragmetn 的视图
+     */
     public abstract void bindView(View view);
 
     private Unbinder unbinder = null;
@@ -44,8 +57,8 @@ public abstract class BaseMvpFragment<P extends IBasePresenter> extends Permissi
      */
     private ImmersionBar mImmersionBar;
 
-    public <T extends BaseMvpFragment> T getParentDelegate(){
-        return (T)getParentFragment();
+    public <T extends BaseMvpFragment> T getParentDelegate() {
+        return (T) getParentFragment();
     }
 
     @Nullable
@@ -68,14 +81,14 @@ public abstract class BaseMvpFragment<P extends IBasePresenter> extends Permissi
         Latte.getBaseMvpActivity().setOnBackPressListener(this);
         initImmersion();
 //        绑定 ButterKnife
-        unbinder = ButterKnife.bind(this,rootView);
+        unbinder = ButterKnife.bind(this, rootView);
         bindView(rootView);
 //        将 Lifecycle 对象和LifecycleObserver 对象进行绑定
         getLifecycle().addObserver(mPresenter);
         return rootView;
     }
 
-    public P getPresenter(){
+    public P getPresenter() {
         return mPresenter;
     }
 
@@ -92,7 +105,7 @@ public abstract class BaseMvpFragment<P extends IBasePresenter> extends Permissi
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        if (unbinder != null){
+        if (unbinder != null) {
             unbinder.unbind();
             unbinder = null;
         }
@@ -106,7 +119,7 @@ public abstract class BaseMvpFragment<P extends IBasePresenter> extends Permissi
     }
 
 
-    public View getRootView(){
+    public View getRootView() {
         return rootView;
     }
 
@@ -138,6 +151,7 @@ public abstract class BaseMvpFragment<P extends IBasePresenter> extends Permissi
             ImmersionBar.setTitleBar(this, mTitleBar);
         }*/
     }
+
     /**
      * 初始化沉浸式状态栏
      */
@@ -148,12 +162,25 @@ public abstract class BaseMvpFragment<P extends IBasePresenter> extends Permissi
                 .titleBarMarginTop(getToolView())
                 // 默认状态栏字体颜色为黑色
                 .statusBarDarkFont(true);
+        if (getToolView() instanceof Toolbar) {
+            setBack(((Toolbar) getToolView()));
+        }
         return mImmersionBar;
     }
 
-    private View getToolView(){
+    protected void setBack(Toolbar toolbar) {
+        toolbar.setNavigationIcon(R.drawable.back);
+        toolbar.setNavigationOnClickListener(v -> {
+            if (!setBackPress()) {
+                getSupportDelegate().pop();
+            }
+        });
+    }
+
+
+    private View getToolView() {
         int id = getToolbar();
-        if (id != 0){
+        if (id != 0) {
             return rootView.findViewById(id);
         }
         return null;
@@ -162,12 +189,12 @@ public abstract class BaseMvpFragment<P extends IBasePresenter> extends Permissi
     /**
      * 需要被重写
      */
-    public int getToolbar(){
+    public int getToolbar() {
         return 0;
     }
 
     /**
-     *  如果需要拦截返回事件，则重写该方法 return true 即可
+     * 如果需要拦截返回事件，则重写该方法 return true 即可
      */
     @Override
     public boolean setBackPress() {
@@ -175,18 +202,26 @@ public abstract class BaseMvpFragment<P extends IBasePresenter> extends Permissi
     }
 
     /**
-     * fragment基本跳转
-     * A->B
+     * 有父fragment的基本跳转
      */
-    public void fragmentStart(@IdRes int id) {
-
+    public void fragmentAnimStart(BaseMvpFragment fragment) {
+        getParentDelegate()
+                .getSupportDelegate()
+                .extraTransaction()
+                .setCustomAnimations(R.anim.slide_right_in, R.anim.slide_right_out,
+                        R.anim.slide_left_in, R.anim.slide_left_out)
+                .start(fragment);
     }
-    /**
-     * fragment 携带数据跳转-Bundle
-     * A->B
-     */
-    public void fragmentStart(@IdRes int id, @Nullable Bundle bundle) {
 
+    /**
+     * 无父fragment的基本跳转
+     */
+    public void fragmentStart(BaseMvpFragment fragment) {
+        getSupportDelegate()
+                .extraTransaction()
+                .setCustomAnimations(R.anim.slide_right_in, R.anim.slide_right_out,
+                        R.anim.slide_left_in, R.anim.slide_left_out)
+                .start(fragment);
     }
 
     /**

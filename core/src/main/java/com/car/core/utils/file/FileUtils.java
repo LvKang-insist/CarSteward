@@ -1,4 +1,4 @@
-package com.car.core.file;
+package com.car.core.utils.file;
 
 import android.annotation.SuppressLint;
 import android.content.ContentResolver;

@@ -32,14 +32,6 @@ public abstract class BaseDelegate extends Fragment implements ISupportFragment 
     @SuppressWarnings("SpellCheckingInspection")
     private Unbinder mUnbinder = null;
 
-    /**
-     * @return 可以是一个View ，也可以是一个Layout的Id，代表一个视图
-     */
-    public abstract Object setLayout();
-
-
-
-
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);

@@ -4,4 +4,15 @@
     <string name="sign_in">签到</string>
     <string name="my_order">我的订单</string>
     <string name="all_order">全部订单</string>
+    <string name="plase_phone_number">请输入手机号码</string>
+    <string name="plase_password">请输入密码</string>
+    <string name="forget_pasword">忘记密码</string>
+    <string name="phone_number_register">手机号注册</string>
+    <string name="the_three_parties_login">使用第三方登录</string>
+    <string name="login">登录</string>
+    <string name="singup">注册</string>
+    <string name="get_phone_code">获取验证码</string>
+    <string name="plase_phone_code">请输入验证码</string>
+    <string name="consent">同意</string>
+    <string name="consent_password">确认密码</string>
 </resources>

@@ -37,7 +37,8 @@
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/mine_head_circle_iv"
                     android:layout_width="50dp"
-                    android:layout_height="50dp" />
+                    android:layout_height="50dp"
+                    android:src="@drawable/head_photo"/>
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/mine_account_number_tv"
@@ -141,7 +142,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/my_order_rl"
-                        android:background="@color/black"
                         android:numColumns="5" />
 
                 </androidx.appcompat.widget.LinearLayoutCompat>

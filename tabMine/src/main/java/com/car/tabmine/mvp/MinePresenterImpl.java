@@ -29,6 +29,14 @@ public class MinePresenterImpl extends BasePresenter<MineContract.IMineView, Min
 
     }
 
+    public void getOneTwoData() {
+        getView().setGvOne(getModel().setGvOneData());
+    }
+
+    public void getGvTwoData() {
+        getView().setGvTwo(getModel().setGvTwoData());
+    }
+
     public void getGvThreeData() {
         getView().setGvThree(getModel().setGvThreeData());
     }

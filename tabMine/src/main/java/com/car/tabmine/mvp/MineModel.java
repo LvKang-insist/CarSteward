@@ -22,28 +22,57 @@ public class MineModel extends BaseModel<String> {
         return null;
     }
 
-    public List<FunctionItemBean> setGvThreeData(){
-        List<FunctionItemBean> functionItemBeans = new ArrayList<>();
-        FunctionItemBean p1 = new FunctionItemBean(R.drawable.gouwuche, "购物车");
-        FunctionItemBean p2 = new FunctionItemBean(R.drawable.huiyuanzhongxin, "会员中心");
-        FunctionItemBean p22 = new FunctionItemBean(R.drawable.wodequanyi, "我的权益");
-        FunctionItemBean p3 = new FunctionItemBean(R.drawable.jifenzhongxin, "积分中心");
-        FunctionItemBean p4 = new FunctionItemBean(R.drawable.jifenshangcheng, "积分商城");
-        FunctionItemBean p5 = new FunctionItemBean(R.drawable.wodeqianbao, "我的钱包");
-        FunctionItemBean p6 = new FunctionItemBean(R.drawable.wodecheku, "我的车库");
-        FunctionItemBean p9 = new FunctionItemBean(R.drawable.dianzifapiao_person, "电子发票");
-        FunctionItemBean p10 = new FunctionItemBean(R.drawable.huiyuanrenwu, "会员任务");
-        FunctionItemBean p11 = new FunctionItemBean(R.drawable.yaoqinghaoyou, "邀请好友");
-        functionItemBeans.add(p1);
-        functionItemBeans.add(p2);
-        functionItemBeans.add(p22);
-        functionItemBeans.add(p3);
-        functionItemBeans.add(p4);
-        functionItemBeans.add(p5);
-        functionItemBeans.add(p6);
-        functionItemBeans.add(p9);
-        functionItemBeans.add(p10);
-        functionItemBeans.add(p11);
-        return functionItemBeans;
+
+    public List<TextIntegerBean> setGvOneData() {
+        List<TextIntegerBean> textIntegerBeans = new ArrayList<>();
+        TextIntegerBean t1 = new TextIntegerBean("收藏夹", 0);
+        TextIntegerBean t2 = new TextIntegerBean("足迹", 0);
+        TextIntegerBean t3 = new TextIntegerBean("银行卡", 0);
+        TextIntegerBean t4 = new TextIntegerBean("优惠券", 0);
+        textIntegerBeans.add(t1);
+        textIntegerBeans.add(t2);
+        textIntegerBeans.add(t3);
+        textIntegerBeans.add(t4);
+        return textIntegerBeans;
+    }
+
+    public List<TextImageBean> setGvTwoData() {
+        List<TextImageBean> textImageBeans = new ArrayList<>();
+        TextImageBean p1 = new TextImageBean(R.drawable.daifukuan, "代付款");
+        TextImageBean p2 = new TextImageBean(R.drawable.daifahuo, "代发货");
+        TextImageBean p3 = new TextImageBean(R.drawable.daishouhuo, "待收货");
+        TextImageBean p4 = new TextImageBean(R.drawable.daipingjia, "待评价");
+        TextImageBean p5 = new TextImageBean(R.drawable.tuihuo_shouhou, "退货/换货");
+        textImageBeans.add(p1);
+        textImageBeans.add(p2);
+        textImageBeans.add(p3);
+        textImageBeans.add(p4);
+        textImageBeans.add(p5);
+        return textImageBeans;
+    }
+
+    public List<TextImageBean> setGvThreeData() {
+        List<TextImageBean> textImageBeans = new ArrayList<>();
+        TextImageBean p1 = new TextImageBean(R.drawable.gouwuche, "购物车");
+        TextImageBean p2 = new TextImageBean(R.drawable.huiyuanzhongxin, "会员中心");
+        TextImageBean p22 = new TextImageBean(R.drawable.wodequanyi, "我的权益");
+        TextImageBean p3 = new TextImageBean(R.drawable.jifenzhongxin, "积分中心");
+        TextImageBean p4 = new TextImageBean(R.drawable.jifenshangcheng, "积分商城");
+        TextImageBean p5 = new TextImageBean(R.drawable.wodeqianbao, "我的钱包");
+        TextImageBean p6 = new TextImageBean(R.drawable.wodecheku, "我的车库");
+        TextImageBean p9 = new TextImageBean(R.drawable.dianzifapiao_person, "电子发票");
+        TextImageBean p10 = new TextImageBean(R.drawable.huiyuanrenwu, "会员任务");
+        TextImageBean p11 = new TextImageBean(R.drawable.yaoqinghaoyou, "邀请好友");
+        textImageBeans.add(p1);
+        textImageBeans.add(p2);
+        textImageBeans.add(p22);
+        textImageBeans.add(p3);
+        textImageBeans.add(p4);
+        textImageBeans.add(p5);
+        textImageBeans.add(p6);
+        textImageBeans.add(p9);
+        textImageBeans.add(p10);
+        textImageBeans.add(p11);
+        return textImageBeans;
     }
 }

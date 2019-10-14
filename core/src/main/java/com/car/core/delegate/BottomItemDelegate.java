@@ -14,16 +14,16 @@ import com.car.core.mvp.view.BaseMvpFragment;
  */
 public abstract class BottomItemDelegate<P extends IBasePresenter> extends BaseMvpFragment {
 
-    // 再点一次退出程序时间设置
+    /** 再点一次退出程序时间设置 */
     private static final long WAIT_TIME = 2000L;
-    private long TOUCH_TIME = 0;
+    private long time = 0;
 
     @Override
     public boolean onBackPressedSupport() {
-        if (System.currentTimeMillis() - TOUCH_TIME < WAIT_TIME) {
+        if (System.currentTimeMillis() - time < WAIT_TIME) {
             _mActivity.finish();
         } else {
-            TOUCH_TIME = System.currentTimeMillis();
+            time = System.currentTimeMillis();
             Toast.makeText(_mActivity, "双击退出", Toast.LENGTH_SHORT).show();
         }
         return true;

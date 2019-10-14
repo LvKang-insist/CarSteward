@@ -8,19 +8,20 @@ import androidx.appcompat.widget.AppCompatTextView;
 
 import com.car.core.delegate.BottomItemDelegate;
 import com.car.core.mvp.factory.CreatePresenter;
-import com.car.core.mvp.mvpdefault.DefaultContract;
-import com.car.core.mvp.mvpdefault.DefaultPresenterImpl;
+import com.car.tabmine.adapter.GradViewOneAdapter;
 import com.car.tabmine.adapter.GradViewThreeAdapter;
-import com.car.tabmine.mvp.FunctionItemBean;
+import com.car.tabmine.adapter.GradViewTwoAdapter;
+import com.car.tabmine.login.LoginDelegate;
+import com.car.tabmine.mvp.TextImageBean;
 import com.car.tabmine.mvp.MineContract;
 import com.car.tabmine.mvp.MinePresenterImpl;
+import com.car.tabmine.mvp.TextIntegerBean;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 import cn.bingoogolapple.badgeview.BGABadgeImageView;
-import cn.bingoogolapple.badgeview.BGABadgeLinearLayout;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
@@ -61,11 +62,12 @@ public class MineDelegate extends BottomItemDelegate<MinePresenterImpl>
         if (id == R.id.min_setting_iv) {
         } else if (id == R.id.mine_news_bgab_iv) {
         } else if (id == R.id.mine_head_circle_iv) {
+            //登录
+            fragmentAnimStart(new LoginDelegate());
         } else if (id == R.id.mine_account_vip_iv) {
         } else if (id == R.id.mine_sign_tv) {
         }
     }
-
 
     @Override
     public Object setLayout() {
@@ -74,6 +76,8 @@ public class MineDelegate extends BottomItemDelegate<MinePresenterImpl>
 
     @Override
     public void bindView(View view) {
+        getPresenter().getOneTwoData();
+        getPresenter().getGvTwoData();
         getPresenter().getGvThreeData();
     }
 
@@ -88,7 +92,19 @@ public class MineDelegate extends BottomItemDelegate<MinePresenterImpl>
     }
 
     @Override
-    public void setGvThree(List<FunctionItemBean> list) {
+    public void setGvOne(List<TextIntegerBean> list) {
+        GradViewOneAdapter adapter = new GradViewOneAdapter(list, getContext(), R.layout.mine_item_tv_tv);
+        mGridViewOne.setAdapter(adapter);
+    }
+
+    @Override
+    public void setGvTwo(List<TextImageBean> list) {
+        GradViewTwoAdapter adapter = new GradViewTwoAdapter(list, getContext(), R.layout.mine_item_icon_tv);
+        mGridViewTwo.setAdapter(adapter);
+    }
+
+    @Override
+    public void setGvThree(List<TextImageBean> list) {
         GradViewThreeAdapter adapter = new GradViewThreeAdapter(list, getContext(), R.layout.mine_item_icon_tv);
         mGridViewThree.setAdapter(adapter);
     }

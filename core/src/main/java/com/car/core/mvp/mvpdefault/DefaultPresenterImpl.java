@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.car.core.mvp.presenter.BasePresenter;
 import com.car.core.mvp.view.BaseMvpFragment;
+
 import java.util.WeakHashMap;
 
 /**
@@ -25,9 +26,9 @@ public class DefaultPresenterImpl extends BasePresenter<DefaultContract.IDefault
     @Override
     public void request(BaseMvpFragment mvpFragment, String url, WeakHashMap param) {
         DefaultModel defaultModel = new ViewModelProvider.NewInstanceFactory().create(DefaultModel.class);
-        defaultModel.request(url,param)
+        defaultModel.request(url, param)
                 .observe(mvpFragment, (Observer<String>) result -> {
-                    getView().onResult(true,result);
+                    getView().onResult(true, result);
                 });
     }
 
