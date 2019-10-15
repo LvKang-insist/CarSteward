@@ -196,7 +196,7 @@
             android:orientation="horizontal">
 
             <androidx.appcompat.widget.AppCompatCheckBox
-                android:id="@+id/is_ok"
+                android:id="@+id/signup_is_check"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:button="@null"
@@ -220,7 +220,7 @@
         </androidx.appcompat.widget.LinearLayoutCompat>
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_register"
+            android:id="@+id/mine_register_btn"
             android:layout_width="match_parent"
             android:layout_height="36dp"
             android:layout_marginTop="90dp"

@@ -1,16 +1,13 @@
 package com.car.tabmine.login;
 
-import android.graphics.Color;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
-
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatEditText;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.appcompat.widget.Toolbar;
-
 import com.car.core.api.Const;
 import com.car.core.mvp.factory.CreatePresenter;
 import com.car.core.mvp.mvpdefault.DefaultContract;
@@ -21,11 +18,11 @@ import com.car.tabmine.R;
 import com.car.tabmine.R2;
 import com.hjq.toast.ToastUtils;
 
-import java.util.WeakHashMap;
+import org.greenrobot.eventbus.EventBus;
 
+import java.util.WeakHashMap;
 import butterknife.BindView;
 import butterknife.OnClick;
-import butterknife.internal.Utils;
 
 /**
  * @author 345 QQ:1831712732
@@ -107,7 +104,7 @@ public class LoginDelegate extends BaseMvpFragment<DefaultPresenterImpl>
 
         } else if (i == R.id.login_go_register_tv) {
             //注册
-            fragmentStart(new SignUpDelegate());
+            fragmentAnimStart(new SignUpDelegate());
         } else if (i == R.id.login_wx_img_login_iv) {
 
         } else if (i == R.id.login_qq_img_login_iv) {
@@ -116,12 +113,24 @@ public class LoginDelegate extends BaseMvpFragment<DefaultPresenterImpl>
 
     @Override
     public void onResult(boolean flag, String result) {
+        Log.e("---------", "onResult: "+result );
         LogInBean logInBean = gson.fromJson(result, LogInBean.class);
         if (logInBean== null){
             ToastUtils.show("请求出错");
         }else {
             if (logInBean.getStatus() == 1){
                 CarPreference.putLogin(true);
+                CarPreference.putTokenId(logInBean.getData().getTokenId());
+                CarPreference.putLoginName(logInBean.getData().getLoginName());
+                CarPreference.putUserName(logInBean.getData().getUserName());
+                CarPreference.putUserSex(logInBean.getData().getUserSex());
+                CarPreference.putUserPhoto(logInBean.getData().getUserPhoto());
+                CarPreference.putQq(logInBean.getData().getIsBindingQQ());
+                CarPreference.putWechat(logInBean.getData().getIsBindingWX());
+                CarPreference.putHomeIsRevise(true);
+                CarPreference.putUserInfoIsRevise(true);
+                EventBus.getDefault().post(logInBean);
+                fragmentAnimBack();
             }
         }
     }

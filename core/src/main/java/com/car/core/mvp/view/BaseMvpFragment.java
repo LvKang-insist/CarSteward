@@ -1,11 +1,11 @@
 package com.car.core.mvp.view;
 
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
@@ -15,8 +15,11 @@ import com.car.core.delegate.base.PermissionCheckerDelegate;
 import com.car.core.latte.Latte;
 import com.car.core.mvp.factory.PresenterFactoryImpl;
 import com.car.core.mvp.presenter.IBasePresenter;
+import com.car.core.ui.dialog.ToastDialog;
 import com.google.gson.Gson;
 import com.gyf.immersionbar.ImmersionBar;
+
+import org.greenrobot.eventbus.EventBus;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -34,6 +37,9 @@ public abstract class BaseMvpFragment<P extends IBasePresenter> extends Permissi
 
     private P mPresenter;
     public Gson gson = new Gson();
+    private boolean mDialogIsShow = false;
+    private ToastDialog mLoadingDilaog;
+
     /**
      * 设置布局
      *
@@ -85,6 +91,10 @@ public abstract class BaseMvpFragment<P extends IBasePresenter> extends Permissi
         bindView(rootView);
 //        将 Lifecycle 对象和LifecycleObserver 对象进行绑定
         getLifecycle().addObserver(mPresenter);
+        //订阅
+        if (isEventBus()) {
+            EventBus.getDefault().register(this);
+        }
         return rootView;
     }
 
@@ -116,13 +126,26 @@ public abstract class BaseMvpFragment<P extends IBasePresenter> extends Permissi
         super.onDestroy();
         unbinder = null;
         rootView = null;
+        stopLoading();
+        if (isEventBus()) {
+            EventBus.getDefault().unregister(this);
+        }
     }
 
-
+    /**
+     * 获取 View
+     *
+     * @return view
+     */
     public View getRootView() {
         return rootView;
     }
 
+    /**
+     * 获取沉浸式状态栏实例
+     *
+     * @return 沉浸式状态栏
+     */
     public ImmersionBar getStatusBarConfig() {
         return mImmersionBar;
     }
@@ -142,14 +165,6 @@ public abstract class BaseMvpFragment<P extends IBasePresenter> extends Permissi
         if (isStatusBarEnabled()) {
             statusBarConfig().init();
         }
-
-
-        // 设置标题栏沉浸
-        /*if (getTitleId() > 0) {
-            ImmersionBar.setTitleBar(this, findViewById(getTitleId()));
-        } else if (mTitleBar != null) {
-            ImmersionBar.setTitleBar(this, mTitleBar);
-        }*/
     }
 
     /**
@@ -166,6 +181,45 @@ public abstract class BaseMvpFragment<P extends IBasePresenter> extends Permissi
             setBack(((Toolbar) getToolView()));
         }
         return mImmersionBar;
+    }
+
+    /**
+     * 显示加载对话框
+     *
+     * @param msg 若为 null ，显示正在加载，否则显示 msg
+     */
+    public void showLoading(String msg) {
+        createLoadingDialog(msg);
+        mLoadingDilaog
+                .setType(ToastDialog.Type.LOADING)
+                .show(getChildFragmentManager(), "register");
+    }
+
+    /**
+     * 初始化 loading
+     *
+     * @param msg 消息
+     */
+    private void createLoadingDialog(String msg) {
+        if (msg == null) {
+            msg = "正在加载...";
+        }
+        mLoadingDilaog = ToastDialog.ToastBuilder()
+                .setContentView(R.layout.dialog_toast)
+                .setGravity(Gravity.CENTER)
+                .build()
+                .setMessage(msg);
+        mDialogIsShow = true;
+    }
+
+    /**
+     * 关闭 Loading
+     */
+    public void stopLoading() {
+        if (mLoadingDilaog != null && mDialogIsShow) {
+            mLoadingDilaog.dismiss();
+            mLoadingDilaog = null;
+        }
     }
 
     protected void setBack(Toolbar toolbar) {
@@ -194,6 +248,15 @@ public abstract class BaseMvpFragment<P extends IBasePresenter> extends Permissi
     }
 
     /**
+     * 是否开启 eventbus
+     *
+     * @return true 为开启
+     */
+    public boolean isEventBus() {
+        return false;
+    }
+
+    /**
      * 如果需要拦截返回事件，则重写该方法 return true 即可
      */
     @Override
@@ -204,7 +267,7 @@ public abstract class BaseMvpFragment<P extends IBasePresenter> extends Permissi
     /**
      * 有父fragment的基本跳转
      */
-    public void fragmentAnimStart(BaseMvpFragment fragment) {
+    public void parentfragmentAnimStart(BaseMvpFragment fragment) {
         getParentDelegate()
                 .getSupportDelegate()
                 .extraTransaction()
@@ -214,9 +277,16 @@ public abstract class BaseMvpFragment<P extends IBasePresenter> extends Permissi
     }
 
     /**
+     * 有父fragment的退栈
+     */
+    public void parentfragmentAnimBack() {
+        getParentDelegate().getSupportDelegate().pop();
+    }
+
+    /**
      * 无父fragment的基本跳转
      */
-    public void fragmentStart(BaseMvpFragment fragment) {
+    public void fragmentAnimStart(BaseMvpFragment fragment) {
         getSupportDelegate()
                 .extraTransaction()
                 .setCustomAnimations(R.anim.slide_right_in, R.anim.slide_right_out,
@@ -225,10 +295,10 @@ public abstract class BaseMvpFragment<P extends IBasePresenter> extends Permissi
     }
 
     /**
-     * 退栈方法
+     * 有父fragment的退栈
      */
-    public void fragmentUp() {
-
+    public void fragmentAnimBack() {
+        getSupportDelegate().pop();
     }
 
 }

@@ -41,7 +41,7 @@
                     android:src="@drawable/head_photo"/>
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/mine_account_number_tv"
+                    android:id="@+id/mine_account_name_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="9dp"
@@ -56,7 +56,7 @@
                     android:id="@+id/mine_account_vip_iv"
                     android:layout_width="61dp"
                     android:layout_height="18dp"
-                    android:layout_below="@id/mine_account_number_tv"
+                    android:layout_below="@+id/mine_account_name_tv"
                     android:layout_marginStart="9dp"
                     android:layout_marginLeft="9dp"
                     android:layout_marginTop="5dp"

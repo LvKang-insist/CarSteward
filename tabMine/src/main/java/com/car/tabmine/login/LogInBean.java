@@ -10,7 +10,7 @@ package com.car.tabmine.login;
 public class LogInBean {
 
     /**
-     * data : {"isBindingQQ":"1","isBindingWX":"0","loginName":"15129379467","tokenId":"eca2d6cbb4c142ea14bbe9a755f9ba61bdd","userName":"15129379467","userScore":"0","userSex":"0","userStatus":"1","userType":"0"}
+     * data : {"isBindingQQ":"1","isBindingWX":"0","loginName":"15129379467","tokenId":"fa5e35312461424a2c50dff2700164a1081","userName":"345","userPhoto":"","userScore":"0","userSex":"1","userStatus":"1","userType":"0"}
      * msg : 登录成功!
      * status : 1
      */
@@ -48,10 +48,11 @@ public class LogInBean {
          * isBindingQQ : 1
          * isBindingWX : 0
          * loginName : 15129379467
-         * tokenId : eca2d6cbb4c142ea14bbe9a755f9ba61bdd
-         * userName : 15129379467
+         * tokenId : fa5e35312461424a2c50dff2700164a1081
+         * userName : 345
+         * userPhoto :
          * userScore : 0
-         * userSex : 0
+         * userSex : 1
          * userStatus : 1
          * userType : 0
          */
@@ -61,6 +62,7 @@ public class LogInBean {
         private String loginName;
         private String tokenId;
         private String userName;
+        private String userPhoto;
         private String userScore;
         private String userSex;
         private String userStatus;
@@ -104,6 +106,14 @@ public class LogInBean {
 
         public void setUserName(String userName) {
             this.userName = userName;
+        }
+
+        public String getUserPhoto() {
+            return userPhoto;
+        }
+
+        public void setUserPhoto(String userPhoto) {
+            this.userPhoto = userPhoto;
         }
 
         public String getUserScore() {

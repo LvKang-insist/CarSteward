@@ -9,7 +9,6 @@ import com.car.core.R;
 import com.car.core.ui.view.ProgressView;
 
 
-
 /**
  * Created by Administrator on 2019/10/9.
  */
@@ -61,6 +60,8 @@ public class ToastDialog extends BaseFragDialog {
                 icon.setVisibility(View.GONE);
                 progressView.setVisibility(View.VISIBLE);
                 break;
+            default:
+                break;
         }
         if (mMessage == null) {
             message.setVisibility(View.GONE);
@@ -106,11 +107,12 @@ public class ToastDialog extends BaseFragDialog {
         return this;
     }
 
+
     /**
      * 显示的类型
      */
     public enum Type {
         // 完成，错误，警告,  加载中
-        FINISH, ERROR, WARN ,LOADING
+        FINISH, ERROR, WARN, LOADING
     }
 }

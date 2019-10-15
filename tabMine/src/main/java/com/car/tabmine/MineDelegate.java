@@ -6,16 +6,25 @@ import android.widget.GridView;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.car.core.api.BaseUrl;
+import com.car.core.api.Const;
 import com.car.core.delegate.BottomItemDelegate;
 import com.car.core.mvp.factory.CreatePresenter;
 import com.car.tabmine.adapter.GradViewOneAdapter;
 import com.car.tabmine.adapter.GradViewThreeAdapter;
 import com.car.tabmine.adapter.GradViewTwoAdapter;
+import com.car.tabmine.login.LogInBean;
 import com.car.tabmine.login.LoginDelegate;
 import com.car.tabmine.mvp.TextImageBean;
 import com.car.tabmine.mvp.MineContract;
 import com.car.tabmine.mvp.MinePresenterImpl;
 import com.car.tabmine.mvp.TextIntegerBean;
+import com.hjq.toast.ToastUtils;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.List;
 
@@ -39,8 +48,8 @@ public class MineDelegate extends BottomItemDelegate<MinePresenterImpl>
     BGABadgeImageView mNewsIv = null;
     @BindView(R2.id.mine_head_circle_iv)
     CircleImageView mHeadCircle = null;
-    @BindView(R2.id.mine_account_number_tv)
-    AppCompatTextView mNumber = null;
+    @BindView(R2.id.mine_account_name_tv)
+    AppCompatTextView mName = null;
     @BindView(R2.id.mine_account_vip_iv)
     AppCompatImageView mVip = null;
     @BindView(R2.id.mine_sign_tv)
@@ -63,7 +72,7 @@ public class MineDelegate extends BottomItemDelegate<MinePresenterImpl>
         } else if (id == R.id.mine_news_bgab_iv) {
         } else if (id == R.id.mine_head_circle_iv) {
             //登录
-            fragmentAnimStart(new LoginDelegate());
+            parentfragmentAnimStart(new LoginDelegate());
         } else if (id == R.id.mine_account_vip_iv) {
         } else if (id == R.id.mine_sign_tv) {
         }
@@ -87,6 +96,11 @@ public class MineDelegate extends BottomItemDelegate<MinePresenterImpl>
     }
 
     @Override
+    public boolean isEventBus() {
+        return true;
+    }
+
+    @Override
     public void onResult(boolean flag, String result) {
 
     }
@@ -107,6 +121,22 @@ public class MineDelegate extends BottomItemDelegate<MinePresenterImpl>
     public void setGvThree(List<TextImageBean> list) {
         GradViewThreeAdapter adapter = new GradViewThreeAdapter(list, getContext(), R.layout.mine_item_icon_tv);
         mGridViewThree.setAdapter(adapter);
+    }
+
+    @Subscribe(threadMode = ThreadMode.POSTING)
+    public void loginResult(LogInBean bean) {
+        ToastUtils.show(getResources().getString(R.string.login_success));
+        if (bean.getData().getUserName() != null) {
+            mName.setText(bean.getData().getUserName());
+        } else {
+            mName.setText(bean.getData().getLoginName());
+        }
+        if (bean.getData().getUserPhoto() != null && !bean.getData().getUserPhoto().isEmpty()){
+            Glide.with(this)
+                    .load(BaseUrl.BASE_URL+bean.getData().getUserPhoto())
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .into(mHeadCircle);
+        }
     }
 
     @Override
