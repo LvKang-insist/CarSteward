@@ -14,21 +14,16 @@ import java.util.WeakHashMap;
  */
 public abstract class BaseModel<T> extends ViewModel {
 
-    public MutableLiveData<T> data;
-
-    public BaseModel(){
-        init();
-    }
-
-    public void init() {
-        if (data == null) {
-            data = new MutableLiveData<>();
-        }
-    }
-
     public MutableLiveData<T> getLiveData() {
-        return data;
+        return new MutableLiveData<>();
     }
 
-    public abstract MutableLiveData<T> request(String url,  WeakHashMap param);
+    /**
+     * 默认的网络请求方法
+     *
+     * @param url   地址
+     * @param param 参数
+     * @return liveData
+     */
+    public abstract MutableLiveData<T> request(String url, WeakHashMap param);
 }

@@ -11,4 +11,6 @@ import static com.car.core.api.BaseUrl.BASE_URL;
  */
 public class Const {
     public static final String API_BASE_USER = BASE_URL + "index.php?m=App&c=APIUsers";
+    public static final String API_BASE_URL_PUBLIC = BASE_URL + "index.php?m=App&c=APIPublic";
+
 }

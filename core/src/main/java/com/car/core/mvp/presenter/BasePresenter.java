@@ -1,12 +1,14 @@
 package com.car.core.mvp.presenter;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.OnLifecycleEvent;
 
 import com.car.core.mvp.model.BaseModel;
 import com.car.core.mvp.view.IBaseView;
+import com.hjq.toast.ToastUtils;
 
 import java.lang.ref.WeakReference;
 

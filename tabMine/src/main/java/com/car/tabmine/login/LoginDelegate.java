@@ -113,7 +113,6 @@ public class LoginDelegate extends BaseMvpFragment<DefaultPresenterImpl>
 
     @Override
     public void onResult(boolean flag, String result) {
-        Log.e("---------", "onResult: "+result );
         LogInBean logInBean = gson.fromJson(result, LogInBean.class);
         if (logInBean== null){
             ToastUtils.show("请求出错");
