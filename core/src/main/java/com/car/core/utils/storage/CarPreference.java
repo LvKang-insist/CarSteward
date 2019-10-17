@@ -264,4 +264,28 @@ public class CarPreference {
     public static Boolean isHomeIsRevise() {
         return getAppPreference(USER).getBoolean("isHomeReviser", false);
     }
+
+    /**
+     * 保存 cookie
+     *
+     * @param cookie cookie
+     */
+    public static void putCookie(String cookie) {
+        getAppPreferenceEdit(USER)
+                .putString("cookie", cookie)
+                .commit();
+    }
+
+    /**
+     * 设置首页是否修改
+     *
+     */
+    public static String getCookie() {
+        String cookie = getAppPreference(USER).getString("cookie", null);
+        if (cookie == null || cookie.isEmpty()) {
+            return null;
+        } else {
+            return cookie;
+        }
+    }
 }

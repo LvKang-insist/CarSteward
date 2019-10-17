@@ -2,6 +2,7 @@ package com.car.tabmine.login;
 
 import android.app.ProgressDialog;
 import android.util.Base64;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 
@@ -10,16 +11,20 @@ import androidx.appcompat.widget.AppCompatCheckBox;
 import androidx.appcompat.widget.AppCompatEditText;
 import androidx.appcompat.widget.AppCompatTextView;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.car.core.api.BaseUrl;
 import com.car.core.api.Const;
 import com.car.core.mvp.factory.CreatePresenter;
 import com.car.core.mvp.mvpdefault.DefaultContract;
 import com.car.core.mvp.mvpdefault.DefaultPresenterImpl;
 import com.car.core.mvp.view.BaseMvpFragment;
+import com.car.core.net.interceptors.InterceptorsManage;
 import com.car.core.ui.dialog.BaseFragDialog;
 import com.car.core.ui.dialog.DialogBuilder;
 import com.car.core.ui.dialog.ToastDialog;
 import com.car.core.utils.storage.CarPreference;
+import com.car.core.utils.time.SetTelCountTimer;
 import com.car.tabmine.R;
 import com.car.tabmine.R2;
 import com.car.tabmine.login.signmvp.SignUpBean;
@@ -106,8 +111,9 @@ public class SignUpDelegate extends BaseMvpFragment<SignUpPresenterImpl>
                 WeakHashMap<String, Object> maps = new WeakHashMap<>();
                 maps.put("loginKey", signkey);
                 maps.put("smsVerfy", smsVerfy);
+                InterceptorsManage.IS_UP_COOKIE_INTERCEPTOR = true;
                 getPresenter().signUp(this, Const.API_BASE_USER + signUp, maps);
-//                showLoading("注册中");
+                showLoading("注册中");
             }
         }
     }
@@ -135,12 +141,13 @@ public class SignUpDelegate extends BaseMvpFragment<SignUpPresenterImpl>
                         dialog.dismiss();
                     })
                     .setListener(R.id.tv_dialog_confirm, (dialog, view) -> {
+                        //获取验证码
                         WeakHashMap<String, Object> map = new WeakHashMap<>();
                         map.put("userPhone", mPhoneEt.getText().toString());
+                        InterceptorsManage.IS_OBTAIN_COOKIE_INTERCEPTOR = true;
                         getPresenter()
                                 .sendSms(this,
                                         Const.API_BASE_URL_PUBLIC + sendSMS, map);
-                        ToastUtils.show("验证码已发送，请注意查收");
                         dialog.dismiss();
                     })
                     .show(getChildFragmentManager(), "send_sms");
@@ -149,15 +156,26 @@ public class SignUpDelegate extends BaseMvpFragment<SignUpPresenterImpl>
 
     @Override
     public void smsResult(String code) {
-
+        InterceptorsManage.IS_OBTAIN_COOKIE_INTERCEPTOR = false;
+        JSONObject object = JSON.parseObject(code);
+        Log.e("_____", "smsResult: "+code );
+        if (object.getInteger("status")== 1){
+            SetTelCountTimer telCountTimer = new SetTelCountTimer(mCodeBtn);
+            telCountTimer.start();
+            mCodeBtn.setEnabled(false);
+        }
+        ToastUtils.show(object.getString("msg"));
     }
 
     @Override
     public void signUpResult(String result) {
+        InterceptorsManage.IS_UP_COOKIE_INTERCEPTOR = false;
         SignUpBean signUpBean = gson.fromJson(result, SignUpBean.class);
+        stopLoading();
         if (signUpBean.getStatus() != 1) {
             ToastUtils.show(signUpBean.getMsg());
         } else if (signUpBean.getStatus() == 1) {
+            ToastUtils.show(signUpBean.getMsg());
             CarPreference.putLogin(true);
             CarPreference.putTokenId(signUpBean.getData().getTokenId());
             CarPreference.putLoginName(signUpBean.getData().getLoginName());

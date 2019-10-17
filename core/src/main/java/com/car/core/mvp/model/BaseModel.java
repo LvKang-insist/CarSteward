@@ -3,6 +3,8 @@ package com.car.core.mvp.model;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.car.core.utils.data.BaseData;
+
 import java.util.WeakHashMap;
 
 /**
@@ -25,5 +27,5 @@ public abstract class BaseModel<T> extends ViewModel {
      * @param param 参数
      * @return liveData
      */
-    public abstract MutableLiveData<T> request(String url, WeakHashMap param);
+    public abstract  MutableLiveData<T> request(String url, WeakHashMap param);
 }

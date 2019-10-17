@@ -20,25 +20,20 @@ public class MinePresenterImpl extends BasePresenter<MineContract.IMineView, Min
         implements MineContract.IMinePresenter {
 
     @Override
-    protected MineModel attachModel() {
-        return new ViewModelProvider.NewInstanceFactory().create(MineModel.class);
-    }
-
-    @Override
     public void request(BaseMvpFragment mvpFragment, String url, WeakHashMap param) {
 
     }
 
     public void getOneTwoData() {
-        getView().setGvOne(getModel().setGvOneData());
+        getView().setGvOne(getModel(MineModel.class).setGvOneData());
     }
 
     public void getGvTwoData() {
-        getView().setGvTwo(getModel().setGvTwoData());
+        getView().setGvTwo(getModel(MineModel.class).setGvTwoData());
     }
 
     public void getGvThreeData() {
-        getView().setGvThree(getModel().setGvThreeData());
+        getView().setGvThree(getModel(MineModel.class).setGvThreeData());
     }
 
 }

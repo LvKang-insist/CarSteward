@@ -3,6 +3,7 @@ package com.car.core.ui.adapter;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 
 import java.util.List;
 
@@ -14,7 +15,7 @@ import java.util.List;
  * @description
  */
 
-public abstract class CarBaseAdapter<T> extends android.widget.BaseAdapter {
+public abstract class CarBaseAdapter<T> extends BaseAdapter {
 
     /** 封装有数据的数据源*/
     private List<T> list;
@@ -45,7 +46,7 @@ public abstract class CarBaseAdapter<T> extends android.widget.BaseAdapter {
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-        ViewHolder holder = ViewHolder.getHolder(view,context,resId);
+        ViewHolder holder = ViewHolder.getHolder(view,viewGroup,context,resId);
         // 需要显示内容
         setData(holder,i);
         return holder.getmConvertView();

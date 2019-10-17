@@ -5,6 +5,7 @@ import android.util.Log;
 
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.OnLifecycleEvent;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.car.core.mvp.model.BaseModel;
 import com.car.core.mvp.view.IBaseView;
@@ -25,17 +26,14 @@ public abstract class BasePresenter<V extends IBaseView, M extends BaseModel>
     private static final String TAG = "BasePresenter";
 
     private WeakReference<V> viewRef;
-    private WeakReference<M> modelRef;
 
     public V getView() {
         return isViewAttached() ? viewRef.get() : null;
     }
 
-    public M getModel() {
-        return modelRef.get();
+    public M getModel(Class<M> cls) {
+        return new ViewModelProvider.NewInstanceFactory().create(cls);
     }
-
-    protected abstract M attachModel();
 
     protected boolean isViewAttached() {
         return viewRef != null && viewRef.get() != null;
@@ -43,7 +41,6 @@ public abstract class BasePresenter<V extends IBaseView, M extends BaseModel>
 
     private void attache(V view, Bundle saveInstanceState) {
         viewRef = new WeakReference<>(view);
-        modelRef = new WeakReference<>(attachModel());
     }
 
     @Override

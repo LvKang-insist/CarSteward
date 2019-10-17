@@ -4,10 +4,14 @@ import android.content.Context;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
+
 import com.car.core.utils.file.FileUtils;
+
 import java.io.File;
 import java.io.InputStream;
+import java.util.Arrays;
 import java.util.WeakHashMap;
+
 import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -93,8 +97,8 @@ public class RxRequest {
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.e("RxJava ", "onError: "+e.getMessage() );
-                        listener.onNext(false,null);
+                        Log.e("RxJava ", "onError: " + e.getMessage() + "\n" + Arrays.toString(e.getStackTrace()));
+                        listener.onNext(false, null);
                     }
 
                     @Override

@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.car.core.mvp.model.BaseModel;
 import com.car.core.net.rx.RxRequest;
+import com.car.core.utils.data.BaseData;
 
 import java.util.WeakHashMap;
 
@@ -19,7 +20,7 @@ public class DefaultModel extends BaseModel {
     private MutableLiveData<String> mLiveData;
 
     @Override
-    public MutableLiveData request(String url, WeakHashMap param) {
+    public  MutableLiveData  request(String url, WeakHashMap param) {
         if (mLiveData == null) {
             mLiveData = new MutableLiveData<>();
         }

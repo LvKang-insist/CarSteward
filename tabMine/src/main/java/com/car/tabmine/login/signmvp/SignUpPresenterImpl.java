@@ -25,16 +25,13 @@ import java.util.WeakHashMap;
 public class SignUpPresenterImpl extends BasePresenter<SignUpContract.IsignUpView, SignUpModel>
         implements SignUpContract.IsingUpPresenter {
 
-    @Override
-    protected SignUpModel attachModel() {
-        return new ViewModelProvider.NewInstanceFactory().create(SignUpModel.class);
-    }
 
     @Override
     public void requestNumberCheck(BaseMvpFragment mvpFragment, String url, WeakHashMap param) {
-        getModel()
+        getModel(SignUpModel.class)
                 .request(url, param)
                 .observe(mvpFragment, s -> {
+                    //验证手机号
                     JSONObject object = JSON.parseObject(s);
                     if (object.getInteger("status") == 1) {
                         if ("success".equals(object.getString("msg"))) {
@@ -46,23 +43,15 @@ public class SignUpPresenterImpl extends BasePresenter<SignUpContract.IsignUpVie
 
     @Override
     public void sendSms(BaseMvpFragment mvpFragment, String url, WeakHashMap param) {
-        getModel().request(url, param)
-                .observe(mvpFragment, new Observer<String>() {
-                    @Override
-                    public void onChanged(String s) {
-                        Log.e("---------", "sendSms: ");
-                    }
-                });
+        getModel(SignUpModel.class)
+                .request(url, param)
+                .observe(mvpFragment, s -> getView().smsResult(s));
     }
 
     @Override
     public void signUp(BaseMvpFragment mvpFragment, String url, WeakHashMap param) {
-        getModel().request(url, param)
-                .observe(mvpFragment, new Observer<String>() {
-                    @Override
-                    public void onChanged(String s) {
-                        getView().signUpResult(s);
-                    }
-                });
+        getModel(SignUpModel.class)
+                .request(url, param)
+                .observe(mvpFragment, s -> getView().signUpResult(s));
     }
 }

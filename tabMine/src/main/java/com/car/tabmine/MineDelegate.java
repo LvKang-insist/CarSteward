@@ -12,6 +12,7 @@ import com.car.core.api.BaseUrl;
 import com.car.core.api.Const;
 import com.car.core.delegate.BottomItemDelegate;
 import com.car.core.mvp.factory.CreatePresenter;
+import com.car.tabmine.adapter.Adap;
 import com.car.tabmine.adapter.GradViewOneAdapter;
 import com.car.tabmine.adapter.GradViewThreeAdapter;
 import com.car.tabmine.adapter.GradViewTwoAdapter;
@@ -107,19 +108,20 @@ public class MineDelegate extends BottomItemDelegate<MinePresenterImpl>
 
     @Override
     public void setGvOne(List<TextIntegerBean> list) {
-        GradViewOneAdapter adapter = new GradViewOneAdapter(list, getContext(), R.layout.mine_item_tv_tv);
+        GradViewOneAdapter adapter = new GradViewOneAdapter(list, getActivity(), R.layout.mine_item_tv_tv);
+//        Adap adapter = new Adap(list,getActivity(),R.layout.mine_item_tv_tv);
         mGridViewOne.setAdapter(adapter);
     }
 
     @Override
     public void setGvTwo(List<TextImageBean> list) {
-        GradViewTwoAdapter adapter = new GradViewTwoAdapter(list, getContext(), R.layout.mine_item_icon_tv);
+        GradViewTwoAdapter adapter = new GradViewTwoAdapter(list, getActivity(), R.layout.mine_item_icon_tv);
         mGridViewTwo.setAdapter(adapter);
     }
 
     @Override
     public void setGvThree(List<TextImageBean> list) {
-        GradViewThreeAdapter adapter = new GradViewThreeAdapter(list, getContext(), R.layout.mine_item_icon_tv);
+        GradViewThreeAdapter adapter = new GradViewThreeAdapter(list, getActivity(), R.layout.mine_item_icon_tv);
         mGridViewThree.setAdapter(adapter);
     }
 

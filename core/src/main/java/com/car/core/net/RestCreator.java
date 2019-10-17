@@ -2,8 +2,18 @@ package com.car.core.net;
 
 
 import com.car.core.api.BaseUrl;
+import com.car.core.net.interceptors.BaseInterceptor;
+import com.car.core.net.interceptors.ObtainCookieInterceptor;
+import com.car.core.net.interceptors.UpCookieInterceptor;
 import com.car.core.net.rx.RxRestService;
+
+import java.util.List;
 import java.util.WeakHashMap;
+
+import javax.xml.transform.OutputKeys;
+
+import okhttp3.Interceptor;
+import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
@@ -37,9 +47,18 @@ public class RestCreator {
         private static Retrofit RETROFIT_CLIENT = new Retrofit.Builder()
                 //设置网络请求的 url地址
                 .baseUrl(BASE_URL)
+                .client(OkhttpHolder.OKHTTP_CLIENT)
                 //依赖中引入的转换器
                 .addConverterFactory(ScalarsConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .build();
+    }
+
+    private static final class OkhttpHolder<T extends BaseInterceptor> {
+
+        private static final OkHttpClient OKHTTP_CLIENT = new OkHttpClient().newBuilder()
+                .addInterceptor(new ObtainCookieInterceptor())
+                .addInterceptor(new UpCookieInterceptor())
                 .build();
     }
 

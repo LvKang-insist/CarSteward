@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 
 /**
  * @author 345 QQ:1831712732
@@ -27,16 +28,16 @@ public class ViewHolder {
         return mConvertView;
     }
 
-    public ViewHolder(Context context, int resId) {
-        mConvertView = LayoutInflater.from(context).inflate(resId,null);
+    public ViewHolder(Context context, int resId,ViewGroup group) {
+        mConvertView = LayoutInflater.from(context).inflate(resId,group,false);
         //给 view 设置tag
         mConvertView.setTag(this);
     }
 
-    public static ViewHolder getHolder(View convertView,Context context,int resId){
+    public static ViewHolder getHolder(View convertView, ViewGroup group, Context context, int resId){
         ViewHolder viewHolder = null;
         if (convertView == null) {
-            viewHolder = new ViewHolder(context,resId);
+            viewHolder = new ViewHolder(context,resId,group);
         }else {
             viewHolder = (ViewHolder) convertView.getTag();
         }

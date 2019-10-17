@@ -19,14 +19,9 @@ public class DefaultPresenterImpl extends BasePresenter<DefaultContract.IDefault
         implements DefaultContract.IDefaultPresenter {
 
     @Override
-    protected DefaultModel attachModel() {
-        return new ViewModelProvider.NewInstanceFactory().create(DefaultModel.class);
-    }
-
-    @Override
     public void request(BaseMvpFragment mvpFragment, String url, WeakHashMap param) {
-        DefaultModel defaultModel = new ViewModelProvider.NewInstanceFactory().create(DefaultModel.class);
-        defaultModel.request(url, param)
+        getModel(DefaultModel.class)
+                .request(url, param)
                 .observe(mvpFragment, (Observer<String>) result -> {
                     getView().onResult(true, result);
                 });
