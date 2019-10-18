@@ -8,6 +8,5 @@ package com.car.core.net.interceptors;
  * @description
  */
 public class InterceptorsManage {
-    public static Boolean IS_OBTAIN_COOKIE_INTERCEPTOR = false;
-    public static Boolean IS_UP_COOKIE_INTERCEPTOR = false;
+
 }

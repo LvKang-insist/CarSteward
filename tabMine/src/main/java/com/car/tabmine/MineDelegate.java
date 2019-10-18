@@ -23,6 +23,7 @@ import com.car.tabmine.mvp.MineContract;
 import com.car.tabmine.mvp.MinePresenterImpl;
 import com.car.tabmine.mvp.TextIntegerBean;
 import com.hjq.toast.ToastUtils;
+import com.orhanobut.logger.Logger;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -75,6 +76,7 @@ public class MineDelegate extends BottomItemDelegate<MinePresenterImpl>
             //登录
             parentfragmentAnimStart(new LoginDelegate());
         } else if (id == R.id.mine_account_vip_iv) {
+            Logger.e("hellow");
         } else if (id == R.id.mine_sign_tv) {
         }
     }

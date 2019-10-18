@@ -1,17 +1,18 @@
 package com.car.core.net.rx;
 
-import android.content.Context;
-
 import com.car.core.net.HttpMethod;
 import com.car.core.net.RestCreator;
+
 import java.io.File;
 import java.util.Map;
 import java.util.WeakHashMap;
+
 import io.reactivex.Observable;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
+import retrofit2.Response;
 
 /**
  * Copyright (C)
@@ -26,16 +27,18 @@ public class RxRestClient {
     private static final WeakHashMap<String, Object> PARAMS = RestCreator.getParams();
     private final RequestBody BODY;
     private final File FILE;
+    private final String COOKIE;
 
     public RxRestClient(String url,
                         Map<String, Object> params,
                         RequestBody body,
                         File file,
-                        Context context) {
+                        String mCookie) {
         this.URL = url;
         PARAMS.putAll(params);
         this.BODY = body;
         this.FILE = file;
+        this.COOKIE = mCookie;
     }
 
     public static RxRestClientBuilder builder() {
@@ -48,6 +51,9 @@ public class RxRestClient {
         switch (method) {
             case GET:
                 observable = service.get(URL, PARAMS);
+                break;
+            case ADD_COOKIE:
+                observable = service.addCookie(COOKIE,URL,PARAMS);
                 break;
             case POST:
                 observable = service.post(URL, PARAMS);
@@ -88,6 +94,20 @@ public class RxRestClient {
     public final Observable<String> get() {
         return request(HttpMethod.GET);
     }
+    public final Observable<String> addCookie() {
+        return request(HttpMethod.ADD_COOKIE);
+    }
+
+    /**
+     * 获取cookie 的请求
+     *
+     * @return
+     */
+    public final Observable<Response<ResponseBody>> getCookie() {
+        final RxRestService service = RestCreator.getRxRestService();
+        return service.getCookie(URL, PARAMS);
+    }
+
 
     public final Observable<String> post() {
         if (BODY == null) {

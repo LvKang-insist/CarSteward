@@ -78,4 +78,6 @@ dependencies {
 
     //JSON 依赖 这个是 Android优化的
     api 'com.alibaba:fastjson:1.2.48'
+    //Log 工具
+    api 'com.orhanobut:logger:2.2.0'
 }

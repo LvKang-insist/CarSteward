@@ -44,14 +44,14 @@ public class SignUpPresenterImpl extends BasePresenter<SignUpContract.IsignUpVie
     @Override
     public void sendSms(BaseMvpFragment mvpFragment, String url, WeakHashMap param) {
         getModel(SignUpModel.class)
-                .request(url, param)
+                .requestSms(url, param)
                 .observe(mvpFragment, s -> getView().smsResult(s));
     }
 
     @Override
     public void signUp(BaseMvpFragment mvpFragment, String url, WeakHashMap param) {
         getModel(SignUpModel.class)
-                .request(url, param)
+                .requestSign(url, param)
                 .observe(mvpFragment, s -> getView().signUpResult(s));
     }
 }

@@ -281,7 +281,7 @@ public class CarPreference {
      *
      */
     public static String getCookie() {
-        String cookie = getAppPreference(USER).getString("cookie", null);
+        String cookie = getAppPreference(USER).getString("cookie", "");
         if (cookie == null || cookie.isEmpty()) {
             return null;
         } else {

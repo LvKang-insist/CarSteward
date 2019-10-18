@@ -55,10 +55,7 @@ public class RestCreator {
     }
 
     private static final class OkhttpHolder<T extends BaseInterceptor> {
-
         private static final OkHttpClient OKHTTP_CLIENT = new OkHttpClient().newBuilder()
-                .addInterceptor(new ObtainCookieInterceptor())
-                .addInterceptor(new UpCookieInterceptor())
                 .build();
     }
 

@@ -20,13 +20,10 @@ import okhttp3.Response;
 public class UpCookieInterceptor extends BaseInterceptor {
     @Override
     public Response intercept(Chain chain) throws IOException {
-        if (InterceptorsManage.IS_UP_COOKIE_INTERCEPTOR) {
-            Request.Builder builder = chain.request().newBuilder();
-            String cookie = CarPreference.getCookie();
-            Log.e("---------", "上传 intercept: "+cookie);
-            builder.addHeader("cookie", cookie);
-            return chain.proceed(builder.build());
-        }
-        return chain.proceed(chain.request());
+        Request.Builder builder = chain.request().newBuilder();
+        String cookie = CarPreference.getCookie();
+        Log.e("---------", "上传 intercept: " + cookie);
+        builder.addHeader("cookie", cookie);
+        return chain.proceed(builder.build());
     }
 }

@@ -31,6 +31,7 @@ import com.car.tabmine.login.signmvp.SignUpBean;
 import com.car.tabmine.login.signmvp.SignUpContract;
 import com.car.tabmine.login.signmvp.SignUpPresenterImpl;
 import com.hjq.toast.ToastUtils;
+import com.orhanobut.logger.Logger;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -111,7 +112,6 @@ public class SignUpDelegate extends BaseMvpFragment<SignUpPresenterImpl>
                 WeakHashMap<String, Object> maps = new WeakHashMap<>();
                 maps.put("loginKey", signkey);
                 maps.put("smsVerfy", smsVerfy);
-                InterceptorsManage.IS_UP_COOKIE_INTERCEPTOR = true;
                 getPresenter().signUp(this, Const.API_BASE_USER + signUp, maps);
                 showLoading("注册中");
             }
@@ -144,7 +144,6 @@ public class SignUpDelegate extends BaseMvpFragment<SignUpPresenterImpl>
                         //获取验证码
                         WeakHashMap<String, Object> map = new WeakHashMap<>();
                         map.put("userPhone", mPhoneEt.getText().toString());
-                        InterceptorsManage.IS_OBTAIN_COOKIE_INTERCEPTOR = true;
                         getPresenter()
                                 .sendSms(this,
                                         Const.API_BASE_URL_PUBLIC + sendSMS, map);
@@ -156,9 +155,8 @@ public class SignUpDelegate extends BaseMvpFragment<SignUpPresenterImpl>
 
     @Override
     public void smsResult(String code) {
-        InterceptorsManage.IS_OBTAIN_COOKIE_INTERCEPTOR = false;
         JSONObject object = JSON.parseObject(code);
-        Log.e("_____", "smsResult: "+code );
+        Logger.json(code);
         if (object.getInteger("status")== 1){
             SetTelCountTimer telCountTimer = new SetTelCountTimer(mCodeBtn);
             telCountTimer.start();
@@ -169,7 +167,6 @@ public class SignUpDelegate extends BaseMvpFragment<SignUpPresenterImpl>
 
     @Override
     public void signUpResult(String result) {
-        InterceptorsManage.IS_UP_COOKIE_INTERCEPTOR = false;
         SignUpBean signUpBean = gson.fromJson(result, SignUpBean.class);
         stopLoading();
         if (signUpBean.getStatus() != 1) {

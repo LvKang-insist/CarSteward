@@ -9,7 +9,11 @@ package com.car.core.net;
  * @description: $ 用来进行判断
  */
 public enum HttpMethod {
+    /**
+     *  请求
+     */
     GET,
+    ADD_COOKIE,
     GET_IMAGE,
     POST,
     POST_RAW,

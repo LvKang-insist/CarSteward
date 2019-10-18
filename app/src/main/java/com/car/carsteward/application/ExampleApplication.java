@@ -4,6 +4,10 @@ import android.annotation.SuppressLint;
 import android.app.Application;
 
 import com.hjq.toast.ToastUtils;
+import com.orhanobut.logger.AndroidLogAdapter;
+import com.orhanobut.logger.FormatStrategy;
+import com.orhanobut.logger.Logger;
+import com.orhanobut.logger.PrettyFormatStrategy;
 
 /**
  * @author 345 QQ:1831712732
@@ -18,5 +22,13 @@ public class ExampleApplication extends Application {
     public void onCreate() {
         super.onCreate();
         ToastUtils.init(this);
+        FormatStrategy formatStrategy = setLogger();
+        Logger.addLogAdapter(new AndroidLogAdapter(formatStrategy));
+    }
+
+    private FormatStrategy setLogger() {
+        return PrettyFormatStrategy.newBuilder()
+                    .tag("345")
+                    .build();
     }
 }

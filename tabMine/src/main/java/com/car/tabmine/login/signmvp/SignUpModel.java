@@ -21,14 +21,36 @@ public class SignUpModel extends BaseModel<String> {
     @Override
     public MutableLiveData<String> request(String url, WeakHashMap param) {
         MutableLiveData<String> liveData = getLiveData();
-        RxRequest.onGetRx(url, param, new RxRequest.OnRxReqeustListener() {
-            @Override
-            public void onNext(boolean flag, String result) {
-                if (flag){
-                    liveData.setValue(result);
-                }else {
-                    liveData.setValue(null);
-                }
+        RxRequest.onGetRx(url, param, (flag, result) -> {
+            if (flag){
+                liveData.setValue(result);
+            }else {
+                liveData.setValue(null);
+            }
+        });
+        return liveData;
+    }
+
+    public MutableLiveData<String> requestSms(String url, WeakHashMap param) {
+        MutableLiveData<String> liveData = getLiveData();
+        RxRequest.onGetRxCookie(url, param, (flag, result) -> {
+            if (flag){
+                liveData.setValue(result);
+            }else {
+                liveData.setValue(null);
+            }
+        });
+        return liveData;
+    }
+
+    public MutableLiveData<String>
+    requestSign(String url, WeakHashMap param) {
+        MutableLiveData<String> liveData = getLiveData();
+        RxRequest.onAddCookieRxObs(url, param, (flag, result) -> {
+            if (flag){
+                liveData.setValue(result);
+            }else {
+                liveData.setValue(null);
             }
         });
         return liveData;

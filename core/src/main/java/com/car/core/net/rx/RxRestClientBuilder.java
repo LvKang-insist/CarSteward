@@ -1,10 +1,13 @@
 package com.car.core.net.rx;
 
 import android.content.Context;
+
 import com.car.core.net.RestCreator;
+
 import java.io.File;
 import java.util.Map;
 import java.util.WeakHashMap;
+
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
 
@@ -20,8 +23,8 @@ public class RxRestClientBuilder {
     private String mUrl = null;
     private static final Map<String, Object> PARAMS = RestCreator.getParams();
     private RequestBody mBody = null;
-    private Context mContext = null;
     private File mFile = null;
+    private String mCookie = null;
 
     RxRestClientBuilder() {
     }
@@ -32,7 +35,7 @@ public class RxRestClientBuilder {
     }
 
     public final RxRestClientBuilder params(WeakHashMap<String, Object> params) {
-        if (params!= null) {
+        if (params != null) {
             PARAMS.putAll(params);
         }
         return this;
@@ -48,6 +51,11 @@ public class RxRestClientBuilder {
         return this;
     }
 
+    public final RxRestClientBuilder cookie(String cookie) {
+        this.mCookie = cookie;
+        return this;
+    }
+
     public final RxRestClientBuilder file(String file) {
         this.mFile = new File(file);
         return this;
@@ -59,7 +67,7 @@ public class RxRestClientBuilder {
     }
 
     public final RxRestClient build() {
-        return new RxRestClient(mUrl, PARAMS, mBody,mFile,mContext);
+        return new RxRestClient(mUrl, PARAMS, mBody, mFile, mCookie);
     }
 
 }

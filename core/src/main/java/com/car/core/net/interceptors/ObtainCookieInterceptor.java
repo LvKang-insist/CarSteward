@@ -1,14 +1,8 @@
 package com.car.core.net.interceptors;
 
 import android.util.Log;
-
-import com.car.core.net.callback.IFailure;
 import com.car.core.utils.storage.CarPreference;
-
 import java.io.IOException;
-
-import javax.security.auth.login.LoginException;
-
 import okhttp3.Request;
 import okhttp3.Response;
 
@@ -22,7 +16,7 @@ import okhttp3.Response;
 public class ObtainCookieInterceptor extends BaseInterceptor {
     @Override
     public Response intercept(Chain chain) throws IOException {
-        if (InterceptorsManage.IS_OBTAIN_COOKIE_INTERCEPTOR) {
+
             Request request = chain.request();
             Response response = chain.proceed(request);
             String cookie = response.header("set-cookie");
@@ -32,7 +26,5 @@ public class ObtainCookieInterceptor extends BaseInterceptor {
                 CarPreference.putCookie(cookie.substring(0, cookie.indexOf(";")));
             }
             return response;
-        }
-        return chain.proceed(chain.request());
     }
 }
