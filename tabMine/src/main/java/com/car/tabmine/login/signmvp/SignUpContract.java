@@ -1,5 +1,6 @@
 package com.car.tabmine.login.signmvp;
 
+import com.car.core.mvp.model.BaseModel;
 import com.car.core.mvp.presenter.IBasePresenter;
 import com.car.core.mvp.view.BaseMvpFragment;
 import com.car.core.mvp.view.IBaseView;
@@ -39,27 +40,24 @@ public class SignUpContract {
     public interface IsingUpPresenter extends IBasePresenter<IsignUpView>{
         /**
          * 请求验证手机号
-         * @param mvpFragment
          * @param url
          * @param param
          */
-        void requestNumberCheck(BaseMvpFragment mvpFragment, String url, WeakHashMap param);
+        void requestNumberCheck(String url, WeakHashMap param);
 
         /**
          * 发送短信
-         * @param mvpFragment
          * @param url
          * @param param
          */
-        void sendSms(BaseMvpFragment mvpFragment, String url, WeakHashMap param);
+        void sendSms(String url, WeakHashMap param);
 
         /**
          * 注册
-         * @param mvpFragment
          * @param url
          * @param param
          */
-        void signUp(BaseMvpFragment mvpFragment, String url, WeakHashMap param);
+        void signUp(String url, WeakHashMap param);
     }
 
 }

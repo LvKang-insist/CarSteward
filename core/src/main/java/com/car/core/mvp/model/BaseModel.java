@@ -14,10 +14,14 @@ import java.util.WeakHashMap;
  * @time 2019/8/30 17:12
  * @description 抽象 M 层 需要被继承，默认一个请求数据的方法，可重写或者重载，也可以自定义
  */
-public abstract class BaseModel<T> extends ViewModel {
+public abstract class BaseModel {
 
-    public MutableLiveData<T> getLiveData() {
-        return new MutableLiveData<>();
+    public interface OnResultListener {
+        /**
+         * 数据的回调方法
+         * @param result 结果
+         */
+        void result(String result);
     }
 
     /**
@@ -25,7 +29,8 @@ public abstract class BaseModel<T> extends ViewModel {
      *
      * @param url   地址
      * @param param 参数
+     * @param listener 数据的回调
      * @return liveData
      */
-    public abstract  MutableLiveData<T> request(String url, WeakHashMap param);
+    public abstract void request(String url, WeakHashMap param, OnResultListener listener);
 }

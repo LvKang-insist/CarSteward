@@ -15,9 +15,18 @@ import java.util.WeakHashMap;
  */
 public class DefaultContract {
     public interface IDefaultView extends IBaseView {
-        void onResult(boolean flag, String result);
+        /**
+         * 网络请求的结果回调
+         * @param result 结果
+         */
+        void onResult(String result);
     }
     public interface IDefaultPresenter extends IBasePresenter<IDefaultView> {
-        void request(BaseMvpFragment mvpFragment, String url, WeakHashMap param);
+        /**
+         * 默认的网络请求接口
+         * @param url 地址
+         * @param param 参数
+         */
+        void request(String url, WeakHashMap param);
     }
 }

@@ -16,44 +16,38 @@ import java.util.WeakHashMap;
  * @time 2019/10/16 20:30
  * @description
  */
-public class SignUpModel extends BaseModel<String> {
+public class SignUpModel extends BaseModel {
 
     @Override
-    public MutableLiveData<String> request(String url, WeakHashMap param) {
-        MutableLiveData<String> liveData = getLiveData();
+    public void request(String url, WeakHashMap param,OnResultListener listener) {
         RxRequest.onGetRx(url, param, (flag, result) -> {
-            if (flag){
-                liveData.setValue(result);
-            }else {
-                liveData.setValue(null);
+            if (flag) {
+               listener.result(result);
+            } else {
+               listener.result(null);
             }
         });
-        return liveData;
     }
 
-    public MutableLiveData<String> requestSms(String url, WeakHashMap param) {
-        MutableLiveData<String> liveData = getLiveData();
+    public void requestSms(String url, WeakHashMap param,OnResultListener listener) {
         RxRequest.onGetRxCookie(url, param, (flag, result) -> {
-            if (flag){
-                liveData.setValue(result);
-            }else {
-                liveData.setValue(null);
+            if (flag) {
+                listener.result(result);
+
+            } else {
+                listener.result(null);
             }
         });
-        return liveData;
     }
 
-    public MutableLiveData<String>
-    requestSign(String url, WeakHashMap param) {
-        MutableLiveData<String> liveData = getLiveData();
+    public void requestSign(String url, WeakHashMap param,OnResultListener listener) {
         RxRequest.onAddCookieRxObs(url, param, (flag, result) -> {
-            if (flag){
-                liveData.setValue(result);
-            }else {
-                liveData.setValue(null);
+            if (flag) {
+                listener.result(result);
+            } else {
+                listener.result(null);
             }
         });
-        return liveData;
     }
 
 

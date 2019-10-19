@@ -28,6 +28,6 @@ public class MineContract {
     }
 
     public interface IMinePresenter extends IBasePresenter<IMineView> {
-        void request(BaseMvpFragment mvpFragment, String url, WeakHashMap param);
+        void request(String url, WeakHashMap param);
     }
 }

@@ -12,6 +12,7 @@ import com.car.core.mvp.view.IBaseView;
 import com.hjq.toast.ToastUtils;
 
 import java.lang.ref.WeakReference;
+import java.util.WeakHashMap;
 
 /**
  * @author 345 QQ:1831712732
@@ -21,26 +22,38 @@ import java.lang.ref.WeakReference;
  * @description P层基类 需要被继承，内部对生命周期进行代理，可直接在 P 层使用生命周期
  */
 public abstract class BasePresenter<V extends IBaseView, M extends BaseModel>
-        implements IBasePresenter<V>  {
-
-    private static final String TAG = "BasePresenter";
+        implements IBasePresenter<V> {
 
     private WeakReference<V> viewRef;
+
+    private M modelRef;
+
+    /**
+     * 获取 M 层对象
+     *
+     * @return
+     */
+    protected abstract M attachModel();
 
     public V getView() {
         return isViewAttached() ? viewRef.get() : null;
     }
 
-    public M getModel(Class<M> cls) {
-        return new ViewModelProvider.NewInstanceFactory().create(cls);
+    public M getModel() {
+        return isViewAttached() ? modelRef : null;
     }
 
     protected boolean isViewAttached() {
         return viewRef != null && viewRef.get() != null;
     }
 
+    protected boolean isModelAttached() {
+        return modelRef != null;
+    }
+
     private void attache(V view, Bundle saveInstanceState) {
         viewRef = new WeakReference<>(view);
+        modelRef = attachModel();
     }
 
     @Override
@@ -54,7 +67,7 @@ public abstract class BasePresenter<V extends IBaseView, M extends BaseModel>
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
-    public void onMvpCreate(){
+    public void onMvpCreate() {
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)

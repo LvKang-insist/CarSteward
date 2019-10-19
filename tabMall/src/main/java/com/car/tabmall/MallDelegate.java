@@ -28,7 +28,7 @@ public class MallDelegate extends BottomItemDelegate<DefaultPresenterImpl>
     }
 
     @Override
-    public void onResult(boolean flag, String result) {
+    public void onResult( String result) {
 
     }
 }

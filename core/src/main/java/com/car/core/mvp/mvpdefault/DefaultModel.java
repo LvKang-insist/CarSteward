@@ -17,20 +17,16 @@ import java.util.WeakHashMap;
  */
 public class DefaultModel extends BaseModel {
 
-    private MutableLiveData<String> mLiveData;
 
     @Override
-    public  MutableLiveData  request(String url, WeakHashMap param) {
-        if (mLiveData == null) {
-            mLiveData = new MutableLiveData<>();
-        }
+    public  void  request(String url, WeakHashMap param,OnResultListener listener) {
+
         RxRequest.onGetRx(url, param, (flag, result) -> {
             if (flag) {
-                mLiveData.setValue(result);
+                listener.result(result);
             }else {
-                mLiveData.setValue(null);
+                listener.result(null);
             }
         });
-        return mLiveData;
     }
 }

@@ -16,10 +16,9 @@ import java.util.WeakHashMap;
  * @time 2019/10/10 22:50
  * @description
  */
-public class MineModel extends BaseModel<String> {
+public class MineModel extends BaseModel {
     @Override
-    public MutableLiveData request(String url, WeakHashMap param) {
-        return null;
+    public void request(String url, WeakHashMap param,OnResultListener listener) {
     }
 
 

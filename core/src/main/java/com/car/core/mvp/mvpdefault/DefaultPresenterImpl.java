@@ -3,6 +3,7 @@ package com.car.core.mvp.mvpdefault;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.car.core.mvp.model.BaseModel;
 import com.car.core.mvp.presenter.BasePresenter;
 import com.car.core.mvp.view.BaseMvpFragment;
 
@@ -19,12 +20,15 @@ public class DefaultPresenterImpl extends BasePresenter<DefaultContract.IDefault
         implements DefaultContract.IDefaultPresenter {
 
     @Override
-    public void request(BaseMvpFragment mvpFragment, String url, WeakHashMap param) {
-        getModel(DefaultModel.class)
-                .request(url, param)
-                .observe(mvpFragment, (Observer<String>) result -> {
-                    getView().onResult(true, result);
-                });
+    protected DefaultModel attachModel() {
+        return new DefaultModel();
     }
+
+    @Override
+    public void request( String url, WeakHashMap param) {
+        getModel()
+                .request(url, param, result -> getView().onResult(result));
+    }
+
 
 }

@@ -97,7 +97,7 @@ public class LoginDelegate extends BaseMvpFragment<DefaultPresenterImpl>
                         + "_" + Base64.encodeToString(pass.getBytes(), Base64.URL_SAFE)).getBytes(), Base64.NO_WRAP);
                 WeakHashMap<String, Object> param = new WeakHashMap<>();
                 param.put("loginKey",logkey);
-                getPresenter().request(this, Const.API_BASE_USER+login,param);
+                getPresenter().request(Const.API_BASE_USER+login,param);
             }
 
         } else if (i == R.id.login_forget_password_tv) {
@@ -112,7 +112,7 @@ public class LoginDelegate extends BaseMvpFragment<DefaultPresenterImpl>
     }
 
     @Override
-    public void onResult(boolean flag, String result) {
+    public void onResult( String result) {
         LogInBean logInBean = gson.fromJson(result, LogInBean.class);
         if (logInBean== null){
             ToastUtils.show("请求出错");

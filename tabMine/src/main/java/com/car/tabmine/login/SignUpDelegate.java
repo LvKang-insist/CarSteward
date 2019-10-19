@@ -89,8 +89,7 @@ public class SignUpDelegate extends BaseMvpFragment<SignUpPresenterImpl>
                 WeakHashMap<String, Object> map = new WeakHashMap<>();
                 map.put("userPhone", mPhoneEt.getText().toString());
                 getPresenter()
-                        .requestNumberCheck(this,
-                                Const.API_BASE_URL_PUBLIC + checkNumber, map);
+                        .requestNumberCheck(Const.API_BASE_URL_PUBLIC + checkNumber, map);
             }
         } else if (id == R.id.signup_is_check) {
 
@@ -112,7 +111,7 @@ public class SignUpDelegate extends BaseMvpFragment<SignUpPresenterImpl>
                 WeakHashMap<String, Object> maps = new WeakHashMap<>();
                 maps.put("loginKey", signkey);
                 maps.put("smsVerfy", smsVerfy);
-                getPresenter().signUp(this, Const.API_BASE_USER + signUp, maps);
+                getPresenter().signUp(Const.API_BASE_USER + signUp, maps);
                 showLoading("注册中");
             }
         }
@@ -145,8 +144,7 @@ public class SignUpDelegate extends BaseMvpFragment<SignUpPresenterImpl>
                         WeakHashMap<String, Object> map = new WeakHashMap<>();
                         map.put("userPhone", mPhoneEt.getText().toString());
                         getPresenter()
-                                .sendSms(this,
-                                        Const.API_BASE_URL_PUBLIC + sendSMS, map);
+                                .sendSms(Const.API_BASE_URL_PUBLIC + sendSMS, map);
                         dialog.dismiss();
                     })
                     .show(getChildFragmentManager(), "send_sms");
