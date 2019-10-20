@@ -1,8 +1,6 @@
-package com.car.tabmine.login;
+package com.car.tabmine.login.sign;
 
-import android.app.ProgressDialog;
 import android.util.Base64;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 
@@ -13,30 +11,20 @@ import androidx.appcompat.widget.AppCompatTextView;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.car.core.api.BaseUrl;
 import com.car.core.api.Const;
 import com.car.core.mvp.factory.CreatePresenter;
-import com.car.core.mvp.mvpdefault.DefaultContract;
-import com.car.core.mvp.mvpdefault.DefaultPresenterImpl;
 import com.car.core.mvp.view.BaseMvpFragment;
-import com.car.core.net.interceptors.InterceptorsManage;
 import com.car.core.ui.dialog.BaseFragDialog;
-import com.car.core.ui.dialog.DialogBuilder;
-import com.car.core.ui.dialog.ToastDialog;
-import com.car.core.utils.storage.CarPreference;
 import com.car.core.utils.time.SetTelCountTimer;
 import com.car.tabmine.R;
 import com.car.tabmine.R2;
-import com.car.tabmine.login.signmvp.SignUpBean;
-import com.car.tabmine.login.signmvp.SignUpContract;
-import com.car.tabmine.login.signmvp.SignUpPresenterImpl;
+import com.car.tabmine.login.sign.signmvp.SignUpBean;
+import com.car.tabmine.login.sign.signmvp.SignUpContract;
+import com.car.tabmine.login.sign.signmvp.SignUpPresenterImpl;
+import com.car.tabmine.xieyi.XieYIDelegate;
 import com.hjq.toast.ToastUtils;
 import com.orhanobut.logger.Logger;
 
-import org.greenrobot.eventbus.EventBus;
-
-import java.util.HashMap;
-import java.util.Map;
 import java.util.WeakHashMap;
 
 import butterknife.BindView;
@@ -91,10 +79,8 @@ public class SignUpDelegate extends BaseMvpFragment<SignUpPresenterImpl>
                 getPresenter()
                         .requestNumberCheck(Const.API_BASE_URL_PUBLIC + checkNumber, map);
             }
-        } else if (id == R.id.signup_is_check) {
-
         } else if (id == R.id.signup_xieyi_tv) {
-
+            getSupportDelegate().start(new XieYIDelegate());
         } else if (id == R.id.mine_register_btn) {
             if (mPhoneCodeEt.getText().toString().trim().isEmpty()) {
                 ToastUtils.show("请填写验证码");
@@ -119,7 +105,7 @@ public class SignUpDelegate extends BaseMvpFragment<SignUpPresenterImpl>
 
     @Override
     public Object setLayout() {
-        return R.layout.signup_delegate;
+        return R.layout.delegate_signup;
     }
 
     @Override
@@ -155,7 +141,7 @@ public class SignUpDelegate extends BaseMvpFragment<SignUpPresenterImpl>
     public void smsResult(String code) {
         JSONObject object = JSON.parseObject(code);
         Logger.json(code);
-        if (object.getInteger("status")== 1){
+        if (object.getInteger("status") == 1) {
             SetTelCountTimer telCountTimer = new SetTelCountTimer(mCodeBtn);
             telCountTimer.start();
             mCodeBtn.setEnabled(false);
@@ -171,19 +157,8 @@ public class SignUpDelegate extends BaseMvpFragment<SignUpPresenterImpl>
             ToastUtils.show(signUpBean.getMsg());
         } else if (signUpBean.getStatus() == 1) {
             ToastUtils.show(signUpBean.getMsg());
-            CarPreference.putLogin(true);
-            CarPreference.putTokenId(signUpBean.getData().getTokenId());
-            CarPreference.putLoginName(signUpBean.getData().getLoginName());
-            CarPreference.putUserName(signUpBean.getData().getUserName());
-            CarPreference.putUserSex(signUpBean.getData().getUserSex());
-            CarPreference.putUserPhoto(signUpBean.getData().getUserPhoto());
-            CarPreference.putQq(signUpBean.getData().getIsBindingQQ());
-            CarPreference.putWechat(signUpBean.getData().getIsBindingWX());
-            CarPreference.putHomeIsRevise(true);
-            CarPreference.putUserInfoIsRevise(true);
-            EventBus.getDefault().post(signUpBean);
             fragmentAnimBack();
         }
-//        stopLoading();
+        stopLoading();
     }
 }

@@ -1,5 +1,7 @@
 package com.car.core.net.rx;
 
+import androidx.lifecycle.LiveData;
+
 import com.car.core.net.HttpMethod;
 import com.car.core.net.RestCreator;
 
@@ -96,6 +98,11 @@ public class RxRestClient {
     }
     public final Observable<String> addCookie() {
         return request(HttpMethod.ADD_COOKIE);
+    }
+
+    public final LiveData<String> textget(){
+        RxRestService rxRestService = RestCreator.getRxRestService();
+        return rxRestService.test(URL,PARAMS);
     }
 
     /**

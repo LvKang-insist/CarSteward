@@ -1,6 +1,8 @@
 package com.car.core.net.rx;
 
 
+import androidx.lifecycle.LiveData;
+
 import java.util.Map;
 
 import io.reactivex.Observable;
@@ -40,6 +42,9 @@ public interface RxRestService {
      */
     @GET
     Observable<String> get(@Url String url, @QueryMap Map<String, Object> params);
+
+    @GET
+    LiveData<String> test(@Url String url, @QueryMap Map<String, Object> params);
 
     @GET
     Observable<Response<ResponseBody>> getCookie(@Url String url, @QueryMap Map<String, Object> params);

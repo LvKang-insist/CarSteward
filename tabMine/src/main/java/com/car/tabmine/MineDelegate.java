@@ -9,10 +9,9 @@ import androidx.appcompat.widget.AppCompatTextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.car.core.api.BaseUrl;
-import com.car.core.api.Const;
 import com.car.core.delegate.BottomItemDelegate;
 import com.car.core.mvp.factory.CreatePresenter;
-import com.car.tabmine.adapter.Adap;
+import com.car.tabmine.LiveDataRetrofit.test.TestViewModel;
 import com.car.tabmine.adapter.GradViewOneAdapter;
 import com.car.tabmine.adapter.GradViewThreeAdapter;
 import com.car.tabmine.adapter.GradViewTwoAdapter;
@@ -74,7 +73,13 @@ public class MineDelegate extends BottomItemDelegate<MinePresenterImpl>
         } else if (id == R.id.mine_news_bgab_iv) {
         } else if (id == R.id.mine_head_circle_iv) {
             //登录
-            parentfragmentAnimStart(new LoginDelegate());
+//            parentfragmentAnimStart(new LoginDelegate());
+
+
+            TestViewModel model = new TestViewModel();
+            model.onCreate(this);
+            model.getBaidu();
+
         } else if (id == R.id.mine_account_vip_iv) {
             Logger.e("hellow");
         } else if (id == R.id.mine_sign_tv) {
@@ -83,7 +88,7 @@ public class MineDelegate extends BottomItemDelegate<MinePresenterImpl>
 
     @Override
     public Object setLayout() {
-        return R.layout.mine_delegate;
+        return R.layout.delegate_mine;
     }
 
     @Override

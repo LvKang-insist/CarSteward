@@ -8,8 +8,12 @@ package com.car.core.latte;
  * @description 配置的Key
  */
 public enum ConfigKeys {
+    /**
+     * key
+     */
     CONTEXT,
     BASE_ACTIVITY,
     CONFIG_READER,
-    HANDLER,
+    JAVASCRIPT_INTERFACE,
+    WEB_HOST
 }

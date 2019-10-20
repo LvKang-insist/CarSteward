@@ -1,7 +1,6 @@
 package com.car.tabmine.login;
 
 import android.util.Base64;
-import android.util.Log;
 import android.view.View;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatEditText;
@@ -16,6 +15,7 @@ import com.car.core.mvp.view.BaseMvpFragment;
 import com.car.core.utils.storage.CarPreference;
 import com.car.tabmine.R;
 import com.car.tabmine.R2;
+import com.car.tabmine.login.sign.SignUpDelegate;
 import com.hjq.toast.ToastUtils;
 
 import org.greenrobot.eventbus.EventBus;
@@ -60,7 +60,7 @@ public class LoginDelegate extends BaseMvpFragment<DefaultPresenterImpl>
 
     @Override
     public Object setLayout() {
-        return R.layout.login_delegate;
+        return R.layout.delegate_login;
     }
 
     @Override

@@ -2,6 +2,8 @@ package com.car.core.latte;
 
 import android.app.Activity;
 
+import androidx.annotation.NonNull;
+
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 
@@ -24,16 +26,31 @@ public class LatteConfigurator {
         return LatteConfiguratorHolder.INSTANCE;
     }
 
-    public LatteConfigurator withBaseMvpActivity(Activity activity) {
-        LATTE_CONFIG.put(ConfigKeys.BASE_ACTIVITY, activity);
-        return this;
-    }
+
 
     /**
      * 配置完成时调用
      */
     public void configure() {
         LATTE_CONFIG.put(ConfigKeys.CONFIG_READER, true);
+    }
+
+    public LatteConfigurator withBaseMvpActivity(Activity activity) {
+        LATTE_CONFIG.put(ConfigKeys.BASE_ACTIVITY, activity);
+        return this;
+    }
+
+    public LatteConfigurator withJavaScriptInterface(@NonNull String name){
+        LATTE_CONFIG.put(ConfigKeys.JAVASCRIPT_INTERFACE,name);
+        return this;
+    }
+
+    /**
+     * 浏览器加载的 HOST
+     */
+    public LatteConfigurator withWebHost(String host){
+        LATTE_CONFIG.put(ConfigKeys.WEB_HOST,host);
+        return this;
     }
 
     /**

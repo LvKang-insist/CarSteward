@@ -2,6 +2,8 @@ package com.car.carsteward.example;
 
 
 import android.annotation.SuppressLint;
+import android.graphics.PixelFormat;
+import android.view.WindowManager;
 
 import com.car.core.delegate.base.BaseDelegate;
 import com.car.core.mvp.factory.CreatePresenter;
@@ -28,11 +30,7 @@ public class ExampleActivity extends BaseMvpActivity {
     }
 
     @Override
-    public void BindView() {
-        // 设置状态栏和导航栏参数
-       /* getStatusBarConfig()
-                .hideBar(BarHide.FLAG_HIDE_STATUS_BAR)
-                .init();*/
+    public void bindView() {
     }
 
 

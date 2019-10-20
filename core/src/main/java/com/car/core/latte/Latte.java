@@ -45,6 +45,10 @@ public class Latte {
         return handler;
     }
 
+    public static <T> T getValue(Object key) {
+        return (T) getInstance().getConfigurator(key);
+    }
+
     private static Map<Object, Object> getConfiguration() {
         return getInstance().getLatteConfigs();
     }

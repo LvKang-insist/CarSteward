@@ -32,7 +32,7 @@ public abstract class BaseMvpActivity<P extends IBasePresenter> extends BaseActi
 
     public abstract BaseDelegate setRootDelegate();
 
-    public abstract void BindView();
+    public abstract void bindView();
 
     public OnBackPressListener onBackPress;
 
@@ -65,9 +65,11 @@ public abstract class BaseMvpActivity<P extends IBasePresenter> extends BaseActi
         mPresenter.onMvpAttachView(this, savedInstanceState);
         Latte.init(this)
                 .withBaseMvpActivity(this)
+                .withJavaScriptInterface("car")
+                .withWebHost("http:www.baidu.com")
                 .configure();
 //        initImmersion();
-        BindView();
+        bindView();
 //        将 Lifecycle 对象和LifecycleObserver 对象进行绑定
         getLifecycle().addObserver(mPresenter);
     }

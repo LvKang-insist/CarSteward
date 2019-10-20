@@ -1,8 +1,6 @@
-package com.car.tabmine.login.signmvp;
+package com.car.tabmine.login.sign.signmvp;
 
-import com.car.core.mvp.model.BaseModel;
 import com.car.core.mvp.presenter.IBasePresenter;
-import com.car.core.mvp.view.BaseMvpFragment;
 import com.car.core.mvp.view.IBaseView;
 
 import java.util.WeakHashMap;

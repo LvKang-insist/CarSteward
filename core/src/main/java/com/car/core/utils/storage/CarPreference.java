@@ -16,6 +16,7 @@ import com.car.core.latte.Latte;
 public class CarPreference {
 
     private static final String USER = "user";
+    private static final String DEFAULT  = "default";
 
 
     public static SharedPreferences.Editor getAppPreferenceEdit(String s) {
@@ -34,6 +35,16 @@ public class CarPreference {
 
     public static boolean getAppFlag(String key) {
         return getAppPreference("").getBoolean(key, false);
+    }
+
+    public static void setValue(String key, String string) {
+        getAppPreferenceEdit(DEFAULT)
+                .putString(key, string)
+                .apply();
+    }
+
+    public static String getValue(String key) {
+        return getAppPreference(DEFAULT).getString(key, "");
     }
 
 

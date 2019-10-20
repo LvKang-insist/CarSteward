@@ -25,7 +25,7 @@ public class DebugActivity extends BaseMvpActivity<DefaultPresenterImpl> {
     }
 
     @Override
-    public void BindView() {
+    public void bindView() {
 
     }
 }
