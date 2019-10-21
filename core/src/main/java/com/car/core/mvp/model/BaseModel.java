@@ -1,8 +1,11 @@
 package com.car.core.mvp.model;
 
+import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
 
+import com.car.core.net.SingleSourceLiveData;
 import com.car.core.utils.data.BaseData;
 
 import java.util.WeakHashMap;
@@ -16,14 +19,15 @@ import java.util.WeakHashMap;
  */
 public abstract class BaseModel<T> extends ViewModel {
 
-    private MutableLiveData<T> sourceLiveData;
+    private SingleSourceLiveData<T> sourceLiveData;
 
-    public MutableLiveData<T> getSourceLiveData() {
+    public SingleSourceLiveData<T> getSourceLiveData() {
         if (sourceLiveData == null) {
-            sourceLiveData = new MutableLiveData<>();
+            sourceLiveData = new SingleSourceLiveData<>();
         }
         return sourceLiveData;
     }
+
 
     public interface OnResultListener {
         /**
@@ -38,8 +42,7 @@ public abstract class BaseModel<T> extends ViewModel {
      *
      * @param url   地址
      * @param param 参数
-     * @param listener 数据的回调
-     * @return liveData
+     * @param owner
      */
-    public abstract void request(String url, WeakHashMap param, OnResultListener listener);
+    public abstract void request(String url, WeakHashMap param, LifecycleOwner owner, Observer<String> observer);
 }

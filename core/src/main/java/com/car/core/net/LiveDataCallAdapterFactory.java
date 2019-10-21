@@ -1,4 +1,4 @@
-package com.car.tabmine.LiveDataRetrofit;
+package com.car.core.net;
 
 import android.util.Log;
 
@@ -34,6 +34,7 @@ public class LiveDataCallAdapterFactory extends CallAdapter.Factory {
 
     /**
      * 转换响应数据类型(Type->R(自定义类型))，并发送自定义的数据
+     *
      * @param <R>
      */
     class LiveDataCallAdapter<R> implements CallAdapter<R, LiveData<R>> {
@@ -51,6 +52,7 @@ public class LiveDataCallAdapterFactory extends CallAdapter.Factory {
         /**
          * 嗯，负责传入 Call<R> 并返回。中间你可以做一些转换
          * 这里我们将数据发送出去
+         *
          * @param call
          * @return
          */
@@ -68,14 +70,14 @@ public class LiveDataCallAdapterFactory extends CallAdapter.Factory {
                         call.enqueue(new Callback<R>() {
                             @Override
                             public void onResponse(Call<R> call, Response<R> response) {
-                                Log.e("Demo", "执行" + response.body());
                                 R body = response.body();
-                                String path = call.request().url().encodedPath();
                                 postValue(body);
                             }
 
                             @Override
                             public void onFailure(Call<R> call, Throwable throwable) {
+                                Log.e("Request onFailure : ", throwable.getMessage());
+                                postValue(null);
                             }
                         });
                     }

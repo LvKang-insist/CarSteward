@@ -1,10 +1,11 @@
 package com.car.core.mvp.mvpdefault;
 
-import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
 
 import com.car.core.mvp.model.BaseModel;
-import com.car.core.net.rx.RxRequest;
-import com.car.core.utils.data.BaseData;
+import com.car.core.net.rx.CarRequest;
 
 import java.util.WeakHashMap;
 
@@ -19,14 +20,7 @@ public class DefaultModel extends BaseModel {
 
 
     @Override
-    public  void  request(String url, WeakHashMap param,OnResultListener listener) {
-
-        RxRequest.onGetRx(url, param, (flag, result) -> {
-            if (flag) {
-                listener.result(result);
-            }else {
-                listener.result(null);
-            }
-        });
+    public void request(String url, WeakHashMap param, LifecycleOwner owner, Observer observer) {
+        CarRequest.result(url, param, liveData -> liveData.observe(owner, observer));
     }
 }

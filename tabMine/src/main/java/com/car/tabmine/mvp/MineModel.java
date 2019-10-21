@@ -1,6 +1,8 @@
 package com.car.tabmine.mvp;
 
+import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
 
 import com.car.core.mvp.model.BaseModel;
 import com.car.tabmine.R;
@@ -17,10 +19,6 @@ import java.util.WeakHashMap;
  * @description
  */
 public class MineModel extends BaseModel {
-    @Override
-    public void request(String url, WeakHashMap param,OnResultListener listener) {
-    }
-
 
     public List<TextIntegerBean> setGvOneData() {
         List<TextIntegerBean> textIntegerBeans = new ArrayList<>();
@@ -73,5 +71,10 @@ public class MineModel extends BaseModel {
         textImageBeans.add(p10);
         textImageBeans.add(p11);
         return textImageBeans;
+    }
+
+    @Override
+    public void request(String url, WeakHashMap param, LifecycleOwner owner, Observer observer) {
+
     }
 }

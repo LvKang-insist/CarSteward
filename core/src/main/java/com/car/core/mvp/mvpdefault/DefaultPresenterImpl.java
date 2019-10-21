@@ -1,5 +1,6 @@
 package com.car.core.mvp.mvpdefault;
 
+import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -26,9 +27,6 @@ public class DefaultPresenterImpl extends BasePresenter<DefaultContract.IDefault
 
     @Override
     public void request( String url, WeakHashMap param) {
-        getModel()
-                .request(url, param, result -> getView().onResult(result));
+        getModel().request(url, param, (LifecycleOwner) getView(), (Observer<String>) s -> getView().onResult(s));
     }
-
-
 }

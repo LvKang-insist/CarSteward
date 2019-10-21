@@ -11,7 +11,6 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.car.core.api.BaseUrl;
 import com.car.core.delegate.BottomItemDelegate;
 import com.car.core.mvp.factory.CreatePresenter;
-import com.car.tabmine.LiveDataRetrofit.test.TestViewModel;
 import com.car.tabmine.adapter.GradViewOneAdapter;
 import com.car.tabmine.adapter.GradViewThreeAdapter;
 import com.car.tabmine.adapter.GradViewTwoAdapter;
@@ -73,13 +72,7 @@ public class MineDelegate extends BottomItemDelegate<MinePresenterImpl>
         } else if (id == R.id.mine_news_bgab_iv) {
         } else if (id == R.id.mine_head_circle_iv) {
             //登录
-//            parentfragmentAnimStart(new LoginDelegate());
-
-
-            TestViewModel model = new TestViewModel();
-            model.onCreate(this);
-            model.getBaidu();
-
+            parentfragmentAnimStart(new LoginDelegate());
         } else if (id == R.id.mine_account_vip_iv) {
             Logger.e("hellow");
         } else if (id == R.id.mine_sign_tv) {
@@ -140,9 +133,9 @@ public class MineDelegate extends BottomItemDelegate<MinePresenterImpl>
         } else {
             mName.setText(bean.getData().getLoginName());
         }
-        if (bean.getData().getUserPhoto() != null && !bean.getData().getUserPhoto().isEmpty()){
+        if (bean.getData().getUserPhoto() != null && !bean.getData().getUserPhoto().isEmpty()) {
             Glide.with(this)
-                    .load(BaseUrl.BASE_URL+bean.getData().getUserPhoto())
+                    .load(BaseUrl.BASE_URL + bean.getData().getUserPhoto())
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .into(mHeadCircle);
         }

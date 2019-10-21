@@ -1,4 +1,4 @@
-package com.car.tabmine.LiveDataRetrofit;
+package com.car.core.net;
 
 import android.util.Log;
 
@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 
 /**
+ * @author
  * 设置并监听单一数据源时使用 LiveData
  * 方便于当需要切换数据源时自动取消掉前一个数据源的监听
  *
@@ -21,7 +22,6 @@ public class SingleSourceLiveData<T> extends MutableLiveData<T> {
             if (t != null && t == lastData) {
                 return;
             }
-
             lastData = t;
             Log.e("Demo", "onChanged: "+t );
             setValue(t);
@@ -40,7 +40,6 @@ public class SingleSourceLiveData<T> extends MutableLiveData<T> {
         }
 
         if (lastSource != null) {
-            Log.e("---", "setSource: 移除" );
             //移除监听
             lastSource.removeObserver(observer);
         }

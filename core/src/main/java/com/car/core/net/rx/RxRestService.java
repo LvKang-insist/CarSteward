@@ -41,39 +41,39 @@ public interface RxRestService {
      * @return 返回一个Call
      */
     @GET
-    Observable<String> get(@Url String url, @QueryMap Map<String, Object> params);
+    LiveData<String> get(@Url String url, @QueryMap Map<String, Object> params);
 
     @GET
     LiveData<String> test(@Url String url, @QueryMap Map<String, Object> params);
 
     @GET
-    Observable<Response<ResponseBody>> getCookie(@Url String url, @QueryMap Map<String, Object> params);
+    LiveData<Response> getCookie(@Url String url, @QueryMap Map<String, Object> params);
 
     @GET
-    Observable<String> addCookie(@Header("cookie") String cookie, @Url String url, @QueryMap Map<String, Object> params);
+    LiveData<String> addCookie(@Header("cookie") String cookie, @Url String url, @QueryMap Map<String, Object> params);
 
     @GET
-    Observable<Byte> getImage(@Url String url, @QueryMap Map<String, Object> params);
+    LiveData<Byte> getImage(@Url String url, @QueryMap Map<String, Object> params);
 
     @FormUrlEncoded
     @POST
-    Observable<String> post(@Url String url, @FieldMap Map<String, Object> params);
+    LiveData<String> post(@Url String url, @FieldMap Map<String, Object> params);
 
     /**
      * 传入原始 数据就不能添加 @FormUrlEncoded 了
      */
     @POST
-    Observable<String> postRaw(@Url String url, @Body RequestBody body);
+    LiveData<String> postRaw(@Url String url, @Body RequestBody body);
 
     @FormUrlEncoded
     @PUT
-    Observable<String> put(@Url String url, @FieldMap Map<String, Object> params);
+    LiveData<String> put(@Url String url, @FieldMap Map<String, Object> params);
 
     @PUT
-    Observable<String> putRaw(@Url String url, @Body RequestBody body);
+    LiveData<String> putRaw(@Url String url, @Body RequestBody body);
 
     @DELETE
-    Observable<String> delete(@Url String url, @QueryMap Map<String, Object> params);
+    LiveData<String> delete(@Url String url, @QueryMap Map<String, Object> params);
 
     /**
      * download 默认是吧文件下载到内存中，最后统一写入文件里，这种方式存在一个问题：
@@ -82,11 +82,11 @@ public interface RxRestService {
      */
     @Streaming
     @GET
-    Observable<ResponseBody> download(@Url String url, @QueryMap Map<String, Object> params);
+    LiveData<ResponseBody> download(@Url String url, @QueryMap Map<String, Object> params);
 
     @Streaming
     @GET
-    Observable<ResponseBody> download(@Url String url);
+    LiveData<ResponseBody> download(@Url String url);
 
 
     /**
@@ -96,6 +96,6 @@ public interface RxRestService {
      */
     @Multipart
     @POST
-    Observable<String> upload(@Url String url, @Part MultipartBody.Part file);
+    LiveData<String> upload(@Url String url, @Part MultipartBody.Part file);
 
 }

@@ -8,8 +8,6 @@ import com.car.core.net.RestCreator;
 import java.io.File;
 import java.util.Map;
 import java.util.WeakHashMap;
-
-import io.reactivex.Observable;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -47,15 +45,15 @@ public class RxRestClient {
         return new RxRestClientBuilder();
     }
 
-    private Observable<String> request(HttpMethod method) {
+    private LiveData<String> request(HttpMethod method) {
         final RxRestService service = RestCreator.getRxRestService();
-        Observable<String> observable = null;
+        LiveData<String> observable = null;
         switch (method) {
             case GET:
                 observable = service.get(URL, PARAMS);
                 break;
             case ADD_COOKIE:
-                observable = service.addCookie(COOKIE,URL,PARAMS);
+                observable = service.addCookie(COOKIE, URL, PARAMS);
                 break;
             case POST:
                 observable = service.post(URL, PARAMS);
@@ -88,46 +86,40 @@ public class RxRestClient {
         return observable;
     }
 
-    private Observable<Byte> request() {
+    private LiveData<Byte> request() {
         final RxRestService service = RestCreator.getRxRestService();
         return service.getImage(URL, PARAMS);
     }
 
-    public final Observable<String> get() {
+    public final LiveData<String> get() {
         return request(HttpMethod.GET);
     }
-    public final Observable<String> addCookie() {
+
+    public final LiveData<String> addCookie() {
         return request(HttpMethod.ADD_COOKIE);
     }
 
-    public final LiveData<String> textget(){
-        RxRestService rxRestService = RestCreator.getRxRestService();
-        return rxRestService.test(URL,PARAMS);
-    }
 
     /**
      * 获取cookie 的请求
      *
      * @return
      */
-    public final Observable<Response<ResponseBody>> getCookie() {
+    public final LiveData<Response> getCookie() {
         final RxRestService service = RestCreator.getRxRestService();
         return service.getCookie(URL, PARAMS);
     }
 
 
-    public final Observable<String> post() {
+    public final LiveData<String> post() {
         if (BODY == null) {
             return request(HttpMethod.POST);
         } else {
-           /* if (!PARAMS.isEmpty()) {
-                throw new RuntimeException("params must be null !");
-            }*/
             return request(HttpMethod.POST_RAW);
         }
     }
 
-    public final Observable<String> put() {
+    public final LiveData<String> put() {
         if (BODY == null) {
             request(HttpMethod.PUT);
         } else {
@@ -138,15 +130,15 @@ public class RxRestClient {
         return request(HttpMethod.PUT_RAW);
     }
 
-    public final Observable<String> delete() {
+    public final LiveData<String> delete() {
         return request(HttpMethod.DELETE);
     }
 
-    public final Observable<String> upload() {
+    public final LiveData<String> upload() {
         return request(HttpMethod.UPLOAD);
     }
 
-    public final Observable<ResponseBody> download() {
+    public final LiveData<ResponseBody> download() {
         return RestCreator.getRxRestService().download(URL, PARAMS);
     }
 

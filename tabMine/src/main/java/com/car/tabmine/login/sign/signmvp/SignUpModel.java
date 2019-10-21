@@ -1,15 +1,15 @@
 package com.car.tabmine.login.sign.signmvp;
 
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.Observer;
 
 import com.car.core.mvp.model.BaseModel;
-import com.car.core.mvp.view.BaseMvpFragment;
-import com.car.core.net.rx.RxRequest;
-import com.car.core.net.rx.RxRestClient;
+import com.car.core.net.rx.CarRequest;
 
 import java.util.WeakHashMap;
+
+import okhttp3.ResponseBody;
+import retrofit2.Response;
 
 /**
  * @author 345 QQ:1831712732
@@ -21,55 +21,18 @@ import java.util.WeakHashMap;
 public class SignUpModel extends BaseModel {
 
     @Override
-    public void request(String url, WeakHashMap param, OnResultListener listener) {
-        RxRequest.onGetRx(url, param, (flag, result) -> {
-            if (flag) {
-                listener.result(result);
-            } else {
-                listener.result(null);
-            }
-        });
+    public void request(String url, WeakHashMap param, LifecycleOwner owner, Observer observer) {
+        CarRequest.result(url, param, liveData -> liveData.observe(owner, observer));
     }
 
-    public MutableLiveData test(BaseMvpFragment fragmeng, String url, WeakHashMap map) {
 
-        MutableLiveData sourceLiveData = getSourceLiveData();
+    public void requestSms(String url, WeakHashMap param, LifecycleOwner owner, Observer<Response> observer) {
 
-        LiveData<String> textget = RxRestClient.builder()
-                .url(url)
-                .params(map)
-                .build()
-                .textget();
-
-        textget.observe(fragmeng, new Observer<String>() {
-            @Override
-            public void onChanged(String s) {
-
-            }
-        });
-
-        return sourceLiveData;
+        CarRequest.getCookie(url, param, liveData -> liveData.observe(owner, observer));
     }
 
-    public void requestSms(String url, WeakHashMap param, OnResultListener listener) {
-        RxRequest.onGetRxCookie(url, param, (flag, result) -> {
-            if (flag) {
-                listener.result(result);
-
-            } else {
-                listener.result(null);
-            }
-        });
-    }
-
-    public void requestSign(String url, WeakHashMap param, OnResultListener listener) {
-        RxRequest.onAddCookieRxObs(url, param, (flag, result) -> {
-            if (flag) {
-                listener.result(result);
-            } else {
-                listener.result(null);
-            }
-        });
+    public void requestSign(String url, WeakHashMap param, LifecycleOwner owner, Observer<String> observer) {
+        CarRequest.onAddCookieRxObs(url, param, liveData -> liveData.observe(owner, observer));
     }
 
 

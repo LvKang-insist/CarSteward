@@ -50,8 +50,9 @@ public class RestCreator {
                 .client(OkhttpHolder.OKHTTP_CLIENT)
                 //依赖中引入的转换器
                 .addConverterFactory(ScalarsConverterFactory.create())
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addCallAdapterFactory(new LiveDataCallAdapterFactory())
                 .build();
+
     }
 
     private static final class OkhttpHolder<T extends BaseInterceptor> {
