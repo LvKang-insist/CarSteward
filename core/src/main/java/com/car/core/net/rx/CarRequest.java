@@ -1,14 +1,18 @@
 package com.car.core.net.rx;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 
+import com.car.core.net.CustomResponse;
 import com.car.core.utils.storage.CarPreference;
 
 import java.io.File;
 import java.util.WeakHashMap;
 
 import okhttp3.ResponseBody;
+import retrofit2.Call;
 import retrofit2.Response;
 
 /**
@@ -32,7 +36,7 @@ public class CarRequest {
          *
          * @param liveData 网络请求的响应体
          */
-        void onNext(LiveData<Response> liveData);
+        void onNext(LiveData<CustomResponse> liveData);
     }
 
     public interface OnRxDowloadListener {
@@ -55,21 +59,26 @@ public class CarRequest {
      * @return 返回一个被观察着
      */
     public static void getCookie(String url, WeakHashMap<String, Object> params, OnResponseListener listener) {
-        listener.onNext(RxRestClient.builder()
+        LiveData<CustomResponse> cookie = RxRestClient.builder()
                 .url(url)
                 .params(params)
-                .cookie(CarPreference.getCookie())
                 .build()
-                .getCookie());
+                .getCookie();
+        if (cookie == null){
+            Log.e("-------", "getCookie: 空" );
+        }else {
+
+            listener.onNext(cookie);
+        }
     }
 
     public static void onAddCookieRxObs(String url, WeakHashMap<String, Object> params, OnReqeustListener listener) {
-        onResult(listener, RxRestClient.builder()
-                .url(url)
-                .params(params)
-                .cookie(CarPreference.getCookie())
-                .build()
-                .addCookie());
+       listener.onNext(RxRestClient.builder()
+               .url(url)
+               .params(params)
+               .cookie(CarPreference.getCookie())
+               .build()
+               .addCookie());
     }
 
 

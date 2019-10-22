@@ -2,6 +2,7 @@ package com.car.core.net.rx;
 
 import androidx.lifecycle.LiveData;
 
+import com.car.core.net.CustomResponse;
 import com.car.core.net.HttpMethod;
 import com.car.core.net.RestCreator;
 
@@ -12,6 +13,7 @@ import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
+import retrofit2.Call;
 import retrofit2.Response;
 
 /**
@@ -105,7 +107,7 @@ public class RxRestClient {
      *
      * @return
      */
-    public final LiveData<Response> getCookie() {
+    public final  LiveData<CustomResponse>  getCookie() {
         final RxRestService service = RestCreator.getRxRestService();
         return service.getCookie(URL, PARAMS);
     }

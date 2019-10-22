@@ -7,9 +7,9 @@ import androidx.lifecycle.LiveData;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
-import java.util.Objects;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.CallAdapter;
 import retrofit2.Callback;
@@ -24,13 +24,56 @@ public class LiveDataCallAdapterFactory extends CallAdapter.Factory {
     public CallAdapter<?, ?> get(Type returnType, Annotation[] annotations, Retrofit retrofit) {
 
         //当接口返回类型是 LiveData时，返回自定义的适配器
-        if (getRawType(returnType) != LiveData.class) {
-            return null;
+        Log.e("-------", "get: " + returnType);
+        if (getRawType(returnType) == LiveData.class) {
+            Type bodyType = getParameterUpperBound(0, (ParameterizedType) returnType);
+            return new LiveDataCallAdapter<>(bodyType);
+        } else if (getRawType(returnType) == Response.class) {
+            new LiveDataResponseAdapter<>(returnType);
         }
-        Type bodyType = getParameterUpperBound(0, (ParameterizedType) returnType);
-        return new LiveDataCallAdapter<>(bodyType);
+        return null;
     }
 
+
+    class LiveDataResponseAdapter<R> implements CallAdapter<R, LiveData<R>> {
+        private final Type responseType;
+
+        LiveDataResponseAdapter(Type responseType) {
+            this.responseType = responseType;
+        }
+
+        @Override
+        public Type responseType() {
+            return responseType;
+        }
+
+        @Override
+        public LiveData<R> adapt(Call<R> call) {
+
+            return new LiveData<R>() {
+                //原子更新的boolean
+                AtomicBoolean started = new AtomicBoolean(false);
+
+                @Override
+                protected void onActive() {
+                    if (started.compareAndSet(false, true)) {
+                        call.enqueue(new Callback<R>() {
+                            @Override
+                            public void onResponse(Call<R> call, Response<R> response) {
+                                setValue(response.body());
+                            }
+
+                            @Override
+                            public void onFailure(Call<R> call, Throwable t) {
+                                setValue(null);
+                            }
+                        });
+                    }
+                }
+            };
+        }
+
+    }
 
     /**
      * 转换响应数据类型(Type->R(自定义类型))，并发送自定义的数据
@@ -58,6 +101,7 @@ public class LiveDataCallAdapterFactory extends CallAdapter.Factory {
          */
         @Override
         public LiveData<R> adapt(final Call<R> call) {
+            Log.e("-----", "adapt: String");
             return new LiveData<R>() {
                 //原子更新的boolean
                 AtomicBoolean started = new AtomicBoolean(false);

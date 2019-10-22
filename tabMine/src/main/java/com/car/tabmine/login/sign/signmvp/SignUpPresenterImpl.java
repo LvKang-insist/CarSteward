@@ -37,6 +37,7 @@ public class SignUpPresenterImpl extends BasePresenter<SignUpContract.IsignUpVie
     @Override
     public void requestNumberCheck(String url, WeakHashMap param) {
         getModel().request(url, param, (LifecycleOwner) getView(), s -> {
+            Log.e("-----", "requestNumberCheck: "+s );
             JSONObject object = JSON.parseObject((String) s);
             if (object.getInteger("status") == 1) {
                 if ("success".equals(object.getString("msg"))) {

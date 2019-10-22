@@ -49,6 +49,7 @@ public class RestCreator {
                 .baseUrl(BASE_URL)
                 .client(OkhttpHolder.OKHTTP_CLIENT)
                 //依赖中引入的转换器
+//                .addConverterFactory(new AddResponse())
                 .addConverterFactory(ScalarsConverterFactory.create())
                 .addCallAdapterFactory(new LiveDataCallAdapterFactory())
                 .build();

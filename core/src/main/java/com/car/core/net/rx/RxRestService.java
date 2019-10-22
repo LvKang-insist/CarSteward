@@ -3,12 +3,15 @@ package com.car.core.net.rx;
 
 import androidx.lifecycle.LiveData;
 
+import com.car.core.net.CustomResponse;
+
 import java.util.Map;
 
 import io.reactivex.Observable;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
+import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
@@ -47,7 +50,7 @@ public interface RxRestService {
     LiveData<String> test(@Url String url, @QueryMap Map<String, Object> params);
 
     @GET
-    LiveData<Response> getCookie(@Url String url, @QueryMap Map<String, Object> params);
+    LiveData<CustomResponse> getCookie(@Url String url, @QueryMap Map<String, Object> params);
 
     @GET
     LiveData<String> addCookie(@Header("cookie") String cookie, @Url String url, @QueryMap Map<String, Object> params);
