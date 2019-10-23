@@ -1,4 +1,4 @@
-package com.car.core.net.rx;
+package com.car.core.net.lvdata;
 
 import android.util.Log;
 
@@ -10,10 +10,6 @@ import com.car.core.utils.storage.CarPreference;
 
 import java.io.File;
 import java.util.WeakHashMap;
-
-import okhttp3.ResponseBody;
-import retrofit2.Call;
-import retrofit2.Response;
 
 /**
  * @author 345

@@ -1,6 +1,4 @@
-package com.car.core.net.rx;
-
-import android.content.Context;
+package com.car.core.net.lvdata;
 
 import com.car.core.net.RestCreator;
 

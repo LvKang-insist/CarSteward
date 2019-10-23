@@ -12,19 +12,18 @@ import retrofit2.Response;
  */
 public class CustomResponse {
     public Response response;
-    public ResponseBody responseBody;
+    public String  result;
 
-
-    public CustomResponse(ResponseBody responseBody) {
-        this.responseBody = responseBody;
+    public CustomResponse(String result) {
+        this.result = result;
     }
 
-    public ResponseBody getResponseBody() {
-        return responseBody;
+    public String getResult() {
+        return result;
     }
 
-    public void setResponseBody(ResponseBody responseBody) {
-        this.responseBody = responseBody;
+    public void setResult(String result) {
+        this.result = result;
     }
 
     public CustomResponse(Response response) {

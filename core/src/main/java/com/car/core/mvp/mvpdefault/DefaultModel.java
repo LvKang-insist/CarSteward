@@ -1,11 +1,10 @@
 package com.car.core.mvp.mvpdefault;
 
 import androidx.lifecycle.LifecycleOwner;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 
 import com.car.core.mvp.model.BaseModel;
-import com.car.core.net.rx.CarRequest;
+import com.car.core.net.lvdata.CarRequest;
 
 import java.util.WeakHashMap;
 
