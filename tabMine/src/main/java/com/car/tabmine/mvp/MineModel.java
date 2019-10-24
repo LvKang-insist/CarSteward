@@ -1,10 +1,10 @@
 package com.car.tabmine.mvp;
 
 import androidx.lifecycle.LifecycleOwner;
-import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 
 import com.car.core.mvp.model.BaseModel;
+import com.car.core.net.lvdata.CarRequest;
 import com.car.tabmine.R;
 
 import java.util.ArrayList;
@@ -20,17 +20,17 @@ import java.util.WeakHashMap;
  */
 public class MineModel extends BaseModel {
 
-    public List<TextIntegerBean> setGvOneData() {
-        List<TextIntegerBean> textIntegerBeans = new ArrayList<>();
-        TextIntegerBean t1 = new TextIntegerBean("收藏夹", 0);
-        TextIntegerBean t2 = new TextIntegerBean("足迹", 0);
-        TextIntegerBean t3 = new TextIntegerBean("银行卡", 0);
-        TextIntegerBean t4 = new TextIntegerBean("优惠券", 0);
-        textIntegerBeans.add(t1);
-        textIntegerBeans.add(t2);
-        textIntegerBeans.add(t3);
-        textIntegerBeans.add(t4);
-        return textIntegerBeans;
+    public List<TextStringBean> setGvOneData(String[] count) {
+        List<TextStringBean> textStringBeans = new ArrayList<>();
+        TextStringBean t1 = new TextStringBean("收藏夹", count[0]);
+        TextStringBean t2 = new TextStringBean("足迹", count[1]);
+        TextStringBean t3 = new TextStringBean("银行卡", count[2]);
+        TextStringBean t4 = new TextStringBean("优惠券", count[3]);
+        textStringBeans.add(t1);
+        textStringBeans.add(t2);
+        textStringBeans.add(t3);
+        textStringBeans.add(t4);
+        return textStringBeans;
     }
 
     public List<TextImageBean> setGvTwoData() {
@@ -75,6 +75,6 @@ public class MineModel extends BaseModel {
 
     @Override
     public void request(String url, WeakHashMap param, LifecycleOwner owner, Observer observer) {
-
+        CarRequest.result(url, param, liveData -> liveData.observe(owner, observer));
     }
 }

@@ -16,7 +16,7 @@ import com.car.core.latte.Latte;
 public class CarPreference {
 
     private static final String USER = "user";
-    private static final String DEFAULT  = "default";
+    private static final String DEFAULT = "default";
 
 
     public static SharedPreferences.Editor getAppPreferenceEdit(String s) {
@@ -116,6 +116,23 @@ public class CarPreference {
         return getAppPreference(USER).getString("loginName", null);
     }
 
+
+    public static void putUserPhone(String phone) {
+        getAppPreferenceEdit(USER)
+                .putString("userPhone", phone)
+                .commit();
+    }
+
+    /**
+     * 获取LoginName 用户账号
+     *
+     * @return 返回用户账号
+     */
+    public static String getUserPhone() {
+        return getAppPreference(USER).getString("userPhone", null);
+    }
+
+
     /**
      * 保存用户昵称
      *
@@ -183,9 +200,32 @@ public class CarPreference {
      *
      * @return 头像地址
      */
-    public static String getUserPhotox() {
+    public static String getUserPhoto() {
         return getAppPreference(USER).getString("userPhoto", null);
     }
+
+
+    /**
+     * 设置用户是否设置支付密码
+     *
+     * @param userPass
+     */
+    public static void putUserIsPayPass(int userPass) {
+        getAppPreferenceEdit(USER)
+                .putInt("PayPass", userPass)
+                .commit();
+    }
+
+    /**
+     * 获取用户是否设置支付密码
+     *
+     * @return 头像地址
+     */
+    public static boolean getUserIsPayPass() {
+        int payPass = getAppPreference(USER).getInt("PayPass", 0);
+        return payPass != 0;
+    }
+
 
     /**
      * 保存 qq 状态
@@ -288,8 +328,7 @@ public class CarPreference {
     }
 
     /**
-     * 设置首页是否修改
-     *
+     * 获取 cookie
      */
     public static String getCookie() {
         String cookie = getAppPreference(USER).getString("cookie", "");
@@ -298,5 +337,95 @@ public class CarPreference {
         } else {
             return cookie;
         }
+    }
+
+    /**
+     * 设置账户余额
+     * @param userMoney 账户余额
+     */
+    public static void putUserMoney(String userMoney){
+        getAppPreferenceEdit(USER)
+        .putString("userMoney", userMoney)
+        .commit();
+    }
+
+    /**
+     * 获取是账户余额
+     * @return 账户余额
+     */
+    public static String getUserMoney(){
+        return getAppPreference(USER).getString("userMoney",null);
+    }
+
+    /**
+     * 设置返现余额
+     * @param userMoney 返现余额
+     */
+    public static void putUserCashBackMoney(String userMoney){
+        getAppPreferenceEdit(USER)
+                .putString("cashBackMoney", userMoney)
+                .commit();
+    }
+
+    /**
+     * 获取是返现余额
+     * @return 返现余额
+     */
+    public static String getUserCashBackMoney(){
+        return getAppPreference(USER).getString("cashBackMoney",null);
+    }
+
+
+    /**
+     *  设置最低提现金额
+     * @param cashStartMoney 最低提现金额
+     */
+    public static void putCashStartMoney(String cashStartMoney){
+        getAppPreferenceEdit(USER)
+        .putString("cashStartMoney", cashStartMoney)
+        .commit();
+    }
+
+    /**
+     * 获取最低提现金额
+     * @return 最低提现金额
+     */
+    public static String getCashStartMoney(){
+        return getAppPreference(USER).getString("cashStartMoney",null);
+    }
+
+    /**
+     * 设置最高提现金额
+     * @param cashEndMoney 最高提现金额
+     */
+    public static void putCashEndMoney(String cashEndMoney){
+        getAppPreferenceEdit(USER)
+                .putString("cashEndMoney", cashEndMoney)
+                .commit();
+    }
+    /**
+     * 获取最高提现金额
+     * @return 最高提现金额
+     */
+    public static String getCashEndMoney(){
+        return getAppPreference(USER).getString("cashEndMoney",null);
+    }
+
+    /**
+     * 设置提现手续费率
+     * @param cashRate 手续费
+     */
+    public static void putCashRate(String cashRate){
+        getAppPreferenceEdit(USER)
+        .putString("cashRate", cashRate)
+        .commit();
+    }
+
+    /**
+     * 获取提现手续费率
+     * @return 获取提现手续费
+     */
+    public static String getCashRate(){
+        return getAppPreference(USER).getString("cashRate",null);
     }
 }

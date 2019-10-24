@@ -3,12 +3,9 @@ package com.car.carsteward.application;
 import android.annotation.SuppressLint;
 import android.app.Application;
 
+import com.elvishew.xlog.LogConfiguration;
+import com.elvishew.xlog.XLog;
 import com.hjq.toast.ToastUtils;
-import com.orhanobut.logger.AndroidLogAdapter;
-import com.orhanobut.logger.FormatStrategy;
-import com.orhanobut.logger.Logger;
-import com.orhanobut.logger.PrettyFormatStrategy;
-
 /**
  * @author 345 QQ:1831712732
  * @name MvpFrame
@@ -22,13 +19,13 @@ public class ExampleApplication extends Application {
     public void onCreate() {
         super.onCreate();
         ToastUtils.init(this);
-        FormatStrategy formatStrategy = setLogger();
-        Logger.addLogAdapter(new AndroidLogAdapter(formatStrategy));
+        setLogger();
     }
 
-    private FormatStrategy setLogger() {
-        return PrettyFormatStrategy.newBuilder()
-                    .tag("345")
-                    .build();
+    private void setLogger() {
+        XLog.init(new LogConfiguration.Builder()
+                .t()//允许打印线程信息
+                .tag("345")
+                .build());
     }
 }

@@ -5,6 +5,7 @@ import android.os.Handler;
 import android.os.Looper;
 
 import com.car.core.mvp.view.BaseMvpActivity;
+import com.google.gson.Gson;
 
 import java.util.Map;
 
@@ -18,6 +19,7 @@ import java.util.Map;
 public class Latte {
 
     private static Handler handler = new Handler(Looper.getMainLooper());
+    private static Gson gson = new Gson();
 
     public static LatteConfigurator init(Context context) {
         getConfiguration().put(ConfigKeys.CONTEXT, context.getApplicationContext());
@@ -43,6 +45,10 @@ public class Latte {
      */
     public static Handler getHandler() {
         return handler;
+    }
+
+    public static Gson getGson(){
+        return gson;
     }
 
     public static <T> T getValue(Object key) {

@@ -3,6 +3,9 @@ package com.car.core.net;
 import android.util.Log;
 
 import androidx.lifecycle.LiveData;
+
+import com.elvishew.xlog.XLog;
+
 import java.lang.annotation.Annotation;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -66,7 +69,7 @@ public class LiveDataCallAdapterFactory extends CallAdapter.Factory {
 
                             @Override
                             public void onFailure(Call<R> call, Throwable t) {
-                                Log.e("Request onFailure : ", t.getMessage());
+                                XLog.e("Request onFailure : ", t.getMessage());
                                 postValue(null);
                             }
                         });
@@ -108,7 +111,7 @@ public class LiveDataCallAdapterFactory extends CallAdapter.Factory {
 
                             @Override
                             public void onFailure(Call<R> call, Throwable throwable) {
-                                Log.e("Request onFailure : ", throwable.getMessage());
+                                XLog.e("Request onFailure : ", throwable.getMessage());
                                 postValue(null);
                             }
                         });

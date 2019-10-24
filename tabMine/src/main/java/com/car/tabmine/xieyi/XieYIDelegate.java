@@ -12,10 +12,7 @@ import com.car.core.mvp.mvpdefault.DefaultPresenterImpl;
 import com.car.core.mvp.view.BaseMvpFragment;
 import com.car.tabmine.R;
 import com.car.tabmine.R2;
-import com.orhanobut.logger.Logger;
-
 import java.util.WeakHashMap;
-
 import butterknife.BindView;
 
 /**

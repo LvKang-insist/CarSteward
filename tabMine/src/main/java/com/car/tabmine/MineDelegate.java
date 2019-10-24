@@ -1,32 +1,41 @@
 package com.car.tabmine;
 
+import android.os.Bundle;
 import android.view.View;
 import android.widget.GridView;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.car.core.api.BaseUrl;
+import com.car.core.api.Const;
 import com.car.core.delegate.BottomItemDelegate;
 import com.car.core.mvp.factory.CreatePresenter;
+import com.car.core.utils.storage.CarPreference;
+import com.car.core.utils.util.GlideUtil;
+import com.car.core.utils.util.RequestParam;
 import com.car.tabmine.adapter.GradViewOneAdapter;
 import com.car.tabmine.adapter.GradViewThreeAdapter;
 import com.car.tabmine.adapter.GradViewTwoAdapter;
 import com.car.tabmine.login.LogInBean;
 import com.car.tabmine.login.LoginDelegate;
+import com.car.tabmine.mvp.GetUserInfoBean;
 import com.car.tabmine.mvp.TextImageBean;
 import com.car.tabmine.mvp.MineContract;
 import com.car.tabmine.mvp.MinePresenterImpl;
-import com.car.tabmine.mvp.TextIntegerBean;
+import com.car.tabmine.mvp.TextStringBean;
+import com.car.tabmine.mvp.UserCenterBean;
+import com.elvishew.xlog.XLog;
 import com.hjq.toast.ToastUtils;
-import com.orhanobut.logger.Logger;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.List;
+import java.util.WeakHashMap;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -60,6 +69,11 @@ public class MineDelegate extends BottomItemDelegate<MinePresenterImpl>
     GridView mGridViewTwo = null;
     @BindView(R2.id.mine_gv_three)
     GridView mGridViewThree = null;
+    private GradViewOneAdapter mOneAdapter;
+    private GradViewTwoAdapter mTowAdapter;
+    private GradViewThreeAdapter mThreeAdapter;
+    private final String mUserInfo = "&a=getUserInfo";
+    private final String mUerCenter = "&a=userCenter";
 
     @OnClick({R2.id.min_setting_iv,
             R2.id.mine_news_bgab_iv,
@@ -68,14 +82,19 @@ public class MineDelegate extends BottomItemDelegate<MinePresenterImpl>
             R2.id.mine_sign_tv})
     void onClick(View view) {
         final int id = view.getId();
-        if (id == R.id.min_setting_iv) {
-        } else if (id == R.id.mine_news_bgab_iv) {
-        } else if (id == R.id.mine_head_circle_iv) {
+        if (!CarPreference.getLogin()) {
             //登录
             parentfragmentAnimStart(new LoginDelegate());
-        } else if (id == R.id.mine_account_vip_iv) {
-            Logger.e("hellow");
-        } else if (id == R.id.mine_sign_tv) {
+        } else {
+            if (id == R.id.min_setting_iv) {
+
+            } else if (id == R.id.mine_news_bgab_iv) {
+            } else if (id == R.id.mine_head_circle_iv) {
+
+            } else if (id == R.id.mine_account_vip_iv) {
+
+            } else if (id == R.id.mine_sign_tv) {
+            }
         }
     }
 
@@ -86,9 +105,24 @@ public class MineDelegate extends BottomItemDelegate<MinePresenterImpl>
 
     @Override
     public void bindView(View view) {
-        getPresenter().getOneTwoData();
+        getPresenter().getGvOneData();
         getPresenter().getGvTwoData();
         getPresenter().getGvThreeData();
+    }
+
+    @Override
+    public void onLazyInitView(@Nullable Bundle savedInstanceState) {
+        //刷新数据
+        refreshView();
+    }
+
+    @Override
+    public void onSupportVisible() {
+        super.onSupportVisible();
+        if (CarPreference.isUserInfoIsRevise()) {
+            refreshView();
+            CarPreference.putUserInfoIsRevise(false);
+        }
     }
 
     @Override
@@ -102,27 +136,99 @@ public class MineDelegate extends BottomItemDelegate<MinePresenterImpl>
     }
 
     @Override
-    public void onResult(boolean flag, String result) {
-
+    public void onResult(String result) {
+        GetUserInfoBean getUserInfoBean = gson.fromJson(result, GetUserInfoBean.class);
+        if (getUserInfoBean.getStatus() == 1) {
+            GetUserInfoBean.DataBean data = getUserInfoBean.getData();
+            CarPreference.putUserName(data.getUserName());
+            CarPreference.putUserSex(data.getUserSex());
+            CarPreference.putLoginName(data.getLoginName());
+            CarPreference.putUserPhone(data.getUserPhone());
+            CarPreference.putUserMoney(data.getUserMoney());
+            CarPreference.putUserIsPayPass(data.getPayPwd());
+            CarPreference.putUserCashBackMoney(data.getUserCashBackMoney());
+            CarPreference.putCashStartMoney(data.getCashStartMoney());
+            CarPreference.putCashEndMoney(data.getCashEndMoney());
+            CarPreference.putCashRate(data.getCashRate());
+            if (data.getUserPhoto() != null) {
+                CarPreference.putUserPhoto(data.getUserPhoto());
+            }
+            if (data.getUserName() != null) {
+                if (!data.getUserName().isEmpty()) {
+                    mName.setText(data.getUserName());
+                } else {
+                    mName.setText(data.getLoginName());
+                }
+            } else {
+                mName.setText(data.getLoginName());
+            }
+            if (data.getUserPhoto() != null && data.getUserPhoto().contains("http")) {
+                GlideUtil.setImage(BaseUrl.BASE_URL + data.getUserPhoto(), mHeadCircle);
+            }
+            //userCenter
+            WeakHashMap<String, Object> build = RequestParam.builder()
+                    .addTokenId()
+                    .build();
+            getPresenter().requestUserCenter(Const.API_BASE_USER + mUerCenter, build);
+        } else {
+            stopLoading();
+            ToastUtils.show(getUserInfoBean.getMsg());
+        }
     }
 
     @Override
-    public void setGvOne(List<TextIntegerBean> list) {
-        GradViewOneAdapter adapter = new GradViewOneAdapter(list, getActivity(), R.layout.mine_item_tv_tv);
-//        Adap adapter = new Adap(list,getActivity(),R.layout.mine_item_tv_tv);
-        mGridViewOne.setAdapter(adapter);
+    public void onUserCenter(UserCenterBean centerBean) {
+        //会员
+        GlideUtil.setImage(BaseUrl.BASE_URL + centerBean.getUserInfo().getRankIcon_1(), mVip);
+        //消息数量
+        int count = Integer.parseInt(centerBean.getMsgCount());
+        if (count > 0) {
+            mNewsIv.showTextBadge(centerBean.getMsgCount());
+        } else {
+            mNewsIv.hiddenBadge();
+        }
+        //通知
+        if (centerBean.getAffiche().size() == 0) {
+
+        } else {
+
+        }
+        stopLoading();
+    }
+
+
+    private void refreshView() {
+        if (CarPreference.getLogin()) {
+            WeakHashMap map = new WeakHashMap();
+            map.put("tokenId", CarPreference.getTokenId());
+            showLoading("");
+            getPresenter().request(Const.API_BASE_URL_PUBLIC + mUserInfo, map);
+        } else {
+            mName.setText("请登录");
+            mHeadCircle.setImageResource(R.drawable.head_photo);
+        }
+    }
+
+    @Override
+    public void setGvOne(List<TextStringBean> list) {
+        if (mOneAdapter == null) {
+            mOneAdapter = new GradViewOneAdapter(list, getActivity(), R.layout.mine_item_tv_tv);
+            mGridViewOne.setAdapter(mOneAdapter);
+        } else {
+            mOneAdapter.addData(list);
+        }
     }
 
     @Override
     public void setGvTwo(List<TextImageBean> list) {
-        GradViewTwoAdapter adapter = new GradViewTwoAdapter(list, getActivity(), R.layout.mine_item_icon_tv);
-        mGridViewTwo.setAdapter(adapter);
+        mTowAdapter = new GradViewTwoAdapter(list, getActivity(), R.layout.mine_item_icon_tv);
+        mGridViewTwo.setAdapter(mTowAdapter);
     }
 
     @Override
     public void setGvThree(List<TextImageBean> list) {
-        GradViewThreeAdapter adapter = new GradViewThreeAdapter(list, getActivity(), R.layout.mine_item_icon_tv);
-        mGridViewThree.setAdapter(adapter);
+        mThreeAdapter = new GradViewThreeAdapter(list, getActivity(), R.layout.mine_item_icon_tv);
+        mGridViewThree.setAdapter(mThreeAdapter);
     }
 
     @Subscribe(threadMode = ThreadMode.POSTING)

@@ -6,12 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
-import androidx.appcompat.widget.AppCompatTextView;
-
-import com.car.core.ui.adapter.CarBaseAdapter;
-import com.car.core.ui.adapter.ViewHolder;
-import com.car.tabmine.R;
-import com.car.tabmine.mvp.TextIntegerBean;
+import com.car.tabmine.mvp.TextStringBean;
 
 import java.util.List;
 
@@ -25,9 +20,9 @@ import java.util.List;
 public class Adap extends BaseAdapter {
     private final Context context;
     private final int resid;
-    List<TextIntegerBean> list;
+    List<TextStringBean> list;
 
-    public Adap(List<TextIntegerBean> list, Context context, int resId) {
+    public Adap(List<TextStringBean> list, Context context, int resId) {
         this.context = context;
         this.list = list;
         this.resid = resId;

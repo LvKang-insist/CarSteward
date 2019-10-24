@@ -23,10 +23,7 @@ import com.car.tabmine.login.sign.signmvp.SignUpContract;
 import com.car.tabmine.login.sign.signmvp.SignUpPresenterImpl;
 import com.car.tabmine.xieyi.XieYIDelegate;
 import com.hjq.toast.ToastUtils;
-import com.orhanobut.logger.Logger;
-
 import java.util.WeakHashMap;
-
 import butterknife.BindView;
 import butterknife.OnClick;
 
@@ -140,7 +137,6 @@ public class SignUpDelegate extends BaseMvpFragment<SignUpPresenterImpl>
     @Override
     public void smsResult(String code) {
         JSONObject object = JSON.parseObject(code);
-        Logger.json(code);
         if (object.getInteger("status") == 1) {
             SetTelCountTimer telCountTimer = new SetTelCountTimer(mCodeBtn);
             telCountTimer.start();

@@ -1,7 +1,6 @@
 package com.car.tabmine.mvp;
 
 import com.car.core.mvp.presenter.IBasePresenter;
-import com.car.core.mvp.view.BaseMvpFragment;
 import com.car.core.mvp.view.IBaseView;
 
 import java.util.List;
@@ -16,18 +15,27 @@ import java.util.WeakHashMap;
  */
 public class MineContract {
 
-    public interface IMineView extends IBaseView{
-        void onResult(boolean flag, String result);
+    public interface IMineView extends IBaseView {
+
+        void onResult(String result);
+
+        void onUserCenter(UserCenterBean bean);
+
         /**
          * gradview 数据
+         *
          * @param list 数据
          */
-        void setGvOne(List<TextIntegerBean> list);
+        void setGvOne(List<TextStringBean> list);
+
         void setGvTwo(List<TextImageBean> list);
+
         void setGvThree(List<TextImageBean> list);
     }
 
     public interface IMinePresenter extends IBasePresenter<IMineView> {
         void request(String url, WeakHashMap param);
+
+        void requestUserCenter(String url, WeakHashMap param);
     }
 }

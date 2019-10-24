@@ -7,11 +7,11 @@ package com.car.tabmine.mvp;
  * @time 2019/10/11 21:59
  * @description
  */
-public class TextIntegerBean {
+public class TextStringBean {
     private String title;
-    private int amount;
+    private String amount;
 
-    public TextIntegerBean(String title, int amount) {
+    public TextStringBean(String title, String amount) {
         this.title = title;
         this.amount = amount;
     }
@@ -24,11 +24,11 @@ public class TextIntegerBean {
         this.title = title;
     }
 
-    public int getAmount() {
+    public String getAmount() {
         return amount;
     }
 
-    public void setAmount(int amount) {
+    public void setAmount(String amount) {
         this.amount = amount;
     }
 }

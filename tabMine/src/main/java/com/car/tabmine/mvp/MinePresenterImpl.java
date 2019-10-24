@@ -1,11 +1,10 @@
 package com.car.tabmine.mvp;
 
-import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.Observer;
 
-import com.car.core.mvp.model.BaseModel;
-import com.car.core.mvp.mvpdefault.DefaultPresenterImpl;
+import com.car.core.latte.Latte;
 import com.car.core.mvp.presenter.BasePresenter;
-import com.car.core.mvp.view.BaseMvpFragment;
 
 import java.util.WeakHashMap;
 
@@ -19,6 +18,8 @@ import java.util.WeakHashMap;
 public class MinePresenterImpl extends BasePresenter<MineContract.IMineView, MineModel>
         implements MineContract.IMinePresenter {
 
+    private UserCenterBean mCenterBean;
+
     @Override
     protected MineModel attachModel() {
         return new MineModel();
@@ -26,11 +27,32 @@ public class MinePresenterImpl extends BasePresenter<MineContract.IMineView, Min
 
     @Override
     public void request(String url, WeakHashMap param) {
-
+        getModel().request(url, param, (LifecycleOwner) getView(), (Observer<String>) s -> getView().onResult(s));
     }
 
-    public void getOneTwoData() {
-        getView().setGvOne(getModel().setGvOneData());
+    @Override
+    public void requestUserCenter(String url, WeakHashMap param) {
+        getModel().request(url, param, (LifecycleOwner) getView(), (Observer<String>) s -> {
+            mCenterBean = Latte.getGson().fromJson(s, UserCenterBean.class);
+            getView().onUserCenter(mCenterBean);
+            getGvOneData();
+            getGvTwoData();
+            getGvThreeData();
+        });
+    }
+
+    public void getGvOneData() {
+        if (mCenterBean != null) {
+            String[] count = new String[]{
+                    mCenterBean.getFavoritesCount(),
+                    mCenterBean.getBrowsHistoryCount(),
+                    mCenterBean.getBankCardCount(),
+                    mCenterBean.getCouponsCount()};
+            getView().setGvOne(getModel().setGvOneData(count));
+        } else {
+            String[] count = new String[]{"0", "0", "0", "0"};
+            getView().setGvOne(getModel().setGvOneData(count));
+        }
     }
 
     public void getGvTwoData() {

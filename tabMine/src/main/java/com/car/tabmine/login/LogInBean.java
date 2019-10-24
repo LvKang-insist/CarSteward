@@ -1,7 +1,5 @@
 package com.car.tabmine.login;
 
-import com.car.core.utils.data.BaseData;
-
 /**
  * @author 345 QQ:1831712732
  * @name CarSteward
@@ -9,7 +7,7 @@ import com.car.core.utils.data.BaseData;
  * @time 2019/10/14 22:38
  * @description
  */
-public class LogInBean extends BaseData {
+public class LogInBean {
 
     /**
      * data : {"isBindingQQ":"1","isBindingWX":"0","loginName":"15129379467","tokenId":"fa5e35312461424a2c50dff2700164a1081","userName":"345","userPhoto":"","userScore":"0","userSex":"1","userStatus":"1","userType":"0"}

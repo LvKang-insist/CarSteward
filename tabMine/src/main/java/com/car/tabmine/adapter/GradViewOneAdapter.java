@@ -7,12 +7,9 @@ import androidx.appcompat.widget.AppCompatTextView;
 import com.car.core.ui.adapter.CarBaseAdapter;
 import com.car.core.ui.adapter.ViewHolder;
 import com.car.tabmine.R;
-import com.car.tabmine.mvp.TextImageBean;
-import com.car.tabmine.mvp.TextIntegerBean;
+import com.car.tabmine.mvp.TextStringBean;
 
 import java.util.List;
-
-import cn.bingoogolapple.badgeview.BGABadgeImageView;
 
 /**
  * @author 345 QQ:1831712732
@@ -21,20 +18,26 @@ import cn.bingoogolapple.badgeview.BGABadgeImageView;
  * @time 2019/10/10 22:35
  * @description
  */
-public class GradViewOneAdapter extends CarBaseAdapter<TextIntegerBean> {
-    List<TextIntegerBean> list;
+public class GradViewOneAdapter extends CarBaseAdapter<TextStringBean> {
+    List<TextStringBean> list;
 
-    public GradViewOneAdapter(List<TextIntegerBean> list, Context context, int resId) {
+    public GradViewOneAdapter(List<TextStringBean> list, Context context, int resId) {
         super(list, context, resId);
         this.list = list;
     }
 
     @Override
     public void setData(ViewHolder viewHolder, int position) {
-        TextIntegerBean textIntegerBean = list.get(position);
+        TextStringBean textStringBean = list.get(position);
         ((AppCompatTextView) viewHolder.findViewById(R.id.item_tv_tv_amount_tv))
-                .setText(String.valueOf(textIntegerBean.getAmount()));
+                .setText(String.valueOf(textStringBean.getAmount()));
         ((AppCompatTextView) viewHolder.findViewById(R.id.item_tv_tv_title_tv))
-                .setText(textIntegerBean.getTitle());
+                .setText(textStringBean.getTitle());
+    }
+
+    public void addData(List<TextStringBean> list){
+        this.list.clear();
+        this.list.addAll(list);
+        this.notifyDataSetChanged();
     }
 }

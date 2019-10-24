@@ -8,16 +8,13 @@ import androidx.lifecycle.Observer;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.car.core.mvp.presenter.BasePresenter;
-import com.car.core.mvp.view.BaseMvpFragment;
 import com.car.core.utils.storage.CarPreference;
-import com.orhanobut.logger.Logger;
+import com.elvishew.xlog.XLog;
 
-import java.io.IOException;
 import java.util.WeakHashMap;
 
 import okhttp3.Headers;
-import okhttp3.ResponseBody;
-import retrofit2.Response;
+
 
 /**
  * @author 345 QQ:1831712732
@@ -59,8 +56,8 @@ public class SignUpPresenterImpl extends BasePresenter<SignUpContract.IsignUpVie
                     String cookie = headers.get("set-cookie");
                     if (cookie != null) {
                         CarPreference.putCookie(cookie.substring(0, cookie.indexOf(";")));
-                    }else {
-                        Logger.e("cookie 获取失败");
+                    } else {
+                        XLog.e("cookie 获取失败");
                     }
                     getView().smsResult(customResponse.getResult());
                 }));
