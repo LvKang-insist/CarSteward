@@ -1,18 +1,13 @@
 package com.car.tabmine.login.sign.signmvp;
 
-import android.util.Log;
-
 import androidx.lifecycle.LifecycleOwner;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 
 import com.car.core.mvp.model.BaseModel;
-import com.car.core.net.CustomResponse;
+import com.car.core.net.lvdata.CustomResponse;
 import com.car.core.net.lvdata.CarRequest;
 
 import java.util.WeakHashMap;
-
-import retrofit2.Response;
 
 /**
  * @author 345 QQ:1831712732

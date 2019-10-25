@@ -3,9 +3,6 @@ package com.car.core.mvp.model;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
-
-import com.car.core.net.SingleSourceLiveData;
-
 import java.util.WeakHashMap;
 
 /**
@@ -16,16 +13,6 @@ import java.util.WeakHashMap;
  * @description 抽象 M 层 需要被继承，默认一个请求数据的方法，可重写或者重载，也可以自定义
  */
 public abstract class BaseModel<T> extends ViewModel {
-
-    private SingleSourceLiveData<T> sourceLiveData;
-
-    public SingleSourceLiveData<T> getSourceLiveData() {
-        if (sourceLiveData == null) {
-            sourceLiveData = new SingleSourceLiveData<>();
-        }
-        return sourceLiveData;
-    }
-
 
     public interface OnResultListener {
         /**

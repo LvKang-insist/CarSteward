@@ -1,5 +1,7 @@
-package com.car.core.net;
+package com.car.core.net.lvdata;
 
+
+import com.car.core.net.lvdata.CustomResponse;
 
 import java.io.IOException;
 import java.lang.annotation.Annotation;

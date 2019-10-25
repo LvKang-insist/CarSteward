@@ -2,8 +2,6 @@ package com.car.core.net.lvdata;
 
 import androidx.lifecycle.LiveData;
 
-import com.car.core.net.CustomResponse;
-import com.car.core.net.HttpMethod;
 import com.car.core.net.RestCreator;
 
 import java.io.File;

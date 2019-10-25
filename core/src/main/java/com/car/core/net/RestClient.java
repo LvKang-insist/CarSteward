@@ -8,6 +8,8 @@ import com.car.core.net.callback.IRequest;
 import com.car.core.net.callback.ISuccess;
 import com.car.core.net.callback.RequestCallback;
 import com.car.core.net.download.DownloadHandler;
+import com.car.core.net.lvdata.HttpMethod;
+
 import java.io.File;
 import java.util.Map;
 import java.util.WeakHashMap;
@@ -73,7 +75,7 @@ public class RestClient {
     }
 
 
-    private void request(HttpMethod method,String baseUrl) {
+    private void request(HttpMethod method, String baseUrl) {
         // 获取网络接口请求的实例
         final RestService service = RestCreator.getRestService();
         Call<String> call = null;

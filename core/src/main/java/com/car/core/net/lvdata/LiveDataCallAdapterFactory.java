@@ -1,15 +1,18 @@
-package com.car.core.net;
-
-import android.util.Log;
+package com.car.core.net.lvdata;
 
 import androidx.lifecycle.LiveData;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.car.core.net.lvdata.CustomResponse;
 import com.elvishew.xlog.XLog;
+import com.hjq.toast.ToastUtils;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.concurrent.atomic.AtomicBoolean;
+
 import retrofit2.Call;
 import retrofit2.CallAdapter;
 import retrofit2.Callback;
@@ -106,13 +109,15 @@ public class LiveDataCallAdapterFactory extends CallAdapter.Factory {
                             @Override
                             public void onResponse(Call<R> call, Response<R> response) {
                                 R body = response.body();
-                                postValue(body);
+                                if (VerifyResult.startVerify((String) body)) {
+                                    postValue(body);
+                                }
                             }
 
                             @Override
                             public void onFailure(Call<R> call, Throwable throwable) {
                                 XLog.e("Request onFailure : ", throwable.getMessage());
-                                postValue(null);
+                                ToastUtils.show("请求错误");
                             }
                         });
                     }

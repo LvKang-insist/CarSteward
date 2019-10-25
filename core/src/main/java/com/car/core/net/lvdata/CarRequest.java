@@ -1,11 +1,8 @@
 package com.car.core.net.lvdata;
 
-import android.util.Log;
-
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 
-import com.car.core.net.CustomResponse;
 import com.car.core.utils.storage.CarPreference;
 
 import java.io.File;
@@ -61,7 +58,7 @@ public class CarRequest {
                 .build()
                 .getCookie();
         if (cookie == null){
-            Log.e("-------", "getCookie: 空" );
+
         }else {
 
             listener.onNext(cookie);
@@ -89,7 +86,6 @@ public class CarRequest {
                 .params(params)
                 .build()
                 .get());
-
     }
 
 

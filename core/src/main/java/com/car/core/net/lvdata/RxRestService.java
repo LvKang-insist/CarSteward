@@ -3,8 +3,6 @@ package com.car.core.net.lvdata;
 
 import androidx.lifecycle.LiveData;
 
-import com.car.core.net.CustomResponse;
-
 import java.util.Map;
 
 import okhttp3.MultipartBody;

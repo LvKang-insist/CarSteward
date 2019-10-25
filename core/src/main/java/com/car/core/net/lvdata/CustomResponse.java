@@ -1,4 +1,4 @@
-package com.car.core.net;
+package com.car.core.net.lvdata;
 
 import okhttp3.ResponseBody;
 import retrofit2.Response;
