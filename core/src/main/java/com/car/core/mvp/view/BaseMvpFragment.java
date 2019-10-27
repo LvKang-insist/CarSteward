@@ -37,8 +37,6 @@ public abstract class BaseMvpFragment<P extends IBasePresenter> extends Permissi
 
     private P mPresenter;
     public Gson gson = new Gson();
-    private boolean mDialogIsShow = false;
-    private ToastDialog mLoadingDilaog;
 
     /**
      * 设置布局
@@ -126,7 +124,6 @@ public abstract class BaseMvpFragment<P extends IBasePresenter> extends Permissi
         super.onDestroy();
         unbinder = null;
         rootView = null;
-        stopLoading();
         if (isEventBus()) {
             EventBus.getDefault().unregister(this);
         }
@@ -183,44 +180,7 @@ public abstract class BaseMvpFragment<P extends IBasePresenter> extends Permissi
         return mImmersionBar;
     }
 
-    /**
-     * 显示加载对话框
-     *
-     * @param msg 若为 null ，显示正在加载，否则显示 msg
-     */
-    public void showLoading(String msg) {
-        createLoadingDialog(msg);
-        mLoadingDilaog
-                .setType(ToastDialog.Type.LOADING)
-                .show(getChildFragmentManager(), "register");
-    }
 
-    /**
-     * 初始化 loading
-     *
-     * @param msg 消息
-     */
-    private void createLoadingDialog(String msg) {
-        if (msg == null) {
-            msg = "正在加载...";
-        }
-        mLoadingDilaog = ToastDialog.ToastBuilder()
-                .setContentView(R.layout.dialog_toast)
-                .setGravity(Gravity.CENTER)
-                .build()
-                .setMessage(msg);
-        mDialogIsShow = true;
-    }
-
-    /**
-     * 关闭 Loading
-     */
-    public void stopLoading() {
-        if (mLoadingDilaog != null && mDialogIsShow) {
-            mLoadingDilaog.dismiss();
-            mLoadingDilaog = null;
-        }
-    }
 
     protected void setBack(Toolbar toolbar) {
         toolbar.setNavigationIcon(R.drawable.back);

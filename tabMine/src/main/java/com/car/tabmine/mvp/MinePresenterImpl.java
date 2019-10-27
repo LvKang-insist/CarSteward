@@ -5,6 +5,7 @@ import androidx.lifecycle.Observer;
 
 import com.car.core.latte.Latte;
 import com.car.core.mvp.presenter.BasePresenter;
+import com.car.tabmine.MineDelegate;
 import com.elvishew.xlog.XLog;
 
 import java.util.WeakHashMap;
@@ -28,12 +29,12 @@ public class MinePresenterImpl extends BasePresenter<MineContract.IMineView, Min
 
     @Override
     public void request(String url, WeakHashMap param) {
-        getModel().request(url, param, (LifecycleOwner) getView(), (Observer<String>) s -> getView().onResult(s));
+        getModel().request(url, param, getLifecycleOwner(), (Observer<String>) s -> getView().onResult(s));
     }
 
     @Override
     public void requestUserCenter(String url, WeakHashMap param) {
-        getModel().request(url, param, (LifecycleOwner) getView(), (Observer<String>) s -> {
+        getModel().request(url, param, getLifecycleOwner(), (Observer<String>) s -> {
             XLog.json(s);
             mCenterBean = Latte.getGson().fromJson(s, UserCenterBean.class);
             getView().onUserCenter(mCenterBean);

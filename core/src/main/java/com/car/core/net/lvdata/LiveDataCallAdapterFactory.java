@@ -111,13 +111,15 @@ public class LiveDataCallAdapterFactory extends CallAdapter.Factory {
                                 R body = response.body();
                                 if (VerifyResult.startVerify((String) body)) {
                                     postValue(body);
+                                } else {
+                                    postValue(null);
                                 }
                             }
 
                             @Override
                             public void onFailure(Call<R> call, Throwable throwable) {
                                 XLog.e("Request onFailure : ", throwable.getMessage());
-                                ToastUtils.show("请求错误");
+                                postValue(null);
                             }
                         });
                     }

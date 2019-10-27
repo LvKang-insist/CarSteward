@@ -9,6 +9,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.car.core.mvp.presenter.BasePresenter;
 import com.car.core.utils.storage.CarPreference;
+import com.car.tabmine.login.sign.SignUpDelegate;
 import com.elvishew.xlog.XLog;
 
 import java.util.WeakHashMap;
@@ -34,7 +35,7 @@ public class SignUpPresenterImpl extends BasePresenter<SignUpContract.IsignUpVie
 
     @Override
     public void requestNumberCheck(String url, WeakHashMap param) {
-        getModel().request(url, param, (LifecycleOwner) getView(), s -> {
+        getModel().request(url, param, getLifecycleOwner(), s -> {
             JSONObject object = JSON.parseObject((String) s);
             if (object.getInteger("status") == 1) {
                 if ("success".equals(object.getString("msg"))) {
@@ -51,7 +52,7 @@ public class SignUpPresenterImpl extends BasePresenter<SignUpContract.IsignUpVie
     @Override
     public void sendSms(String url, WeakHashMap param) {
         getModel()
-                .requestSms(url, param, (LifecycleOwner) getView(), (customResponse -> {
+                .requestSms(url, param, getLifecycleOwner(), (customResponse -> {
                     Headers headers = customResponse.getResponse().headers();
                     String cookie = headers.get("set-cookie");
                     if (cookie != null) {
@@ -66,7 +67,7 @@ public class SignUpPresenterImpl extends BasePresenter<SignUpContract.IsignUpVie
 
     @Override
     public void signUp(String url, WeakHashMap param) {
-        getModel().requestSign(url, param, (LifecycleOwner) getView(), s -> getView().signUpResult(s));
+        getModel().requestSign(url, param,getLifecycleOwner(), s -> getView().signUpResult(s));
     }
 
 

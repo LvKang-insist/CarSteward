@@ -2,12 +2,15 @@ package com.car.tabmine.login;
 
 import android.util.Base64;
 import android.view.View;
+
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatEditText;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.appcompat.widget.Toolbar;
+
 import com.car.core.api.Const;
+import com.car.core.latte.Latte;
 import com.car.core.mvp.factory.CreatePresenter;
 import com.car.core.mvp.mvpdefault.DefaultContract;
 import com.car.core.mvp.mvpdefault.DefaultPresenterImpl;
@@ -21,6 +24,7 @@ import com.hjq.toast.ToastUtils;
 import org.greenrobot.eventbus.EventBus;
 
 import java.util.WeakHashMap;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 
@@ -85,19 +89,19 @@ public class LoginDelegate extends BaseMvpFragment<DefaultPresenterImpl>
             String number = mLoginPhoneEt.getText().toString();
             String pass = mLoginPassEt.getText().toString();
 
-            if (number.isEmpty()){
+            if (number.isEmpty()) {
                 ToastUtils.show(getResources().getString(R.string.plase_phone_number));
-            }else if (number.length() != NUMBER_LENGTH){
+            } else if (number.length() != NUMBER_LENGTH) {
                 ToastUtils.show("请输入正确的手机号码");
-            }else if (pass.isEmpty()){
+            } else if (pass.isEmpty()) {
                 ToastUtils.show(getResources().getString(R.string.plase_password));
-            }else {
+            } else {
                 //登录
                 String logkey = Base64.encodeToString((Base64.encodeToString(number.getBytes(), Base64.URL_SAFE)
                         + "_" + Base64.encodeToString(pass.getBytes(), Base64.URL_SAFE)).getBytes(), Base64.NO_WRAP);
                 WeakHashMap<String, Object> param = new WeakHashMap<>();
-                param.put("loginKey",logkey);
-                getPresenter().request(Const.API_BASE_USER+login,param);
+                param.put("loginKey", logkey);
+                getPresenter().request(Const.API_BASE_USER + login, param);
             }
 
         } else if (i == R.id.login_forget_password_tv) {
@@ -112,12 +116,12 @@ public class LoginDelegate extends BaseMvpFragment<DefaultPresenterImpl>
     }
 
     @Override
-    public void onResult( String result) {
+    public void onResult(String result) {
         LogInBean logInBean = gson.fromJson(result, LogInBean.class);
-        if (logInBean== null){
+        if (logInBean == null) {
             ToastUtils.show("请求出错");
-        }else {
-            if (logInBean.getStatus() == 1){
+        } else {
+            if (logInBean.getStatus() == 1) {
                 CarPreference.putLogin(true);
                 CarPreference.putTokenId(logInBean.getData().getTokenId());
                 CarPreference.putLoginName(logInBean.getData().getLoginName());

@@ -25,7 +25,7 @@ public class VerifyResult {
                 reLogin();
                 return false;
             } else {
-                return false;
+                return true;
             }
         } else {
             ToastUtils.show("请求出错，请重试！");
@@ -36,7 +36,7 @@ public class VerifyResult {
     private static void reLogin() {
         CarPreference.putTokenId(null);
         CarPreference.putLogin(false);
-        CarPreference.putUserSex(null);
+        CarPreference.putUserSex(String.valueOf(0));
         CarPreference.putLoginName(null);
         CarPreference.putUserName(null);
         CarPreference.putUserPhoto(null);
@@ -54,8 +54,8 @@ public class VerifyResult {
             e.printStackTrace();
         } catch (InstantiationException e) {
             e.printStackTrace();
+        }finally {
+            Latte.stopLoading();
         }
     }
-
-
 }

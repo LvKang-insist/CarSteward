@@ -12,6 +12,7 @@ import androidx.appcompat.widget.AppCompatTextView;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.car.core.api.Const;
+import com.car.core.latte.Latte;
 import com.car.core.mvp.factory.CreatePresenter;
 import com.car.core.mvp.view.BaseMvpFragment;
 import com.car.core.ui.dialog.BaseFragDialog;
@@ -22,8 +23,11 @@ import com.car.tabmine.login.sign.signmvp.SignUpBean;
 import com.car.tabmine.login.sign.signmvp.SignUpContract;
 import com.car.tabmine.login.sign.signmvp.SignUpPresenterImpl;
 import com.car.tabmine.xieyi.XieYIDelegate;
+import com.elvishew.xlog.XLog;
 import com.hjq.toast.ToastUtils;
+
 import java.util.WeakHashMap;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 
@@ -95,7 +99,7 @@ public class SignUpDelegate extends BaseMvpFragment<SignUpPresenterImpl>
                 maps.put("loginKey", signkey);
                 maps.put("smsVerfy", smsVerfy);
                 getPresenter().signUp(Const.API_BASE_USER + signUp, maps);
-                showLoading("注册中");
+               Latte.showLoading("注册中");
             }
         }
     }
@@ -147,14 +151,15 @@ public class SignUpDelegate extends BaseMvpFragment<SignUpPresenterImpl>
 
     @Override
     public void signUpResult(String result) {
+        XLog.e(result);
         SignUpBean signUpBean = gson.fromJson(result, SignUpBean.class);
-        stopLoading();
+        Latte.stopLoading();
         if (signUpBean.getStatus() != 1) {
             ToastUtils.show(signUpBean.getMsg());
         } else if (signUpBean.getStatus() == 1) {
             ToastUtils.show(signUpBean.getMsg());
             fragmentAnimBack();
         }
-        stopLoading();
+
     }
 }

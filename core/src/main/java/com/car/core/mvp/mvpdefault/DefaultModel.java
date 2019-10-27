@@ -17,7 +17,6 @@ import java.util.WeakHashMap;
  */
 public class DefaultModel extends BaseModel {
 
-
     @Override
     public void request(String url, WeakHashMap param, LifecycleOwner owner, Observer observer) {
         CarRequest.result(url, param, liveData -> liveData.observe(owner, observer));
