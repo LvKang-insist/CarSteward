@@ -18,18 +18,18 @@ import com.car.core.mvp.factory.CreatePresenter;
 import com.car.core.utils.storage.CarPreference;
 import com.car.core.utils.util.GlideUtil;
 import com.car.core.utils.util.RequestParam;
-import com.car.tabmine.adapter.GradViewOneAdapter;
-import com.car.tabmine.adapter.GradViewThreeAdapter;
-import com.car.tabmine.adapter.GradViewTwoAdapter;
 import com.car.tabmine.login.LogInBean;
 import com.car.tabmine.login.LoginDelegate;
-import com.car.tabmine.mvp.GetUserInfoBean;
-import com.car.tabmine.mvp.TextImageBean;
-import com.car.tabmine.mvp.MineContract;
-import com.car.tabmine.mvp.MinePresenterImpl;
-import com.car.tabmine.mvp.TextStringBean;
-import com.car.tabmine.mvp.UserCenterBean;
-import com.elvishew.xlog.XLog;
+import com.car.tabmine.mine.adapter.GradViewOneAdapter;
+import com.car.tabmine.mine.adapter.GradViewThreeAdapter;
+import com.car.tabmine.mine.adapter.GradViewTwoAdapter;
+import com.car.tabmine.mine.mvp.GetUserInfoBean;
+import com.car.tabmine.mine.mvp.MineContract;
+import com.car.tabmine.mine.mvp.MinePresenterImpl;
+import com.car.tabmine.mine.mvp.TextImageBean;
+import com.car.tabmine.mine.mvp.TextStringBean;
+import com.car.tabmine.mine.mvp.UserCenterBean;
+import com.car.tabmine.setting.SettingDelegate;
 import com.hjq.toast.ToastUtils;
 
 import org.greenrobot.eventbus.Subscribe;
@@ -75,6 +75,7 @@ public class MineDelegate extends BottomItemDelegate<MinePresenterImpl>
     private GradViewThreeAdapter mThreeAdapter;
     private final String mUserInfo = "&a=getUserInfo";
     private final String mUerCenter = "&a=userCenter";
+    private final String mUserSignIn = "&a=userSignIn";
 
     @OnClick({R2.id.min_setting_iv,
             R2.id.mine_news_bgab_iv,
@@ -88,13 +89,20 @@ public class MineDelegate extends BottomItemDelegate<MinePresenterImpl>
             parentfragmentAnimStart(new LoginDelegate());
         } else {
             if (id == R.id.min_setting_iv) {
-
+                //设置
+                parentfragmentAnimStart(new SettingDelegate());
             } else if (id == R.id.mine_news_bgab_iv) {
+
             } else if (id == R.id.mine_head_circle_iv) {
 
             } else if (id == R.id.mine_account_vip_iv) {
 
             } else if (id == R.id.mine_sign_tv) {
+                //签到
+                getPresenter().requestSignIn(Const.API_BASE_USER + mUserSignIn,
+                        RequestParam.builder()
+                                .addTokenId()
+                                .build());
             }
         }
     }
@@ -163,7 +171,7 @@ public class MineDelegate extends BottomItemDelegate<MinePresenterImpl>
             } else {
                 mName.setText(data.getLoginName());
             }
-            if (data.getUserPhoto() != null && data.getUserPhoto().contains("http")) {
+            if (data.getUserPhoto() != null && !data.getUserPhoto().isEmpty()) {
                 GlideUtil.setImage(BaseUrl.BASE_URL + data.getUserPhoto(), mHeadCircle);
             }
             //userCenter
@@ -222,8 +230,12 @@ public class MineDelegate extends BottomItemDelegate<MinePresenterImpl>
 
     @Override
     public void setGvTwo(List<TextImageBean> list) {
-        mTowAdapter = new GradViewTwoAdapter(list, getActivity(), R.layout.mine_item_icon_tv);
-        mGridViewTwo.setAdapter(mTowAdapter);
+        if (mTowAdapter == null) {
+            mTowAdapter = new GradViewTwoAdapter(list, getActivity(), R.layout.mine_item_icon_tv);
+            mGridViewTwo.setAdapter(mTowAdapter);
+        } else {
+            mTowAdapter.addData(list);
+        }
     }
 
     @Override

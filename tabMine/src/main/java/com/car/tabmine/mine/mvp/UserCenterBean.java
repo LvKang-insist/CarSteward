@@ -1,4 +1,4 @@
-package com.car.tabmine.mvp;
+package com.car.tabmine.mine.mvp;
 
 import java.util.List;
 

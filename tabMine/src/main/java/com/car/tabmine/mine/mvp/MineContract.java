@@ -1,4 +1,4 @@
-package com.car.tabmine.mvp;
+package com.car.tabmine.mine.mvp;
 
 import com.car.core.mvp.presenter.IBasePresenter;
 import com.car.core.mvp.view.IBaseView;
@@ -31,11 +31,20 @@ public class MineContract {
         void setGvTwo(List<TextImageBean> list);
 
         void setGvThree(List<TextImageBean> list);
+
+
     }
 
     public interface IMinePresenter extends IBasePresenter<IMineView> {
         void request(String url, WeakHashMap param);
 
         void requestUserCenter(String url, WeakHashMap param);
+
+        /**
+         * 签到
+         * @param url 地址
+         * @param weakHashMap 参数
+         */
+        void requestSignIn(String url, WeakHashMap weakHashMap);
     }
 }

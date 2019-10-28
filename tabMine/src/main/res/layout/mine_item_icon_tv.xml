@@ -11,14 +11,14 @@
 
     <cn.bingoogolapple.badgeview.BGABadgeImageView
         android:id="@+id/item_icon_tv_icon"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:padding="6dp"
         app:badge_bgColor="@color/white"
         app:badge_borderColor="@color/red"
         app:badge_borderWidth="1px"
         app:badge_gravity="rightTop"
         app:badge_horizontalMargin="0dp"
-        app:badge_padding="4dp"
         app:badge_textColor="@color/red"
         app:badge_textSize="8dp"
         app:badge_verticalMargin="0dp" />
@@ -27,7 +27,6 @@
         android:id="@+id/item_icon_tv_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:textColor="@color/black"
         android:textSize="10sp"
         tools:ignore="SmallSp" />

@@ -1,4 +1,4 @@
-package com.car.tabmine.mvp;
+package com.car.tabmine.mine.mvp;
 
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.Observer;
@@ -33,13 +33,13 @@ public class MineModel extends BaseModel {
         return textStringBeans;
     }
 
-    public List<TextImageBean> setGvTwoData() {
+    public List<TextImageBean> setGvTwoData(int[] count) {
         List<TextImageBean> textImageBeans = new ArrayList<>();
-        TextImageBean p1 = new TextImageBean(R.drawable.daifukuan, "代付款");
-        TextImageBean p2 = new TextImageBean(R.drawable.daifahuo, "代发货");
-        TextImageBean p3 = new TextImageBean(R.drawable.daishouhuo, "待收货");
-        TextImageBean p4 = new TextImageBean(R.drawable.daipingjia, "待评价");
-        TextImageBean p5 = new TextImageBean(R.drawable.tuihuo_shouhou, "退货/换货");
+        TextImageBean p1 = new TextImageBean(R.drawable.daifukuan, "代付款", count[0]);
+        TextImageBean p2 = new TextImageBean(R.drawable.daifahuo, "代发货", count[1]);
+        TextImageBean p3 = new TextImageBean(R.drawable.daishouhuo, "待收货", count[2]);
+        TextImageBean p4 = new TextImageBean(R.drawable.daipingjia, "待评价", count[3]);
+        TextImageBean p5 = new TextImageBean(R.drawable.tuihuo_shouhou, "退货/换货", count[4]);
         textImageBeans.add(p1);
         textImageBeans.add(p2);
         textImageBeans.add(p3);

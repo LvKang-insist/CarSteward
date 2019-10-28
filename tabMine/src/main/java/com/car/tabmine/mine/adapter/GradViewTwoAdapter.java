@@ -1,4 +1,4 @@
-package com.car.tabmine.adapter;
+package com.car.tabmine.mine.adapter;
 
 import android.content.Context;
 
@@ -7,7 +7,7 @@ import androidx.appcompat.widget.AppCompatTextView;
 import com.car.core.ui.adapter.CarBaseAdapter;
 import com.car.core.ui.adapter.ViewHolder;
 import com.car.tabmine.R;
-import com.car.tabmine.mvp.TextImageBean;
+import com.car.tabmine.mine.mvp.TextImageBean;
 
 import java.util.List;
 
@@ -31,9 +31,18 @@ public class GradViewTwoAdapter extends CarBaseAdapter<TextImageBean> {
     @Override
     public void setData(ViewHolder viewHolder, int position) {
         TextImageBean textImageBean = list.get(position);
-        ((BGABadgeImageView) viewHolder.findViewById(R.id.item_icon_tv_icon))
-                .setImageResource(textImageBean.getImage());
+        BGABadgeImageView image = (BGABadgeImageView) viewHolder.findViewById(R.id.item_icon_tv_icon);
+        image.setImageResource(textImageBean.getImage());
+        if (textImageBean.getBga() > 0) {
+            image.showTextBadge(String.valueOf(textImageBean.getBga()));
+        }
         ((AppCompatTextView) viewHolder.findViewById(R.id.item_icon_tv_tv))
                 .setText(textImageBean.getTitle());
+    }
+
+    public void addData(List<TextImageBean> list) {
+        this.list.clear();
+        this.list.addAll(list);
+        this.notifyDataSetChanged();
     }
 }

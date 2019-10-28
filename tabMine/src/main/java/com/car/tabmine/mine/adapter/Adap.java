@@ -1,4 +1,4 @@
-package com.car.tabmine.adapter;
+package com.car.tabmine.mine.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
-import com.car.tabmine.mvp.TextStringBean;
+import com.car.tabmine.mine.mvp.TextStringBean;
 
 import java.util.List;
 

@@ -1,11 +1,9 @@
-package com.car.tabmine.mvp;
+package com.car.tabmine.mine.mvp;
 
-import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.Observer;
 
 import com.car.core.latte.Latte;
 import com.car.core.mvp.presenter.BasePresenter;
-import com.car.tabmine.MineDelegate;
 import com.elvishew.xlog.XLog;
 
 import java.util.WeakHashMap;
@@ -35,12 +33,17 @@ public class MinePresenterImpl extends BasePresenter<MineContract.IMineView, Min
     @Override
     public void requestUserCenter(String url, WeakHashMap param) {
         getModel().request(url, param, getLifecycleOwner(), (Observer<String>) s -> {
-            XLog.json(s);
             mCenterBean = Latte.getGson().fromJson(s, UserCenterBean.class);
             getView().onUserCenter(mCenterBean);
             getGvOneData();
             getGvTwoData();
-            getGvThreeData();
+        });
+    }
+
+    @Override
+    public void requestSignIn(String url, WeakHashMap param) {
+        getModel().request(url, param, getLifecycleOwner(), (Observer<String>) s -> {
+            XLog.json(s);
         });
     }
 
@@ -59,12 +62,23 @@ public class MinePresenterImpl extends BasePresenter<MineContract.IMineView, Min
     }
 
     public void getGvTwoData() {
-        getView().setGvTwo(getModel().setGvTwoData());
+        int[] count;
+        if (mCenterBean != null) {
+            UserCenterBean.OrderCountBean orderCount = mCenterBean.getOrderCount();
+            count = new int[]{
+                    orderCount.getWaitForPayCount(),
+                    orderCount.getWaitForSendOutCount(),
+                    orderCount.getWaitForReceiptCount(),
+                    orderCount.getWaitForAppraisesCount(),
+                    orderCount.getCancelCount()};
+        } else {
+            count = new int[]{0, 0, 0, 0, 0};
+        }
+        getView().setGvTwo(getModel().setGvTwoData(count));
     }
 
     public void getGvThreeData() {
         getView().setGvThree(getModel().setGvThreeData());
     }
-
 
 }

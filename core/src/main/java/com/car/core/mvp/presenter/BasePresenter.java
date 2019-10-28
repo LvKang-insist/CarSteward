@@ -8,7 +8,6 @@ import androidx.lifecycle.OnLifecycleEvent;
 
 import com.car.core.latte.Latte;
 import com.car.core.mvp.model.BaseModel;
-import com.car.core.mvp.view.BaseMvpFragment;
 import com.car.core.mvp.view.IBaseView;
 import com.elvishew.xlog.XLog;
 
@@ -48,7 +47,7 @@ public abstract class BasePresenter<V extends IBaseView, M extends BaseModel>
                 if (viewRef.get() != null && isArgs(args)) {
                     return method.invoke(viewRef.get(), args);
                 } else if (!isArgs(args)) {
-                    XLog.e("更新 View 层参数获取失败：方法名字为：" + method.getName());
+                    XLog.e("更新 View 层参数获取失败：" + proxy.toString() + "方法名字为：" + method.getName());
                     //重试机制，如果三次未成功，则不在重试
                     if (retryCount < 3) {
                         retryCount++;
@@ -70,9 +69,11 @@ public abstract class BasePresenter<V extends IBaseView, M extends BaseModel>
      * @return true 表示 不为空，否则为 null
      */
     private boolean isArgs(Object[] args) {
-        for (Object arg : args) {
-            if (arg == null) {
-                return false;
+        if (args != null) {
+            for (Object arg : args) {
+                if (arg == null) {
+                    return false;
+                }
             }
         }
         return true;

@@ -1,6 +1,8 @@
 package com.car.core.mvp.view;
 
+import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -175,14 +177,14 @@ public abstract class BaseMvpFragment<P extends IBasePresenter> extends Permissi
                 // 默认状态栏字体颜色为黑色
                 .statusBarDarkFont(true);
         if (getToolView() instanceof Toolbar) {
+            Log.e("------", "statusBarConfig: " );
             setBack(((Toolbar) getToolView()));
         }
         return mImmersionBar;
     }
 
 
-
-    protected void setBack(Toolbar toolbar) {
+    private void setBack(Toolbar toolbar) {
         toolbar.setNavigationIcon(R.drawable.back);
         toolbar.setNavigationOnClickListener(v -> {
             if (!setBackPress()) {
@@ -201,7 +203,7 @@ public abstract class BaseMvpFragment<P extends IBasePresenter> extends Permissi
     }
 
     /**
-     * 需要被重写
+     * 此方法需要重写
      */
     public int getToolbar() {
         return 0;
@@ -244,6 +246,20 @@ public abstract class BaseMvpFragment<P extends IBasePresenter> extends Permissi
     }
 
     /**
+     * 没有动画的基本跳转
+     *
+     * @param fragment
+     */
+    public void fragmentStart(BaseMvpFragment fragment) {
+        getSupportDelegate().start(fragment);
+    }
+
+    public void parentfragmenttart(BaseMvpFragment fragment) {
+        getParentDelegate().getSupportDelegate().start(fragment);
+    }
+
+
+    /**
      * 无父fragment的基本跳转
      */
     public void fragmentAnimStart(BaseMvpFragment fragment) {
@@ -254,8 +270,9 @@ public abstract class BaseMvpFragment<P extends IBasePresenter> extends Permissi
                 .start(fragment);
     }
 
+
     /**
-     * 有父fragment的退栈
+     * fragment的退栈
      */
     public void fragmentAnimBack() {
         getSupportDelegate().pop();

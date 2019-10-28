@@ -1,4 +1,4 @@
-package com.car.tabmine.adapter;
+package com.car.tabmine.mine.adapter;
 
 import android.content.Context;
 
@@ -7,7 +7,7 @@ import androidx.appcompat.widget.AppCompatTextView;
 import com.car.core.ui.adapter.CarBaseAdapter;
 import com.car.core.ui.adapter.ViewHolder;
 import com.car.tabmine.R;
-import com.car.tabmine.mvp.TextImageBean;
+import com.car.tabmine.mine.mvp.TextImageBean;
 
 import java.util.List;
 

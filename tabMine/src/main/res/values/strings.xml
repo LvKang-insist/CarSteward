@@ -17,4 +17,5 @@
     <string name="consent_password">确认密码</string>
     <string name="login_success">登录成功</string>
     <string name="plase_success_phone_number">请输入正确的手机号</string>
+    <string name="setting">设置</string>
 </resources>
