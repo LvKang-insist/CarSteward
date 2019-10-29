@@ -5,12 +5,5 @@
 
     <include layout="@layout/toolbar_layout"/>
 
-    <TextView
-        android:id="@+id/mendian"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:textSize="30sp"
-        android:text="门店"
-        android:gravity="center"/>
 
 </LinearLayout>

@@ -177,7 +177,6 @@ public abstract class BaseMvpFragment<P extends IBasePresenter> extends Permissi
                 // 默认状态栏字体颜色为黑色
                 .statusBarDarkFont(true);
         if (getToolView() instanceof Toolbar) {
-            Log.e("------", "statusBarConfig: " );
             setBack(((Toolbar) getToolView()));
         }
         return mImmersionBar;

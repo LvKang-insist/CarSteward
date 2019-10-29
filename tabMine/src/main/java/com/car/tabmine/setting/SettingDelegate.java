@@ -43,7 +43,7 @@ public class SettingDelegate extends BaseMvpFragment<DefaultPresenterImpl> {
     public void bindView(View view) {
         mToolbarTitle.setText(R.string.setting);
         mToolbarTitle.setTextColor(getResources().getColor(R.color.white));
-//        mToolbar.setBackgroundColor(getResources().getColor(R.color.red));
+        mToolbar.setBackgroundColor(getResources().getColor(R.color.red));
         getStatusBarConfig().statusBarColor(R.color.red).init();
     }
 

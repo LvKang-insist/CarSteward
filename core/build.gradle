@@ -3,7 +3,7 @@ apply plugin: 'com.jakewharton.butterknife'
 android {
 
     compileSdkVersion compile_sdk_version
-    buildToolsVersion "29.0.1"
+    buildToolsVersion build_tools_version
 
     defaultConfig {
 
@@ -80,4 +80,7 @@ dependencies {
     api 'com.alibaba:fastjson:1.2.48'
     //Log 工具
     api 'com.elvishew:xlog:1.6.1'
+
+    //design
+    api 'com.android.support:design:28.0.0'
 }

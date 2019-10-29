@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
 
     compileSdkVersion compile_sdk_version
-    buildToolsVersion "29.0.1"
+    buildToolsVersion build_tools_version
 
     defaultConfig {
         applicationId "com.car.carsteward"
