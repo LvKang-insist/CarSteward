@@ -4,6 +4,10 @@ import android.app.Activity;
 
 import androidx.annotation.NonNull;
 
+import com.elvishew.xlog.LogConfiguration;
+import com.elvishew.xlog.XLog;
+import com.hjq.toast.ToastUtils;
+
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 
@@ -27,7 +31,6 @@ public class LatteConfigurator {
     }
 
 
-
     /**
      * 配置完成时调用
      */
@@ -35,21 +38,39 @@ public class LatteConfigurator {
         LATTE_CONFIG.put(ConfigKeys.CONFIG_READER, true);
     }
 
-    public LatteConfigurator withBaseMvpActivity(Activity activity) {
+    public void withBaseMvpActivity(Activity activity) {
         LATTE_CONFIG.put(ConfigKeys.BASE_ACTIVITY, activity);
-        return this;
     }
 
-    public LatteConfigurator withJavaScriptInterface(@NonNull String name){
-        LATTE_CONFIG.put(ConfigKeys.JAVASCRIPT_INTERFACE,name);
+    public LatteConfigurator withJavaScriptInterface(@NonNull String name) {
+        LATTE_CONFIG.put(ConfigKeys.JAVASCRIPT_INTERFACE, name);
         return this;
     }
 
     /**
      * 浏览器加载的 HOST
      */
-    public LatteConfigurator withWebHost(String host){
-        LATTE_CONFIG.put(ConfigKeys.WEB_HOST,host);
+    public LatteConfigurator withWebHost(String host) {
+        LATTE_CONFIG.put(ConfigKeys.WEB_HOST, host);
+        return this;
+    }
+
+    /**
+     * 初始化 Toast
+     */
+    public LatteConfigurator withToastUtils() {
+        ToastUtils.init(Latte.getAppContext());
+        return this;
+    }
+
+    /**
+     * 初始化 Toast
+     */
+    public LatteConfigurator withLog() {
+        XLog.init(new LogConfiguration.Builder()
+                .t()//允许打印线程信息
+                .tag("345")
+                .build());
         return this;
     }
 

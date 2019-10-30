@@ -11,7 +11,7 @@ public enum ConfigKeys {
     /**
      * key
      */
-    CONTEXT,
+    APP_CONTEXT,
     BASE_ACTIVITY,
     CONFIG_READER,
     JAVASCRIPT_INTERFACE,

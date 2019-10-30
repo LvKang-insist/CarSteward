@@ -3,9 +3,11 @@ package com.car.carsteward.application;
 import android.annotation.SuppressLint;
 import android.app.Application;
 
+import com.car.core.latte.Latte;
 import com.elvishew.xlog.LogConfiguration;
 import com.elvishew.xlog.XLog;
 import com.hjq.toast.ToastUtils;
+
 /**
  * @author 345 QQ:1831712732
  * @name MvpFrame
@@ -18,14 +20,13 @@ public class ExampleApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        ToastUtils.init(this);
-        setLogger();
+
+        Latte.init(this)
+                .withJavaScriptInterface("car")
+                .withWebHost("http:www.baidu.com")
+                .withToastUtils()
+                .withLog()
+                .configure();
     }
 
-    private void setLogger() {
-        XLog.init(new LogConfiguration.Builder()
-                .t()//允许打印线程信息
-                .tag("345")
-                .build());
-    }
 }

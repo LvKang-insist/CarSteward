@@ -1,5 +1,6 @@
 package com.car.tabmine;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.GridView;
@@ -119,6 +120,7 @@ public class MineDelegate extends BottomItemDelegate<MinePresenterImpl>
         getPresenter().getGvThreeData();
     }
 
+
     @Override
     public void onLazyInitView(@Nullable Bundle savedInstanceState) {
         //刷新数据
@@ -127,7 +129,7 @@ public class MineDelegate extends BottomItemDelegate<MinePresenterImpl>
 
     @Override
     public void onSupportVisible() {
-        super.onSupportVisible();
+        setImmersion(R.color.transparent);
         if (CarPreference.isUserInfoIsRevise()) {
             refreshView();
             CarPreference.putUserInfoIsRevise(false);

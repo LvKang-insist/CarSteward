@@ -34,16 +34,6 @@ public abstract class BaseMvpActivity<P extends IBasePresenter> extends BaseActi
 
     public abstract void bindView();
 
-    public OnBackPressListener onBackPress;
-
-    public interface OnBackPressListener {
-        boolean setBackPress();
-    }
-
-    public void setOnBackPressListener(OnBackPressListener onBackPress) {
-        this.onBackPress = onBackPress;
-    }
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,13 +52,9 @@ public abstract class BaseMvpActivity<P extends IBasePresenter> extends BaseActi
         if (mPresenter == null) {
             throw new NullPointerException("Presenter is null ! Do you return null in createPresenter()?");
         }
+        Latte.init(Latte.getAppContext())
+                .withBaseMvpActivity(this);
         mPresenter.onMvpAttachView(this, savedInstanceState);
-        Latte.init(this)
-                .withBaseMvpActivity(this)
-                .withJavaScriptInterface("car")
-                .withWebHost("http:www.baidu.com")
-                .configure();
-//        initImmersion();
         bindView();
 //        将 Lifecycle 对象和LifecycleObserver 对象进行绑定
         getLifecycle().addObserver(mPresenter);
@@ -101,22 +87,15 @@ public abstract class BaseMvpActivity<P extends IBasePresenter> extends BaseActi
         if (isStatusBarEnabled()) {
             statusBarConfig().init();
         }
-
-
-        // 设置标题栏沉浸
-        /*if (getTitleId() > 0) {
-            ImmersionBar.setTitleBar(this, findViewById(getTitleId()));
-        } else if (mTitleBar != null) {
-            ImmersionBar.setTitleBar(this, mTitleBar);
-        }*/
     }
+
     /**
      * 初始化沉浸式状态栏
      */
     protected ImmersionBar statusBarConfig() {
         // 在BaseActivity里初始化
         mImmersionBar = ImmersionBar.with(this)
-                .transparentNavigationBar()
+                .statusBarColor(R.color.colorPrimary)
                 // 默认状态栏字体颜色为黑色
                 .statusBarDarkFont(true);
         return mImmersionBar;

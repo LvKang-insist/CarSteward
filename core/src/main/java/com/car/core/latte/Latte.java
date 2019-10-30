@@ -1,5 +1,6 @@
 package com.car.core.latte;
 
+import android.app.Application;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
@@ -26,16 +27,16 @@ public class Latte {
     private static boolean mDialogIsShow = false;
     private static ToastDialog mLoadingDilaog;
 
-    public static LatteConfigurator init(Context context) {
-        getConfiguration().put(ConfigKeys.CONTEXT, context.getApplicationContext());
+    public static LatteConfigurator init(Application context) {
+        getConfiguration().put(ConfigKeys.APP_CONTEXT, context.getApplicationContext());
         return getInstance();
     }
 
     /**
      * @return 返回一个 全局Context
      */
-    public static Context getContext() {
-        return (Context) getConfiguration().get(ConfigKeys.CONTEXT);
+    public static Application getAppContext() {
+        return (Application) getConfiguration().get(ConfigKeys.APP_CONTEXT);
     }
 
     /**

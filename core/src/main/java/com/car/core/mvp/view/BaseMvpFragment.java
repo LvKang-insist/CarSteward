@@ -7,10 +7,14 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 
+import androidx.annotation.CallSuper;
+import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
+import androidx.test.filters.Suppress;
 
 import com.car.core.R;
 import com.car.core.delegate.base.PermissionCheckerDelegate;
@@ -35,10 +39,11 @@ import butterknife.Unbinder;
  */
 
 public abstract class BaseMvpFragment<P extends IBasePresenter> extends PermissionCheckerDelegate
-        implements IBaseView, BaseMvpActivity.OnBackPressListener {
+        implements IBaseView {
 
     private P mPresenter;
     public Gson gson = new Gson();
+    private boolean isImmersion;
 
     /**
      * 设置布局
@@ -84,18 +89,22 @@ public abstract class BaseMvpFragment<P extends IBasePresenter> extends Permissi
             throw new NullPointerException("Presenter is null ! Do you return null in createPresenter()");
         }
         mPresenter.onMvpAttachView(this, savedInstanceState);
-        Latte.getBaseMvpActivity().setOnBackPressListener(this);
-        initImmersion();
+        initView(savedInstanceState);
+        return rootView;
+    }
+
+    private void initView(@Nullable Bundle savedInstanceState) {
 //        绑定 ButterKnife
         unbinder = ButterKnife.bind(this, rootView);
-        bindView(rootView);
 //        将 Lifecycle 对象和LifecycleObserver 对象进行绑定
         getLifecycle().addObserver(mPresenter);
         //订阅
         if (isEventBus()) {
             EventBus.getDefault().register(this);
         }
-        return rootView;
+        initImmersion();
+//        setImmersion(R.color.colorPrimaryDark);
+        bindView(rootView);
     }
 
     public P getPresenter() {
@@ -174,21 +183,39 @@ public abstract class BaseMvpFragment<P extends IBasePresenter> extends Permissi
         mImmersionBar = ImmersionBar.with(this)
                 .transparentStatusBar()
                 .titleBarMarginTop(getToolView())
-                // 默认状态栏字体颜色为黑色
-                .statusBarDarkFont(true);
+                .statusBarColor(R.color.colorPrimaryDark);
         if (getToolView() instanceof Toolbar) {
             setBack(((Toolbar) getToolView()));
+            (getToolView()).setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
         }
         return mImmersionBar;
     }
 
 
+    @Override
+    public void onSupportInvisible() {
+        if (isImmersion) {
+        initImmersion();
+        }
+    }
+
+    /**
+     * 自定义状态栏的颜色，必须在fragment显示的时候调用，否则无效
+     *
+     * @param statusColor 状态栏颜色
+     */
+    public void setImmersion(@ColorRes int statusColor) {
+        isImmersion = true;
+        ImmersionBar.with(this)
+                .statusBarColor(statusColor)
+                .titleBarMarginTop(getToolView())
+                .init();
+    }
+
     private void setBack(Toolbar toolbar) {
         toolbar.setNavigationIcon(R.drawable.back);
         toolbar.setNavigationOnClickListener(v -> {
-            if (!setBackPress()) {
-                getSupportDelegate().pop();
-            }
+            getSupportDelegate().pop();
         });
     }
 
@@ -214,14 +241,6 @@ public abstract class BaseMvpFragment<P extends IBasePresenter> extends Permissi
      * @return true 为开启
      */
     public boolean isEventBus() {
-        return false;
-    }
-
-    /**
-     * 如果需要拦截返回事件，则重写该方法 return true 即可
-     */
-    @Override
-    public boolean setBackPress() {
         return false;
     }
 

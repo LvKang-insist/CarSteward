@@ -252,12 +252,12 @@ public class FileUtils {
     private static void refreshDCIM() {
         if (Build.VERSION.SDK_INT >= 19) {
             //兼容android 4.4 版本，只扫描存放照面的目录
-            MediaScannerConnection.scanFile(Latte.getContext(), new String[]{
+            MediaScannerConnection.scanFile(Latte.getAppContext(), new String[]{
                             Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).getPath()}
                     , null, null);
         } else {
             //扫明真个SD卡 来更新系统图库，当文件很多时，用户体验不佳，而不适合4.4以上版本
-            Latte.getContext().sendBroadcast(new Intent(Intent.ACTION_MEDIA_MOUNTED,
+            Latte.getAppContext().sendBroadcast(new Intent(Intent.ACTION_MEDIA_MOUNTED,
                     Uri.parse("file://" + Environment.getExternalStorageDirectory())));
         }
     }
@@ -267,7 +267,7 @@ public class FileUtils {
      */
 
     public static String getRawFile(int id) {
-        final InputStream is = Latte.getContext().getResources().openRawResource(id);
+        final InputStream is = Latte.getAppContext().getResources().openRawResource(id);
         final BufferedInputStream bis = new BufferedInputStream(is);
         final InputStreamReader isr = new InputStreamReader(bis);
         final BufferedReader br = new BufferedReader(isr);
@@ -294,7 +294,7 @@ public class FileUtils {
     }
 
     public static void setIconFont(String path, TextView textView) {
-        final Typeface typeface = Typeface.createFromAsset(Latte.getContext().getAssets(), path);
+        final Typeface typeface = Typeface.createFromAsset(Latte.getAppContext().getAssets(), path);
     }
 
     /**
@@ -308,7 +308,7 @@ public class FileUtils {
         BufferedReader br = null;
         StringBuilder stringBuilder = null;
 
-        final AssetManager assetManager = Latte.getContext().getAssets();
+        final AssetManager assetManager = Latte.getAppContext().getAssets();
 
         try {
             is = assetManager.open(name);

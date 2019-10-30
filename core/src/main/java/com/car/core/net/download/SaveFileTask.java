@@ -70,7 +70,7 @@ public class SaveFileTask extends AsyncTask<Object, Void, File> {
             final Intent install = new Intent();
             install.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             install.setAction(Intent.ACTION_VIEW);
-            Latte.getContext().startActivity(install);
+            Latte.getAppContext().startActivity(install);
         }
     }
 

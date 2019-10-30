@@ -20,11 +20,11 @@ public class CarPreference {
 
 
     public static SharedPreferences.Editor getAppPreferenceEdit(String s) {
-        return Latte.getContext().getSharedPreferences(s, 0).edit();
+        return Latte.getAppContext().getSharedPreferences(s, 0).edit();
     }
 
     public static SharedPreferences getAppPreference(String s) {
-        return Latte.getContext().getSharedPreferences(s, 0);
+        return Latte.getAppContext().getSharedPreferences(s, 0);
     }
 
     public static void setAppFlag(String key, boolean flag) {
