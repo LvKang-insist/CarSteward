@@ -1,27 +1,21 @@
 package com.car.core.mvp.view;
 
-import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 
-import androidx.annotation.CallSuper;
 import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
-import androidx.test.filters.Suppress;
 
 import com.car.core.R;
 import com.car.core.delegate.base.PermissionCheckerDelegate;
 import com.car.core.latte.Latte;
 import com.car.core.mvp.factory.PresenterFactoryImpl;
 import com.car.core.mvp.presenter.IBasePresenter;
-import com.car.core.ui.dialog.ToastDialog;
+import com.car.core.utils.dimen.SetToolBar;
 import com.google.gson.Gson;
 import com.gyf.immersionbar.ImmersionBar;
 
@@ -102,7 +96,7 @@ public abstract class BaseMvpFragment<P extends IBasePresenter> extends Permissi
         if (isEventBus()) {
             EventBus.getDefault().register(this);
         }
-        initImmersion();
+        initToolbar();
 //        setImmersion(R.color.colorPrimaryDark);
         bindView(rootView);
     }
@@ -168,55 +162,25 @@ public abstract class BaseMvpFragment<P extends IBasePresenter> extends Permissi
     /**
      * 初始化沉浸式
      */
-    protected void initImmersion() {
-        // 初始化沉浸式状态栏
-        if (isStatusBarEnabled()) {
-            statusBarConfig().init();
-        }
-    }
-
-    /**
-     * 初始化沉浸式状态栏
-     */
-    protected ImmersionBar statusBarConfig() {
-        // 在BaseActivity里初始化
-        mImmersionBar = ImmersionBar.with(this)
-                .transparentStatusBar()
-                .titleBarMarginTop(getToolView())
-                .statusBarColor(R.color.colorPrimaryDark);
+    protected void initToolbar() {
         if (getToolView() instanceof Toolbar) {
             setBack(((Toolbar) getToolView()));
-            (getToolView()).setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
+            SetToolBar.setToolBar(getToolView());
+        }else if (getToolView() instanceof  ViewGroup){
+            SetToolBar.setToolBar(getToolView());
         }
-        return mImmersionBar;
-    }
 
+    }
 
     @Override
     public void onSupportInvisible() {
         if (isImmersion) {
-        initImmersion();
+            initToolbar();
         }
     }
 
-    /**
-     * 自定义状态栏的颜色，必须在fragment显示的时候调用，否则无效
-     *
-     * @param statusColor 状态栏颜色
-     */
-    public void setImmersion(@ColorRes int statusColor) {
-        isImmersion = true;
-        ImmersionBar.with(this)
-                .statusBarColor(statusColor)
-                .titleBarMarginTop(getToolView())
-                .init();
-    }
-
     private void setBack(Toolbar toolbar) {
-        toolbar.setNavigationIcon(R.drawable.back);
-        toolbar.setNavigationOnClickListener(v -> {
-            getSupportDelegate().pop();
-        });
+        toolbar.getChildAt(0).setOnClickListener(v -> getSupportDelegate().pop());
     }
 
 

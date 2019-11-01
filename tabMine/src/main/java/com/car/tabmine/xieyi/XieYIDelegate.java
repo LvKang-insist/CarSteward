@@ -49,7 +49,8 @@ public class XieYIDelegate extends BaseMvpFragment<DefaultPresenterImpl>
 
     }
 
-    private void initToolbar() {
+
+    private void setToolbar() {
         mToolbarTitle.setText("服务用户协议");
         mToolbarTitle.setTextColor(getResources().getColor(R.color.black));
     }

@@ -4,19 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/toolbar"
     android:layout_width="match_parent"
-    android:layout_height="44dp"
-    android:background="@color/transparent"
-    android:minHeight="?attr/actionBarSize"
-    >
+    android:layout_height="60dp"
+    android:background="@color/colorPrimaryDark"
+    android:minHeight="?attr/actionBarSize">
 
     <!--自定义toolbar的title 和subtitle -->
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/toolbar_left"
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/toolbar_back"
         style="@style/TextAppearance.AppCompat.Widget.ActionBar.Subtitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/black"
-        android:visibility="gone" />
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:src="@drawable/back" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/toolbar_right"

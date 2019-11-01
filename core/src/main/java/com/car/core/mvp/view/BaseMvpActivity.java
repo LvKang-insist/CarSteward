@@ -58,6 +58,7 @@ public abstract class BaseMvpActivity<P extends IBasePresenter> extends BaseActi
         bindView();
 //        将 Lifecycle 对象和LifecycleObserver 对象进行绑定
         getLifecycle().addObserver(mPresenter);
+        initImmersion();
     }
 
     @Override
@@ -95,7 +96,7 @@ public abstract class BaseMvpActivity<P extends IBasePresenter> extends BaseActi
     protected ImmersionBar statusBarConfig() {
         // 在BaseActivity里初始化
         mImmersionBar = ImmersionBar.with(this)
-                .statusBarColor(R.color.colorPrimary)
+                .statusBarColor(R.color.transparent)
                 // 默认状态栏字体颜色为黑色
                 .statusBarDarkFont(true);
         return mImmersionBar;

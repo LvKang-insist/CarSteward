@@ -48,4 +48,9 @@ public class ShopDelegate extends BottomItemDelegate<DefaultPresenterImpl>
     public void onResult(String result) {
 
     }
+
+    @Override
+    public int getToolbar() {
+        return R.id.toolbar;
+    }
 }

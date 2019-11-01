@@ -129,7 +129,6 @@ public class MineDelegate extends BottomItemDelegate<MinePresenterImpl>
 
     @Override
     public void onSupportVisible() {
-        setImmersion(R.color.transparent);
         if (CarPreference.isUserInfoIsRevise()) {
             refreshView();
             CarPreference.putUserInfoIsRevise(false);

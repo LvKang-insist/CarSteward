@@ -10,12 +10,7 @@ import com.car.core.mvp.mvpdefault.DefaultPresenterImpl;
 import com.car.core.mvp.view.BaseMvpFragment;
 import com.car.tabmine.R;
 import com.car.tabmine.R2;
-import com.elvishew.xlog.XLog;
 import com.hjq.toast.ToastUtils;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ListIterator;
 
 import butterknife.BindView;
 
@@ -29,6 +24,7 @@ import butterknife.BindView;
 @CreatePresenter(DefaultPresenterImpl.class)
 public class SettingDelegate extends BaseMvpFragment<DefaultPresenterImpl> {
 
+//    String json = "
     @BindView(R2.id.toolbar_title)
     AppCompatTextView mToolbarTitle = null;
     @BindView(R2.id.toolbar)
