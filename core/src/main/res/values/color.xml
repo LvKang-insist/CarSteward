@@ -66,5 +66,7 @@
     <color name="pink">#FFC0CB</color>
     <!-- 橙色 -->
     <color name="orange">#FFA500</color>
+    <!-- 背景色-->
+    <color name="back">#F2F2F2</color>
 
 </resources>

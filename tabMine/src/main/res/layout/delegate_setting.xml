@@ -4,17 +4,22 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include layout="@layout/toolbar_layout"/>
+    <include layout="@layout/toolbar_layout" />
 
-    <Button
-        android:id="@+id/btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
-
-    <Button
-        android:id="@+id/back"
-        android:layout_width="wrap_content"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/delegate_setting_recycler"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="back"/>
+        android:background="@color/white"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginTop="100dp"
+        android:gravity="center"
+        android:text="@string/exit_login"
+        android:textColor="@color/red"
+        android:background="@color/white"
+        android:textSize="15sp" />
+
 </androidx.appcompat.widget.LinearLayoutCompat>

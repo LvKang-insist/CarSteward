@@ -18,4 +18,5 @@
     <string name="login_success">登录成功</string>
     <string name="plase_success_phone_number">请输入正确的手机号</string>
     <string name="setting">设置</string>
+    <string name="exit_login">退出登录</string>
 </resources>

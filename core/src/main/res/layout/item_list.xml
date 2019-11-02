@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:orientation="horizontal">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/item_list_text"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:paddingLeft="10dp"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        tools:ignore="RelativeOverlap,RtlHardcoded,RtlSymmetry"
+        tools:text="设置" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/item_list_image"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:paddingEnd="10dp"
+        android:paddingRight="10dp"
+        tools:ignore="RtlSymmetry" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#f2f2f2" />
+
+</RelativeLayout>
