@@ -1,4 +1,4 @@
-package com.car.tabmine.mine.mvp;
+package com.car.core.utils.bean;
 
 import java.util.List;
 
@@ -9,7 +9,7 @@ import java.util.List;
  * @time 2019/10/24 22:18
  * @description
  */
-public class UserCenterBean {
+public class GetUserCenterBean {
     /**
      * affiche : []
      * bankCardCount : 0

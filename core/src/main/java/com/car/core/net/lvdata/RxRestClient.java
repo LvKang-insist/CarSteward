@@ -7,6 +7,7 @@ import com.car.core.net.RestCreator;
 import java.io.File;
 import java.util.Map;
 import java.util.WeakHashMap;
+
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -22,18 +23,18 @@ import okhttp3.ResponseBody;
  */
 public class RxRestClient {
     private final String URL;
-    private static final WeakHashMap<String, Object> PARAMS = RestCreator.getParams();
+    private final WeakHashMap<String, Object> PARAMS;
     private final RequestBody BODY;
     private final File FILE;
     private final String COOKIE;
 
     public RxRestClient(String url,
-                        Map<String, Object> params,
+                        WeakHashMap<String, Object> params,
                         RequestBody body,
                         File file,
                         String mCookie) {
         this.URL = url;
-        PARAMS.putAll(params);
+        this.PARAMS = params;
         this.BODY = body;
         this.FILE = file;
         this.COOKIE = mCookie;
@@ -103,7 +104,7 @@ public class RxRestClient {
      *
      * @return
      */
-    public final  LiveData<CustomResponse>  getCookie() {
+    public final LiveData<CustomResponse> getCookie() {
         final RxRestService service = RestCreator.getRxRestService();
         return service.getCookie(URL, PARAMS);
     }

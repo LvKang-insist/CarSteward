@@ -32,12 +32,12 @@ import java.util.Date;
 
 /**
  * @author 345 QQ:1831712732
- * @name MvpFrame
- * @class name：com.latte.core.util
- * @time 2019/10/6 20:38
+ * @name CarSteward
+ * @class name：com.car.core.utils.file
+ * @time 2019/11/3 20:42
  * @description
  */
-public class FileUtils {
+public class FileUtil {
     /**
      * 格式化模板
      */
@@ -164,7 +164,7 @@ public class FileUtils {
     }
 
     public static File writeToDisk(InputStream is, String dir, String name) {
-        final File file = FileUtils.createFile(dir, name);
+        final File file = FileUtil.createFile(dir, name);
         BufferedInputStream bis = null;
         FileOutputStream fos = null;
         BufferedOutputStream bos = null;
@@ -204,7 +204,7 @@ public class FileUtils {
     }
 
     public static File writeToDisk(InputStream is, String dir, String prefix, String extension) {
-        final File file = FileUtils.createFileByTime(dir, prefix, extension);
+        final File file = FileUtil.createFileByTime(dir, prefix, extension);
         BufferedInputStream bis = null;
         FileOutputStream fos = null;
         BufferedOutputStream bos = null;

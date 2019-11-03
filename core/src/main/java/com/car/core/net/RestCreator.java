@@ -3,6 +3,7 @@ package com.car.core.net;
 
 import com.car.core.api.BaseUrl;
 import com.car.core.net.interceptors.BaseInterceptor;
+import com.car.core.net.interceptors.TestInterceptor;
 import com.car.core.net.lvdata.LiveDataCallAdapterFactory;
 import com.car.core.net.lvdata.LiveDataResponseConverterFactory;
 import com.car.core.net.lvdata.RxRestService;
@@ -11,6 +12,7 @@ import java.util.WeakHashMap;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
+import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 /**
  * Copyright (C)
@@ -45,12 +47,14 @@ public class RestCreator {
                 //依赖中引入的转换器
                 .addConverterFactory(new LiveDataResponseConverterFactory())
                 .addCallAdapterFactory(new LiveDataCallAdapterFactory())
+//                .addConverterFactory(new ScalarsConverterFactory())
                 .build();
 
     }
 
     private static final class OkhttpHolder<T extends BaseInterceptor> {
         private static final OkHttpClient OKHTTP_CLIENT = new OkHttpClient().newBuilder()
+//                .addInterceptor(new TestInterceptor())
                 .build();
     }
 

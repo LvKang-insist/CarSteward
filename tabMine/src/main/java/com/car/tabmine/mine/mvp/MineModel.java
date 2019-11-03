@@ -5,6 +5,8 @@ import androidx.lifecycle.Observer;
 
 import com.car.core.mvp.model.BaseModel;
 import com.car.core.net.lvdata.CarRequest;
+import com.car.core.utils.bean.TextImageBean;
+import com.car.core.utils.bean.TextStringBean;
 import com.car.tabmine.R;
 
 import java.util.ArrayList;

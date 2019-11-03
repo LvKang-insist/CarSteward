@@ -99,7 +99,6 @@ public class LiveDataCallAdapterFactory extends CallAdapter.Factory {
             return new LiveData<R>() {
                 //原子更新的boolean
                 AtomicBoolean started = new AtomicBoolean(false);
-
                 @Override
                 protected void onActive() {
                     super.onActive();
@@ -117,8 +116,8 @@ public class LiveDataCallAdapterFactory extends CallAdapter.Factory {
                             }
 
                             @Override
-                            public void onFailure(Call<R> call, Throwable throwable) {
-                                XLog.e("Request onFailure : ", throwable.getMessage());
+                            public void onFailure(Call<R> call, Throwable t) {
+                                XLog.e("Request onFailure : ", t.getMessage());
                                 postValue(null);
                             }
                         });

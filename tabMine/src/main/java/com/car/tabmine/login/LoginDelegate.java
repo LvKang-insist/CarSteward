@@ -10,11 +10,11 @@ import androidx.appcompat.widget.AppCompatTextView;
 import androidx.appcompat.widget.Toolbar;
 
 import com.car.core.api.Const;
-import com.car.core.latte.Latte;
 import com.car.core.mvp.factory.CreatePresenter;
 import com.car.core.mvp.mvpdefault.DefaultContract;
 import com.car.core.mvp.mvpdefault.DefaultPresenterImpl;
 import com.car.core.mvp.view.BaseMvpFragment;
+import com.car.core.utils.bean.LogInBean;
 import com.car.core.utils.storage.CarPreference;
 import com.car.tabmine.R;
 import com.car.tabmine.R2;
@@ -103,7 +103,6 @@ public class LoginDelegate extends BaseMvpFragment<DefaultPresenterImpl>
                 param.put("loginKey", logkey);
                 getPresenter().request(Const.API_BASE_USER + login, param);
             }
-
         } else if (i == R.id.login_forget_password_tv) {
 
         } else if (i == R.id.login_go_register_tv) {

@@ -13,6 +13,8 @@ import com.car.core.mvp.view.BaseMvpFragment;
 import com.car.core.ui.recycler.rdefault.ListAdapter;
 import com.car.tabmine.R;
 import com.car.tabmine.R2;
+import com.car.tabmine.setting.user.UserDataDelegate;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.hjq.toast.ToastUtils;
 
 import butterknife.BindView;
@@ -25,7 +27,7 @@ import butterknife.BindView;
  * @description
  */
 @CreatePresenter(DefaultPresenterImpl.class)
-public class SettingDelegate extends BaseMvpFragment<DefaultPresenterImpl> {
+public class SettingDelegate extends BaseMvpFragment<DefaultPresenterImpl> implements BaseQuickAdapter.OnItemClickListener {
 
     @BindView(R2.id.toolbar_title)
     AppCompatTextView mToolbarTitle = null;
@@ -46,6 +48,7 @@ public class SettingDelegate extends BaseMvpFragment<DefaultPresenterImpl> {
 
         RvConverter converter = new RvConverter();
         ListAdapter adapter = new ListAdapter(converter.convert());
+        adapter.setOnItemClickListener(this);
         mRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
         mRecycler.setAdapter(adapter);
     }
@@ -53,5 +56,12 @@ public class SettingDelegate extends BaseMvpFragment<DefaultPresenterImpl> {
     @Override
     public int getToolbar() {
         return R.id.toolbar;
+    }
+
+    @Override
+    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+        if (position == 0) {
+            fragmentAnimStart(new UserDataDelegate());
+        }
     }
 }

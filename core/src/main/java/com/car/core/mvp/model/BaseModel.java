@@ -28,6 +28,7 @@ public abstract class BaseModel<T> extends ViewModel {
      * @param url   地址
      * @param param 参数
      * @param owner
+     * @param observer 观察者
      */
     public abstract void request(String url, WeakHashMap param, LifecycleOwner owner, Observer<String> observer);
 }

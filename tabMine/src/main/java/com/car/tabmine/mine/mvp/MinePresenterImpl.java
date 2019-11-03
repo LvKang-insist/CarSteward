@@ -4,6 +4,7 @@ import androidx.lifecycle.Observer;
 
 import com.car.core.latte.Latte;
 import com.car.core.mvp.presenter.BasePresenter;
+import com.car.core.utils.bean.GetUserCenterBean;
 import com.elvishew.xlog.XLog;
 
 import java.util.WeakHashMap;
@@ -18,7 +19,7 @@ import java.util.WeakHashMap;
 public class MinePresenterImpl extends BasePresenter<MineContract.IMineView, MineModel>
         implements MineContract.IMinePresenter {
 
-    private UserCenterBean mCenterBean;
+    private GetUserCenterBean mCenterBean;
 
     @Override
     protected MineModel attachModel() {
@@ -33,12 +34,13 @@ public class MinePresenterImpl extends BasePresenter<MineContract.IMineView, Min
     @Override
     public void requestUserCenter(String url, WeakHashMap param) {
         getModel().request(url, param, getLifecycleOwner(), (Observer<String>) s -> {
-            mCenterBean = Latte.getGson().fromJson(s, UserCenterBean.class);
+            mCenterBean = Latte.getGson().fromJson(s, GetUserCenterBean.class);
             getView().onUserCenter(mCenterBean);
             getGvOneData();
             getGvTwoData();
         });
     }
+
 
     @Override
     public void requestSignIn(String url, WeakHashMap param) {
@@ -64,7 +66,7 @@ public class MinePresenterImpl extends BasePresenter<MineContract.IMineView, Min
     public void getGvTwoData() {
         int[] count;
         if (mCenterBean != null) {
-            UserCenterBean.OrderCountBean orderCount = mCenterBean.getOrderCount();
+            GetUserCenterBean.OrderCountBean orderCount = mCenterBean.getOrderCount();
             count = new int[]{
                     orderCount.getWaitForPayCount(),
                     orderCount.getWaitForSendOutCount(),

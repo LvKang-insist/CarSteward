@@ -3,10 +3,11 @@ package com.car.core.net.download;
 import android.content.Intent;
 import android.os.AsyncTask;
 
-import com.car.core.utils.file.FileUtils;
 import com.car.core.latte.Latte;
 import com.car.core.net.callback.IRequest;
 import com.car.core.net.callback.ISuccess;
+import com.car.core.utils.file.FileUtil;
+
 import java.io.File;
 import java.io.InputStream;
 
@@ -47,9 +48,9 @@ public class SaveFileTask extends AsyncTask<Object, Void, File> {
         }
 
         if (name == null){
-            return FileUtils.writeToDisk(is,downloadDir,extension.toUpperCase(),extension);
+            return FileUtil.writeToDisk(is,downloadDir,extension.toUpperCase(),extension);
         }else {
-            return FileUtils.writeToDisk(is,downloadDir,name);
+            return FileUtil.writeToDisk(is,downloadDir,name);
         }
     }
 
@@ -66,7 +67,7 @@ public class SaveFileTask extends AsyncTask<Object, Void, File> {
 
     //安装apk
     private void autoInstallApk(File file){
-        if (FileUtils.getExtension(file.getPath()).equals("apk")){
+        if (FileUtil.getExtension(file.getPath()).equals("apk")){
             final Intent install = new Intent();
             install.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             install.setAction(Intent.ACTION_VIEW);

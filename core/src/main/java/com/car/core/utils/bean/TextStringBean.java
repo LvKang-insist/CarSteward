@@ -1,4 +1,4 @@
-package com.car.tabmine.mine.mvp;
+package com.car.core.utils.bean;
 
 /**
  * @author 345 QQ:1831712732

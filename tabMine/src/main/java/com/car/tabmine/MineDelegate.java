@@ -1,6 +1,5 @@
 package com.car.tabmine;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.GridView;
@@ -19,17 +18,17 @@ import com.car.core.mvp.factory.CreatePresenter;
 import com.car.core.utils.storage.CarPreference;
 import com.car.core.utils.util.GlideUtil;
 import com.car.core.utils.util.RequestParam;
-import com.car.tabmine.login.LogInBean;
+import com.car.core.utils.bean.LogInBean;
 import com.car.tabmine.login.LoginDelegate;
 import com.car.tabmine.mine.adapter.GradViewOneAdapter;
 import com.car.tabmine.mine.adapter.GradViewThreeAdapter;
 import com.car.tabmine.mine.adapter.GradViewTwoAdapter;
-import com.car.tabmine.mine.mvp.GetUserInfoBean;
+import com.car.core.utils.bean.GetUserInfoBean;
 import com.car.tabmine.mine.mvp.MineContract;
 import com.car.tabmine.mine.mvp.MinePresenterImpl;
-import com.car.tabmine.mine.mvp.TextImageBean;
-import com.car.tabmine.mine.mvp.TextStringBean;
-import com.car.tabmine.mine.mvp.UserCenterBean;
+import com.car.core.utils.bean.TextImageBean;
+import com.car.core.utils.bean.TextStringBean;
+import com.car.core.utils.bean.GetUserCenterBean;
 import com.car.tabmine.setting.SettingDelegate;
 import com.hjq.toast.ToastUtils;
 
@@ -91,7 +90,8 @@ public class MineDelegate extends BottomItemDelegate<MinePresenterImpl>
         } else {
             if (id == R.id.min_setting_iv) {
                 //设置
-                parentfragmentAnimStart(new SettingDelegate());
+//                parentfragmentAnimStart(new SettingDelegate());
+                startCameraWithCheck();
             } else if (id == R.id.mine_news_bgab_iv) {
 
             } else if (id == R.id.mine_head_circle_iv) {
@@ -187,7 +187,7 @@ public class MineDelegate extends BottomItemDelegate<MinePresenterImpl>
     }
 
     @Override
-    public void onUserCenter(UserCenterBean centerBean) {
+    public void onUserCenter(GetUserCenterBean centerBean) {
         //会员
         GlideUtil.setImage(BaseUrl.BASE_URL + centerBean.getUserInfo().getRankIcon_1(), mVip);
         //消息数量

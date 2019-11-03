@@ -1,7 +1,9 @@
 package com.car.core.net.interceptors;
 
 import androidx.annotation.RawRes;
-import com.car.core.utils.file.FileUtils;
+
+import com.car.core.utils.file.FileUtil;
+
 import java.io.IOException;
 import okhttp3.Interceptor;
 import okhttp3.MediaType;
@@ -38,7 +40,7 @@ public class DebugInterceptor  extends BaseInterceptor{
     }
 
     private Response debugResponse(Interceptor.Chain chain, @RawRes int rawId){
-        final String json = FileUtils.getRawFile(rawId);
+        final String json = FileUtil.getRawFile(rawId);
         return getResponse(chain,json);
     }
 

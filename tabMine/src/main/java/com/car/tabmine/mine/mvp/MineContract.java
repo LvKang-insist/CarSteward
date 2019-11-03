@@ -2,6 +2,9 @@ package com.car.tabmine.mine.mvp;
 
 import com.car.core.mvp.presenter.IBasePresenter;
 import com.car.core.mvp.view.IBaseView;
+import com.car.core.utils.bean.GetUserCenterBean;
+import com.car.core.utils.bean.TextImageBean;
+import com.car.core.utils.bean.TextStringBean;
 
 import java.util.List;
 import java.util.WeakHashMap;
@@ -19,7 +22,7 @@ public class MineContract {
 
         void onResult(String result);
 
-        void onUserCenter(UserCenterBean bean);
+        void onUserCenter(GetUserCenterBean bean);
 
         /**
          * gradview 数据

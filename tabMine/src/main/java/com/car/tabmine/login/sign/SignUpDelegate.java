@@ -19,7 +19,7 @@ import com.car.core.ui.dialog.BaseFragDialog;
 import com.car.core.utils.time.SetTelCountTimer;
 import com.car.tabmine.R;
 import com.car.tabmine.R2;
-import com.car.tabmine.login.sign.signmvp.SignUpBean;
+import com.car.core.utils.bean.SignUpBean;
 import com.car.tabmine.login.sign.signmvp.SignUpContract;
 import com.car.tabmine.login.sign.signmvp.SignUpPresenterImpl;
 import com.car.tabmine.xieyi.XieYIDelegate;

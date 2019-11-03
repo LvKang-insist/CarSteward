@@ -8,6 +8,7 @@ import android.view.Gravity;
 
 import com.car.core.R;
 import com.car.core.mvp.view.BaseMvpActivity;
+import com.car.core.net.callback.IFailure;
 import com.car.core.ui.dialog.ToastDialog;
 import com.google.gson.Gson;
 
@@ -63,10 +64,14 @@ public class Latte {
      * @param msg 若为 null ，显示正在加载，否则显示 msg
      */
     public static void showLoading(String msg) {
-        createLoadingDialog(msg);
-        mLoadingDilaog
-                .setType(ToastDialog.Type.LOADING)
-                .show(getBaseMvpActivity().getSupportFragmentManager(), "latte");
+        if (mLoadingDilaog == null) {
+            createLoadingDialog(msg);
+        }
+        if (!mLoadingDilaog.isVisible()) {
+            mLoadingDilaog
+                    .setType(ToastDialog.Type.LOADING)
+                    .show(getBaseMvpActivity().getSupportFragmentManager(), "latte");
+        }
     }
 
     /**

@@ -19,7 +19,7 @@ import okhttp3.RequestBody;
  */
 public class RxRestClientBuilder {
     private String mUrl = null;
-    private static final Map<String, Object> PARAMS = RestCreator.getParams();
+    private static final WeakHashMap<String, Object> PARAMS = RestCreator.getParams();
     private RequestBody mBody = null;
     private File mFile = null;
     private String mCookie = null;
@@ -34,6 +34,7 @@ public class RxRestClientBuilder {
 
     public final RxRestClientBuilder params(WeakHashMap<String, Object> params) {
         if (params != null) {
+            PARAMS.clear();
             PARAMS.putAll(params);
         }
         return this;

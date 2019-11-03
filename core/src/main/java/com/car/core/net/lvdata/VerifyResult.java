@@ -16,7 +16,7 @@ import com.hjq.toast.ToastUtils;
  */
 public class VerifyResult {
     public static boolean startVerify(String reslut) {
-        if (reslut.indexOf("{") > -1) {
+        if (reslut != null && reslut.indexOf("{") > -1) {
             JSONObject object = JSON.parseObject(reslut);
             if (object.getInteger("status") == 1) {
                 return true;
@@ -54,7 +54,7 @@ public class VerifyResult {
             e.printStackTrace();
         } catch (InstantiationException e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             Latte.stopLoading();
         }
     }

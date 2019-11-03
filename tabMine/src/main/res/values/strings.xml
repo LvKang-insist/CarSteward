@@ -19,4 +19,11 @@
     <string name="plase_success_phone_number">请输入正确的手机号</string>
     <string name="setting">设置</string>
     <string name="exit_login">退出登录</string>
+    <string name="head_photo">头像</string>
+    <string name="phone">手机</string>
+    <string name="number">账号</string>
+    <string name="name">昵称</string>
+    <string name="man">男</string>
+    <string name="woman">女</string>
+    <string name="save_setting">保存设置</string>
 </resources>

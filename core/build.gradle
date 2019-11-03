@@ -85,6 +85,13 @@ dependencies {
     api 'com.android.support:design:28.0.0'
 
     //RecyclerView 的适配器依赖
-
     api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.50'
+
+    //工具库，内部封装了Android 的常用功能
+    api 'com.blankj:utilcode:1.23.7'
+
+    //权限管理
+    api 'com.github.hotchemi:permissionsdispatcher:3.1.0'
+    annotationProcessor 'com.github.hotchemi:permissionsdispatcher-processor:3.1.0'
+
 }

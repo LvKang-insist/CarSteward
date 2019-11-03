@@ -1,6 +1,7 @@
 package com.car.core.utils.util;
 
 import com.car.core.utils.storage.CarPreference;
+import com.hjq.toast.ToastUtils;
 
 import java.util.WeakHashMap;
 
@@ -16,7 +17,11 @@ public class RequestParam {
     public WeakHashMap param;
 
     private RequestParam(WeakHashMap param) {
-        param = new WeakHashMap();
+        this.param = param;
+    }
+
+    public WeakHashMap getParam() {
+        return param;
     }
 
     public static ParamBuilder builder() {
@@ -41,8 +46,12 @@ public class RequestParam {
             return this;
         }
 
+        public WeakHashMap<String, Object> getTokenParam() {
+            return addTokenId().build();
+        }
+
         public WeakHashMap<String, Object> build() {
-            return new RequestParam(param).param;
+            return new RequestParam(param).getParam();
         }
 
     }

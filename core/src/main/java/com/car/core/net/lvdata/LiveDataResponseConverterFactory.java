@@ -2,6 +2,7 @@ package com.car.core.net.lvdata;
 
 
 import com.car.core.net.lvdata.CustomResponse;
+import com.elvishew.xlog.XLog;
 
 import java.io.IOException;
 import java.lang.annotation.Annotation;
