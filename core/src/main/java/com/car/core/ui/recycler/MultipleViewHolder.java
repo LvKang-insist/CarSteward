@@ -15,6 +15,7 @@ public class MultipleViewHolder extends BaseViewHolder {
 
     private MultipleViewHolder(View view) {
         super(view);
+
     }
 
     public static MultipleViewHolder create(View view) {

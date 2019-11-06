@@ -1,7 +1,6 @@
 package com.car.core.ui.recycler.rdefault;
 
-import android.view.View;
-import android.widget.AdapterView;
+
 
 import com.car.core.R;
 import com.car.core.ui.recycler.MultipleFields;

@@ -46,7 +46,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * @name CarSteward
  * @class name：com.car.tabmine.setting.user
  * @time 2019/11/3 14:05
- * @description
+ * @description 个人资料
  */
 @CreatePresenter(UserPresenterImpl.class)
 public class UserDataDelegate extends BaseMvpFragment<UserPresenterImpl>
@@ -78,11 +78,6 @@ public class UserDataDelegate extends BaseMvpFragment<UserPresenterImpl>
         }
     }
 
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-    }
 
     private void upUserData() {
         String name = mName.getText().toString().trim();

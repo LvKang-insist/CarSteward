@@ -7,11 +7,11 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
-import android.provider.MediaStore;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.provider.MediaStore;
 
 import com.car.core.R;
 import com.car.core.delegate.base.PermissionCheckerDelegate;
@@ -62,9 +62,6 @@ public class CameraHandler implements View.OnClickListener {
     private String getPhotoName(){
         return FileUtil.getFileNameByTime("IMG","jpg");
     }
-    /**
-     * 调起系统相机
-     */
     private void takePhoto(){
         //获取一个 名字,
         final String currentPhotoName = getPhotoName();

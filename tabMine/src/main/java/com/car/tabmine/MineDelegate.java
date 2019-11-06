@@ -90,8 +90,7 @@ public class MineDelegate extends BottomItemDelegate<MinePresenterImpl>
         } else {
             if (id == R.id.min_setting_iv) {
                 //设置
-//                parentfragmentAnimStart(new SettingDelegate());
-                startCameraWithCheck();
+                parentfragmentAnimStart(new SettingDelegate());
             } else if (id == R.id.mine_news_bgab_iv) {
 
             } else if (id == R.id.mine_head_circle_iv) {
