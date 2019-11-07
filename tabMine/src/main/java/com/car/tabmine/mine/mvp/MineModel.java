@@ -4,10 +4,12 @@ import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.Observer;
 
 import com.car.core.mvp.model.BaseModel;
+import com.car.core.mvp.view.BaseMvpDelegate;
 import com.car.core.net.lvdata.CarRequest;
 import com.car.core.utils.bean.TextImageBean;
 import com.car.core.utils.bean.TextStringBean;
 import com.car.tabmine.R;
+import com.car.tabmine.item.shopcart.ShopCartDelegate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,41 +39,35 @@ public class MineModel extends BaseModel {
 
     public List<TextImageBean> setGvTwoData(int[] count) {
         List<TextImageBean> textImageBeans = new ArrayList<>();
-        TextImageBean p1 = new TextImageBean(R.drawable.daifukuan, "代付款", count[0]);
-        TextImageBean p2 = new TextImageBean(R.drawable.daifahuo, "代发货", count[1]);
-        TextImageBean p3 = new TextImageBean(R.drawable.daishouhuo, "待收货", count[2]);
-        TextImageBean p4 = new TextImageBean(R.drawable.daipingjia, "待评价", count[3]);
-        TextImageBean p5 = new TextImageBean(R.drawable.tuihuo_shouhou, "退货/换货", count[4]);
-        textImageBeans.add(p1);
-        textImageBeans.add(p2);
-        textImageBeans.add(p3);
-        textImageBeans.add(p4);
-        textImageBeans.add(p5);
+        String[] name = new String[]{"代付款", "代发货", "待收货", "待评价", "退货/换货"};
+        int[] drawId = new int[]{R.drawable.daifukuan, R.drawable.daifahuo,
+                R.drawable.daishouhuo, R.drawable.daipingjia,
+                R.drawable.tuihuo_shouhou};
+        BaseMvpDelegate[] delegates = new BaseMvpDelegate[]{
+                ShopCartDelegate.create(),
+                ShopCartDelegate.create(),
+                ShopCartDelegate.create(),
+                ShopCartDelegate.create(),
+                ShopCartDelegate.create()};
+
+        for (int i = 0; i < count.length; i++) {
+            textImageBeans.add(new TextImageBean(drawId[i], name[i], count[i], delegates[i]));
+        }
         return textImageBeans;
     }
 
     public List<TextImageBean> setGvThreeData() {
+        String[] name = new String[]{"购物车", "会员中心", "我的权益", "积分中心", "积分商城",
+                "我的钱包", "我的车库", "电子发票", "会员任务", "邀请好友"};
+        int[] drawId = new int[]{R.drawable.gouwuche, R.drawable.huiyuanzhongxin,
+                R.drawable.wodequanyi, R.drawable.jifenzhongxin,
+                R.drawable.jifenshangcheng, R.drawable.wodeqianbao,
+                R.drawable.wodecheku, R.drawable.dianzifapiao_person,
+                R.drawable.huiyuanrenwu, R.drawable.yaoqinghaoyou};
         List<TextImageBean> textImageBeans = new ArrayList<>();
-        TextImageBean p1 = new TextImageBean(R.drawable.gouwuche, "购物车");
-        TextImageBean p2 = new TextImageBean(R.drawable.huiyuanzhongxin, "会员中心");
-        TextImageBean p22 = new TextImageBean(R.drawable.wodequanyi, "我的权益");
-        TextImageBean p3 = new TextImageBean(R.drawable.jifenzhongxin, "积分中心");
-        TextImageBean p4 = new TextImageBean(R.drawable.jifenshangcheng, "积分商城");
-        TextImageBean p5 = new TextImageBean(R.drawable.wodeqianbao, "我的钱包");
-        TextImageBean p6 = new TextImageBean(R.drawable.wodecheku, "我的车库");
-        TextImageBean p9 = new TextImageBean(R.drawable.dianzifapiao_person, "电子发票");
-        TextImageBean p10 = new TextImageBean(R.drawable.huiyuanrenwu, "会员任务");
-        TextImageBean p11 = new TextImageBean(R.drawable.yaoqinghaoyou, "邀请好友");
-        textImageBeans.add(p1);
-        textImageBeans.add(p2);
-        textImageBeans.add(p22);
-        textImageBeans.add(p3);
-        textImageBeans.add(p4);
-        textImageBeans.add(p5);
-        textImageBeans.add(p6);
-        textImageBeans.add(p9);
-        textImageBeans.add(p10);
-        textImageBeans.add(p11);
+        for (int i = 0; i < name.length; i++) {
+            textImageBeans.add(new TextImageBean(drawId[i], name[i], ShopCartDelegate.create()));
+        }
         return textImageBeans;
     }
 

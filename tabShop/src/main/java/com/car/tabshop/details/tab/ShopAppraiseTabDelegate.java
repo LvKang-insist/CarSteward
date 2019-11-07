@@ -7,7 +7,7 @@ import androidx.appcompat.widget.AppCompatTextView;
 
 import com.car.core.mvp.factory.CreatePresenter;
 import com.car.core.mvp.mvpdefault.DefaultPresenterImpl;
-import com.car.core.mvp.view.BaseMvpFragment;
+import com.car.core.mvp.view.BaseMvpDelegate;
 import com.car.tabshop.R;
 import com.car.tabshop.R2;
 
@@ -21,7 +21,7 @@ import butterknife.BindView;
  * @description 门店评价
  */
 @CreatePresenter(DefaultPresenterImpl.class)
-public class ShopAppraiseTabDelegate extends BaseMvpFragment<DefaultPresenterImpl> {
+public class ShopAppraiseTabDelegate extends BaseMvpDelegate<DefaultPresenterImpl> {
 
     @BindView(R2.id.toolbar_title)
     AppCompatTextView mToolbarTitle = null;

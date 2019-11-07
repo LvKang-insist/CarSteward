@@ -4,7 +4,7 @@ import android.view.View;
 
 import com.car.core.mvp.factory.CreatePresenter;
 import com.car.core.mvp.mvpdefault.DefaultPresenterImpl;
-import com.car.core.mvp.view.BaseMvpFragment;
+import com.car.core.mvp.view.BaseMvpDelegate;
 import com.car.tabshop.R;
 
 /**
@@ -15,7 +15,7 @@ import com.car.tabshop.R;
  * @description 服务产品
  */
 @CreatePresenter(DefaultPresenterImpl.class)
-public class ServiceProductTabDelegate extends BaseMvpFragment<DefaultPresenterImpl> {
+public class ServiceProductTabDelegate extends BaseMvpDelegate<DefaultPresenterImpl> {
     @Override
     public Object setLayout() {
         return R.layout.delegate_service_product_tab;

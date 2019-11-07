@@ -19,7 +19,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.car.core.R;
 import com.car.core.R2;
 import com.car.core.mvp.presenter.IBasePresenter;
-import com.car.core.mvp.view.BaseMvpFragment;
+import com.car.core.mvp.view.BaseMvpDelegate;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -35,7 +35,7 @@ import butterknife.BindView;
  * @description 管理tab
  */
 
-public abstract class TabItemSlideDelegate<P extends IBasePresenter> extends BaseMvpFragment
+public abstract class TabItemSlideDelegate<P extends IBasePresenter> extends BaseMvpDelegate
         implements View.OnClickListener {
 
     @BindView(R2.id.bottom_slide_bar)

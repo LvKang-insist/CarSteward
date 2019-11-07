@@ -2,6 +2,8 @@ package com.car.core.utils.camera;
 
 import android.net.Uri;
 
+import java.io.File;
+
 /**
  * Copyright (C)
  *
@@ -13,10 +15,14 @@ import android.net.Uri;
 public final class CameraImageBean {
 
     private Uri mPath = null;
-    private CameraImageBean(){}
+    private File file = null;
+
+    private CameraImageBean() {
+    }
 
     private static final CameraImageBean INSTANCE = new CameraImageBean();
-    public static CameraImageBean getInstance(){
+
+    public static CameraImageBean getInstance() {
         return INSTANCE;
     }
 
@@ -26,5 +32,13 @@ public final class CameraImageBean {
 
     public void setPath(Uri mPath) {
         this.mPath = mPath;
+    }
+
+    public File getFile() {
+        return file;
+    }
+
+    public void setFile(File file) {
+        this.file = file;
     }
 }

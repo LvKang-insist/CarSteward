@@ -91,20 +91,17 @@ public abstract class PermissionCheckerDelegate extends BaseDelegate {
                 //相机回调
                 case RequestCode.TAKE_PHOTO:
                     final Uri resultUri = CameraImageBean.getInstance().getPath();
-                    XLog.e(resultUri.toString());
-                    CropPhoto.cropPhoto(getActivity(), true, resultUri, resultUri);
+                    CropPhoto.cropPhoto(this, true, resultUri);
                     break;
                 case RequestCode.PICK_PHOTO:
-//                    if (data != null) {?
-                        //从相册取的 原路径
+                    if (data != null) {
                         final Uri pickPath = data.getData();
-                        XLog.e(pickPath.toString());
-                        //从相册选择后需要有个路径存放剪裁后的图片
-CropPhoto.cropPhoto(getActivity(),false,pickPath,pickPath);
-//                    }
+                        CropPhoto.cropPhoto(this, false, pickPath);
+                    }
                     break;
                 case RequestCode.CROP_ERROR:
                     ToastUtils.show("裁剪图片");
+                    XLog.e(CameraImageBean.getInstance().getPath());
                     break;
                 default:
                     break;

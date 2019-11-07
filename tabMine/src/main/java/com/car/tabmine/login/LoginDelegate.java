@@ -13,7 +13,7 @@ import com.car.core.api.Const;
 import com.car.core.mvp.factory.CreatePresenter;
 import com.car.core.mvp.mvpdefault.DefaultContract;
 import com.car.core.mvp.mvpdefault.DefaultPresenterImpl;
-import com.car.core.mvp.view.BaseMvpFragment;
+import com.car.core.mvp.view.BaseMvpDelegate;
 import com.car.core.utils.bean.LogInBean;
 import com.car.core.utils.storage.CarPreference;
 import com.car.tabmine.R;
@@ -36,7 +36,7 @@ import butterknife.OnClick;
  * @description
  */
 @CreatePresenter(DefaultPresenterImpl.class)
-public class LoginDelegate extends BaseMvpFragment<DefaultPresenterImpl>
+public class LoginDelegate extends BaseMvpDelegate<DefaultPresenterImpl>
         implements DefaultContract.IDefaultView {
 
     @BindView(R2.id.toolbar_title)

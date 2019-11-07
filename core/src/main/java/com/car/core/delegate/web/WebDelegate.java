@@ -11,7 +11,7 @@ import com.car.core.latte.ConfigKeys;
 import com.car.core.latte.Latte;
 import com.car.core.mvp.factory.CreatePresenter;
 import com.car.core.mvp.mvpdefault.DefaultPresenterImpl;
-import com.car.core.mvp.view.BaseMvpFragment;
+import com.car.core.mvp.view.BaseMvpDelegate;
 
 import java.lang.ref.ReferenceQueue;
 import java.lang.ref.WeakReference;
@@ -24,12 +24,12 @@ import java.lang.ref.WeakReference;
  * @description
  */
 @CreatePresenter(DefaultPresenterImpl.class)
-public abstract class WebDelegate extends BaseMvpFragment<DefaultPresenterImpl> implements IWebViewInitializer {
+public abstract class WebDelegate extends BaseMvpDelegate<DefaultPresenterImpl> implements IWebViewInitializer {
 
     private WebView mWebView = null;
     private final ReferenceQueue<WebView> WEB_VIEW_QUEUE = new ReferenceQueue<>();
     private String mUrl = null;
-    private BaseMvpFragment mTopDelegate = null;
+    private BaseMvpDelegate mTopDelegate = null;
 
     private boolean mIsWebViewAbailable = false;
 
@@ -82,14 +82,14 @@ public abstract class WebDelegate extends BaseMvpFragment<DefaultPresenterImpl> 
     /**
      * 设置 delegate
      */
-    public void setTopDelegate(BaseMvpFragment delegate) {
+    public void setTopDelegate(BaseMvpDelegate delegate) {
         mTopDelegate = delegate;
     }
 
     /**
      * 获取 delegate
      */
-    public BaseMvpFragment getTopDelegate() {
+    public BaseMvpDelegate getTopDelegate() {
         if (mTopDelegate == null) {
             mTopDelegate = this;
         }

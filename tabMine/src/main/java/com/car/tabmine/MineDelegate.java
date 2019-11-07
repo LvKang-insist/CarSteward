@@ -240,7 +240,7 @@ public class MineDelegate extends BottomItemDelegate<MinePresenterImpl>
 
     @Override
     public void setGvThree(List<TextImageBean> list) {
-        mThreeAdapter = new GradViewThreeAdapter(list, getActivity(), R.layout.mine_item_icon_tv);
+        mThreeAdapter = new GradViewThreeAdapter(list, R.layout.mine_item_icon_tv, this);
         mGridViewThree.setAdapter(mThreeAdapter);
     }
 

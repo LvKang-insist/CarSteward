@@ -3,7 +3,7 @@ package com.car.core.net.lvdata;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.car.core.latte.Latte;
-import com.car.core.mvp.view.BaseMvpFragment;
+import com.car.core.mvp.view.BaseMvpDelegate;
 import com.car.core.utils.storage.CarPreference;
 import com.hjq.toast.ToastUtils;
 
@@ -46,7 +46,7 @@ public class VerifyResult {
         try {
             Class<?> aClass = Class.forName("com.car.tabmine.login.LoginDelegate");
             if (aClass != null) {
-                Latte.getBaseMvpActivity().getSupportDelegate().start((BaseMvpFragment) aClass.newInstance());
+                Latte.getBaseMvpActivity().getSupportDelegate().start((BaseMvpDelegate) aClass.newInstance());
             }
         } catch (ClassNotFoundException e) {
             e.printStackTrace();

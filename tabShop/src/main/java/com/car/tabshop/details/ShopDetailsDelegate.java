@@ -13,7 +13,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.car.tabshop.R2;
 import com.car.core.mvp.factory.CreatePresenter;
 import com.car.core.mvp.mvpdefault.DefaultPresenterImpl;
-import com.car.core.mvp.view.BaseMvpFragment;
+import com.car.core.mvp.view.BaseMvpDelegate;
 import com.car.tabshop.R;
 import com.google.android.material.tabs.TabLayout;
 
@@ -27,7 +27,7 @@ import butterknife.BindView;
  * @description
  */
 @CreatePresenter(DefaultPresenterImpl.class)
-public class ShopDetailsDelegate extends BaseMvpFragment<DefaultPresenterImpl> {
+public class ShopDetailsDelegate extends BaseMvpDelegate<DefaultPresenterImpl> {
 
     @BindView(R2.id.toolbar_title)
     AppCompatTextView mToolbarTitle = null;

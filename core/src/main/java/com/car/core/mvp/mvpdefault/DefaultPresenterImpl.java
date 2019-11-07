@@ -1,12 +1,8 @@
 package com.car.core.mvp.mvpdefault;
 
-import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 
-import com.car.core.mvp.model.BaseModel;
 import com.car.core.mvp.presenter.BasePresenter;
-import com.car.core.mvp.view.BaseMvpFragment;
 
 import java.util.WeakHashMap;
 

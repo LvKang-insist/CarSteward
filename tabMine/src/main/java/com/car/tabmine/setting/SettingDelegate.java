@@ -9,13 +9,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.car.core.mvp.factory.CreatePresenter;
 import com.car.core.mvp.mvpdefault.DefaultPresenterImpl;
-import com.car.core.mvp.view.BaseMvpFragment;
+import com.car.core.mvp.view.BaseMvpDelegate;
 import com.car.core.ui.recycler.rdefault.ListAdapter;
 import com.car.tabmine.R;
 import com.car.tabmine.R2;
 import com.car.tabmine.setting.user.UserDataDelegate;
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.hjq.toast.ToastUtils;
 
 import butterknife.BindView;
 
@@ -27,7 +26,7 @@ import butterknife.BindView;
  * @description
  */
 @CreatePresenter(DefaultPresenterImpl.class)
-public class SettingDelegate extends BaseMvpFragment<DefaultPresenterImpl> implements BaseQuickAdapter.OnItemClickListener {
+public class SettingDelegate extends BaseMvpDelegate<DefaultPresenterImpl> implements BaseQuickAdapter.OnItemClickListener {
 
     @BindView(R2.id.toolbar_title)
     AppCompatTextView mToolbarTitle = null;

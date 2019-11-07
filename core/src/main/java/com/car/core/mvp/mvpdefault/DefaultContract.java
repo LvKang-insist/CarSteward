@@ -1,7 +1,6 @@
 package com.car.core.mvp.mvpdefault;
 
 import com.car.core.mvp.presenter.IBasePresenter;
-import com.car.core.mvp.view.BaseMvpFragment;
 import com.car.core.mvp.view.IBaseView;
 
 import java.util.WeakHashMap;

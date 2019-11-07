@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <paths>
-    <external-path path="Android/data/com.car.carsteward/" name="files_root" />
-    <external-path path="." name="external_storage_root" />
+    <!--    name 随便填
+            path 表示属性值的具体路径，-->
+    <external-path
+        name="files_root"
+        path="Android/data/com.car.carsteward/" />
+    <external-path
+        name="external_storage_root"
+        path="." />
 </paths>

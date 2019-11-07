@@ -1,17 +1,8 @@
 package com.car.tabmine.setting.user;
 
-import android.Manifest;
-import android.content.Intent;
 import android.graphics.Color;
-import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.webkit.PermissionRequest;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatEditText;
 import androidx.appcompat.widget.AppCompatRadioButton;
 import androidx.appcompat.widget.AppCompatTextView;
@@ -22,9 +13,7 @@ import com.car.core.api.BaseUrl;
 import com.car.core.api.Const;
 import com.car.core.latte.Latte;
 import com.car.core.mvp.factory.CreatePresenter;
-import com.car.core.mvp.mvpdefault.DefaultContract;
-import com.car.core.mvp.mvpdefault.DefaultPresenterImpl;
-import com.car.core.mvp.view.BaseMvpFragment;
+import com.car.core.mvp.view.BaseMvpDelegate;
 import com.car.core.utils.bean.GetUserInfoBean;
 import com.car.core.utils.storage.CarPreference;
 import com.car.core.utils.util.GlideUtil;
@@ -34,7 +23,6 @@ import com.car.tabmine.R;
 import com.car.tabmine.R2;
 import com.car.tabmine.setting.user.mvp.UserContract;
 import com.car.tabmine.setting.user.mvp.UserPresenterImpl;
-import com.elvishew.xlog.XLog;
 import com.hjq.toast.ToastUtils;
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -49,7 +37,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * @description 个人资料
  */
 @CreatePresenter(UserPresenterImpl.class)
-public class UserDataDelegate extends BaseMvpFragment<UserPresenterImpl>
+public class UserDataDelegate extends BaseMvpDelegate<UserPresenterImpl>
         implements UserContract.IuserView {
 
     @BindView(R2.id.toolbar_title)

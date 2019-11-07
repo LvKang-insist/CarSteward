@@ -11,7 +11,7 @@ import androidx.core.content.ContextCompat;
 
 import com.car.core.delegate.web.WebDelegate;
 import com.car.core.delegate.web.WebDelegateImpl;
-import com.car.core.mvp.view.BaseMvpFragment;
+import com.car.core.mvp.view.BaseMvpDelegate;
 
 /**
  * Copyright (C)
@@ -41,7 +41,7 @@ public class Router {
             return true;
         }
         //拿到父碎片
-        final BaseMvpFragment topDelegate = delegate.getTopDelegate();
+        final BaseMvpDelegate topDelegate = delegate.getTopDelegate();
         final WebDelegateImpl webDelegate = WebDelegateImpl.create(url);
         topDelegate.getSupportDelegate().start(webDelegate);
         return true;

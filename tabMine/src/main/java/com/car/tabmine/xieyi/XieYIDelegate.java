@@ -9,7 +9,7 @@ import com.car.core.delegate.web.WebDelegateImpl;
 import com.car.core.mvp.factory.CreatePresenter;
 import com.car.core.mvp.mvpdefault.DefaultContract;
 import com.car.core.mvp.mvpdefault.DefaultPresenterImpl;
-import com.car.core.mvp.view.BaseMvpFragment;
+import com.car.core.mvp.view.BaseMvpDelegate;
 import com.car.tabmine.R;
 import com.car.tabmine.R2;
 import java.util.WeakHashMap;
@@ -23,7 +23,7 @@ import butterknife.BindView;
  * @description
  */
 @CreatePresenter(DefaultPresenterImpl.class)
-public class XieYIDelegate extends BaseMvpFragment<DefaultPresenterImpl>
+public class XieYIDelegate extends BaseMvpDelegate<DefaultPresenterImpl>
         implements DefaultContract.IDefaultView {
 
     @BindView(R2.id.toolbar_title)

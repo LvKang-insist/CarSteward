@@ -8,15 +8,18 @@ import android.os.Environment;
 import android.provider.MediaStore;
 
 import androidx.core.content.FileProvider;
-import androidx.fragment.app.Fragment;
 
 import com.car.core.delegate.base.PermissionCheckerDelegate;
 import com.car.core.latte.Latte;
+import com.car.core.utils.file.FileUtil;
+import com.elvishew.xlog.XLog;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+
+import static com.car.core.utils.camera.RequestCode.CROP_ERROR;
 
 /**
  * @author 345 QQ:1831712732
@@ -27,55 +30,48 @@ import java.util.Locale;
  */
 public class CropPhoto {
 
-    public static void cropPhoto(Activity activity, boolean fromCapture, Uri uri, Uri cropUrie) {
+    public static void cropPhoto(PermissionCheckerDelegate delegate, boolean fromCapture, Uri uri) {
+        Uri imageUrl;
         //打开系统自带的裁剪图片的intent
         Intent intent = new Intent("com.android.camera.action.CROP");
         // 注意一定要添加该项权限，否则会提示无法裁剪
         intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
-
         intent.setDataAndType(uri, "image/*");
         intent.putExtra("scale", true);
-
-        // 设置裁剪区域的宽高比例
-//        intent.putExtra("aspectX", 1);
-//        intent.putExtra("aspectY", 1);
-//
-//        // 设置裁剪区域的宽度和高度
-//        intent.putExtra("outputX", 200);
-//        intent.putExtra("outputY", 200);
-
         // 取消人脸识别
         intent.putExtra("noFaceDetection", true);
         // 图片输出格式
         intent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString());
-        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-        intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+
         // 若为false则表示不返回数据
         intent.putExtra("return-data", false);
 
         // 指定裁剪完成以后的图片所保存的位置,pic info显示有延时
         if (fromCapture) {
             // 如果是使用拍照，那么原先的uri和最终目标的uri一致,注意这里的uri必须是Uri.fromFile生成的
-//            mCutUri = Uri.fromFile(imgFile);
-            cropUrie = FileProvider.getUriForFile(activity, activity.getApplicationContext().getPackageName() + ".provider", new File(Environment.getExternalStorageDirectory() + "/take_photo"));
-        } else { // 从相册中选择，那么裁剪的图片保存在take_photo中
-            String time = new SimpleDateFormat("yyyyMMddHHmmss", Locale.CHINA).format(new Date());
-            String fileName = "photo_" + time;
-            File mCutFile = new File(Environment.getExternalStorageDirectory() + "/take_photo", fileName + ".jpeg");
-            if (!mCutFile.getParentFile().exists()) {
-                mCutFile.getParentFile().mkdirs();
+            imageUrl = Uri.fromFile(CameraImageBean.getInstance().getFile());
+        } else {
+            //获取一个 名字,
+            final String currentPhotoName = getPhotoName();
+            //创建一个文件，路径为系统相册，第二个参数为名字
+            final File tempFile = new File(FileUtil.CAMERA_PHOTO_DIR, currentPhotoName);
+            // 从相册中选择，那么裁剪的图片保存在take_photo中
+            if (!tempFile.getParentFile().exists()) {
+                tempFile.getParentFile().mkdirs();
             }
-            cropUrie = Uri.fromFile(mCutFile);
-//            cropUrie = FileProvider.getUriForFile(activity, activity.getApplicationContext().getPackageName() + ".provider", mCutFile);
+            imageUrl = Uri.fromFile(tempFile);
         }
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, cropUrie);
-//        // 以广播方式刷新系统相册，以便能够在相册中找到刚刚所拍摄和裁剪的照片
+        CameraImageBean.getInstance().setPath(imageUrl);
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUrl);
+        // 以广播方式刷新系统相册，以便能够在相册中找到刚刚所拍摄和裁剪的照片
         Intent intentBc = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
         intentBc.setData(uri);
-        activity.sendBroadcast(intentBc);
-
-        activity.startActivityForResult(intent, 0); //设置裁剪参数显示图片至ImageVie
+        Latte.getBaseMvpActivity().sendBroadcast(intentBc);
+        delegate.startActivityForResult(intent, CROP_ERROR);
     }
 
+    private static String getPhotoName() {
+        return FileUtil.getFileNameByTime("IMG", "jpg");
+    }
 }

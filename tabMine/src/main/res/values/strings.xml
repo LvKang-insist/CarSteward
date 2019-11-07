@@ -26,4 +26,5 @@
     <string name="man">男</string>
     <string name="woman">女</string>
     <string name="save_setting">保存设置</string>
+    <string name="shop_cart">购物车</string>
 </resources>

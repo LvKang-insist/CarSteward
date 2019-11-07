@@ -5,14 +5,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 
 import com.car.core.R;
 import com.car.core.delegate.base.PermissionCheckerDelegate;
-import com.car.core.latte.Latte;
 import com.car.core.mvp.factory.PresenterFactoryImpl;
 import com.car.core.mvp.presenter.IBasePresenter;
 import com.car.core.utils.dimen.SetToolBar;
@@ -32,12 +30,11 @@ import butterknife.Unbinder;
  * @description 抽象类， Fragment 必须继承此类，该类会调用 P 层的生命周期方法
  */
 
-public abstract class BaseMvpFragment<P extends IBasePresenter> extends PermissionCheckerDelegate
+public abstract class BaseMvpDelegate<P extends IBasePresenter> extends PermissionCheckerDelegate
         implements IBaseView {
 
     private P mPresenter;
     public Gson gson = new Gson();
-    private boolean isImmersion;
 
     /**
      * 设置布局
@@ -62,7 +59,7 @@ public abstract class BaseMvpFragment<P extends IBasePresenter> extends Permissi
      */
     private ImmersionBar mImmersionBar;
 
-    public <T extends BaseMvpFragment> T getParentDelegate() {
+    public <T extends BaseMvpDelegate> T getParentDelegate() {
         return (T) getParentFragment();
     }
 
@@ -172,12 +169,6 @@ public abstract class BaseMvpFragment<P extends IBasePresenter> extends Permissi
 
     }
 
-    @Override
-    public void onSupportInvisible() {
-        if (isImmersion) {
-            initToolbar();
-        }
-    }
 
     private void setBack(Toolbar toolbar) {
         toolbar.getChildAt(0).setOnClickListener(v -> getSupportDelegate().pop());
@@ -211,7 +202,7 @@ public abstract class BaseMvpFragment<P extends IBasePresenter> extends Permissi
     /**
      * 有父fragment的基本跳转
      */
-    public void parentfragmentAnimStart(BaseMvpFragment fragment) {
+    public void parentfragmentAnimStart(BaseMvpDelegate fragment) {
         getParentDelegate()
                 .getSupportDelegate()
                 .extraTransaction()
@@ -232,11 +223,11 @@ public abstract class BaseMvpFragment<P extends IBasePresenter> extends Permissi
      *
      * @param fragment
      */
-    public void fragmentStart(BaseMvpFragment fragment) {
+    public void fragmentStart(BaseMvpDelegate fragment) {
         getSupportDelegate().start(fragment);
     }
 
-    public void parentfragmenttart(BaseMvpFragment fragment) {
+    public void parentfragmenttart(BaseMvpDelegate fragment) {
         getParentDelegate().getSupportDelegate().start(fragment);
     }
 
@@ -244,7 +235,7 @@ public abstract class BaseMvpFragment<P extends IBasePresenter> extends Permissi
     /**
      * 无父fragment的基本跳转
      */
-    public void fragmentAnimStart(BaseMvpFragment fragment) {
+    public void fragmentAnimStart(BaseMvpDelegate fragment) {
         getSupportDelegate()
                 .extraTransaction()
                 .setCustomAnimations(R.anim.slide_right_in, R.anim.slide_right_out,

@@ -14,7 +14,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.car.core.api.Const;
 import com.car.core.latte.Latte;
 import com.car.core.mvp.factory.CreatePresenter;
-import com.car.core.mvp.view.BaseMvpFragment;
+import com.car.core.mvp.view.BaseMvpDelegate;
 import com.car.core.ui.dialog.BaseFragDialog;
 import com.car.core.utils.time.SetTelCountTimer;
 import com.car.tabmine.R;
@@ -40,7 +40,7 @@ import butterknife.OnClick;
  */
 
 @CreatePresenter(SignUpPresenterImpl.class)
-public class SignUpDelegate extends BaseMvpFragment<SignUpPresenterImpl>
+public class SignUpDelegate extends BaseMvpDelegate<SignUpPresenterImpl>
         implements SignUpContract.IsignUpView {
 
     @BindView(R2.id.signup_user_phone_et)
