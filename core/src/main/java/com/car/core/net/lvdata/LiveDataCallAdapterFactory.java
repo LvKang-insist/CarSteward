@@ -63,6 +63,7 @@ public class LiveDataCallAdapterFactory extends CallAdapter.Factory {
                         call.enqueue(new Callback<R>() {
                             @Override
                             public void onResponse(Call<R> call, Response<R> response) {
+                                XLog.e("request # " + response.raw().request().url());
                                 CustomResponse body = (CustomResponse) response.body();
                                 if (body != null) {
                                     body.setResponse(response);
@@ -99,6 +100,7 @@ public class LiveDataCallAdapterFactory extends CallAdapter.Factory {
             return new LiveData<R>() {
                 //原子更新的boolean
                 AtomicBoolean started = new AtomicBoolean(false);
+
                 @Override
                 protected void onActive() {
                     super.onActive();
@@ -108,6 +110,7 @@ public class LiveDataCallAdapterFactory extends CallAdapter.Factory {
                             @Override
                             public void onResponse(Call<R> call, Response<R> response) {
                                 R body = response.body();
+                                XLog.e("request # " + response.raw().request().url());
                                 if (VerifyResult.startVerify((String) body)) {
                                     postValue(body);
                                 } else {

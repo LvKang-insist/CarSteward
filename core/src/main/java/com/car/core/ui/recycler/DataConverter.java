@@ -12,23 +12,37 @@ import java.util.ArrayList;
 public abstract class DataConverter {
 
     /**
-     *  convert 方法解析完数据后 会将结果存进这个集合中
+     * convert 方法解析完数据后 会将结果存进这个集合中
      */
     protected final ArrayList<MultipleItemEntity> ENTITLES = new ArrayList<>();
     private String mJsonData = null;
 
     /**
-     *解析数据
+     * @return size
+     */
+    public int size() {
+        return ENTITLES.size();
+    }
+
+    /**
+     * 清空
+     */
+    public void clear() {
+        ENTITLES.clear();
+    }
+
+    /**
+     * 解析数据
      */
     public abstract ArrayList<MultipleItemEntity> convert();
 
-    public DataConverter setJsonData(String json){
+    public DataConverter setJsonData(String json) {
         this.mJsonData = json;
         return this;
     }
 
-    protected String getJsonData(){
-        if (mJsonData == null || mJsonData.isEmpty()){
+    protected String getJsonData() {
+        if (mJsonData == null || mJsonData.isEmpty()) {
             throw new NullPointerException("DATA IS NULL");
         }
         return mJsonData;

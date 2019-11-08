@@ -11,6 +11,7 @@ android {
         targetSdkVersion target_sdk_version
         versionCode version_code
         versionName version_name
+        multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

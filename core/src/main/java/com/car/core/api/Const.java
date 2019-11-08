@@ -9,8 +9,11 @@ import static com.car.core.api.BaseUrl.BASE_URL;
  * @time 2019/10/14 22:10
  * @description
  */
-public class Const {
-    public static final String API_BASE_USER = BASE_URL + "index.php?m=App&c=APIUsers";
-    public static final String API_BASE_URL_PUBLIC = BASE_URL + "index.php?m=App&c=APIPublic";
-
+public interface Const {
+    String API_BASE_USER = BASE_URL + "index.php?m=App&c=APIUsers";
+    String API_BASE_URL_PUBLIC = BASE_URL + "index.php?m=App&c=APIPublic";
+    /**
+     * 自营商品接口
+     */
+    String API_MALL = BASE_URL + "index.php?m=App&c=APIMall";
 }

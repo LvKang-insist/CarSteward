@@ -1,5 +1,6 @@
 package com.car.tabmine.login.sign;
 
+import android.graphics.Color;
 import android.util.Base64;
 import android.view.Gravity;
 import android.view.View;
@@ -8,6 +9,7 @@ import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatCheckBox;
 import androidx.appcompat.widget.AppCompatEditText;
 import androidx.appcompat.widget.AppCompatTextView;
+import androidx.appcompat.widget.Toolbar;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
@@ -43,6 +45,10 @@ import butterknife.OnClick;
 public class SignUpDelegate extends BaseMvpDelegate<SignUpPresenterImpl>
         implements SignUpContract.IsignUpView {
 
+    @BindView(R2.id.toolbar_title)
+    AppCompatTextView mToolbarTitle = null;
+    @BindView(R2.id.toolbar)
+    Toolbar mToolbar = null;
     @BindView(R2.id.signup_user_phone_et)
     AppCompatEditText mPhoneEt = null;
     @BindView(R2.id.signup_get_code_btn)
@@ -99,7 +105,7 @@ public class SignUpDelegate extends BaseMvpDelegate<SignUpPresenterImpl>
                 maps.put("loginKey", signkey);
                 maps.put("smsVerfy", smsVerfy);
                 getPresenter().signUp(Const.API_BASE_USER + signUp, maps);
-               Latte.showLoading("注册中");
+                Latte.showLoading("注册中");
             }
         }
     }
@@ -111,7 +117,9 @@ public class SignUpDelegate extends BaseMvpDelegate<SignUpPresenterImpl>
 
     @Override
     public void bindView(View view) {
-
+        mToolbar.setBackgroundColor(Color.TRANSPARENT);
+        mToolbarTitle.setText(R.string.login);
+        mToolbarTitle.setTextColor(getResources().getColor(R.color.white));
     }
 
     @Override

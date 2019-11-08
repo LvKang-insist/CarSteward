@@ -1,5 +1,6 @@
 package com.car.tabmine.login;
 
+import android.graphics.Color;
 import android.util.Base64;
 import android.view.View;
 
@@ -76,6 +77,7 @@ public class LoginDelegate extends BaseMvpDelegate<DefaultPresenterImpl>
     public void bindView(View view) {
         mToolbarTitle.setText(R.string.login);
         mToolbarTitle.setTextColor(getResources().getColor(R.color.white));
+        mToolbar.setBackgroundColor(Color.TRANSPARENT);
     }
 
     @OnClick({R2.id.login_btn,

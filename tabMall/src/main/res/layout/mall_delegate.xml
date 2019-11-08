@@ -1,13 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <TextView
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/delegate_mall_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:textSize="30sp"
-        android:text="商城"
-        android:gravity="center"/>
+        android:layout_height="70dp"
+        android:background="@color/colorPrimaryDark"
+        app:contentInsetStart="0dp">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:background="@drawable/back_oval_white"
+            android:gravity="center"
+            tools:ignore="RtlHardcoded">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/delegate_mall_search_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingStart="20dp"
+                android:paddingLeft="20dp"
+                android:paddingEnd="10dp"
+                android:paddingRight="10dp"
+                android:src="@drawable/search" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/delegate_mall_et"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:gravity="center|left"
+                android:hint="搜索您感兴趣的商品"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:textSize="12sp"
+                tools:ignore="HardcodedText,RtlHardcoded" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.appcompat.widget.Toolbar>
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/delegate_mall_refresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/delegate_mall_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/back" />
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
 
 </LinearLayout>

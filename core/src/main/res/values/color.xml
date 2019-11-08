@@ -69,4 +69,6 @@
     <!-- 背景色-->
     <color name="back">#F2F2F2</color>
 
+    <!-- 灰暗的text-->
+    <color name="color_text_gray">#333333</color>
 </resources>

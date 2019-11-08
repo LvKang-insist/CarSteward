@@ -1,9 +1,9 @@
-if (isDebug.toBoolean()){
+if (isDebug.toBoolean()) {
     apply plugin: 'com.android.application'
-}else {
+} else {
     apply plugin: 'com.android.library'
 }
-
+apply plugin: 'com.jakewharton.butterknife'
 android {
     compileSdkVersion compile_sdk_version
     buildToolsVersion build_tools_version
@@ -33,7 +33,7 @@ android {
         main {
             if (isDebug.toBoolean()) {
                 manifest.srcFile 'src/debug/AndroidManifest.xml'
-            }else {
+            } else {
                 manifest.srcFile 'src/main/AndroidManifest.xml'
             }
         }
@@ -42,6 +42,7 @@ android {
 }
 
 dependencies {
+    implementation project(path: ':core')
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.1.0'
 
-implementation project(path: ':core')
 }

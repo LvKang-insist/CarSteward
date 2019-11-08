@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">tabMall</string>
+    <string name="money_icon">¥</string>
 </resources>
