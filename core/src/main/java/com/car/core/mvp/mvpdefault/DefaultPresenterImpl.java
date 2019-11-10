@@ -21,6 +21,8 @@ public class DefaultPresenterImpl extends BasePresenter<DefaultContract.IDefault
         return new DefaultModel();
     }
 
+
+
     @Override
     public void request(String url, WeakHashMap param) {
         getModel().request(url, param, getLifecycleOwner(), (Observer<String>) s -> getView().onResult(s));

@@ -11,4 +11,8 @@ public class UrlParam {
     public static String getParam(String param) {
         return "&a=" + param;
     }
+
+    public static String getParam(String api, String param) {
+        return api + "&a=" + param;
+    }
 }

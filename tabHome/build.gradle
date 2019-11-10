@@ -3,6 +3,7 @@ if (isDebug.toBoolean()){
 }else {
     apply plugin: 'com.android.library'
 }
+apply plugin: 'com.jakewharton.butterknife'
 
 android {
     compileSdkVersion compile_sdk_version
@@ -43,4 +44,5 @@ android {
 
 dependencies {
     implementation project(path: ':core')
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.1.0'
 }

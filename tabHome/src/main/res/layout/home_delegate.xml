@@ -1,14 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.scwang.smartrefresh.layout.SmartRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_Refresh"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <TextView
+    <com.scwang.smartrefresh.layout.header.ClassicsHeader
+        android:id="@+id/delegate_home_header"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:textSize="30sp"
-        android:text="首页"
-        android:gravity="center"/>
+        android:layout_height="wrap_content" />
 
-</LinearLayout>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!--        <com.nuli100.changmao.chebangyang.module.find.video.MyNestedScrollView-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:fillViewport="true">-->
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/delegate_home_image"
+                android:layout_width="match_parent"
+                android:layout_height="296dp"
+                android:scaleType="fitXY" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/delegate_home_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingTop="50dp" />
+        </FrameLayout>
+        <!--        </com.nuli100.changmao.chebangyang.module.find.video.MyNestedScrollView>-->
+
+        <LinearLayout
+            android:id="@+id/delegate_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:id="@+id/activity_a_title"
+                android:layout_width="wrap_content"
+                android:layout_height="44dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/delegate_home_location"
+                    style="@style/TextAppearance.AppCompat.Widget.ActionBar.Subtitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:drawableStart="@drawable/location"
+                    android:drawableLeft="@drawable/location"
+                    android:drawablePadding="7dp"
+                    android:ellipsize="end"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:textColor="@color/white"
+                    android:textSize="15sp" />
+
+                <cn.bingoogolapple.badgeview.BGABadgeImageView
+                    android:id="@+id/delegate_home_news"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:padding="6dp"
+                    android:src="@drawable/news"
+                    app:badge_bgColor="@color/white"
+                    app:badge_borderColor="@color/red"
+                    app:badge_borderWidth="1px"
+                    app:badge_gravity="rightTop"
+                    app:badge_horizontalMargin="0dp"
+                    app:badge_padding="3dp"
+                    app:badge_textColor="@color/red"
+                    app:badge_textSize="8dp"
+                    app:badge_verticalMargin="0dp" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_toStartOf="@id/delegate_home_location"
+                    android:layout_toLeftOf="@id/delegate_home_location"
+                    android:gravity="center_vertical"
+                    android:src="@drawable/search"
+                    android:visibility="gone" />
+            </RelativeLayout>
+        </LinearLayout>
+    </FrameLayout>
+</com.scwang.smartrefresh.layout.SmartRefreshLayout>

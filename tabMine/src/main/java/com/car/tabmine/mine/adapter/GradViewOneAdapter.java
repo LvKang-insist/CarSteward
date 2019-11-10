@@ -35,9 +35,18 @@ public class GradViewOneAdapter extends CarBaseAdapter<TextStringBean> {
                 .setText(textStringBean.getTitle());
     }
 
-    public void addData(List<TextStringBean> list){
-        this.list.clear();
-        this.list.addAll(list);
-        this.notifyDataSetChanged();
+    public void addData(List<TextStringBean> list) {
+        if (list != null) {
+            this.list.clear();
+            this.list.addAll(list);
+        }
+        notifyDataSetChanged();
+    }
+
+    public void clear() {
+        for (int i = 0; i < list.size(); i++) {
+            list.get(i).setAmount("0");
+        }
+        notifyDataSetChanged();
     }
 }

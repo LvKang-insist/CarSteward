@@ -13,6 +13,7 @@
         android:background="@color/white"/>
 
     <TextView
+        android:id="@+id/delegate_setting_back_login"
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:layout_marginTop="100dp"

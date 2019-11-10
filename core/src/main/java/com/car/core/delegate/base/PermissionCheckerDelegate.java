@@ -5,10 +5,12 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
+import android.provider.Settings;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
+import com.car.core.R;
 import com.car.core.utils.camera.CameraImageBean;
 import com.car.core.utils.camera.CropPhoto;
 import com.car.core.utils.camera.LatteCamera;
@@ -45,6 +47,47 @@ public abstract class PermissionCheckerDelegate extends BaseDelegate {
 
     public void startCameraWithCheck() {
         PermissionCheckerDelegatePermissionsDispatcher.startCameraWithPermissionCheck(this);
+    }
+
+    @NeedsPermission({Manifest.permission.ACCESS_COARSE_LOCATION,
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.READ_PHONE_STATE})
+    void initPermission() {
+        XLog.e("权限获取成功");
+    }
+
+    @NeedsPermission({Manifest.permission.ACCESS_COARSE_LOCATION,
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.READ_PHONE_STATE})
+    void initPsermissionDenied() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle(R.string.notifyTitle);
+        builder.setMessage(R.string.notifyMsg);
+
+        // 拒绝, 退出应用
+        builder.setNegativeButton(R.string.cancel,
+                (dialog, which) -> {
+                    dialog.cancel();
+                });
+
+        builder.setPositiveButton(R.string.setting,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        startAppSettings();
+                        dialog.cancel();
+                    }
+                });
+
+        builder.setCancelable(false);
+
+        builder.show();
+    }
+
+    public void startInitPermission() {
+        PermissionCheckerDelegatePermissionsDispatcher.initPermissionWithPermissionCheck(this);
     }
 
 
@@ -107,5 +150,18 @@ public abstract class PermissionCheckerDelegate extends BaseDelegate {
                     break;
             }
         }
+    }
+
+
+    /**
+     * 启动应用的设置
+     *
+     * @since 2.5.0
+     */
+    private void startAppSettings() {
+        Intent intent = new Intent(
+                Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+        intent.setData(Uri.parse("package:" + getContext().getPackageName()));
+        startActivity(intent);
     }
 }

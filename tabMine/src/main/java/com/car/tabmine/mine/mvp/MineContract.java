@@ -39,13 +39,14 @@ public class MineContract {
     }
 
     public interface IMinePresenter extends IBasePresenter<IMineView> {
+
         void request(String url, WeakHashMap param);
 
         void requestUserCenter(String url, WeakHashMap param);
-
         /**
          * 签到
-         * @param url 地址
+         *
+         * @param url         地址
          * @param weakHashMap 参数
          */
         void requestSignIn(String url, WeakHashMap weakHashMap);

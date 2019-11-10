@@ -3,6 +3,9 @@ package com.car.core.mvp.model;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
+
+import com.car.core.net.lvdata.CarRequest;
+
 import java.util.WeakHashMap;
 
 /**
@@ -17,6 +20,7 @@ public abstract class BaseModel<T> extends ViewModel {
     public interface OnResultListener {
         /**
          * 数据的回调方法
+         *
          * @param result 结果
          */
         void result(String result);
@@ -25,10 +29,22 @@ public abstract class BaseModel<T> extends ViewModel {
     /**
      * 默认的网络请求方法
      *
-     * @param url   地址
-     * @param param 参数
+     * @param url      地址
+     * @param param    参数
      * @param owner
      * @param observer 观察者
      */
     public abstract void request(String url, WeakHashMap param, LifecycleOwner owner, Observer<String> observer);
+
+    /**
+     * 默认的 请求
+     *
+     * @param url
+     * @param param
+     * @param owner
+     * @param observer
+     */
+    public void defaultRequest(String url, WeakHashMap param, LifecycleOwner owner, Observer observer) {
+        CarRequest.result(url, param, liveData -> liveData.observe(owner, observer));
+    }
 }

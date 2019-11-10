@@ -11,12 +11,14 @@ import com.car.core.mvp.factory.CreatePresenter;
 import com.car.core.mvp.mvpdefault.DefaultPresenterImpl;
 import com.car.core.mvp.view.BaseMvpDelegate;
 import com.car.core.ui.recycler.rdefault.ListAdapter;
+import com.car.core.utils.storage.CarPreference;
 import com.car.tabmine.R;
 import com.car.tabmine.R2;
 import com.car.tabmine.setting.user.UserDataDelegate;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * @author 345 QQ:1831712732
@@ -34,6 +36,23 @@ public class SettingDelegate extends BaseMvpDelegate<DefaultPresenterImpl> imple
     Toolbar mToolbar = null;
     @BindView(R2.id.delegate_setting_recycler)
     RecyclerView mRecycler = null;
+
+    @OnClick(R2.id.delegate_setting_back_login)
+    void onBackLogin() {
+        CarPreference.putTokenId(null);
+        CarPreference.putLogin(false);
+        CarPreference.putUserSex(null);
+        CarPreference.putLoginName(null);
+        CarPreference.putUserName(null);
+        CarPreference.putUserPhoto(null);
+        CarPreference.putUserPhone(null);
+//        CarPreference.putMyCar(getApplication(), null);
+        CarPreference.putQq("0");
+        CarPreference.putWechat("0");
+        CarPreference.putUserInfoIsRevise(true);
+        CarPreference.putHomeIsRevise(true);
+        fragmentAnimBack();
+    }
 
     @Override
     public Object setLayout() {

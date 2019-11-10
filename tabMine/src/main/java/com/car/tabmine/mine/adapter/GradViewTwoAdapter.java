@@ -41,8 +41,17 @@ public class GradViewTwoAdapter extends CarBaseAdapter<TextImageBean> {
     }
 
     public void addData(List<TextImageBean> list) {
-        this.list.clear();
-        this.list.addAll(list);
-        this.notifyDataSetChanged();
+        if (list != null) {
+            this.list.clear();
+            this.list.addAll(list);
+        }
+        notifyDataSetChanged();
+    }
+
+    public void clear() {
+        for (int i = 0; i < list.size(); i++) {
+            list.get(i).setBga(0);
+        }
+        notifyDataSetChanged();
     }
 }

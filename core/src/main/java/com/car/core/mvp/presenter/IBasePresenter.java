@@ -1,8 +1,12 @@
 package com.car.core.mvp.presenter;
 
 import android.os.Bundle;
+
 import androidx.lifecycle.LifecycleObserver;
+
 import com.car.core.mvp.view.IBaseView;
+
+import java.util.WeakHashMap;
 
 /**
  * @author 345 QQ:1831712732

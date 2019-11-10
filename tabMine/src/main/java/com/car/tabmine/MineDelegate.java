@@ -215,13 +215,15 @@ public class MineDelegate extends BottomItemDelegate<MinePresenterImpl>
         } else {
             mName.setText("请登录");
             mHeadCircle.setImageResource(R.drawable.head_photo);
+            mOneAdapter.clear();
+            mTowAdapter.clear();
         }
     }
 
     @Override
     public void setGvOne(List<TextStringBean> list) {
         if (mOneAdapter == null) {
-            mOneAdapter = new GradViewOneAdapter(list, getActivity(), R.layout.mine_item_tv_tv);
+            mOneAdapter = new GradViewOneAdapter(list, getActivity(), R.layout.item_tv_tv);
             mGridViewOne.setAdapter(mOneAdapter);
         } else {
             mOneAdapter.addData(list);
@@ -231,7 +233,7 @@ public class MineDelegate extends BottomItemDelegate<MinePresenterImpl>
     @Override
     public void setGvTwo(List<TextImageBean> list) {
         if (mTowAdapter == null) {
-            mTowAdapter = new GradViewTwoAdapter(list, getActivity(), R.layout.mine_item_icon_tv);
+            mTowAdapter = new GradViewTwoAdapter(list, getActivity(), R.layout.item_icon_tv);
             mGridViewTwo.setAdapter(mTowAdapter);
         } else {
             mTowAdapter.addData(list);
@@ -240,7 +242,7 @@ public class MineDelegate extends BottomItemDelegate<MinePresenterImpl>
 
     @Override
     public void setGvThree(List<TextImageBean> list) {
-        mThreeAdapter = new GradViewThreeAdapter(list, R.layout.mine_item_icon_tv, this);
+        mThreeAdapter = new GradViewThreeAdapter(list, R.layout.item_icon_tv, this);
         mGridViewThree.setAdapter(mThreeAdapter);
     }
 

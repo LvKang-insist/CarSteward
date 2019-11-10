@@ -16,4 +16,15 @@ public interface Const {
      * 自营商品接口
      */
     String API_MALL = BASE_URL + "index.php?m=App&c=APIMall";
+
+    /**
+     * 首页接口
+     */
+    String API_USER_STORE = BASE_URL + "index.php?m=App&c=APIUserStore";
+
+    /**
+     * 首页
+     */
+    String API_USER_INDEX = BASE_URL + "index.php?m=App&c=APIUserIndex";
+
 }

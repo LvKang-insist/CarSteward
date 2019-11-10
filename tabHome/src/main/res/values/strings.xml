@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">tabHome</string>
+    <string name="car_brand">车辆品牌</string>
+    <string name="car_series">车系</string>
+    <string name="add_live_car">添加爱车</string>
 </resources>

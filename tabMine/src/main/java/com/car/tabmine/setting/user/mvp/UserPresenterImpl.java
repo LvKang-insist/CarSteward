@@ -43,4 +43,5 @@ public class UserPresenterImpl extends BasePresenter<UserContract.IuserView, Use
                 .request(url, param, getLifecycleOwner(), (Observer<String>) s -> getView().getUserInfoResult(s));
     }
 
+
 }

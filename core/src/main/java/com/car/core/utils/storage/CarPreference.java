@@ -160,7 +160,7 @@ public class CarPreference {
      */
     public static void putUserSex(String userSex) {
         String sex;
-        if (Integer.valueOf(userSex) == 0) {
+        if (userSex == null || Integer.valueOf(userSex) == 0) {
             sex = "保密";
         } else if (Integer.valueOf(userSex) == 1) {
             sex = "男";
@@ -341,27 +341,30 @@ public class CarPreference {
 
     /**
      * 设置账户余额
+     *
      * @param userMoney 账户余额
      */
-    public static void putUserMoney(String userMoney){
+    public static void putUserMoney(String userMoney) {
         getAppPreferenceEdit(USER)
-        .putString("userMoney", userMoney)
-        .commit();
+                .putString("userMoney", userMoney)
+                .commit();
     }
 
     /**
      * 获取是账户余额
+     *
      * @return 账户余额
      */
-    public static String getUserMoney(){
-        return getAppPreference(USER).getString("userMoney",null);
+    public static String getUserMoney() {
+        return getAppPreference(USER).getString("userMoney", null);
     }
 
     /**
      * 设置返现余额
+     *
      * @param userMoney 返现余额
      */
-    public static void putUserCashBackMoney(String userMoney){
+    public static void putUserCashBackMoney(String userMoney) {
         getAppPreferenceEdit(USER)
                 .putString("cashBackMoney", userMoney)
                 .commit();
@@ -369,63 +372,71 @@ public class CarPreference {
 
     /**
      * 获取是返现余额
+     *
      * @return 返现余额
      */
-    public static String getUserCashBackMoney(){
-        return getAppPreference(USER).getString("cashBackMoney",null);
+    public static String getUserCashBackMoney() {
+        return getAppPreference(USER).getString("cashBackMoney", null);
     }
 
 
     /**
-     *  设置最低提现金额
+     * 设置最低提现金额
+     *
      * @param cashStartMoney 最低提现金额
      */
-    public static void putCashStartMoney(String cashStartMoney){
+    public static void putCashStartMoney(String cashStartMoney) {
         getAppPreferenceEdit(USER)
-        .putString("cashStartMoney", cashStartMoney)
-        .commit();
+                .putString("cashStartMoney", cashStartMoney)
+                .commit();
     }
 
     /**
      * 获取最低提现金额
+     *
      * @return 最低提现金额
      */
-    public static String getCashStartMoney(){
-        return getAppPreference(USER).getString("cashStartMoney",null);
+    public static String getCashStartMoney() {
+        return getAppPreference(USER).getString("cashStartMoney", null);
     }
 
     /**
      * 设置最高提现金额
+     *
      * @param cashEndMoney 最高提现金额
      */
-    public static void putCashEndMoney(String cashEndMoney){
+    public static void putCashEndMoney(String cashEndMoney) {
         getAppPreferenceEdit(USER)
                 .putString("cashEndMoney", cashEndMoney)
                 .commit();
     }
+
     /**
      * 获取最高提现金额
+     *
      * @return 最高提现金额
      */
-    public static String getCashEndMoney(){
-        return getAppPreference(USER).getString("cashEndMoney",null);
+    public static String getCashEndMoney() {
+        return getAppPreference(USER).getString("cashEndMoney", null);
     }
 
     /**
      * 设置提现手续费率
+     *
      * @param cashRate 手续费
      */
-    public static void putCashRate(String cashRate){
+    public static void putCashRate(String cashRate) {
         getAppPreferenceEdit(USER)
-        .putString("cashRate", cashRate)
-        .commit();
+                .putString("cashRate", cashRate)
+                .commit();
     }
 
     /**
      * 获取提现手续费率
+     *
      * @return 获取提现手续费
      */
-    public static String getCashRate(){
-        return getAppPreference(USER).getString("cashRate",null);
+    public static String getCashRate() {
+        return getAppPreference(USER).getString("cashRate", null);
     }
 }

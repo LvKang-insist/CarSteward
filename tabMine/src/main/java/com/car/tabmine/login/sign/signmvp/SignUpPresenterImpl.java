@@ -70,5 +70,4 @@ public class SignUpPresenterImpl extends BasePresenter<SignUpContract.IsignUpVie
         getModel().requestSign(url, param,getLifecycleOwner(), s -> getView().signUpResult(s));
     }
 
-
 }
