@@ -22,4 +22,5 @@ public enum  MultipleFields {
     ID,
     IMAGEi_URL,
     TAG,
+    NAME,
 }

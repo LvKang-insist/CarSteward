@@ -9,17 +9,12 @@ import androidx.appcompat.widget.AppCompatTextView;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.alibaba.fastjson.JSON;
 import com.amap.api.location.AMapLocation;
-import com.car.core.api.Const;
 import com.car.core.delegate.BottomItemDelegate;
 import com.car.core.mvp.factory.CreatePresenter;
-import com.car.core.mvp.mvpdefault.DefaultContract;
-import com.car.core.mvp.mvpdefault.DefaultPresenterImpl;
 import com.car.core.utils.bean.IndexBean;
 import com.car.core.utils.map.AMapUtils;
 import com.car.core.utils.util.RequestParam;
-import com.car.core.utils.util.UrlParam;
 import com.car.tabhome.home.adapter.HomeConverter;
 import com.car.tabhome.home.adapter.HomeRvAdapter;
 import com.car.tabhome.home.mvp.HomeContract;
@@ -68,8 +63,9 @@ public class HomeDelegate extends BottomItemDelegate<HomePersenterImpl>
     public void bindView(View view) {
         initLocation();
         mConverter = new HomeConverter();
-        mAdapter = new HomeRvAdapter(mConverter.convert());
+        mAdapter = new HomeRvAdapter(mConverter.convert(), this);
         mRecycler.setLayoutManager(new GridLayoutManager(getContext(), 20));
+        mRecycler.setAdapter(mAdapter);
     }
 
     /**
@@ -83,6 +79,7 @@ public class HomeDelegate extends BottomItemDelegate<HomePersenterImpl>
     @Override
     public void onLazyInitView(@Nullable Bundle savedInstanceState) {
         getPresenter().onRequestIndex(RequestParam.builder()
+                .addTokenId()
                 //省级名称
                 .addParam("areaName1", "陕西省")
                 //市级名称
@@ -106,7 +103,17 @@ public class HomeDelegate extends BottomItemDelegate<HomePersenterImpl>
     public void onResultIndex(String result) {
         IndexBean bean = gson.fromJson(result, IndexBean.class);
         if (bean.getStatus() == 1) {
-
+            if (!bean.getMsgCount().isEmpty() && Integer.parseInt(bean.getMsgCount()) > 0) {
+                mNews.showTextBadge(bean.getMsgCount());
+            } else {
+                mNews.hiddenBadge();
+            }
+            if (bean.getBrandName() != null && !bean.getBrandName().isEmpty() &&
+                    bean.getYearsTypeName() != null && !bean.getYearsTypeName().isEmpty()) {
+                ToastUtils.show("哈哈哈");
+                mConverter.add(bean);
+                mAdapter.notifyDataSetChanged();
+            }
         } else {
             ToastUtils.show(bean.getMsg());
         }

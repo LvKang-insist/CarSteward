@@ -11,32 +11,41 @@ import java.util.List;
  */
 public class IndexBean {
 
+
     /**
-     * status : 1
-     * msg : 用户未登录！
-     * msgCount :
-     * brandName :
-     * yearsTypeName :
-     * notice : [{"catName":"车榜样首页公告","articleId":"6","catId":"11","articleTitle":"车榜样微信端首页公告","articleImg":"","articleKey":"首页公告","articleContent":"车榜样 为您的汽车生活保驾护航！"},{"catName":"车榜样首页公告","articleId":"5","catId":"11","articleTitle":"车榜样微信端首页公告","articleImg":"","articleKey":"首页公告","articleContent":"车榜样二手车，买的放心，用的安心！"},{"catName":"车榜样首页公告","articleId":"4","catId":"11","articleTitle":"车榜样微信端首页公告","articleImg":"","articleKey":"首页公告","articleContent":"汽车消毒除味就选悦治理，专业专心专注！"},{"catName":"车榜样首页公告","articleId":"3","catId":"11","articleTitle":"车榜样微信端首页公告","articleImg":"","articleKey":"首页公告","articleContent":"车榜样特惠新车，全网最低价！"}]
-     * ads : {"indexAds":[],"integralsAds":[],"selfGoodsAds":[],"giftAds":[],"usedCarsAds":[],"tehuiCarData":[]}
+     * ads : {"giftAds":[],"indexAds":[],"integralsAds":[],"selfGoodsAds":[],"tehuiCarData":[],"usedCarsAds":[]}
      * affiche : []
+     * brandName : 宝马--宝马1系
+     * msg : success
+     * msgCount : 0
+     * notice : [{"articleContent":"车榜样 为您的汽车生活保驾护航！","articleId":"6","articleImg":"","articleKey":"首页公告","articleTitle":"车榜样微信端首页公告","catId":"11","catName":"车榜样首页公告"},{"articleContent":"车榜样二手车，买的放心，用的安心！","articleId":"5","articleImg":"","articleKey":"首页公告","articleTitle":"车榜样微信端首页公告","catId":"11","catName":"车榜样首页公告"},{"articleContent":"汽车消毒除味就选悦治理，专业专心专注！","articleId":"4","articleImg":"","articleKey":"首页公告","articleTitle":"车榜样微信端首页公告","catId":"11","catName":"车榜样首页公告"},{"articleContent":"车榜样特惠新车，全网最低价！","articleId":"3","articleImg":"","articleKey":"首页公告","articleTitle":"车榜样微信端首页公告","catId":"11","catName":"车榜样首页公告"}]
+     * status : 1
+     * yearsTypeName : 2017款 118i 运动型
      */
 
-    private int status;
+    private AdsBean ads;
+    private String brandName;
     private String msg;
     private String msgCount;
-    private String brandName;
+    private int status;
     private String yearsTypeName;
-    private AdsBean ads;
-    private List<NoticeBean> notice;
     private List<?> affiche;
+    private List<NoticeBean> notice;
 
-    public int getStatus() {
-        return status;
+    public AdsBean getAds() {
+        return ads;
     }
 
-    public void setStatus(int status) {
-        this.status = status;
+    public void setAds(AdsBean ads) {
+        this.ads = ads;
+    }
+
+    public String getBrandName() {
+        return brandName;
+    }
+
+    public void setBrandName(String brandName) {
+        this.brandName = brandName;
     }
 
     public String getMsg() {
@@ -55,12 +64,12 @@ public class IndexBean {
         this.msgCount = msgCount;
     }
 
-    public String getBrandName() {
-        return brandName;
+    public int getStatus() {
+        return status;
     }
 
-    public void setBrandName(String brandName) {
-        this.brandName = brandName;
+    public void setStatus(int status) {
+        this.status = status;
     }
 
     public String getYearsTypeName() {
@@ -71,12 +80,12 @@ public class IndexBean {
         this.yearsTypeName = yearsTypeName;
     }
 
-    public AdsBean getAds() {
-        return ads;
+    public List<?> getAffiche() {
+        return affiche;
     }
 
-    public void setAds(AdsBean ads) {
-        this.ads = ads;
+    public void setAffiche(List<?> affiche) {
+        this.affiche = affiche;
     }
 
     public List<NoticeBean> getNotice() {
@@ -87,21 +96,21 @@ public class IndexBean {
         this.notice = notice;
     }
 
-    public List<?> getAffiche() {
-        return affiche;
-    }
-
-    public void setAffiche(List<?> affiche) {
-        this.affiche = affiche;
-    }
-
     public static class AdsBean {
+        private List<?> giftAds;
         private List<?> indexAds;
         private List<?> integralsAds;
         private List<?> selfGoodsAds;
-        private List<?> giftAds;
-        private List<?> usedCarsAds;
         private List<?> tehuiCarData;
+        private List<?> usedCarsAds;
+
+        public List<?> getGiftAds() {
+            return giftAds;
+        }
+
+        public void setGiftAds(List<?> giftAds) {
+            this.giftAds = giftAds;
+        }
 
         public List<?> getIndexAds() {
             return indexAds;
@@ -127,12 +136,12 @@ public class IndexBean {
             this.selfGoodsAds = selfGoodsAds;
         }
 
-        public List<?> getGiftAds() {
-            return giftAds;
+        public List<?> getTehuiCarData() {
+            return tehuiCarData;
         }
 
-        public void setGiftAds(List<?> giftAds) {
-            this.giftAds = giftAds;
+        public void setTehuiCarData(List<?> tehuiCarData) {
+            this.tehuiCarData = tehuiCarData;
         }
 
         public List<?> getUsedCarsAds() {
@@ -142,41 +151,33 @@ public class IndexBean {
         public void setUsedCarsAds(List<?> usedCarsAds) {
             this.usedCarsAds = usedCarsAds;
         }
-
-        public List<?> getTehuiCarData() {
-            return tehuiCarData;
-        }
-
-        public void setTehuiCarData(List<?> tehuiCarData) {
-            this.tehuiCarData = tehuiCarData;
-        }
     }
 
     public static class NoticeBean {
         /**
-         * catName : 车榜样首页公告
+         * articleContent : 车榜样 为您的汽车生活保驾护航！
          * articleId : 6
-         * catId : 11
-         * articleTitle : 车榜样微信端首页公告
          * articleImg :
          * articleKey : 首页公告
-         * articleContent : 车榜样 为您的汽车生活保驾护航！
+         * articleTitle : 车榜样微信端首页公告
+         * catId : 11
+         * catName : 车榜样首页公告
          */
 
-        private String catName;
+        private String articleContent;
         private String articleId;
-        private String catId;
-        private String articleTitle;
         private String articleImg;
         private String articleKey;
-        private String articleContent;
+        private String articleTitle;
+        private String catId;
+        private String catName;
 
-        public String getCatName() {
-            return catName;
+        public String getArticleContent() {
+            return articleContent;
         }
 
-        public void setCatName(String catName) {
-            this.catName = catName;
+        public void setArticleContent(String articleContent) {
+            this.articleContent = articleContent;
         }
 
         public String getArticleId() {
@@ -185,22 +186,6 @@ public class IndexBean {
 
         public void setArticleId(String articleId) {
             this.articleId = articleId;
-        }
-
-        public String getCatId() {
-            return catId;
-        }
-
-        public void setCatId(String catId) {
-            this.catId = catId;
-        }
-
-        public String getArticleTitle() {
-            return articleTitle;
-        }
-
-        public void setArticleTitle(String articleTitle) {
-            this.articleTitle = articleTitle;
         }
 
         public String getArticleImg() {
@@ -219,12 +204,28 @@ public class IndexBean {
             this.articleKey = articleKey;
         }
 
-        public String getArticleContent() {
-            return articleContent;
+        public String getArticleTitle() {
+            return articleTitle;
         }
 
-        public void setArticleContent(String articleContent) {
-            this.articleContent = articleContent;
+        public void setArticleTitle(String articleTitle) {
+            this.articleTitle = articleTitle;
+        }
+
+        public String getCatId() {
+            return catId;
+        }
+
+        public void setCatId(String catId) {
+            this.catId = catId;
+        }
+
+        public String getCatName() {
+            return catName;
+        }
+
+        public void setCatName(String catName) {
+            this.catName = catName;
         }
     }
 }

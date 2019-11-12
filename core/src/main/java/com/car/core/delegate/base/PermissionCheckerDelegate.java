@@ -54,7 +54,7 @@ public abstract class PermissionCheckerDelegate extends BaseDelegate {
             Manifest.permission.WRITE_EXTERNAL_STORAGE,
             Manifest.permission.READ_PHONE_STATE})
     void initPermission() {
-        XLog.e("权限获取成功");
+
     }
 
     @NeedsPermission({Manifest.permission.ACCESS_COARSE_LOCATION,

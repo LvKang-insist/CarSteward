@@ -100,4 +100,7 @@ dependencies {
     api 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0'
     api 'com.scwang.smartrefresh:SmartRefreshHeader:1.1.0'
 
+    //Banner
+    api 'com.bigkoo:ConvenientBanner:2.1.4'
+
 }

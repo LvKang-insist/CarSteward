@@ -10,4 +10,7 @@ package com.car.tabhome;
 public interface HomeItemType {
     int ITEM_HOME_ONE = 200;
     int ITEM_HOME_TWO = 201;
+    int ITEM_HOME_THREE = 202;
+    int ITEM_HOME_FOUR = 203;
+    int ITEM_HOME_FIVE = 204;
 }
