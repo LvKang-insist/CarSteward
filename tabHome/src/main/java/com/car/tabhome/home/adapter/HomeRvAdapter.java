@@ -6,6 +6,7 @@ import android.view.View;
 import androidx.recyclerview.widget.GridLayoutManager;
 
 import com.bigkoo.convenientbanner.ConvenientBanner;
+import com.bigkoo.convenientbanner.listener.OnItemClickListener;
 import com.car.core.api.BaseUrl;
 import com.car.core.ui.recycler.MultipleFields;
 import com.car.core.ui.recycler.MultipleItemEntity;
@@ -15,6 +16,7 @@ import com.car.core.ui.recycler.MultipleViewHolder;
 import com.car.core.ui.view.CarouselView;
 import com.car.core.utils.bean.IndexBean;
 import com.car.core.utils.bean.TextImageBean;
+import com.car.core.utils.util.AndFixManager;
 import com.car.core.utils.util.GlideUtil;
 import com.car.tabhome.HomeDelegate;
 import com.car.tabhome.HomeItemType;
@@ -22,6 +24,7 @@ import com.car.tabhome.R;
 import com.elvishew.xlog.XLog;
 import com.hjq.toast.ToastUtils;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,15 +59,35 @@ public class HomeRvAdapter extends MultipleRecyclerAdapter {
                     holder.setText(R.id.item_home_car_brand, indexBean.getBrandName())
                             .setText(R.id.item_home_car_series, indexBean.getYearsTypeName())
                             .setText(R.id.item_home_add_live_car, "添加爱车");
-                    holder.getView(R.id.item_home_add_live_car).setOnClickListener(v -> {
-                        ToastUtils.show("添加爱车");
-                    });
                 }
+                String mPatchDir = delegate.getContext().getExternalCacheDir().getAbsolutePath() + "/apatch/";
+                File file = new File(mPatchDir);
+                if (!file.exists()) {
+                    XLog.e(mPatchDir + "：" + file.exists());
+                    boolean mkdir = file.mkdir();
+                }
+                holder.getView(R.id.item_home_car_series).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        ToastUtils.show("修复 bug");
+
+                        AndFixManager.getInstance().addPath(mPatchDir);
+                    }
+                });
+                holder.getView(R.id.item_home_add_live_car).setOnClickListener(v -> {
+                    bug();
+                });
                 break;
             case HomeItemType.ITEM_HOME_TWO:
                 TextImageBean bean = entity.getField(MultipleFields.OBJECT);
                 holder.setText(R.id.item_icon_tv_tv, bean.getTitle());
                 holder.getView(R.id.item_icon_tv_icon).setBackgroundColor(Color.RED);
+                holder.getView(R.id.mine_item_icon_tv).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        ToastUtils.show("嘻嘻嘻");
+                    }
+                });
                 if (bean.getImage() != 0) {
                     GlideUtil.setImage(BaseUrl.BASE_URL + bean.getImage(), holder.getView(R.id.item_icon_tv_icon));
                 }
@@ -87,7 +110,6 @@ public class HomeRvAdapter extends MultipleRecyclerAdapter {
                     List<IndexBean.NoticeBean> notice = five_bean.getNotice();
                     CarouselView view = holder.getView(R.id.item_carouse_view);
                     ArrayList list = new ArrayList();
-                    XLog.e("----"+notice.size());
                     for (int i = 0; i < notice.size(); i++) {
                         list.add(notice.get(i).getArticleContent());
                     }
@@ -98,6 +120,10 @@ public class HomeRvAdapter extends MultipleRecyclerAdapter {
             default:
                 break;
         }
+    }
+
+    public void bug() {
+        ToastUtils.show("已修复");
     }
 
     @Override

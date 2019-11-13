@@ -7,6 +7,7 @@ import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
 import com.elvishew.xlog.XLog;
+import com.hjq.toast.ToastUtils;
 
 /**
  * @author 345 QQ:1831712732
@@ -95,6 +96,7 @@ public class AMapUtils implements AMapLocationListener {
                 XLog.e("AmapError # location Error, ErrCode:"
                         + aMapLocation.getErrorCode() + ", errInfo:"
                         + aMapLocation.getErrorInfo());
+                ToastUtils.show("定位失败");
                 stopMapLocation();
             }
         } else {

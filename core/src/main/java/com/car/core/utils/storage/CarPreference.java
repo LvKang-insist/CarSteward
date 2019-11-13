@@ -3,6 +3,7 @@ package com.car.core.utils.storage;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.car.core.api.BaseUrl;
 import com.car.core.latte.Latte;
 
 /**
@@ -438,5 +439,65 @@ public class CarPreference {
      */
     public static String getCashRate() {
         return getAppPreference(USER).getString("cashRate", null);
+    }
+
+    /**
+     * 保存定位城市
+     *
+     * @param city 城市
+     */
+    public static void putCity(String city) {
+        getAppPreferenceEdit(USER)
+                .putString("city", city)
+                .commit();
+    }
+
+    /**
+     * 获取定位城市，默认西安
+     */
+    public static String getCity() {
+        return getAppPreference(USER).getString("city", BaseUrl.DEFAULTCITY);
+    }
+
+    /**
+     * 保存经度
+     *
+     * @param longitude
+     */
+    public static void putLongitude(String longitude) {
+        getAppPreferenceEdit(USER)
+                .putString("longitude", longitude)
+                .commit();
+    }
+
+    /**
+     * 获取 经度，默认西安钟楼
+     *
+     * @param context
+     * @return
+     */
+    public static String getLongitude(Context context) {
+        return getAppPreference(USER).getString("longitude", "108.94702");
+    }
+
+    /**
+     * 保存维度
+     *
+     * @param latitude
+     */
+    public static void putLatitude(String latitude) {
+        getAppPreferenceEdit(USER)
+                .putString("latitude", latitude)
+                .commit();
+    }
+
+    /**
+     * 获取纬度
+     *
+     * @param context
+     * @return
+     */
+    public static String getLatitude(Context context) {
+        return getAppPreference(USER).getString("latitude", "34.259432");
     }
 }

@@ -11,6 +11,7 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 
 import com.car.core.R;
+import com.car.core.mvp.view.BaseMvpDelegate;
 import com.car.core.utils.camera.CameraImageBean;
 import com.car.core.utils.camera.CropPhoto;
 import com.car.core.utils.camera.LatteCamera;
@@ -71,18 +72,12 @@ public abstract class PermissionCheckerDelegate extends BaseDelegate {
                 (dialog, which) -> {
                     dialog.cancel();
                 });
-
         builder.setPositiveButton(R.string.setting,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        startAppSettings();
-                        dialog.cancel();
-                    }
+                (dialog, which) -> {
+                    startAppSettings();
+                    dialog.cancel();
                 });
-
         builder.setCancelable(false);
-
         builder.show();
     }
 
@@ -125,7 +120,6 @@ public abstract class PermissionCheckerDelegate extends BaseDelegate {
         PermissionCheckerDelegatePermissionsDispatcher
                 .onRequestPermissionsResult(this, requestCode, data);
     }
-
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {

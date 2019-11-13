@@ -31,4 +31,12 @@ public class HomePersenterImpl extends BasePresenter<HomeContract.IHomeView, Hom
             getView().onResultIndex(s);
         });
     }
+
+    @Override
+    public void onRequestICityCode(WeakHashMap map) {
+        String index = UrlParam.getParam(Const.API_USER_STORE, "getCityCode");
+        getModel().request(index, map, getLifecycleOwner(), (Observer<String>) s -> {
+            getView().onResultCityCode(s);
+        });
+    }
 }

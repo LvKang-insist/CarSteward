@@ -10,10 +10,12 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.amap.api.location.AMapLocation;
+import com.car.core.api.BaseUrl;
 import com.car.core.delegate.BottomItemDelegate;
 import com.car.core.mvp.factory.CreatePresenter;
 import com.car.core.utils.bean.IndexBean;
 import com.car.core.utils.map.AMapUtils;
+import com.car.core.utils.storage.CarPreference;
 import com.car.core.utils.util.RequestParam;
 import com.car.tabhome.home.adapter.HomeConverter;
 import com.car.tabhome.home.adapter.HomeRvAdapter;
@@ -36,7 +38,6 @@ import cn.bingoogolapple.badgeview.BGABadgeImageView;
 public class HomeDelegate extends BottomItemDelegate<HomePersenterImpl>
         implements HomeContract.IHomeView, AMapUtils.LocationCallBack {
 
-
     @BindView(R2.id.delegate_home_location)
     AppCompatTextView mLocation = null;
     @BindView(R2.id.delegate_home_news)
@@ -47,6 +48,7 @@ public class HomeDelegate extends BottomItemDelegate<HomePersenterImpl>
     RecyclerView mRecycler = null;
     private HomeConverter mConverter;
     private HomeRvAdapter mAdapter;
+    private AMapUtils aMapUtils;
 
     @Override
     public Object setLayout() {
@@ -66,13 +68,15 @@ public class HomeDelegate extends BottomItemDelegate<HomePersenterImpl>
         mAdapter = new HomeRvAdapter(mConverter.convert(), this);
         mRecycler.setLayoutManager(new GridLayoutManager(getContext(), 20));
         mRecycler.setAdapter(mAdapter);
+
+        mLocation.setText(CarPreference.getCity());
     }
 
     /**
      * 开始定位
      */
     private void initLocation() {
-        AMapUtils aMapUtils = new AMapUtils(getContext(), this);
+        aMapUtils = new AMapUtils(getContext(), this);
         aMapUtils.startMapLocation();
     }
 
@@ -95,8 +99,15 @@ public class HomeDelegate extends BottomItemDelegate<HomePersenterImpl>
      */
     @Override
     public void onCallLocationSuc(AMapLocation location) {
-        XLog.e(location.getProvince());
-        XLog.e(location.getCity());
+        aMapUtils.stopMapLocation();
+        mLocation.setText(location.getCity());
+        XLog.e(" -------" + location.getCity());
+        getPresenter().onRequestICityCode(RequestParam.builder()
+                .addParam("areaName1", location.getProvider())
+                .addParam("areaName2", location.getCity()).build());
+        //保存经纬度
+        CarPreference.putLongitude(String.valueOf(location.getLongitude()));
+        CarPreference.putLatitude(String.valueOf(location.getLatitude()));
     }
 
     @Override
@@ -110,12 +121,16 @@ public class HomeDelegate extends BottomItemDelegate<HomePersenterImpl>
             }
             if (bean.getBrandName() != null && !bean.getBrandName().isEmpty() &&
                     bean.getYearsTypeName() != null && !bean.getYearsTypeName().isEmpty()) {
-                ToastUtils.show("哈哈哈");
                 mConverter.add(bean);
                 mAdapter.notifyDataSetChanged();
             }
         } else {
             ToastUtils.show(bean.getMsg());
         }
+    }
+
+    @Override
+    public void onResultCityCode(String result) {
+        XLog.json(result);
     }
 }

@@ -16,10 +16,20 @@ public interface HomeContract {
 
     interface IHomeView extends IBaseView {
         void onResultIndex(String result);
+
+        void onResultCityCode(String result);
     }
 
     interface IHomePersenter extends IBasePresenter<IHomeView> {
         void onRequestIndex(WeakHashMap map);
+
+        /**
+         * 获取城市 code
+         *
+         * @param map
+         */
+        void onRequestICityCode(WeakHashMap map);
+
     }
 
 }

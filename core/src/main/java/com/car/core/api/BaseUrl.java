@@ -30,6 +30,6 @@ public class BaseUrl {
      * 测试地址
      */
 //    public static final String BASE_URL_HTML = "http://192.168.199.131";
-//    public static final String DEFAULTCITY = "西安";
-//    public static final String DEFAULTCITYAREAID = "610100";
+    public static final String DEFAULTCITY = "西安";
+    public static final String DEFAULTCITYAREAID = "610100";
 }
