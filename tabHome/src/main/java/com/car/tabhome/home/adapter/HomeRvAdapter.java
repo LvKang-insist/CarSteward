@@ -6,17 +6,14 @@ import android.view.View;
 import androidx.recyclerview.widget.GridLayoutManager;
 
 import com.bigkoo.convenientbanner.ConvenientBanner;
-import com.bigkoo.convenientbanner.listener.OnItemClickListener;
 import com.car.core.api.BaseUrl;
 import com.car.core.ui.recycler.MultipleFields;
 import com.car.core.ui.recycler.MultipleItemEntity;
-import com.car.core.ui.recycler.MultipleItemType;
 import com.car.core.ui.recycler.MultipleRecyclerAdapter;
 import com.car.core.ui.recycler.MultipleViewHolder;
 import com.car.core.ui.view.CarouselView;
 import com.car.core.utils.bean.IndexBean;
 import com.car.core.utils.bean.TextImageBean;
-import com.car.core.utils.util.AndFixManager;
 import com.car.core.utils.util.GlideUtil;
 import com.car.tabhome.HomeDelegate;
 import com.car.tabhome.HomeItemType;
@@ -47,7 +44,6 @@ public class HomeRvAdapter extends MultipleRecyclerAdapter {
         addItemType(HomeItemType.ITEM_HOME_THREE, R.layout.item_banner_image);
         addItemType(HomeItemType.ITEM_HOME_FOUR, R.layout.item_icon_tv);
         addItemType(HomeItemType.ITEM_HOME_FIVE, R.layout.item_carouse_view);
-
     }
 
     @Override
@@ -71,7 +67,6 @@ public class HomeRvAdapter extends MultipleRecyclerAdapter {
                     public void onClick(View v) {
                         ToastUtils.show("修复 bug");
 
-                        AndFixManager.getInstance().addPath(mPatchDir);
                     }
                 });
                 holder.getView(R.id.item_home_add_live_car).setOnClickListener(v -> {

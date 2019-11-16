@@ -23,4 +23,5 @@ public enum  MultipleFields {
     IMAGEi_URL,
     TAG,
     NAME,
+    COLOR,
 }

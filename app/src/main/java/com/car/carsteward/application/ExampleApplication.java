@@ -7,10 +7,6 @@ import android.content.Context;
 import androidx.multidex.MultiDex;
 
 import com.car.core.latte.Latte;
-import com.car.core.utils.util.AndFixManager;
-import com.elvishew.xlog.LogConfiguration;
-import com.elvishew.xlog.XLog;
-import com.hjq.toast.ToastUtils;
 
 /**
  * @author 345 QQ:1831712732
@@ -31,7 +27,6 @@ public class ExampleApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        AndFixManager.getInstance().initPatch(this);
         Latte.init(this)
                 .withJavaScriptInterface("car")
                 .withWebHost("http:www.baidu.com")

@@ -4,9 +4,13 @@ import androidx.lifecycle.Observer;
 
 import com.car.core.api.Const;
 import com.car.core.mvp.presenter.BasePresenter;
+import com.car.core.utils.bean.DataBean;
+import com.car.core.utils.bean.GetStylesBean;
 import com.car.core.utils.util.UrlParam;
 
 import java.util.WeakHashMap;
+
+import static com.car.core.utils.bean.DataBean.toData;
 
 /**
  * @author 345 QQ:1831712732
@@ -39,4 +43,13 @@ public class HomePersenterImpl extends BasePresenter<HomeContract.IHomeView, Hom
             getView().onResultCityCode(s);
         });
     }
+
+    @Override
+    public void onResultIStyles() {
+        getModel().request(UrlParam.getParam(Const.API_USER_INDEX, "getStyles"),
+                null, getLifecycleOwner(), (Observer<String>) s -> {
+                    getView().onResultStyles(toData(s, GetStylesBean.class));
+                });
+    }
+
 }

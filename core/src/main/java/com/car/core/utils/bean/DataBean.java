@@ -1,5 +1,7 @@
 package com.car.core.utils.bean;
 
+import com.car.core.latte.Latte;
+
 /**
  * @author 345 QQ:1831712732
  * @name CarSteward
@@ -8,4 +10,7 @@ package com.car.core.utils.bean;
  * @description
  */
 public class DataBean {
+    public static <T extends DataBean> T toData(String result, Class<T> tClass) {
+        return Latte.getGson().fromJson(result, tClass);
+    }
 }

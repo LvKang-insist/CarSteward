@@ -16,28 +16,28 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <!--        <com.nuli100.changmao.chebangyang.module.find.video.MyNestedScrollView-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:fillViewport="true">-->
-
-        <FrameLayout
+        <com.car.core.ui.view.RvNestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:fillViewport="true">
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/delegate_home_image"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="296dp"
-                android:scaleType="fitXY" />
+                android:layout_height="wrap_content">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/delegate_home_recycler"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingTop="50dp" />
-        </FrameLayout>
-        <!--        </com.nuli100.changmao.chebangyang.module.find.video.MyNestedScrollView>-->
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/delegate_home_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="296dp"
+                    android:scaleType="fitXY" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/delegate_home_recycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingTop="50dp" />
+            </FrameLayout>
+        </com.car.core.ui.view.RvNestedScrollView>
 
         <LinearLayout
             android:id="@+id/delegate_toolbar"
@@ -49,7 +49,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="44dp"
                 android:paddingLeft="10dp"
-                android:paddingRight="10dp">
+                android:paddingRight="10dp"
+                tools:ignore="UselessParent">
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/delegate_home_location"
@@ -66,7 +67,8 @@
                     android:gravity="center"
                     android:maxLines="1"
                     android:textColor="@color/black"
-                    android:textSize="15sp" />
+                    android:textSize="15sp"
+                    tools:ignore="RelativeOverlap" />
 
                 <cn.bingoogolapple.badgeview.BGABadgeImageView
                     android:id="@+id/delegate_home_news"

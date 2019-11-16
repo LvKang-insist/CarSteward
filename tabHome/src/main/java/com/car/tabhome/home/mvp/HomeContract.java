@@ -2,6 +2,8 @@ package com.car.tabhome.home.mvp;
 
 import com.car.core.mvp.presenter.IBasePresenter;
 import com.car.core.mvp.view.IBaseView;
+import com.car.core.utils.bean.DataBean;
+import com.car.core.utils.bean.GetStylesBean;
 
 import java.util.WeakHashMap;
 
@@ -15,12 +17,35 @@ import java.util.WeakHashMap;
 public interface HomeContract {
 
     interface IHomeView extends IBaseView {
+        /**
+         * index
+         *
+         * @param result
+         */
         void onResultIndex(String result);
 
+        /**
+         * citycode
+         *
+         * @param result
+         */
         void onResultCityCode(String result);
+
+        /**
+         * styles
+         *
+         * @param bean
+         */
+        void onResultStyles(GetStylesBean bean);
     }
 
     interface IHomePersenter extends IBasePresenter<IHomeView> {
+
+        /**
+         * index
+         *
+         * @param map
+         */
         void onRequestIndex(WeakHashMap map);
 
         /**
@@ -29,6 +54,11 @@ public interface HomeContract {
          * @param map
          */
         void onRequestICityCode(WeakHashMap map);
+
+        /**
+         * index
+         */
+         void onResultIStyles();
 
     }
 

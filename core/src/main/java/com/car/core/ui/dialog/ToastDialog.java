@@ -10,7 +10,8 @@ import com.car.core.ui.view.ProgressView;
 
 
 /**
- * Created by Administrator on 2019/10/9.
+ * @author 345
+ * @date 2019/10/9
  */
 
 public class ToastDialog extends BaseFragDialog {

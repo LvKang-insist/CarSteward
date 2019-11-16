@@ -102,7 +102,5 @@ dependencies {
 
     //Banner
     api 'com.bigkoo:ConvenientBanner:2.1.4'
-    //阿里 AndFox
-    api 'com.alipay.euler:andfix:0.5.0@aar'
 
 }

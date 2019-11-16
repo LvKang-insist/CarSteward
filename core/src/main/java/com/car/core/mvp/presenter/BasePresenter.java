@@ -10,6 +10,7 @@ import com.car.core.latte.Latte;
 import com.car.core.mvp.model.BaseModel;
 import com.car.core.mvp.view.IBaseView;
 import com.elvishew.xlog.XLog;
+import com.google.gson.Gson;
 
 import java.lang.ref.WeakReference;
 import java.lang.reflect.InvocationHandler;
@@ -31,6 +32,8 @@ public abstract class BasePresenter<V extends IBaseView, M extends BaseModel>
     private M modelRef;
 
     private int retryCount = 0;
+
+    public static Gson gson = new Gson();
 
     /**
      * 获取 M 层对象

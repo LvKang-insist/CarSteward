@@ -13,9 +13,12 @@ import com.amap.api.location.AMapLocation;
 import com.car.core.api.BaseUrl;
 import com.car.core.delegate.BottomItemDelegate;
 import com.car.core.mvp.factory.CreatePresenter;
+import com.car.core.utils.bean.DataBean;
+import com.car.core.utils.bean.GetStylesBean;
 import com.car.core.utils.bean.IndexBean;
 import com.car.core.utils.map.AMapUtils;
 import com.car.core.utils.storage.CarPreference;
+import com.car.core.utils.util.GlideUtil;
 import com.car.core.utils.util.RequestParam;
 import com.car.tabhome.home.adapter.HomeConverter;
 import com.car.tabhome.home.adapter.HomeRvAdapter;
@@ -62,13 +65,17 @@ public class HomeDelegate extends BottomItemDelegate<HomePersenterImpl>
     }
 
     @Override
+    public int getToolbar() {
+        return R.id.delegate_toolbar;
+    }
+
+    @Override
     public void bindView(View view) {
         initLocation();
         mConverter = new HomeConverter();
         mAdapter = new HomeRvAdapter(mConverter.convert(), this);
         mRecycler.setLayoutManager(new GridLayoutManager(getContext(), 20));
         mRecycler.setAdapter(mAdapter);
-
         mLocation.setText(CarPreference.getCity());
     }
 
@@ -89,8 +96,8 @@ public class HomeDelegate extends BottomItemDelegate<HomePersenterImpl>
                 //市级名称
                 .addParam("areaName2", "西安")
                 .build());
+        getPresenter().onResultIStyles();
     }
-
 
     /**
      * 定位结果回调
@@ -101,7 +108,6 @@ public class HomeDelegate extends BottomItemDelegate<HomePersenterImpl>
     public void onCallLocationSuc(AMapLocation location) {
         aMapUtils.stopMapLocation();
         mLocation.setText(location.getCity());
-        XLog.e(" -------" + location.getCity());
         getPresenter().onRequestICityCode(RequestParam.builder()
                 .addParam("areaName1", location.getProvider())
                 .addParam("areaName2", location.getCity()).build());
@@ -113,6 +119,7 @@ public class HomeDelegate extends BottomItemDelegate<HomePersenterImpl>
     @Override
     public void onResultIndex(String result) {
         IndexBean bean = gson.fromJson(result, IndexBean.class);
+
         if (bean.getStatus() == 1) {
             if (!bean.getMsgCount().isEmpty() && Integer.parseInt(bean.getMsgCount()) > 0) {
                 mNews.showTextBadge(bean.getMsgCount());
@@ -133,4 +140,12 @@ public class HomeDelegate extends BottomItemDelegate<HomePersenterImpl>
     public void onResultCityCode(String result) {
         XLog.json(result);
     }
+
+    @Override
+    public void onResultStyles(GetStylesBean bean) {
+        GlideUtil.setImage(BaseUrl.BASE_URL + bean.getData().getBackgroundImg(), mImage);
+        mConverter.addStyle(bean);
+        mAdapter.notifyDataSetChanged();
+    }
+
 }
