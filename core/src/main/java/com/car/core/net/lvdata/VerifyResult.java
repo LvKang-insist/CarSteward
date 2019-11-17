@@ -54,8 +54,6 @@ public class VerifyResult {
             e.printStackTrace();
         } catch (InstantiationException e) {
             e.printStackTrace();
-        } finally {
-            Latte.stopLoading();
         }
     }
 }

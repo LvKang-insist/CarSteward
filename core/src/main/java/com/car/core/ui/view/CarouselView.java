@@ -35,8 +35,6 @@ public class CarouselView extends ViewSwitcher {
     private MyHandler myHandler;
     private ArrayList listString;
 
-    @IdRes
-    private int id;
 
     public CarouselView(Context context) {
         this(context, null);
@@ -54,20 +52,6 @@ public class CarouselView extends ViewSwitcher {
     private void initData() {
         listString = new ArrayList<>();
         myHandler = new MyHandler(this);
-    }
-
-    /**
-     * 给viewSwitch添加显示的view，可以自由设置，外部调用
-     *
-     * @param layoutId 自定义view的布局id
-     */
-    public void addView(final int layoutId) {
-        setFactory(new ViewFactory() {
-            @Override
-            public View makeView() {
-                return LayoutInflater.from(getContext()).inflate(layoutId, null);
-            }
-        });
     }
 
     /**
@@ -93,7 +77,6 @@ public class CarouselView extends ViewSwitcher {
         listString.clear();
         listString.addAll(mList);
         showNextView();
-        //startLooping();
     }
 
     /**
@@ -126,10 +109,6 @@ public class CarouselView extends ViewSwitcher {
         myHandler.removeMessages(0);
     }
 
-    public void setChildId(int id) {
-        this.id = id;
-    }
-
     /**
      * 在当前view上设置数据
      *
@@ -140,13 +119,9 @@ public class CarouselView extends ViewSwitcher {
         final int position = mCutItem + 1;
         AppCompatTextView textView = (AppCompatTextView) view;
         textView.setText(text);
-        textView.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (null != onClickItemListener) {
-                    onClickItemListener.onClick(mCutItem);
-                }
-                //Toast.makeText(getContext(), "你点击了第" + position + "条广告", Toast.LENGTH_SHORT).show();
+        textView.setOnClickListener(v -> {
+            if (null != onClickItemListener) {
+                onClickItemListener.onClick(mCutItem);
             }
         });
     }
@@ -168,8 +143,13 @@ public class CarouselView extends ViewSwitcher {
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             CarouselView mView = (CarouselView) this.mRef.get();
-            mView.showNextView();//展示下一条广告，会调用shownext方法展示下一条广告
-            mView.startLooping();//启动轮播，间隔后展示下一条
+            if (mView != null) {
+                mView.showNextView();//展示下一条广告，会调用shownext方法展示下一条广告
+                mView.startLooping();//启动轮播，间隔后展示下一条
+            } else {
+                //如果 mView 为空，表示当前 mView 被回收，清除 handler中的所有任务
+                removeCallbacksAndMessages(null);
+            }
         }
     }
 
@@ -179,9 +159,19 @@ public class CarouselView extends ViewSwitcher {
      * 定义一个接口回调
      */
     interface OnClickItemListener {
+        /**
+         * 回调方法
+         *
+         * @param position 位置
+         */
         void onClick(int position);
     }
 
+    /**
+     * 接口
+     *
+     * @param onClickListener
+     */
     public void setOnClickListener(OnClickItemListener onClickListener) {
         this.onClickItemListener = onClickListener;
     }

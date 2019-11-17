@@ -233,7 +233,7 @@ public class MineDelegate extends BottomItemDelegate<MinePresenterImpl>
     @Override
     public void setGvTwo(List<TextImageBean> list) {
         if (mTowAdapter == null) {
-            mTowAdapter = new GradViewTwoAdapter(list, getActivity(), R.layout.item_icon_tv);
+            mTowAdapter = new GradViewTwoAdapter(list, getActivity(), R.layout.item_bgab_tv);
             mGridViewTwo.setAdapter(mTowAdapter);
         } else {
             mTowAdapter.addData(list);
@@ -242,7 +242,7 @@ public class MineDelegate extends BottomItemDelegate<MinePresenterImpl>
 
     @Override
     public void setGvThree(List<TextImageBean> list) {
-        mThreeAdapter = new GradViewThreeAdapter(list, R.layout.item_icon_tv, this);
+        mThreeAdapter = new GradViewThreeAdapter(list, R.layout.item_bgab_tv, this);
         mGridViewThree.setAdapter(mThreeAdapter);
     }
 

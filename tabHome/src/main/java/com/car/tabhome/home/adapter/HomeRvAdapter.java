@@ -1,27 +1,24 @@
 package com.car.tabhome.home.adapter;
 
-import android.graphics.Color;
-import android.view.View;
-
 import androidx.recyclerview.widget.GridLayoutManager;
 
 import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.car.core.api.BaseUrl;
+import com.car.core.ui.banner.BannerCreator;
 import com.car.core.ui.recycler.MultipleFields;
 import com.car.core.ui.recycler.MultipleItemEntity;
 import com.car.core.ui.recycler.MultipleRecyclerAdapter;
 import com.car.core.ui.recycler.MultipleViewHolder;
 import com.car.core.ui.view.CarouselView;
+import com.car.core.utils.bean.GetStylesBean;
 import com.car.core.utils.bean.IndexBean;
 import com.car.core.utils.bean.TextImageBean;
 import com.car.core.utils.util.GlideUtil;
 import com.car.tabhome.HomeDelegate;
 import com.car.tabhome.HomeItemType;
 import com.car.tabhome.R;
-import com.elvishew.xlog.XLog;
 import com.hjq.toast.ToastUtils;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,7 +38,7 @@ public class HomeRvAdapter extends MultipleRecyclerAdapter {
         this.delegate = delegate;
         addItemType(HomeItemType.ITEM_HOME_ONE, R.layout.item_home_add_car);
         addItemType(HomeItemType.ITEM_HOME_TWO, R.layout.item_icon_tv);
-        addItemType(HomeItemType.ITEM_HOME_THREE, R.layout.item_banner_image);
+        addItemType(HomeItemType.ITEM_HOME_THREE, R.layout.item_banner);
         addItemType(HomeItemType.ITEM_HOME_FOUR, R.layout.item_icon_tv);
         addItemType(HomeItemType.ITEM_HOME_FIVE, R.layout.item_carouse_view);
     }
@@ -56,48 +53,46 @@ public class HomeRvAdapter extends MultipleRecyclerAdapter {
                             .setText(R.id.item_home_car_series, indexBean.getYearsTypeName())
                             .setText(R.id.item_home_add_live_car, "添加爱车");
                 }
-                String mPatchDir = delegate.getContext().getExternalCacheDir().getAbsolutePath() + "/apatch/";
-                File file = new File(mPatchDir);
-                if (!file.exists()) {
-                    XLog.e(mPatchDir + "：" + file.exists());
-                    boolean mkdir = file.mkdir();
-                }
-                holder.getView(R.id.item_home_car_series).setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        ToastUtils.show("修复 bug");
-
-                    }
-                });
-                holder.getView(R.id.item_home_add_live_car).setOnClickListener(v -> {
-                    bug();
-                });
                 break;
             case HomeItemType.ITEM_HOME_TWO:
                 TextImageBean bean = entity.getField(MultipleFields.OBJECT);
+                int color = entity.getField(MultipleFields.COLOR);
                 holder.setText(R.id.item_icon_tv_tv, bean.getTitle());
-                holder.getView(R.id.item_icon_tv_icon).setBackgroundColor(Color.RED);
-                holder.getView(R.id.mine_item_icon_tv).setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        ToastUtils.show("嘻嘻嘻");
-                    }
-                });
-                if (bean.getImage() != 0) {
+                if (color != 0) {
+                    holder.setTextColor(R.id.item_icon_tv_tv, color);
+                }
+                if (bean.getImage() != null && !bean.getImage().isEmpty()) {
                     GlideUtil.setImage(BaseUrl.BASE_URL + bean.getImage(), holder.getView(R.id.item_icon_tv_icon));
                 }
+                holder.getView(R.id.mine_item_icon_tv).setOnClickListener(v -> ToastUtils.show(bean.getTitle()));
                 break;
             case HomeItemType.ITEM_HOME_THREE:
-                ConvenientBanner banner = holder.getView(R.id.item_banner_image);
-                banner.setBackgroundResource(R.color.red);
+                List<GetStylesBean.DataBean.AdGallerysBean> adGallerys = entity.getField(MultipleFields.LIST);
+                ArrayList<String> image = new ArrayList<>();
+                if (adGallerys != null && adGallerys.size() > 0) {
+                    for (int i = 0; i < adGallerys.size(); i++) {
+                        image.add(BaseUrl.BASE_URL + adGallerys.get(i).getAdFile());
+                    }
+                } else {
+                    image.add(String.valueOf(R.drawable.back));
+                }
+                ConvenientBanner banner = holder.getView(R.id.item_banner);
+                BannerCreator.setDefault(banner, image, position -> {
+                    ToastUtils.show(adGallerys.get(position).getAdName());
+                });
                 break;
             case HomeItemType.ITEM_HOME_FOUR:
-                TextImageBean fBean = entity.getField(MultipleFields.OBJECT);
-                holder.setText(R.id.item_icon_tv_tv, fBean.getTitle());
-                holder.getView(R.id.item_icon_tv_icon).setBackgroundColor(Color.RED);
-                if (fBean.getImage() != 0) {
-                    GlideUtil.setImage(BaseUrl.BASE_URL + fBean.getImage(), holder.getView(R.id.item_icon_tv_icon));
+
+                TextImageBean fourBean = entity.getField(MultipleFields.OBJECT);
+                int tvColor = entity.getField(MultipleFields.COLOR);
+                holder.setText(R.id.item_icon_tv_tv, fourBean.getTitle());
+                if (tvColor != 0) {
+                    holder.setTextColor(R.id.item_icon_tv_tv, tvColor);
                 }
+                if (fourBean.getImage() != null && !fourBean.getImage().isEmpty()) {
+                    GlideUtil.setImage(BaseUrl.BASE_URL + fourBean.getImage(), holder.getView(R.id.item_icon_tv_icon));
+                }
+                holder.getView(R.id.mine_item_icon_tv).setOnClickListener(v -> ToastUtils.show(fourBean.getTitle()));
                 break;
             case HomeItemType.ITEM_HOME_FIVE:
                 IndexBean five_bean = entity.getField(MultipleFields.OBJECT);

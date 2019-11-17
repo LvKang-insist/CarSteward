@@ -11,29 +11,29 @@ import com.car.core.utils.strategy.BaseStrategySkip;
  * @description bean 类，实现了策略的业务逻辑：进行跳转
  */
 public class TextImageBean implements BaseStrategySkip {
-    private int image;
+    private String image;
     private String title;
     private int bga;
     private BaseMvpDelegate newDelegate;
 
-    public TextImageBean(int imageId, String title, BaseMvpDelegate newDelegate) {
+    public TextImageBean(String imageId, String title, BaseMvpDelegate newDelegate) {
         this.image = imageId;
         this.title = title;
         this.newDelegate = newDelegate;
     }
 
-    public TextImageBean(int image, String title, int bga, BaseMvpDelegate newDelegate) {
+    public TextImageBean(String image, String title, int bga, BaseMvpDelegate newDelegate) {
         this.image = image;
         this.title = title;
         this.bga = bga;
         this.newDelegate = newDelegate;
     }
 
-    public int getImage() {
+    public String getImage() {
         return image;
     }
 
-    public void setImage(int image) {
+    public void setImage(String image) {
         this.image = image;
     }
 

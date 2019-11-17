@@ -12,8 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.amap.api.location.AMapLocation;
 import com.car.core.api.BaseUrl;
 import com.car.core.delegate.BottomItemDelegate;
+import com.car.core.latte.Latte;
 import com.car.core.mvp.factory.CreatePresenter;
-import com.car.core.utils.bean.DataBean;
 import com.car.core.utils.bean.GetStylesBean;
 import com.car.core.utils.bean.IndexBean;
 import com.car.core.utils.map.AMapUtils;
@@ -89,6 +89,7 @@ public class HomeDelegate extends BottomItemDelegate<HomePersenterImpl>
 
     @Override
     public void onLazyInitView(@Nullable Bundle savedInstanceState) {
+        Latte.showLoading("");
         getPresenter().onRequestIndex(RequestParam.builder()
                 .addTokenId()
                 //省级名称
@@ -119,7 +120,6 @@ public class HomeDelegate extends BottomItemDelegate<HomePersenterImpl>
     @Override
     public void onResultIndex(String result) {
         IndexBean bean = gson.fromJson(result, IndexBean.class);
-
         if (bean.getStatus() == 1) {
             if (!bean.getMsgCount().isEmpty() && Integer.parseInt(bean.getMsgCount()) > 0) {
                 mNews.showTextBadge(bean.getMsgCount());
@@ -143,6 +143,7 @@ public class HomeDelegate extends BottomItemDelegate<HomePersenterImpl>
 
     @Override
     public void onResultStyles(GetStylesBean bean) {
+        Latte.stopLoading();
         GlideUtil.setImage(BaseUrl.BASE_URL + bean.getData().getBackgroundImg(), mImage);
         mConverter.addStyle(bean);
         mAdapter.notifyDataSetChanged();

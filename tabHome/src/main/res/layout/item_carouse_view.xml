@@ -1,9 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:background="#999999">
+    android:layout_marginTop="5dp"
+    android:background="@color/white"
+    android:orientation="horizontal"
+    android:paddingTop="5dp"
+    android:paddingBottom="5dp">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="1dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginRight="1dp"
+        android:layout_marginBottom="1dp"
+        android:padding="5dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/headline_image" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/headline_title_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:background="@drawable/oval_blue_back"
+        android:paddingLeft="10dp"
+        android:paddingTop="3dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="3dp"
+        android:text="@string/heat"
+        android:textColor="#0096fb"
+        android:textSize="15sp" />
 
     <com.car.core.ui.view.CarouselView
         android:id="@+id/item_carouse_view"
@@ -13,13 +42,13 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:textSize="20sp" />
+            android:textSize="15sp" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:textSize="20sp" />
+            android:textSize="15sp" />
 
     </com.car.core.ui.view.CarouselView>
 
-</LinearLayout>
+</androidx.appcompat.widget.LinearLayoutCompat>

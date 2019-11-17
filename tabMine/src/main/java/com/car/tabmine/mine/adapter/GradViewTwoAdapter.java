@@ -31,12 +31,12 @@ public class GradViewTwoAdapter extends CarBaseAdapter<TextImageBean> {
     @Override
     public void setData(ViewHolder viewHolder, int position) {
         TextImageBean textImageBean = list.get(position);
-        BGABadgeImageView image = (BGABadgeImageView) viewHolder.findViewById(R.id.item_icon_tv_icon);
-        image.setImageResource(textImageBean.getImage());
+        BGABadgeImageView image = (BGABadgeImageView) viewHolder.findViewById(R.id.item_bgab_tv_icon);
+        image.setImageResource(Integer.valueOf(textImageBean.getImage()));
         if (textImageBean.getBga() > 0) {
             image.showTextBadge(String.valueOf(textImageBean.getBga()));
         }
-        ((AppCompatTextView) viewHolder.findViewById(R.id.item_icon_tv_tv))
+        ((AppCompatTextView) viewHolder.findViewById(R.id.item_bgab_tv_tv))
                 .setText(textImageBean.getTitle());
     }
 

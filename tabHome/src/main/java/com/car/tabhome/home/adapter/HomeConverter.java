@@ -13,6 +13,7 @@ import com.car.tabhome.HomeItemType;
 import com.elvishew.xlog.XLog;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author 345 QQ:1831712732
@@ -37,7 +38,8 @@ public class HomeConverter extends DataConverter {
             MultipleItemEntity tab = MultipleItemEntity.builder()
                     .setField(MultipleFields.ITEM_TYPE, HomeItemType.ITEM_HOME_TWO)
                     .setField(MultipleFields.SPAN_SIZE, 5)
-                    .setField(MultipleFields.OBJECT, new TextImageBean(0, TextImage.two[i], null))
+                    .setField(MultipleFields.COLOR, 0)
+                    .setField(MultipleFields.OBJECT, new TextImageBean(null, TextImage.two[i], null))
                     .build();
             ENTITLES.add(tab);
         }
@@ -48,25 +50,12 @@ public class HomeConverter extends DataConverter {
                 .build();
         ENTITLES.add(banner);
 
-        MultipleItemEntity banner1 = MultipleItemEntity.builder()
-                .setField(MultipleFields.ITEM_TYPE, HomeItemType.ITEM_HOME_THREE)
-                .setField(MultipleFields.SPAN_SIZE, 20)
-                .setField(MultipleFields.OBJECT, null)
-                .build();
-        ENTITLES.add(banner1);
-
-        MultipleItemEntity banner2 = MultipleItemEntity.builder()
-                .setField(MultipleFields.ITEM_TYPE, HomeItemType.ITEM_HOME_THREE)
-                .setField(MultipleFields.SPAN_SIZE, 20)
-                .setField(MultipleFields.OBJECT, null)
-                .build();
-        ENTITLES.add(banner2);
-
         for (int i = 0; i < 10; i++) {
             MultipleItemEntity tab = MultipleItemEntity.builder()
                     .setField(MultipleFields.ITEM_TYPE, HomeItemType.ITEM_HOME_FOUR)
                     .setField(MultipleFields.SPAN_SIZE, 4)
-                    .setField(MultipleFields.OBJECT, new TextImageBean(0, TextImage.four[i], null))
+                    .setField(MultipleFields.COLOR, 0)
+                    .setField(MultipleFields.OBJECT, new TextImageBean(null, TextImage.four[i], null))
                     .build();
             ENTITLES.add(tab);
         }
@@ -97,12 +86,34 @@ public class HomeConverter extends DataConverter {
         int end = getEnd(HomeItemType.ITEM_HOME_THREE);
         if (data.getFontColor() != null && !data.getFontColor().isEmpty()) {
             int color = Color.parseColor("#" + data.getFontColor());
-            for (int i = pos; i < end; i++) {
-                ENTITLES.get(i).setField(MultipleFields.COLOR, color);
-            }
+            String[] img = new String[]{data.getWashcarImg(), data.getWashcarImg(),
+                    data.getMaintainImg(), data.getArbImg()};
+            setData(color, img, pos, end);
+
+            pos = getPos(HomeItemType.ITEM_HOME_FOUR);
+            end = getEnd(HomeItemType.ITEM_HOME_FIVE);
+            String[] image = new String[]{data.getCheapCarImg(), data.getUsedCarImg(),
+                    data.getChangeTireImg(), data.getChangeBottleImg(), data.getChangingGlassImg(),
+                    data.getRescueImg(), data.getViolationInquiryImg(), data.getValuationCarImg(),
+                    data.getDecorateImg(), data.getMoreImg()};
+            setData(color, image, pos, end);
         }
+        List<GetStylesBean.DataBean.AdGallerysBean> adGallerys = data.getAdGallerys();
+        pos = getPos(HomeItemType.ITEM_HOME_THREE);
+        ENTITLES.get(pos).setField(MultipleFields.LIST, adGallerys);
+
     }
 
+    private void setData(int color, String[] image, int pos, int end) {
+        XLog.e("pos" + pos + "------- end" + end);
+        int j = 0;
+        for (int i = pos; i < end; i++) {
+            ENTITLES.get(i).setField(MultipleFields.COLOR, color);
+            TextImageBean textImageBean = ENTITLES.get(i).getField(MultipleFields.OBJECT);
+            textImageBean.setImage(image[j]);
+            j++;
+        }
+    }
 
     private int getPos(int itemType) {
         for (int i = 0; i < ENTITLES.size(); i++) {
@@ -115,6 +126,6 @@ public class HomeConverter extends DataConverter {
     }
 
     private int getEnd(int itemType) {
-        return getPos(itemType) - 1;
+        return getPos(itemType) ;
     }
 }

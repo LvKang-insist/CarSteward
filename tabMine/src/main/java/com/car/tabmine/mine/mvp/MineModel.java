@@ -51,7 +51,7 @@ public class MineModel extends BaseModel {
                 ShopCartDelegate.create()};
 
         for (int i = 0; i < count.length; i++) {
-            textImageBeans.add(new TextImageBean(drawId[i], name[i], count[i], delegates[i]));
+            textImageBeans.add(new TextImageBean(String.valueOf(drawId[i]), name[i], count[i], delegates[i]));
         }
         return textImageBeans;
     }
@@ -66,7 +66,7 @@ public class MineModel extends BaseModel {
                 R.drawable.huiyuanrenwu, R.drawable.yaoqinghaoyou};
         List<TextImageBean> textImageBeans = new ArrayList<>();
         for (int i = 0; i < name.length; i++) {
-            textImageBeans.add(new TextImageBean(drawId[i], name[i], ShopCartDelegate.create()));
+            textImageBeans.add(new TextImageBean(String.valueOf(drawId[i]), name[i], ShopCartDelegate.create()));
         }
         return textImageBeans;
     }

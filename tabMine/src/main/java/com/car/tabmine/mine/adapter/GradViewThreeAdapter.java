@@ -1,14 +1,10 @@
 package com.car.tabmine.mine.adapter;
 
-import android.content.Context;
-import android.view.View;
-
 import androidx.appcompat.widget.AppCompatTextView;
 
 import com.car.core.mvp.view.BaseMvpDelegate;
 import com.car.core.ui.adapter.CarBaseAdapter;
 import com.car.core.ui.adapter.ViewHolder;
-import com.car.core.utils.strategy.BaseStrategySkip;
 import com.car.core.utils.strategy.BaseStrategySkipContext;
 import com.car.tabmine.R;
 import com.car.core.utils.bean.TextImageBean;
@@ -43,11 +39,11 @@ public class GradViewThreeAdapter extends CarBaseAdapter<TextImageBean> {
     @Override
     public void setData(ViewHolder viewHolder, int position) {
         TextImageBean textImageBean = list.get(position);
-        ((BGABadgeImageView) viewHolder.findViewById(R.id.item_icon_tv_icon))
-                .setImageResource(textImageBean.getImage());
-        ((AppCompatTextView) viewHolder.findViewById(R.id.item_icon_tv_tv))
+        ((BGABadgeImageView) viewHolder.findViewById(R.id.item_bgab_tv_icon))
+                .setImageResource(Integer.valueOf(textImageBean.getImage()));
+        ((AppCompatTextView) viewHolder.findViewById(R.id.item_bgab_tv_tv))
                 .setText(textImageBean.getTitle());
-        viewHolder.findViewById(R.id.mine_item_icon_tv).setOnClickListener(v -> {
+        viewHolder.findViewById(R.id.mine_item_bgab_tv).setOnClickListener(v -> {
             skipContext.setStrategySkip(list.get(position)).skip();
             ToastUtils.show(list.get(position).getTitle());
         });
