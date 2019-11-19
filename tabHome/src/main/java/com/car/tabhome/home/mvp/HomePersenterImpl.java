@@ -2,6 +2,8 @@ package com.car.tabhome.home.mvp;
 
 import androidx.lifecycle.Observer;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.car.core.api.Const;
 import com.car.core.mvp.presenter.BasePresenter;
 import com.car.core.utils.bean.DataBean;
@@ -40,7 +42,12 @@ public class HomePersenterImpl extends BasePresenter<HomeContract.IHomeView, Hom
     public void onRequestICityCode(WeakHashMap map) {
         String index = UrlParam.getParam(Const.API_USER_STORE, "getCityCode");
         getModel().request(index, map, getLifecycleOwner(), (Observer<String>) s -> {
-            getView().onResultCityCode(s);
+            JSONObject object = JSON.parseObject(s);
+            if ("1".equals(object.getString("status"))) {
+                getView().onResultCityCode(object.getString("data"));
+                return;
+            }
+            getView().onResultCityCode(null);
         });
     }
 

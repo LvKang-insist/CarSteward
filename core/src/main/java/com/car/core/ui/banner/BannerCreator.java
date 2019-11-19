@@ -14,12 +14,15 @@ import java.util.ArrayList;
  * @description
  */
 public class BannerCreator {
+
+
+
     public static void setDefault(ConvenientBanner<String> convenientBanner,
                                   ArrayList<String> banners,
-                                  OnItemClickListener clickListener){
+                                  OnItemClickListener clickListener) {
         convenientBanner
-                .setPages(new HolderCreate(),banners)
-//                .setPageIndicator(new int[]{R.drawable.dot_focus,R.drawable.dot_normal})
+                .setPages(new HolderCreate(), banners)
+                .setPageIndicator(new int[]{R.drawable.dot_focus, R.drawable.dot_normal})
                 .setPageIndicatorAlign(ConvenientBanner.PageIndicatorAlign.CENTER_HORIZONTAL)
                 .setOnItemClickListener(clickListener)
                 .startTurning(3000)

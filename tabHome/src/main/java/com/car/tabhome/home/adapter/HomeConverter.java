@@ -2,6 +2,7 @@ package com.car.tabhome.home.adapter;
 
 import android.graphics.Color;
 
+import com.car.core.net.callback.IFailure;
 import com.car.core.ui.recycler.DataConverter;
 import com.car.core.ui.recycler.MultipleFields;
 import com.car.core.ui.recycler.MultipleItemEntity;
@@ -10,7 +11,6 @@ import com.car.core.utils.bean.GetStylesBean;
 import com.car.core.utils.bean.IndexBean;
 import com.car.core.utils.bean.TextImageBean;
 import com.car.tabhome.HomeItemType;
-import com.elvishew.xlog.XLog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +23,11 @@ import java.util.List;
  * @description
  */
 public class HomeConverter extends DataConverter {
+
+    /**
+     * 初始化 banner 内容
+     */
+    List<GetStylesBean.DataBean.AdGallerysBean> adGallerys;
 
     @Override
     public ArrayList<MultipleItemEntity> convert() {
@@ -43,10 +48,13 @@ public class HomeConverter extends DataConverter {
                     .build();
             ENTITLES.add(tab);
         }
+        if (adGallerys == null) {
+            adGallerys = new ArrayList<>();
+        }
         MultipleItemEntity banner = MultipleItemEntity.builder()
                 .setField(MultipleFields.ITEM_TYPE, HomeItemType.ITEM_HOME_THREE)
                 .setField(MultipleFields.SPAN_SIZE, 20)
-                .setField(MultipleFields.OBJECT, null)
+                .setField(MultipleFields.OBJECT, adGallerys)
                 .build();
         ENTITLES.add(banner);
 
@@ -77,7 +85,6 @@ public class HomeConverter extends DataConverter {
         pos = getPos(HomeItemType.ITEM_HOME_FIVE);
         ENTITLES.get(pos)
                 .setField(MultipleFields.OBJECT, bean);
-        XLog.e(ENTITLES.size());
     }
 
     public void addStyle(GetStylesBean bean) {
@@ -98,14 +105,17 @@ public class HomeConverter extends DataConverter {
                     data.getDecorateImg(), data.getMoreImg()};
             setData(color, image, pos, end);
         }
-        List<GetStylesBean.DataBean.AdGallerysBean> adGallerys = data.getAdGallerys();
+        if (adGallerys != null) {
+            adGallerys.clear();
+            adGallerys.addAll(data.getAdGallerys());
+        } else {
+            adGallerys = data.getAdGallerys();
+        }
         pos = getPos(HomeItemType.ITEM_HOME_THREE);
         ENTITLES.get(pos).setField(MultipleFields.LIST, adGallerys);
-
     }
 
     private void setData(int color, String[] image, int pos, int end) {
-        XLog.e("pos" + pos + "------- end" + end);
         int j = 0;
         for (int i = pos; i < end; i++) {
             ENTITLES.get(i).setField(MultipleFields.COLOR, color);
@@ -126,6 +136,6 @@ public class HomeConverter extends DataConverter {
     }
 
     private int getEnd(int itemType) {
-        return getPos(itemType) ;
+        return getPos(itemType);
     }
 }

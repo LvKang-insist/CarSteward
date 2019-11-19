@@ -3,6 +3,7 @@ package com.car.tabhome;
 import android.os.Bundle;
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
@@ -26,6 +27,9 @@ import com.car.tabhome.home.mvp.HomeContract;
 import com.car.tabhome.home.mvp.HomePersenterImpl;
 import com.elvishew.xlog.XLog;
 import com.hjq.toast.ToastUtils;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 import butterknife.BindView;
 import cn.bingoogolapple.badgeview.BGABadgeImageView;
@@ -39,7 +43,7 @@ import cn.bingoogolapple.badgeview.BGABadgeImageView;
  */
 @CreatePresenter(HomePersenterImpl.class)
 public class HomeDelegate extends BottomItemDelegate<HomePersenterImpl>
-        implements HomeContract.IHomeView, AMapUtils.LocationCallBack {
+        implements HomeContract.IHomeView, AMapUtils.LocationCallBack, OnRefreshListener {
 
     @BindView(R2.id.delegate_home_location)
     AppCompatTextView mLocation = null;
@@ -49,9 +53,12 @@ public class HomeDelegate extends BottomItemDelegate<HomePersenterImpl>
     AppCompatImageView mImage = null;
     @BindView(R2.id.delegate_home_recycler)
     RecyclerView mRecycler = null;
+    @BindView(R2.id.delegate_home_refresh_layout)
+    SmartRefreshLayout mRefresh = null;
     private HomeConverter mConverter;
     private HomeRvAdapter mAdapter;
     private AMapUtils aMapUtils;
+    private boolean isRefresh = false;
 
     @Override
     public Object setLayout() {
@@ -72,11 +79,24 @@ public class HomeDelegate extends BottomItemDelegate<HomePersenterImpl>
     @Override
     public void bindView(View view) {
         initLocation();
+        setCity();
         mConverter = new HomeConverter();
         mAdapter = new HomeRvAdapter(mConverter.convert(), this);
         mRecycler.setLayoutManager(new GridLayoutManager(getContext(), 20));
         mRecycler.setAdapter(mAdapter);
-        mLocation.setText(CarPreference.getCity());
+        mRefresh.setOnRefreshListener(this);
+    }
+
+    /**
+     * 设置当前位置
+     */
+    private void setCity() {
+        if (CarPreference.getCity() != null) {
+            mLocation.setText(CarPreference.getCity());
+        } else {
+            ToastUtils.show("使用默认位置");
+            mLocation.setText(BaseUrl.DEFAULTCITY);
+        }
     }
 
     /**
@@ -90,13 +110,7 @@ public class HomeDelegate extends BottomItemDelegate<HomePersenterImpl>
     @Override
     public void onLazyInitView(@Nullable Bundle savedInstanceState) {
         Latte.showLoading("");
-        getPresenter().onRequestIndex(RequestParam.builder()
-                .addTokenId()
-                //省级名称
-                .addParam("areaName1", "陕西省")
-                //市级名称
-                .addParam("areaName2", "西安")
-                .build());
+        requestIndex(CarPreference.getAreaId());
         getPresenter().onResultIStyles();
     }
 
@@ -108,17 +122,30 @@ public class HomeDelegate extends BottomItemDelegate<HomePersenterImpl>
     @Override
     public void onCallLocationSuc(AMapLocation location) {
         aMapUtils.stopMapLocation();
-        mLocation.setText(location.getCity());
         getPresenter().onRequestICityCode(RequestParam.builder()
-                .addParam("areaName1", location.getProvider())
+                .addParam("areaName1", location.getProvince())
                 .addParam("areaName2", location.getCity()).build());
         //保存经纬度
         CarPreference.putLongitude(String.valueOf(location.getLongitude()));
         CarPreference.putLatitude(String.valueOf(location.getLatitude()));
     }
 
+    /**
+     * 刷新回调
+     *
+     * @param refreshLayout
+     */
+    @Override
+    public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+        isRefresh = true;
+        requestIndex(CarPreference.getAreaId());
+    }
+
     @Override
     public void onResultIndex(String result) {
+        if (isRefresh) {
+            mRefresh.finishRefresh();
+        }
         IndexBean bean = gson.fromJson(result, IndexBean.class);
         if (bean.getStatus() == 1) {
             if (!bean.getMsgCount().isEmpty() && Integer.parseInt(bean.getMsgCount()) > 0) {
@@ -137,8 +164,27 @@ public class HomeDelegate extends BottomItemDelegate<HomePersenterImpl>
     }
 
     @Override
-    public void onResultCityCode(String result) {
-        XLog.json(result);
+    public void onResultCityCode(String cityCode) {
+        if (cityCode == null) {
+            requestIndex(BaseUrl.DEFAULTCITYAREAID);
+            return;
+        }
+        //位置发生变化
+        if (CarPreference.getAreaId() != null &&
+                !CarPreference.getAreaId().equals(cityCode)) {
+            ToastUtils.show("当前位置发生变化，正在切换位置");
+            CarPreference.putAreaId(cityCode);
+            CarPreference.putCity(mLocation.getText().toString());
+            setCity();
+            requestIndex(cityCode);
+        }
+    }
+
+    public void requestIndex(String areaid) {
+        getPresenter().onRequestIndex(RequestParam.builder()
+                .addTokenId()
+                .addParam("areaId2", areaid)
+                .build());
     }
 
     @Override
@@ -148,5 +194,6 @@ public class HomeDelegate extends BottomItemDelegate<HomePersenterImpl>
         mConverter.addStyle(bean);
         mAdapter.notifyDataSetChanged();
     }
+
 
 }

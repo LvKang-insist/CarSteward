@@ -1,10 +1,18 @@
 package com.car.tabhome.home.adapter;
 
+import android.view.View;
+import android.widget.Toast;
+
 import androidx.recyclerview.widget.GridLayoutManager;
 
 import com.bigkoo.convenientbanner.ConvenientBanner;
+import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
+import com.bigkoo.convenientbanner.holder.Holder;
+import com.bigkoo.convenientbanner.listener.OnItemClickListener;
 import com.car.core.api.BaseUrl;
 import com.car.core.ui.banner.BannerCreator;
+import com.car.core.ui.banner.HolderCreate;
+import com.car.core.ui.banner.ImageHolder;
 import com.car.core.ui.recycler.MultipleFields;
 import com.car.core.ui.recycler.MultipleItemEntity;
 import com.car.core.ui.recycler.MultipleRecyclerAdapter;
@@ -17,6 +25,7 @@ import com.car.core.utils.util.GlideUtil;
 import com.car.tabhome.HomeDelegate;
 import com.car.tabhome.HomeItemType;
 import com.car.tabhome.R;
+import com.elvishew.xlog.XLog;
 import com.hjq.toast.ToastUtils;
 
 import java.util.ArrayList;
@@ -32,6 +41,7 @@ import java.util.List;
 public class HomeRvAdapter extends MultipleRecyclerAdapter {
 
     private HomeDelegate delegate;
+    private boolean isBanner = false;
 
     public HomeRvAdapter(List<MultipleItemEntity> data, HomeDelegate delegate) {
         super(data);
@@ -73,16 +83,22 @@ public class HomeRvAdapter extends MultipleRecyclerAdapter {
                     for (int i = 0; i < adGallerys.size(); i++) {
                         image.add(BaseUrl.BASE_URL + adGallerys.get(i).getAdFile());
                     }
-                } else {
-                    image.add(String.valueOf(R.drawable.back));
                 }
                 ConvenientBanner banner = holder.getView(R.id.item_banner);
+                if (image.size() == 0) {
+                    return;
+                }
+//                if (isBanner) {
+//                    banner.notifyDataSetChanged();
+//                    return;
+//                }
                 BannerCreator.setDefault(banner, image, position -> {
-                    ToastUtils.show(adGallerys.get(position).getAdName());
+
                 });
+                isBanner = true;
+
                 break;
             case HomeItemType.ITEM_HOME_FOUR:
-
                 TextImageBean fourBean = entity.getField(MultipleFields.OBJECT);
                 int tvColor = entity.getField(MultipleFields.COLOR);
                 holder.setText(R.id.item_icon_tv_tv, fourBean.getTitle());

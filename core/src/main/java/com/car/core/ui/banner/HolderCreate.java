@@ -13,7 +13,7 @@ import com.car.core.R;
  * @time 2019/11/11 21:04
  * @description
  */
-class HolderCreate implements CBViewHolderCreator {
+public class HolderCreate implements CBViewHolderCreator {
     @Override
     public Holder createHolder(View itemView) {
         return new ImageHolder(itemView);

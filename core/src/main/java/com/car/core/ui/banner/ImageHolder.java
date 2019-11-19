@@ -15,7 +15,7 @@ import com.car.core.utils.util.GlideUtil;
  * @time 2019/11/11 21:05
  * @description
  */
-class ImageHolder extends Holder<String> {
+public class ImageHolder extends Holder<String> {
 
     AppCompatImageView image;
 

@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:layout_gravity="center"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp" />
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>

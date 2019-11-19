@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.car.core.api.BaseUrl;
+import com.car.core.api.Const;
 import com.car.core.latte.Latte;
 
 /**
@@ -499,5 +500,25 @@ public class CarPreference {
      */
     public static String getLatitude(Context context) {
         return getAppPreference(USER).getString("latitude", "34.259432");
+    }
+
+    /**
+     * 保存城市代码
+     *
+     * @param areaId
+     */
+    public static void putAreaId(String areaId) {
+        getAppPreferenceEdit(USER)
+                .putString("areaId", areaId)
+                .commit();
+    }
+
+    /**
+     * 获取城市代码
+     *
+     * @return 默认西安
+     */
+    public static String getAreaId() {
+        return getAppPreference(USER).getString("areaId", BaseUrl.DEFAULTCITYAREAID);
     }
 }
