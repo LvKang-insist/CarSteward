@@ -32,6 +32,10 @@
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <!--  - - - - - - - - - - - - - - 定位权限结束 - - - - - - - - - - - - - - - - -->
 
+
+    <!-- - - - - - - - - - - - - - -友盟统计所需权限- - - - - - - - - - - - - - -  -->
+    <!-- - - - - - - - - - - 所需权限已在定位权限中出现，到此结束 - - - - - - - - - -->
+
     <application
         android:name=".application.ExampleApplication"
         android:allowBackup="true"
@@ -67,8 +71,19 @@
         <meta-data
             android:name="com.amap.api.v2.apikey"
             android:value="d30aa7cb4d1a37c91b8feb9230d22d7b" />
+
         <!--        定位 Service-->
         <service android:name="com.amap.api.location.APSService" />
+
+        <!--value的值填写你在友盟后台申请的应用Appkey-->
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="5dd53d004ca357c1fc000ed1" />
+
+        <!--value的值填写渠道名称，例如yingyongbao。这里设置动态渠道名称变量-->
+        <meta-data
+            android:name="UMENG_CHANNEL"
+            android:value="${UMENG_CHANNEL_VALUE}" />
     </application>
 
 </manifest>

@@ -63,7 +63,7 @@ public class MallDelegate extends BottomItemDelegate<DefaultPresenterImpl>
         }
         getPresenter().request(Const.API_MALL + UrlParam.getParam("getGoodsList"),
                 RequestParam.builder()
-                        .addParam("p", "1")
+                        .addParam("currPage", "1")
                         .addParam("keyWords", content)
                         .addParam("goodsSrc", "1").build());
         isSearch = true;
@@ -145,7 +145,7 @@ public class MallDelegate extends BottomItemDelegate<DefaultPresenterImpl>
         getPresenter().request(Const.API_MALL + UrlParam.getParam("getGoodsList"),
                 RequestParam.builder()
                         //当前页数 1
-                        .addParam("p", page)
+                        .addParam("currPage", page)
                         //0 积分，1 自营
                         .addParam("goodsSrc", "1").build());
     }

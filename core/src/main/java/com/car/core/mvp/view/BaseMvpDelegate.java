@@ -16,6 +16,8 @@ import com.car.core.mvp.presenter.IBasePresenter;
 import com.car.core.utils.dimen.SetToolBar;
 import com.google.gson.Gson;
 import com.gyf.immersionbar.ImmersionBar;
+import com.hjq.toast.ToastUtils;
+import com.umeng.analytics.MobclickAgent;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -131,6 +133,18 @@ public abstract class BaseMvpDelegate<P extends IBasePresenter> extends Permissi
         }
     }
 
+    @Override
+    public void onSupportInvisible() {
+        super.onSupportInvisible();
+        MobclickAgent.onPageStart(this.getClass().getName());
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        MobclickAgent.onPageEnd(this.getClass().getName());
+    }
+
     /**
      * 获取 View
      *
@@ -163,7 +177,7 @@ public abstract class BaseMvpDelegate<P extends IBasePresenter> extends Permissi
         if (getToolView() instanceof Toolbar) {
             setBack(((Toolbar) getToolView()));
             SetToolBar.setToolBar(getToolView());
-        }else if (getToolView() instanceof  ViewGroup){
+        } else if (getToolView() instanceof ViewGroup) {
             SetToolBar.setToolBar(getToolView());
         }
 

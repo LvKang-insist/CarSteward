@@ -74,7 +74,7 @@ public class LiveDataCallAdapterFactory extends CallAdapter.Factory {
 
                             @Override
                             public void onFailure(Call<R> call, Throwable t) {
-                                XLog.e("Request onFailure : ", t.getMessage());
+                                XLog.e("Request onFailure : " + t.getMessage());
                                 postValue(null);
                             }
                         });
@@ -122,7 +122,7 @@ public class LiveDataCallAdapterFactory extends CallAdapter.Factory {
 
                             @Override
                             public void onFailure(Call<R> call, Throwable t) {
-                                XLog.e("Request onFailure : ", t.getMessage());
+                                XLog.e("Request onFailure : " + t.getMessage());
                                 postValue(null);
                                 Latte.stopLoading();
                             }

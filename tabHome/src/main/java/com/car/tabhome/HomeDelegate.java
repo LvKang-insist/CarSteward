@@ -68,7 +68,12 @@ public class HomeDelegate extends BottomItemDelegate<HomePersenterImpl>
     @Override
     public void onStart() {
         super.onStart();
-        startInitPermission();
+        //获取权限
+        startInitPermission(isResult -> {
+            if (isResult) {
+                initLocation();
+            }
+        });
     }
 
     @Override
@@ -78,7 +83,6 @@ public class HomeDelegate extends BottomItemDelegate<HomePersenterImpl>
 
     @Override
     public void bindView(View view) {
-        initLocation();
         setCity();
         mConverter = new HomeConverter();
         mAdapter = new HomeRvAdapter(mConverter.convert(), this);
@@ -121,6 +125,7 @@ public class HomeDelegate extends BottomItemDelegate<HomePersenterImpl>
      */
     @Override
     public void onCallLocationSuc(AMapLocation location) {
+        XLog.e("定位成功 当前位置 #" + location.getCity());
         aMapUtils.stopMapLocation();
         getPresenter().onRequestICityCode(RequestParam.builder()
                 .addParam("areaName1", location.getProvince())
@@ -139,6 +144,7 @@ public class HomeDelegate extends BottomItemDelegate<HomePersenterImpl>
     public void onRefresh(@NonNull RefreshLayout refreshLayout) {
         isRefresh = true;
         requestIndex(CarPreference.getAreaId());
+        getPresenter().onResultIStyles();
     }
 
     @Override
@@ -153,11 +159,8 @@ public class HomeDelegate extends BottomItemDelegate<HomePersenterImpl>
             } else {
                 mNews.hiddenBadge();
             }
-            if (bean.getBrandName() != null && !bean.getBrandName().isEmpty() &&
-                    bean.getYearsTypeName() != null && !bean.getYearsTypeName().isEmpty()) {
-                mConverter.add(bean);
-                mAdapter.notifyDataSetChanged();
-            }
+            mConverter.add(bean);
+            mAdapter.notifyDataSetChanged();
         } else {
             ToastUtils.show(bean.getMsg());
         }
@@ -194,6 +197,5 @@ public class HomeDelegate extends BottomItemDelegate<HomePersenterImpl>
         mConverter.addStyle(bean);
         mAdapter.notifyDataSetChanged();
     }
-
 
 }

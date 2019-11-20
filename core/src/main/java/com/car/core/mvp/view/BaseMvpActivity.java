@@ -12,6 +12,7 @@ import com.car.core.latte.Latte;
 import com.car.core.mvp.factory.PresenterFactoryImpl;
 import com.car.core.mvp.presenter.IBasePresenter;
 import com.gyf.immersionbar.ImmersionBar;
+import com.umeng.analytics.MobclickAgent;
 
 /**
  * @author 345 QQ:1831712732
@@ -30,8 +31,16 @@ public abstract class BaseMvpActivity<P extends IBasePresenter> extends BaseActi
 
     public P mPresenter;
 
+    /**
+     * 根 delegate
+     *
+     * @return
+     */
     public abstract BaseDelegate setRootDelegate();
 
+    /**
+     * 初始化
+     */
     public abstract void bindView();
 
     @Override
@@ -103,15 +112,22 @@ public abstract class BaseMvpActivity<P extends IBasePresenter> extends BaseActi
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        //友盟统计
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        //友盟统计
+        MobclickAgent.onPause(this);
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
     }
 
-    /*  @Override
-    public boolean onKeyUp(int keyCode, KeyEvent event) {
-        if (onBackPress != null && onBackPress.setBackPress()) {
-            return true;
-        }
-        return super.onKeyUp(keyCode, event);
-    }*/
 }

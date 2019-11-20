@@ -26,6 +26,7 @@ android {
         targetCompatibility = '1.8'
     }
 
+
 }
 
 dependencies {
@@ -103,4 +104,7 @@ dependencies {
     //Banner
     api 'com.bigkoo:ConvenientBanner:2.1.4'
 
+    //友盟基础组件库和统计SDK库依赖
+    api 'com.umeng.umsdk:analytics:8.0.0'
+    api 'com.umeng.umsdk:common:2.0.0'
 }

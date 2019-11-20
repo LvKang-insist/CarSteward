@@ -59,8 +59,8 @@ public class HomeRvAdapter extends MultipleRecyclerAdapter {
             case HomeItemType.ITEM_HOME_ONE:
                 IndexBean indexBean = entity.getField(MultipleFields.OBJECT);
                 if (indexBean != null) {
-                    holder.setText(R.id.item_home_car_brand, indexBean.getBrandName())
-                            .setText(R.id.item_home_car_series, indexBean.getYearsTypeName())
+                    holder.setText(R.id.item_home_car_brand, indexBean.getBrandName() != null ? indexBean.getBrandName() : "车辆品牌")
+                            .setText(R.id.item_home_car_series, indexBean.getYearsTypeName() != null ? indexBean.getYearsTypeName() : "车系")
                             .setText(R.id.item_home_add_live_car, "添加爱车");
                 }
                 break;
@@ -84,19 +84,14 @@ public class HomeRvAdapter extends MultipleRecyclerAdapter {
                         image.add(BaseUrl.BASE_URL + adGallerys.get(i).getAdFile());
                     }
                 }
-                ConvenientBanner banner = holder.getView(R.id.item_banner);
-                if (image.size() == 0) {
+                if (image.size() == 0 || isBanner) {
                     return;
                 }
-//                if (isBanner) {
-//                    banner.notifyDataSetChanged();
-//                    return;
-//                }
+                ConvenientBanner banner = holder.getView(R.id.item_banner);
                 BannerCreator.setDefault(banner, image, position -> {
-
+                    ToastUtils.show(adGallerys.get(position).getAdName());
                 });
                 isBanner = true;
-
                 break;
             case HomeItemType.ITEM_HOME_FOUR:
                 TextImageBean fourBean = entity.getField(MultipleFields.OBJECT);

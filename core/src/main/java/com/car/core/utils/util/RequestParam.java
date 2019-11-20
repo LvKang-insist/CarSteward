@@ -37,7 +37,9 @@ public class RequestParam {
         }
 
         public ParamBuilder addTokenId() {
-            param.put("tokenId", CarPreference.getTokenId());
+            if (CarPreference.getTokenId() != null) {
+                param.put("tokenId", CarPreference.getTokenId());
+            }
             return this;
         }
 

@@ -37,6 +37,17 @@ import permissions.dispatcher.RuntimePermissions;
 @RuntimePermissions
 public abstract class PermissionCheckerDelegate extends BaseDelegate {
 
+    public interface OnPsermissionReslut {
+        /**
+         * 权限是否成功获取
+         *
+         * @param isResult true 为成功
+         */
+        void onResult(boolean isResult);
+    }
+
+    private OnPsermissionReslut mResult;
+
     /**
      * 不是直接调用方法，他仅仅只是为了生成代码而存在的
      */
@@ -55,7 +66,9 @@ public abstract class PermissionCheckerDelegate extends BaseDelegate {
             Manifest.permission.WRITE_EXTERNAL_STORAGE,
             Manifest.permission.READ_PHONE_STATE})
     void initPermission() {
-
+        if (mResult != null) {
+            mResult.onResult(true);
+        }
     }
 
     @NeedsPermission({Manifest.permission.ACCESS_COARSE_LOCATION,
@@ -81,7 +94,8 @@ public abstract class PermissionCheckerDelegate extends BaseDelegate {
         builder.show();
     }
 
-    public void startInitPermission() {
+    public void startInitPermission(OnPsermissionReslut reslut) {
+        this.mResult = reslut;
         PermissionCheckerDelegatePermissionsDispatcher.initPermissionWithPermissionCheck(this);
     }
 
