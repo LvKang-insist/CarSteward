@@ -37,7 +37,7 @@
     <!-- - - - - - - - - - - 所需权限已在定位权限中出现，到此结束 - - - - - - - - - -->
 
     <application
-        android:name=".application.ExampleApplication"
+        android:name=".application.MyTinkerApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"

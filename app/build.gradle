@@ -1,5 +1,5 @@
 apply plugin: 'com.android.application'
-
+apply from: 'tinkerpatch.gradle'
 android {
 
     compileSdkVersion compile_sdk_version
@@ -42,4 +42,9 @@ android {
 dependencies {
     implementation project(path: ':core')
     implementation project(path: ':detegateManager')
+    annotationProcessor("com.tinkerpatch.tinker:tinker-android-anno:${TINKER_VERSION}") {
+        changing = true
+    }
+    compileOnly("com.tinkerpatch.tinker:tinker-android-anno:${TINKER_VERSION}") { changing = true }
+
 }

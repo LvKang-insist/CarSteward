@@ -1,5 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'com.jakewharton.butterknife'
+
+
 android {
 
     compileSdkVersion compile_sdk_version
@@ -107,4 +109,10 @@ dependencies {
     //友盟基础组件库和统计SDK库依赖
     api 'com.umeng.umsdk:analytics:8.0.0'
     api 'com.umeng.umsdk:common:2.0.0'
+
+    annotationProcessor("com.tinkerpatch.tinker:tinker-android-anno:${TINKER_VERSION}") {
+        changing = true
+    }
+    compileOnly("com.tinkerpatch.tinker:tinker-android-anno:${TINKER_VERSION}") { changing = true }
+    api("com.tinkerpatch.sdk:tinkerpatch-android-sdk:${TINKERPATCH_VERSION}") { changing = true }
 }

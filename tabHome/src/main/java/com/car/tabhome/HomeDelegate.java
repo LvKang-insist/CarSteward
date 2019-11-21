@@ -167,6 +167,12 @@ public class HomeDelegate extends BottomItemDelegate<HomePersenterImpl>
     }
 
     @Override
+    public void onSupportInvisible() {
+        super.onSupportInvisible();
+        ToastUtils.show("哈哈哈");
+    }
+
+    @Override
     public void onResultCityCode(String cityCode) {
         if (cityCode == null) {
             requestIndex(BaseUrl.DEFAULTCITYAREAID);

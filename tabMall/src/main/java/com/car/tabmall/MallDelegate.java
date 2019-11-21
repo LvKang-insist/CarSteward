@@ -28,6 +28,7 @@ import com.car.tabmall.mall.adapter.MallRvAdapter;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.elvishew.xlog.XLog;
 import com.hjq.toast.ToastUtils;
+import com.umeng.analytics.MobclickAgent;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -138,8 +139,9 @@ public class MallDelegate extends BottomItemDelegate<DefaultPresenterImpl>
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
         GetGoodsListBean.DataBean bean = this.adapter.getData().get(position).getField(MultipleFields.OBJECT);
         ToastUtils.show(bean.getGoodsName());
+        //第二个参数为点击 id
+        MobclickAgent.onEvent(getContext(), "shop");
     }
-
 
     private void getShop(String page) {
         getPresenter().request(Const.API_MALL + UrlParam.getParam("getGoodsList"),
