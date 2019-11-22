@@ -69,11 +69,11 @@ public class ExampleApplication extends ApplicationLike {
          * UMConfigure.init(this, "58edcfeb310c93091c000be2", "Umeng", UMConfigure.DEVICE_TYPE_PHONE, "1fe6a20054bcef865eeb0991ee84525b");
          * 我已经配置过，所以如下方式初始化
          */
-        UMConfigure.init(getApplication(), UMConfigure.DEVICE_TYPE_PHONE, "");
-        UMConfigure.setLogEnabled(true);
+//        UMConfigure.init(getApplication(), UMConfigure.DEVICE_TYPE_PHONE, "");
+//        UMConfigure.setLogEnabled(true);
 
         // 选用AUTO页面采集模式
-        MobclickAgent.setPageCollectionMode(MobclickAgent.PageMode.AUTO);
+//        MobclickAgent.setPageCollectionMode(MobclickAgent.PageMode.AUTO);
     }
 
 }

@@ -44,7 +44,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        tools:ignore="AllowBackup,GoogleAppIndexingWarning">
+        tools:ignore="AllowBackup,GoogleAppIndexingWarning"
+        tools:targetApi="donut">
 
         <activity
             android:name=".example.ExampleActivity"
@@ -75,15 +76,8 @@
         <!--        定位 Service-->
         <service android:name="com.amap.api.location.APSService" />
 
-        <!--value的值填写你在友盟后台申请的应用Appkey-->
-        <meta-data
-            android:name="UMENG_APPKEY"
-            android:value="5dd53d004ca357c1fc000ed1" />
 
-        <!--value的值填写渠道名称，例如yingyongbao。这里设置动态渠道名称变量-->
-        <meta-data
-            android:name="UMENG_CHANNEL"
-            android:value="${UMENG_CHANNEL_VALUE}" />
+
     </application>
 
 </manifest>

@@ -46,49 +46,7 @@ tinkerpatchSupport {
     baseProguardMappingFile = "${pathPrefix}/${name}-mapping.txt"
     baseResourceRFile = "${pathPrefix}/${name}-R.txt"
 
-    /**
-     *  若有编译多flavors需求, 可以参照： https://github.com/TinkerPatch/tinkerpatch-flavors-sample
-     *  注意: 除非你不同的flavor代码是不一样的,不然建议采用zip comment或者文件方式生成渠道信息（相关工具：walle 或者 packer-ng）
-     **/
-    productFlavors {
-        flavor {
-            flavorName = "wandoujia"
-            // 后台需要按照每个flavor的appVersion来建立独立的工程，并单独下发补丁
-            appVersion = "${tinkerpatchSupport.appVersion}_${flavorName}"
 
-            pathPrefix = "${bakPath}/${baseInfo}/${flavorName}${variantName}/"
-            name = "${project.name}-${flavorName}${variantName}"
-
-            baseApkFile = "${pathPrefix}/${name}.apk"
-            baseProguardMappingFile = "${pathPrefix}/${name}-mapping.txt"
-            baseResourceRFile = "${pathPrefix}/${name}-R.txt"
-        }
-
-        flavor {
-            flavorName = "xiaomi"
-            // 后台需要按照每个flavor的appVersion来建立独立的工程，并单独下发补丁
-            appVersion = "${tinkerpatchSupport.appVersion}_${flavorName}"
-
-            pathPrefix = "${bakPath}/${baseInfo}/${flavorName}${variantName}/"
-            name = "${project.name}-${flavorName}${variantName}"
-
-            baseApkFile = "${pathPrefix}/${name}.apk"
-            baseProguardMappingFile = "${pathPrefix}/${name}-mapping.txt"
-            baseResourceRFile = "${pathPrefix}/${name}-R.txt"
-        }
-        flavor {
-            flavorName = "yingyongbao"
-            // 后台需要按照每个flavor的appVersion来建立独立的工程，并单独下发补丁
-            appVersion = "${tinkerpatchSupport.appVersion}_${flavorName}"
-
-            pathPrefix = "${bakPath}/${baseInfo}/${flavorName}${variantName}/"
-            name = "${project.name}-${flavorName}${variantName}"
-
-            baseApkFile = "${pathPrefix}/${name}.apk"
-            baseProguardMappingFile = "${pathPrefix}/${name}-mapping.txt"
-            baseResourceRFile = "${pathPrefix}/${name}-R.txt"
-        }
-    }
 }
 
 /**

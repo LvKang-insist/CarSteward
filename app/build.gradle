@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply from: 'tinkerpatch.gradle'
+apply plugin: 'walle'
 android {
 
     compileSdkVersion compile_sdk_version
@@ -25,18 +26,17 @@ android {
         sourceCompatibility = '1.8'
         targetCompatibility = '1.8'
     }
-    /*配置渠道*/
-    productFlavors {
-        yingyongbao {
-            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "yingyongbao"]
-        }
-        wandoujia {
-            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "wandoujia"]
-        }
-        xiaomi {
-            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "xiaomi"]
-        }
+
+
+    walle {
+        // 指定渠道包的输出路径
+        apkOutputFolder = new File("${project.buildDir}/outputs/channels");
+        // 定制渠道包的APK的文件名称
+        apkFileNameFormat = '${appName}-${channel}-${buildType}-v${versionName}-${versionCode}.apk';
+        // 渠道配置文件
+        channelFile = new File("${project.getProjectDir()}/channel")
     }
+
 }
 
 dependencies {
@@ -46,5 +46,7 @@ dependencies {
         changing = true
     }
     compileOnly("com.tinkerpatch.tinker:tinker-android-anno:${TINKER_VERSION}") { changing = true }
+
+    api 'com.meituan.android.walle:library:1.1.6'
 
 }
