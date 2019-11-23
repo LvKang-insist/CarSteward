@@ -1,1 +1,2 @@
-include ':app', ':core', ':detegateManager', ':tabHome', ':tabShop', ':tabDiscover', ':tabMall', ':tabMine'
+include  ':app', ':core', ':detegateManager', ':tabHome', ':tabShop', ':tabDiscover', ':tabMall', ':tabMine'
+rootProject.name='CarSteward'

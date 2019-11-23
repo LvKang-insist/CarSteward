@@ -1,6 +1,5 @@
 apply plugin: 'com.android.library'
 apply plugin: 'com.jakewharton.butterknife'
-
 android {
 
     compileSdkVersion compile_sdk_version
@@ -16,21 +15,10 @@ android {
 
     }
 
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
-    }
-
-
-
     compileOptions {
         sourceCompatibility = '1.8'
         targetCompatibility = '1.8'
     }
-
-
 }
 
 dependencies {
@@ -112,6 +100,7 @@ dependencies {
     api 'com.umeng.umsdk:analytics:8.0.0'
     api 'com.umeng.umsdk:common:2.0.0'
 
-
+    //多渠道
+    api 'com.meituan.android.walle:library:1.1.6'
 
 }

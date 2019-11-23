@@ -36,8 +36,15 @@
     <!-- - - - - - - - - - - - - - -友盟统计所需权限- - - - - - - - - - - - - - -  -->
     <!-- - - - - - - - - - - 所需权限已在定位权限中出现，到此结束 - - - - - - - - - -->
 
+
+    <!-- - - - - - - - - - - - - - -bugly所需权限- - - - - - - - - - - - - - -  -->
+    <uses-permission
+        android:name="android.permission.READ_LOGS"
+        tools:ignore="ProtectedPermissions" />
+    <!-- - - - - - - - - - - 某些权限在上面出现，到此结束 - - - - - - - - - -->
+
     <application
-        android:name="com.car.carsteward.application.ExampleApplication"
+        android:name="com.car.carsteward.application.SampleApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -57,6 +64,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- Bugly升级SDK配置开始  -->
+        <activity
+            android:name="com.tencent.bugly.beta.ui.BetaActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize|locale"
+            android:theme="@android:style/Theme.Translucent" />
+        <!-- Bugly升级SDK配置结束-->
+
         <!--        内容提供者，在调用相机时用到-->
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -68,6 +83,7 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
+
         <!--        高德定位-->
         <meta-data
             android:name="com.amap.api.v2.apikey"
@@ -75,8 +91,6 @@
 
         <!--        定位 Service-->
         <service android:name="com.amap.api.location.APSService" />
-
-
 
     </application>
 

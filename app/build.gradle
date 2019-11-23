@@ -1,8 +1,7 @@
 apply plugin: 'com.android.application'
-apply from: 'tinkerpatch.gradle'
 apply plugin: 'walle'
+apply from: 'tinker-support.gradle'
 android {
-
     compileSdkVersion compile_sdk_version
     buildToolsVersion build_tools_version
 
@@ -16,52 +15,50 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         flavorDimensions "versionCode"
     }
-
-    compileOptions {
-        sourceCompatibility = '1.8'
-        targetCompatibility = '1.8'
-    }
-
     signingConfigs {
         config {
-            storeFile file('C:\\Users\\Administrator\\Desktop\\345\\Project\\CarSteward\\app\\CarSteward.jks')
+            storeFile file('F:\\Android\\Project\\CarSteward\\app\\CarSteward.jks')
             storePassword 'nulicarsteward'
             keyAlias = 'CarSteward'
             keyPassword 'nulicarsteward'
         }
     }
     buildTypes {
-        debug {
-            debuggable true
-        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.config
         }
     }
+    compileOptions {
+        sourceCompatibility = '1.8'
+        targetCompatibility = '1.8'
+    }
 
-}
-walle {
-    // 指定渠道包的输出路径
-    apkOutputFolder = new File("${project.buildDir}/outputs/channels");
-    // 定制渠道包的APK的文件名称
-    apkFileNameFormat = '${appName}-${channel}-${buildType}-v${versionName}-${versionCode}.apk';
-    // 渠道配置文件
-    channelFile = new File("${project.getProjectDir()}/channel")
+    walle {
+        // 指定渠道包的输出路径
+        apkOutputFolder = new File("${project.buildDir}/outputs/channels");
+        // 定制渠道包的APK的文件名称
+        apkFileNameFormat = '${appName}-${channel}-${buildType}-v${versionName}-${versionCode}.apk';
+        // 渠道配置文件
+        channelFile = new File("${project.getProjectDir()}/channel")
+    }
+    //bugly 需要用到
+    defaultConfig {
+        ndk {
+            //设置支持的SO库架构
+            abiFilters 'armeabi' //, 'x86', 'armeabi-v7a', 'x86_64', 'arm64-v8a'
+        }
+    }
 }
 
 dependencies {
     implementation project(path: ':core')
     implementation project(path: ':detegateManager')
 
-
-    implementation 'com.meituan.android.walle:library:1.1.6'
-
-    //tinker 依赖
-    implementation("com.tinkerpatch.sdk:tinkerpatch-android-sdk:${TINKERPATCH_VERSION}") { changing = true }
-
+    //bugly
+    implementation "com.android.support:multidex:1.0.3" // 多dex配置
+    implementation 'com.tencent.bugly:crashreport_upgrade:1.3.5'
+    implementation 'com.tencent.tinker:tinker-android-lib:1.9.6'
+    implementation 'com.tencent.bugly:nativecrashreport:3.7.1'
 }
-
-
-
