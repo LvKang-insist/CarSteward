@@ -16,7 +16,6 @@ import com.car.core.mvp.presenter.IBasePresenter;
 import com.car.core.utils.dimen.SetToolBar;
 import com.google.gson.Gson;
 import com.gyf.immersionbar.ImmersionBar;
-import com.hjq.toast.ToastUtils;
 import com.umeng.analytics.MobclickAgent;
 
 import org.greenrobot.eventbus.EventBus;

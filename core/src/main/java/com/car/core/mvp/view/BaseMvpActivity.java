@@ -2,9 +2,7 @@ package com.car.core.mvp.view;
 
 import android.os.Bundle;
 import android.widget.FrameLayout;
-
 import androidx.annotation.Nullable;
-
 import com.car.core.R;
 import com.car.core.activity.BaseActivity;
 import com.car.core.delegate.base.BaseDelegate;

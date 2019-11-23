@@ -39,7 +39,7 @@ public class BottomDelegate extends TabItemDelegate {
 
     @Override
     public int startDelegate() {
-        return 0;
+        return 1;
     }
 
     @Override

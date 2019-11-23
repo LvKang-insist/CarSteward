@@ -4,7 +4,7 @@ apply plugin: 'tinkerpatch-support'
  * TODO: 请按自己的需求修改为适应自己工程的参数
  */
 def bakPath = file("${buildDir}/bakApk/")
-def baseInfo = "app-1.0.0-1122-00-30-48"
+def baseInfo = "app-1.0.0-1123-16-59-33"
 def variantName = "release"
 
 /**
@@ -19,7 +19,7 @@ tinkerpatchSupport {
      需要你手动修改'tinker.sample.android.app'本示例的包名为你自己的包名, com.xxx前缀的包名不用修改
      **/
     tinkerEnable = true
-    reflectApplication = false
+    reflectApplication = true
     /**
      * 是否开启加固模式，只能在APK将要进行加固时使用，否则会patch失败。
      * 如果只在某个渠道使用了加固，可使用多flavors配置
@@ -31,7 +31,6 @@ tinkerpatchSupport {
      **/
     supportComponent = true
 
-
     autoBackupApkPath = "${bakPath}"
 
     appKey = "d6e477c37a46b97e"
@@ -41,12 +40,15 @@ tinkerpatchSupport {
 
     def pathPrefix = "${bakPath}/${baseInfo}/${variantName}/"
     def name = "${project.name}-${variantName}"
-    /** 基准包的文件路径**/
+
     baseApkFile = "${pathPrefix}/${name}.apk"
     baseProguardMappingFile = "${pathPrefix}/${name}-mapping.txt"
     baseResourceRFile = "${pathPrefix}/${name}-R.txt"
 
-
+    /**
+     *  若有编译多flavors需求, 可以参照： https://github.com/TinkerPatch/tinkerpatch-flavors-sample
+     *  注意: 除非你不同的flavor代码是不一样的,不然建议采用zip comment或者文件方式生成渠道信息（相关工具：walle 或者 packer-ng）
+     **/
 }
 
 /**
@@ -91,4 +93,3 @@ tinkerPatch {
         keepDexApply = false
     }
 }
-

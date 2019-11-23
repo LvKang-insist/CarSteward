@@ -5,12 +5,8 @@ import android.view.View;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatEditText;
-import androidx.appcompat.widget.AppCompatImageView;
-import androidx.appcompat.widget.LinearLayoutCompat;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
 
 import com.car.core.api.Const;
 import com.car.core.delegate.BottomItemDelegate;
@@ -26,7 +22,6 @@ import com.car.core.utils.util.UrlParam;
 import com.car.tabmall.mall.adapter.MallConverter;
 import com.car.tabmall.mall.adapter.MallRvAdapter;
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.elvishew.xlog.XLog;
 import com.hjq.toast.ToastUtils;
 import com.umeng.analytics.MobclickAgent;
 

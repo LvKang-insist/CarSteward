@@ -5,7 +5,8 @@
     android:id="@+id/delegate_home_refresh_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:visibility="gone">
 
     <com.scwang.smartrefresh.layout.header.ClassicsHeader
         android:id="@+id/delegate_home_header"

@@ -12,9 +12,7 @@ buildscript {
         classpath 'com.jakewharton:butterknife-gradle-plugin:10.1.0'
         // TinkerPatch 插件
         classpath "com.tinkerpatch.sdk:tinkerpatch-gradle-plugin:${TINKERPATCH_VERSION}"
-
-
-        //美团多渠道
+        // 美团多渠道打包插件
         classpath 'com.meituan.android.walle:plugin:1.1.6'
     }
 }
