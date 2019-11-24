@@ -44,7 +44,7 @@
     <!-- - - - - - - - - - - 某些权限在上面出现，到此结束 - - - - - - - - - -->
 
     <application
-        android:name="com.car.carsteward.application.SampleApplication"
+        android:name=".application.SampleApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"

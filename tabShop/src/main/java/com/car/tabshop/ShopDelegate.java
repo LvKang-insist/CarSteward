@@ -8,6 +8,7 @@ import com.car.core.delegate.BottomItemDelegate;
 import com.car.core.mvp.factory.CreatePresenter;
 import com.car.core.mvp.mvpdefault.DefaultContract;
 import com.car.core.mvp.mvpdefault.DefaultPresenterImpl;
+import com.hjq.toast.ToastUtils;
 
 import butterknife.BindView;
 
@@ -33,7 +34,7 @@ public class ShopDelegate extends BottomItemDelegate<DefaultPresenterImpl>
 
     @Override
     public void bindView(View view) {
-
+        ToastUtils.show("已修复---------------");
     }
 
     @Override

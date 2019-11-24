@@ -56,8 +56,7 @@
             android:id="@+id/delegate_mall_recycler"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/back"
-            android:visibility="gone"/>
+            android:background="@color/back" />
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 
