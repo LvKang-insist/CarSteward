@@ -18,13 +18,13 @@ android {
     }
     signingConfigs {
         config {
-            storeFile file('F:\\Android\\Project\\CarSteward\\app\\CarSteward.jks')
+            storeFile file('C:\\Users\\Administrator\\Desktop\\345\\Project\\CarSteward\\app\\CarSteward.jks')
             storePassword 'nulicarsteward'
             keyAlias = 'CarSteward'
             keyPassword 'nulicarsteward'
         }
         debug {
-            storeFile file('F:\\Android\\Project\\CarSteward\\app\\CarSteward.jks')
+            storeFile file('C:\\Users\\Administrator\\Desktop\\345\\Project\\CarSteward\\app\\CarSteward.jks')
             storePassword 'nulicarsteward'
             keyAlias = 'CarSteward'
             keyPassword 'nulicarsteward'
@@ -32,7 +32,7 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.config
         }
@@ -63,11 +63,11 @@ dependencies {
     implementation project(path: ':core')
     implementation project(path: ':detegateManager')
 
-    implementation "com.android.support:multidex:1.0.3" // 多dex配置
     //注释掉原有bugly的仓库
     //compile 'com.tencent.bugly:crashreport:latest.release'//其中latest.release指代最新版本号，也可以指定明确的版本号，例如1.3.4
     implementation 'com.tencent.bugly:crashreport_upgrade:1.4.2'
     // 指定tinker依赖版本（注：应用升级1.3.5版本起，不再内置tinker）
     implementation 'com.tinkerpatch.sdk:tinkerpatch-android-sdk:1.2.14'
-    implementation 'com.tencent.bugly:nativecrashreport:3.7.1' //其中latest.release指代最新版本号，也可以指定明确的版本号，例如2.2.0
+    implementation 'com.tencent.bugly:nativecrashreport:3.7.1'
+    //其中latest.release指代最新版本号，也可以指定明确的版本号，例如2.2.0
 }
