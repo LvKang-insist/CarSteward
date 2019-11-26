@@ -14,7 +14,7 @@ public class DialogBuilder<T> {
 
 
     private Object view;
-    private float mAlpha = 1;
+    private float mAlpha = 1f;
     private boolean mAutoDismiss = false;
     private boolean mCancelable = true;
     private int mAnimation = 0;
@@ -86,13 +86,13 @@ public class DialogBuilder<T> {
         if (tClass != null) {
             try {
                 Constructor<T> constructor = tClass.getConstructor(
-                        Object.class, float.class, boolean.class, boolean.class, int.class,int.class);
-                return constructor.newInstance(view, mAlpha, mAutoDismiss, mCancelable,mAnimation,mGravity);
+                        Object.class, float.class, boolean.class, boolean.class, int.class, int.class);
+                return constructor.newInstance(view, mAlpha, mAutoDismiss, mCancelable, mAnimation, mGravity);
             } catch (Exception e) {
-                throw new RuntimeException("创建 "+tClass.getName()+" 失败，原因可能是构造参数有问题："+e.getMessage());
+                throw new RuntimeException("创建 " + tClass.getName() + " 失败，原因可能是构造参数有问题：" + e.getMessage() + "\n");
             }
         } else {
-            return (T) BaseFragDialog.newInstance(view, mAlpha, mAutoDismiss, mCancelable,mAnimation,mGravity);
+            return (T) BaseFragDialog.newInstance(view, mAlpha, mAutoDismiss, mCancelable, mAnimation, mGravity);
         }
     }
 }

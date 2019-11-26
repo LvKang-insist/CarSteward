@@ -21,6 +21,7 @@ import androidx.fragment.app.DialogFragment;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.car.core.latte.Latte;
 
 import java.util.Objects;
 
@@ -30,7 +31,7 @@ import java.util.Objects;
 
 public class BaseFragDialog extends DialogFragment {
 
-    public static final Handler HANDLER = new Handler();
+    public Handler HANDLER = Latte.getHandler();
     private Object mView;
     private View mRootView;
     private float mAlpha;
@@ -43,7 +44,7 @@ public class BaseFragDialog extends DialogFragment {
     private SparseArray<String> mSetText;
     private SparseArray<String> mSetImage;
 
-    BaseFragDialog(Object view, float alpha, boolean autoDismiss, boolean cancelable, int animation, int gravity) {
+    public BaseFragDialog(Object view, float alpha, boolean autoDismiss, boolean cancelable, int animation, int gravity) {
         this.mView = view;
         this.mAlpha = alpha;
         this.mAutoDismiss = autoDismiss;
@@ -68,7 +69,7 @@ public class BaseFragDialog extends DialogFragment {
         window = Objects.requireNonNull(getDialog()).getWindow();
         if (window != null) {
             if (mView instanceof Integer) {
-                this.mRootView = inflater.inflate((Integer) mView,  window.findViewById(android.R.id.content), false);
+                this.mRootView = inflater.inflate((Integer) mView, window.findViewById(android.R.id.content), false);
             } else if (mView instanceof View) {
                 this.mRootView = (View) mView;
             } else {

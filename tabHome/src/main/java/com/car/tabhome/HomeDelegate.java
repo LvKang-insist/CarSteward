@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.amap.api.location.AMapLocation;
 import com.car.core.api.BaseUrl;
 import com.car.core.delegate.BottomItemDelegate;
-import com.car.core.latte.Latte;
 import com.car.core.mvp.factory.CreatePresenter;
 import com.car.core.utils.bean.GetStylesBean;
 import com.car.core.utils.bean.IndexBean;
@@ -113,7 +112,7 @@ public class HomeDelegate extends BottomItemDelegate<HomePersenterImpl>
 
     @Override
     public void onLazyInitView(@Nullable Bundle savedInstanceState) {
-        Latte.showLoading("");
+//        Latte.showLoading("");
         requestIndex(CarPreference.getAreaId());
         getPresenter().onResultIStyles();
     }
@@ -198,7 +197,7 @@ public class HomeDelegate extends BottomItemDelegate<HomePersenterImpl>
 
     @Override
     public void onResultStyles(GetStylesBean bean) {
-        Latte.stopLoading();
+//        Latte.stopLoading();
         GlideUtil.setImage(BaseUrl.BASE_URL + bean.getData().getBackgroundImg(), mImage);
         mConverter.addStyle(bean);
         mAdapter.notifyDataSetChanged();

@@ -12,6 +12,7 @@ import androidx.multidex.MultiDex;
 import com.car.core.latte.Latte;
 import com.tencent.bugly.Bugly;
 import com.tencent.bugly.beta.Beta;
+import com.tencent.bugly.crashreport.CrashReport;
 import com.tencent.tinker.entry.DefaultApplicationLike;
 
 
@@ -36,14 +37,7 @@ public class SampleApplicationLike extends DefaultApplicationLike {
     @Override
     public void onCreate() {
         super.onCreate();
-        String addId = "749d5e1fe3";
-        // 这里实现SDK初始化，appId替换成你的在Bugly平台申请的appId
-        // 调试时，将第三个参数改为true
-        Bugly.init(getApplication(), addId, false);
-
-        // 设置开发设备，默认为false，上传补丁如果下发范围指定为“开发设备”，需要调用此接口来标识开发设备
-        Bugly.setIsDevelopmentDevice(getApplication(), true);
-
+        initBugly();
 
         //自定义初始化
         Latte.init(getApplication())
@@ -53,6 +47,19 @@ public class SampleApplicationLike extends DefaultApplicationLike {
                 .withLog()
                 .withUMConfig(getApplication())
                 .configure();
+    }
+
+    private void initBugly() {
+        //初始化修复
+        String addId = "749d5e1fe3";
+        // 这里实现SDK初始化，appId替换成你的在Bugly平台申请的appId
+        Bugly.init(getApplication(), addId, false);
+        // 设置开发设备，默认为false，上传补丁如果下发范围指定为“开发设备”，需要调用此接口来标识开发设备
+        Bugly.setIsDevelopmentDevice(getApplication(), true);
+
+        //初始化 异常上报，第三个参数为 log。建议在 测试时为 true
+        CrashReport.initCrashReport(getApplication(), addId, true);
+
     }
 
 
