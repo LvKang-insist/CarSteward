@@ -34,7 +34,7 @@
         android:textColor="#0096fb"
         android:textSize="15sp" />
 
-    <com.car.core.ui.view.CarouselView
+    <com.car.ui.view.CarouselView
         android:id="@+id/item_carouse_view"
         android:layout_width="match_parent"
         android:layout_height="30dp">
@@ -49,6 +49,6 @@
             android:layout_height="match_parent"
             android:textSize="15sp" />
 
-    </com.car.core.ui.view.CarouselView>
+    </com.car.ui.view.CarouselView>
 
 </androidx.appcompat.widget.LinearLayoutCompat>

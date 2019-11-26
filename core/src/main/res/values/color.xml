@@ -71,4 +71,5 @@
 
     <!-- 灰暗的text-->
     <color name="color_text_gray">#333333</color>
+    <color name="color_text_six">#666666</color>
 </resources>

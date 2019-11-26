@@ -46,4 +46,5 @@ dependencies {
     implementation project(path: ':core')
     annotationProcessor "cn.bingoogolapple:bga-badgeview-compiler:1.1.8"
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.1.0'
+    implementation project(path: ':ui')
 }

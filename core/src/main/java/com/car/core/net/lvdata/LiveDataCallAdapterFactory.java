@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.car.core.dialog.LoadingView;
 import com.car.core.latte.Latte;
 import com.car.core.net.lvdata.CustomResponse;
 import com.elvishew.xlog.XLog;
@@ -116,7 +117,7 @@ public class LiveDataCallAdapterFactory extends CallAdapter.Factory {
                                     postValue(body);
                                 } else {
                                     postValue(null);
-                                    Latte.stopLoading();
+                                    LoadingView.stopLoading();
                                 }
                             }
 
@@ -124,7 +125,7 @@ public class LiveDataCallAdapterFactory extends CallAdapter.Factory {
                             public void onFailure(Call<R> call, Throwable t) {
                                 XLog.e("Request onFailure : " + t.getMessage());
                                 postValue(null);
-                                Latte.stopLoading();
+                                LoadingView.stopLoading();
                             }
                         });
                     }

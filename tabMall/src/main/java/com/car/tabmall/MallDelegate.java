@@ -10,17 +10,18 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.car.core.api.Const;
 import com.car.core.delegate.BottomItemDelegate;
+import com.car.core.dialog.LoadingView;
 import com.car.core.latte.Latte;
 import com.car.core.mvp.factory.CreatePresenter;
 import com.car.core.mvp.mvpdefault.DefaultContract;
 import com.car.core.mvp.mvpdefault.DefaultPresenterImpl;
-import com.car.core.ui.recycler.MultipleFields;
-import com.car.core.ui.view.CustomGridManager;
 import com.car.core.utils.bean.GetGoodsListBean;
 import com.car.core.utils.util.RequestParam;
 import com.car.core.utils.util.UrlParam;
 import com.car.tabmall.mall.adapter.MallConverter;
 import com.car.tabmall.mall.adapter.MallRvAdapter;
+import com.car.ui.recycler.MultipleFields;
+import com.car.ui.view.CustomGridManager;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.hjq.toast.ToastUtils;
 import com.umeng.analytics.MobclickAgent;
@@ -88,7 +89,7 @@ public class MallDelegate extends BottomItemDelegate<DefaultPresenterImpl>
 
     @Override
     public void onLazyInitView(@Nullable Bundle savedInstanceState) {
-        Latte.showLoading("");
+        LoadingView.showLoading("");
         getShop("1");
     }
 
@@ -107,7 +108,7 @@ public class MallDelegate extends BottomItemDelegate<DefaultPresenterImpl>
         converter.add(listBean);
         adapter.notifyItemChanged(converter.size() - listBean.getData().size(), converter.size());
         adapter.loadMoreComplete();
-        Latte.stopLoading();
+        LoadingView.stopLoading();
     }
 
     /**

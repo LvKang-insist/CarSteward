@@ -6,7 +6,7 @@ import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.OnLifecycleEvent;
 
-import com.car.core.latte.Latte;
+import com.car.core.dialog.LoadingView;
 import com.car.core.mvp.model.BaseModel;
 import com.car.core.mvp.view.IBaseView;
 import com.elvishew.xlog.XLog;
@@ -56,7 +56,7 @@ public abstract class BasePresenter<V extends IBaseView, M extends BaseModel>
                         retryCount++;
                         retryRequest();
                     } else {
-                        Latte.stopLoading();
+                        LoadingView.stopLoading();
                         retryCount = 0;
                     }
                 }

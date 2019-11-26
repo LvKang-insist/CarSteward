@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">ui</string>
+    <string name="service_type">服务类型</string>
+    <string name="default_sort">默认排序</string>
+    <string name="filtrate">筛选</string>
+    <string name="not_shop">暂无店铺...</string>
+</resources>

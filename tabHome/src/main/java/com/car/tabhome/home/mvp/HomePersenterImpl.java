@@ -43,9 +43,11 @@ public class HomePersenterImpl extends BasePresenter<HomeContract.IHomeView, Hom
         String index = UrlParam.getParam(Const.API_USER_STORE, "getCityCode");
         getModel().request(index, map, getLifecycleOwner(), (Observer<String>) s -> {
             JSONObject object = JSON.parseObject(s);
-            if ("1".equals(object.getString("status"))) {
-                getView().onResultCityCode(object.getString("data"));
-                return;
+            if (object!= null){
+                if ("1".equals(object.getString("status"))) {
+                    getView().onResultCityCode(object.getString("data"));
+                    return;
+                }
             }
             getView().onResultCityCode(null);
         });

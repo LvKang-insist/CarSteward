@@ -11,6 +11,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.car.core.api.BaseUrl;
 import com.car.core.api.Const;
+import com.car.core.dialog.LoadingView;
 import com.car.core.latte.Latte;
 import com.car.core.mvp.factory.CreatePresenter;
 import com.car.core.mvp.view.BaseMvpDelegate;
@@ -81,7 +82,7 @@ public class UserDataDelegate extends BaseMvpDelegate<UserPresenterImpl>
                 } else {
                     sex = "0";
                 }
-                Latte.showLoading("");
+                LoadingView.showLoading("");
                 getPresenter().requestUserInfo(Const.API_BASE_USER + UrlParam.getParam("userInfo"),
                         RequestParam.builder()
                                 .addTokenId()
@@ -126,7 +127,7 @@ public class UserDataDelegate extends BaseMvpDelegate<UserPresenterImpl>
     public void userInfoReslut(String result) {
         JSONObject object = JSON.parseObject(result);
         ToastUtils.show(object.getString("msg"));
-        Latte.stopLoading();
+        LoadingView.stopLoading();
         CarPreference.putUserInfoIsRevise(true);
         getPresenter().requestGetUserInfo(Const.API_BASE_URL_PUBLIC + UrlParam.getParam("getUserInfo"),
                 RequestParam.builder().addTokenId().build());

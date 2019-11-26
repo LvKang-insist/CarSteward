@@ -45,12 +45,12 @@
 
 
 -keep class **.R$* {*;}
--keep public class com.car.core.ui.dialog.BaseFragDialog { *; }
--keep public class com.car.core.ui.dialog.DialogBuilder {*;}
+-keep public class BaseFragDialog { *; }
+-keep public class DialogBuilder {*;}
 -keep public class com.car.core.mvp.presenter.BasePresenter {*;}
 
 ##不混淆某个类的构造方法
-#-keepclassmembers class com.car.core.ui.dialog.BaseFragDialog {
+#-keepclassmembers class BaseFragDialog {
 #    public <init>();
 #}
 

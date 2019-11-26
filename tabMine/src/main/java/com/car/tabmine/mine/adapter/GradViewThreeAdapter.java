@@ -3,11 +3,11 @@ package com.car.tabmine.mine.adapter;
 import androidx.appcompat.widget.AppCompatTextView;
 
 import com.car.core.mvp.view.BaseMvpDelegate;
-import com.car.core.ui.adapter.CarBaseAdapter;
-import com.car.core.ui.adapter.ViewHolder;
 import com.car.core.utils.strategy.BaseStrategySkipContext;
 import com.car.tabmine.R;
 import com.car.core.utils.bean.TextImageBean;
+import com.car.ui.adapter.CarBaseAdapter;
+import com.car.ui.adapter.ViewHolder;
 import com.hjq.toast.ToastUtils;
 
 import java.util.List;

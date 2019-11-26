@@ -1,23 +1,9 @@
 package com.car.tabhome.home.adapter;
 
-import android.view.View;
-import android.widget.Toast;
-
 import androidx.recyclerview.widget.GridLayoutManager;
 
 import com.bigkoo.convenientbanner.ConvenientBanner;
-import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
-import com.bigkoo.convenientbanner.holder.Holder;
-import com.bigkoo.convenientbanner.listener.OnItemClickListener;
 import com.car.core.api.BaseUrl;
-import com.car.core.ui.banner.BannerCreator;
-import com.car.core.ui.banner.HolderCreate;
-import com.car.core.ui.banner.ImageHolder;
-import com.car.core.ui.recycler.MultipleFields;
-import com.car.core.ui.recycler.MultipleItemEntity;
-import com.car.core.ui.recycler.MultipleRecyclerAdapter;
-import com.car.core.ui.recycler.MultipleViewHolder;
-import com.car.core.ui.view.CarouselView;
 import com.car.core.utils.bean.GetStylesBean;
 import com.car.core.utils.bean.IndexBean;
 import com.car.core.utils.bean.TextImageBean;
@@ -25,7 +11,12 @@ import com.car.core.utils.util.GlideUtil;
 import com.car.tabhome.HomeDelegate;
 import com.car.tabhome.HomeItemType;
 import com.car.tabhome.R;
-import com.elvishew.xlog.XLog;
+import com.car.ui.banner.BannerCreator;
+import com.car.ui.recycler.MultipleFields;
+import com.car.ui.recycler.MultipleItemEntity;
+import com.car.ui.recycler.MultipleRecyclerAdapter;
+import com.car.ui.recycler.MultipleViewHolder;
+import com.car.ui.view.CarouselView;
 import com.hjq.toast.ToastUtils;
 
 import java.util.ArrayList;
