@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/toolbar_layout" />
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="41dp"
+        android:layout_marginTop="1dp"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:id="@+id/base_delegate_shop_select_city"
+            style="@style/base_shop_list_select_style"
+            android:layout_marginLeft="1dp"
+            tools:ignore="RtlHardcoded">
+
+            <TextView
+                android:id="@+id/base_delegate_shop_select_city_tv"
+                style="@style/base_shop_list_select_text_style" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
+            android:background="@color/color_text_six" />
+
+        <RelativeLayout
+            android:id="@+id/base_delegate_shop_select_service"
+            style="@style/base_shop_list_select_style">
+
+            <TextView
+                android:id="@+id/base_delegate_shop_select_service_tv"
+                style="@style/base_shop_list_select_text_style"
+                android:text="@string/service_type" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
+            android:background="@color/color_text_six" />
+
+        <RelativeLayout
+            android:id="@+id/base_delegate_shop_select_sort"
+            style="@style/base_shop_list_select_style">
+
+            <TextView
+                android:id="@+id/base_delegate_shop_select_sort_tv"
+                style="@style/base_shop_list_select_text_style"
+                android:text="@string/default_sort" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
+            android:background="@color/black60" />
+
+        <RelativeLayout
+            android:id="@+id/base_delegate_shop_select_filtrate"
+            style="@style/base_shop_list_select_style"
+            android:layout_marginRight="1dp"
+            tools:ignore="RtlHardcoded">
+
+            <TextView
+                android:id="@+id/base_delegate_shop_select_filtrate_tv"
+                style="@style/base_shop_list_select_text_style"
+                android:text="@string/filtrate" />
+        </RelativeLayout>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/ll_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <View
+            android:id="@+id/base_delegate_shop_select_city_line"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1"
+            android:background="@color/red"
+            android:visibility="invisible" />
+
+        <View
+            android:id="@+id/base_delegate_shop_select_service_line"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1"
+            android:background="@color/red"
+            android:visibility="invisible" />
+
+        <View
+            android:id="@+id/base_delegate_shop_select_sort_line"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1"
+            android:background="@color/red"
+            android:visibility="invisible" />
+
+        <View
+            android:id="@+id/base_delegate_shop_select_filtrate_line"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1"
+            android:background="@color/red"
+            android:visibility="invisible" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/base_delegate_shop_refresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/base_delegate_shop_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/base_delegate_shop_default"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/not_shop" />
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+</androidx.appcompat.widget.LinearLayoutCompat>
