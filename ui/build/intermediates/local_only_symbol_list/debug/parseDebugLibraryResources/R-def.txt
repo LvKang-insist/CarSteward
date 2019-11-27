@@ -1,0 +1,27 @@
+R_DEF: Internal format may change without notice
+local
+drawable select_top_arrow
+id base_delegate_shop_default
+id base_delegate_shop_recycler
+id base_delegate_shop_refresh
+id base_delegate_shop_select_city
+id base_delegate_shop_select_city_line
+id base_delegate_shop_select_city_tv
+id base_delegate_shop_select_filtrate
+id base_delegate_shop_select_filtrate_line
+id base_delegate_shop_select_filtrate_tv
+id base_delegate_shop_select_service
+id base_delegate_shop_select_service_line
+id base_delegate_shop_select_service_tv
+id base_delegate_shop_select_sort
+id base_delegate_shop_select_sort_line
+id base_delegate_shop_select_sort_tv
+id ll_content
+layout base_delegate_shop_list
+string app_name
+string default_sort
+string filtrate
+string not_shop
+string service_type
+style base_shop_list_select_style
+style base_shop_list_select_text_style
