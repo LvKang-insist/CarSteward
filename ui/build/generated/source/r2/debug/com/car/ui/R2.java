@@ -3999,10 +3999,13 @@ public final class R2 {
     public static final int selector_transparent = 0x7f08008e;
 
     @DrawableRes
-    public static final int tooltip_frame_dark = 0x7f08008f;
+    public static final int title_top_arrow = 0x7f08008f;
 
     @DrawableRes
-    public static final int tooltip_frame_light = 0x7f080090;
+    public static final int tooltip_frame_dark = 0x7f080090;
+
+    @DrawableRes
+    public static final int tooltip_frame_light = 0x7f080091;
   }
 
   public static final class id {

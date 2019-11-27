@@ -18,7 +18,7 @@ android {
     }
     signingConfigs {
         config {
-            storeFile file('C:\\Users\\Administrator\\Desktop\\345\\Project\\CarSteward\\app\\CarSteward.jks')
+            storeFile file('F:\\Android\\Project\\CarSteward\\app\\CarSteward.jks')
             storePassword 'nulicarsteward'
             keyAlias = 'CarSteward'
             keyPassword 'nulicarsteward'

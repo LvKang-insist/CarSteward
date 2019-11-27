@@ -18,7 +18,7 @@ public interface Const {
     String API_MALL = BASE_URL + "index.php?m=App&c=APIMall";
 
     /**
-     * 首页接口
+     * 用户商店
      */
     String API_USER_STORE = BASE_URL + "index.php?m=App&c=APIUserStore";
 
@@ -26,5 +26,7 @@ public interface Const {
      * 首页
      */
     String API_USER_INDEX = BASE_URL + "index.php?m=App&c=APIUserIndex";
+
+
 
 }

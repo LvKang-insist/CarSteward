@@ -1,6 +1,7 @@
 package com.car.core.mvp.model;
 
 import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
 
@@ -45,6 +46,6 @@ public abstract class BaseModel<T> extends ViewModel {
      * @param observer
      */
     public void defaultRequest(String url, WeakHashMap param, LifecycleOwner owner, Observer observer) {
-        CarRequest.result(url, param, liveData -> liveData.observe(owner, observer));
+        CarRequest.result(url, param, liveData -> liveData.observe(owner,observer));
     }
 }

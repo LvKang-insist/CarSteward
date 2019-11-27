@@ -1,6 +1,7 @@
 R_DEF: Internal format may change without notice
 local
 drawable select_top_arrow
+drawable title_top_arrow
 id base_delegate_shop_default
 id base_delegate_shop_recycler
 id base_delegate_shop_refresh

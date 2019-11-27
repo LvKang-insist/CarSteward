@@ -1332,8 +1332,9 @@ int drawable notification_tile_bg 0x7f08008b
 int drawable notify_panel_notification_icon_bg 0x7f08008c
 int drawable select_top_arrow 0x7f08008d
 int drawable selector_transparent 0x7f08008e
-int drawable tooltip_frame_dark 0x7f08008f
-int drawable tooltip_frame_light 0x7f080090
+int drawable title_top_arrow 0x7f08008f
+int drawable tooltip_frame_dark 0x7f080090
+int drawable tooltip_frame_light 0x7f080091
 int id BaseQuickAdapter_databinding_support 0x7f0b0001
 int id BaseQuickAdapter_dragging_support 0x7f0b0002
 int id BaseQuickAdapter_swiping_support 0x7f0b0003
