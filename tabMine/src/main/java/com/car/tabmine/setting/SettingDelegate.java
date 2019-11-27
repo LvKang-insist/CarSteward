@@ -10,11 +10,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.car.core.mvp.factory.CreatePresenter;
 import com.car.core.mvp.mvpdefault.DefaultPresenterImpl;
 import com.car.core.mvp.view.BaseMvpDelegate;
-import com.car.core.ui.recycler.rdefault.ListAdapter;
 import com.car.core.utils.storage.CarPreference;
 import com.car.tabmine.R;
 import com.car.tabmine.R2;
 import com.car.tabmine.setting.user.UserDataDelegate;
+import com.car.ui.recycler.rdefault.ListAdapter;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 
 import butterknife.BindView;

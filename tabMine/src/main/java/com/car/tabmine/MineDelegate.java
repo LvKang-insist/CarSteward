@@ -13,6 +13,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.car.core.api.BaseUrl;
 import com.car.core.api.Const;
 import com.car.core.delegate.BottomItemDelegate;
+import com.car.core.dialog.LoadingView;
 import com.car.core.latte.Latte;
 import com.car.core.mvp.factory.CreatePresenter;
 import com.car.core.utils.storage.CarPreference;
@@ -180,7 +181,7 @@ public class MineDelegate extends BottomItemDelegate<MinePresenterImpl>
                     .build();
             getPresenter().requestUserCenter(Const.API_BASE_USER + mUerCenter, build);
         } else {
-            Latte.stopLoading();
+            LoadingView.stopLoading();
             ToastUtils.show(getUserInfoBean.getMsg());
         }
     }
@@ -202,7 +203,7 @@ public class MineDelegate extends BottomItemDelegate<MinePresenterImpl>
         } else {
 
         }
-        Latte.stopLoading();
+        LoadingView.stopLoading();
     }
 
 
@@ -210,7 +211,7 @@ public class MineDelegate extends BottomItemDelegate<MinePresenterImpl>
         if (CarPreference.getLogin()) {
             WeakHashMap map = new WeakHashMap();
             map.put("tokenId", CarPreference.getTokenId());
-            Latte.showLoading("");
+            LoadingView.showLoading("");
             getPresenter().request(Const.API_BASE_URL_PUBLIC + mUserInfo, map);
         } else {
             mName.setText("请登录");

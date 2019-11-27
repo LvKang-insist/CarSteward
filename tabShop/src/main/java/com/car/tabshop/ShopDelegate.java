@@ -8,6 +8,7 @@ import com.car.core.delegate.BottomItemDelegate;
 import com.car.core.mvp.factory.CreatePresenter;
 import com.car.core.mvp.mvpdefault.DefaultContract;
 import com.car.core.mvp.mvpdefault.DefaultPresenterImpl;
+import com.car.ui.delegate.shoplist.BaseShopListDelegate;
 import com.hjq.toast.ToastUtils;
 
 import butterknife.BindView;
@@ -23,9 +24,10 @@ import butterknife.BindView;
 public class ShopDelegate extends BottomItemDelegate<DefaultPresenterImpl>
         implements DefaultContract.IDefaultView {
 
-    @BindView(R2.id.toolbar_title)
-    AppCompatTextView mToolbarTitle = null;
+    @Override
+    public void onResult(String result) {
 
+    }
 
     @Override
     public Object setLayout() {
@@ -34,16 +36,6 @@ public class ShopDelegate extends BottomItemDelegate<DefaultPresenterImpl>
 
     @Override
     public void bindView(View view) {
-        ToastUtils.show("已修复---------------");
-    }
-
-    @Override
-    public void onResult(String result) {
-
-    }
-
-    @Override
-    public int getToolbar() {
-        return R.id.toolbar;
+        getSupportDelegate().loadRootFragment(R.id.delegate_shop_layout, new BaseShopListDelegate());
     }
 }

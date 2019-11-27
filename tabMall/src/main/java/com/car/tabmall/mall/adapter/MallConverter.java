@@ -1,13 +1,13 @@
 package com.car.tabmall.mall.adapter;
 
-import com.car.core.ui.recycler.DataConverter;
-import com.car.core.ui.recycler.MultipleFields;
-import com.car.core.ui.recycler.MultipleItemEntity;
 import com.car.core.utils.bean.GetGoodsListBean;
 import com.car.tabmall.MallItemType;
+import com.car.ui.recycler.DataConverter;
+import com.car.ui.recycler.MultipleFields;
+import com.car.ui.recycler.MultipleItemEntity;
 
 import java.util.ArrayList;
-import java.util.Map;
+
 
 /**
  * @author 345 QQ:1831712732

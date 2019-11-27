@@ -14,10 +14,11 @@ import androidx.appcompat.widget.Toolbar;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.car.core.api.Const;
+import com.car.core.dialog.BaseFragDialog;
+import com.car.core.dialog.LoadingView;
 import com.car.core.latte.Latte;
 import com.car.core.mvp.factory.CreatePresenter;
 import com.car.core.mvp.view.BaseMvpDelegate;
-import com.car.core.ui.dialog.BaseFragDialog;
 import com.car.core.utils.time.SetTelCountTimer;
 import com.car.tabmine.R;
 import com.car.tabmine.R2;
@@ -105,7 +106,7 @@ public class SignUpDelegate extends BaseMvpDelegate<SignUpPresenterImpl>
                 maps.put("loginKey", signkey);
                 maps.put("smsVerfy", smsVerfy);
                 getPresenter().signUp(Const.API_BASE_USER + signUp, maps);
-                Latte.showLoading("注册中");
+                LoadingView.showLoading("注册中");
             }
         }
     }
@@ -161,7 +162,7 @@ public class SignUpDelegate extends BaseMvpDelegate<SignUpPresenterImpl>
     public void signUpResult(String result) {
         XLog.e(result);
         SignUpBean signUpBean = gson.fromJson(result, SignUpBean.class);
-        Latte.stopLoading();
+        LoadingView.stopLoading();
         if (signUpBean.getStatus() != 1) {
             ToastUtils.show(signUpBean.getMsg());
         } else if (signUpBean.getStatus() == 1) {

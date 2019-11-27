@@ -4,14 +4,14 @@ import androidx.appcompat.widget.AppCompatImageView;
 import androidx.recyclerview.widget.GridLayoutManager;
 
 import com.car.core.api.BaseUrl;
-import com.car.core.ui.recycler.MultipleFields;
-import com.car.core.ui.recycler.MultipleItemEntity;
-import com.car.core.ui.recycler.MultipleRecyclerAdapter;
-import com.car.core.ui.recycler.MultipleViewHolder;
 import com.car.core.utils.bean.GetGoodsListBean;
 import com.car.core.utils.util.GlideUtil;
 import com.car.tabmall.MallItemType;
 import com.car.tabmall.R;
+import com.car.ui.recycler.MultipleFields;
+import com.car.ui.recycler.MultipleItemEntity;
+import com.car.ui.recycler.MultipleRecyclerAdapter;
+import com.car.ui.recycler.MultipleViewHolder;
 
 import java.util.List;
 

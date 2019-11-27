@@ -2,14 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/delegate_shop_layout"
     android:orientation="vertical">
-
-    <include layout="@layout/toolbar_layout" />
-
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="我被修复"/>
 
 </LinearLayout>

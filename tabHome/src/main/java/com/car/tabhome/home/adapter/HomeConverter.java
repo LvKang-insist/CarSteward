@@ -2,15 +2,13 @@ package com.car.tabhome.home.adapter;
 
 import android.graphics.Color;
 
-import com.car.core.net.callback.IFailure;
-import com.car.core.ui.recycler.DataConverter;
-import com.car.core.ui.recycler.MultipleFields;
-import com.car.core.ui.recycler.MultipleItemEntity;
-import com.car.core.ui.recycler.MultipleItemType;
 import com.car.core.utils.bean.GetStylesBean;
 import com.car.core.utils.bean.IndexBean;
 import com.car.core.utils.bean.TextImageBean;
 import com.car.tabhome.HomeItemType;
+import com.car.ui.recycler.DataConverter;
+import com.car.ui.recycler.MultipleFields;
+import com.car.ui.recycler.MultipleItemEntity;
 
 import java.util.ArrayList;
 import java.util.List;

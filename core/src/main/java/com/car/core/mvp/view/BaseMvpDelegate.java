@@ -5,8 +5,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatTextView;
 import androidx.appcompat.widget.Toolbar;
 
 import com.car.core.R;
@@ -55,10 +57,7 @@ public abstract class BaseMvpDelegate<P extends IBasePresenter> extends Permissi
 
     private View rootView;
 
-    /**
-     * 状态栏沉浸
-     */
-    private ImmersionBar mImmersionBar;
+    private Toolbar mToolbar = null;
 
     public <T extends BaseMvpDelegate> T getParentDelegate() {
         return (T) getParentFragment();
@@ -153,20 +152,12 @@ public abstract class BaseMvpDelegate<P extends IBasePresenter> extends Permissi
         return rootView;
     }
 
-    /**
-     * 获取沉浸式状态栏实例
-     *
-     * @return 沉浸式状态栏
-     */
-    public ImmersionBar getStatusBarConfig() {
-        return mImmersionBar;
-    }
-
-    /**
-     * 是否使用沉浸式状态栏
-     */
-    public boolean isStatusBarEnabled() {
-        return true;
+    public void setToolbarStyle(@ColorInt int color, @Nullable String title) {
+        if (mToolbar != null) {
+            mToolbar.setBackgroundColor(color);
+            AppCompatTextView text = (AppCompatTextView) mToolbar.getChildAt(2);
+            text.setText(title);
+        }
     }
 
     /**
@@ -174,12 +165,12 @@ public abstract class BaseMvpDelegate<P extends IBasePresenter> extends Permissi
      */
     protected void initToolbar() {
         if (getToolView() instanceof Toolbar) {
-            setBack(((Toolbar) getToolView()));
-            SetToolBar.setToolBar(getToolView());
+            mToolbar = (Toolbar) getToolView();
+            setBack(mToolbar);
+            SetToolBar.setToolBar(mToolbar);
         } else if (getToolView() instanceof ViewGroup) {
             SetToolBar.setToolBar(getToolView());
         }
-
     }
 
 

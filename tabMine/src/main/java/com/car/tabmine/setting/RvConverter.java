@@ -1,9 +1,9 @@
 package com.car.tabmine.setting;
 
-import com.car.core.ui.recycler.DataConverter;
-import com.car.core.ui.recycler.MultipleFields;
-import com.car.core.ui.recycler.MultipleItemEntity;
-import com.car.core.ui.recycler.MultipleItemType;
+import com.car.ui.recycler.DataConverter;
+import com.car.ui.recycler.MultipleFields;
+import com.car.ui.recycler.MultipleItemEntity;
+import com.car.ui.recycler.MultipleItemType;
 
 import java.util.ArrayList;
 

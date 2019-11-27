@@ -4,10 +4,10 @@ import android.content.Context;
 
 import androidx.appcompat.widget.AppCompatTextView;
 
-import com.car.core.ui.adapter.CarBaseAdapter;
-import com.car.core.ui.adapter.ViewHolder;
 import com.car.tabmine.R;
 import com.car.core.utils.bean.TextImageBean;
+import com.car.ui.adapter.CarBaseAdapter;
+import com.car.ui.adapter.ViewHolder;
 
 import java.util.List;
 
