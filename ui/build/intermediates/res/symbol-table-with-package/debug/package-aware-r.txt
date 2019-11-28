@@ -1482,8 +1482,10 @@ id item_icon_tv_tv
 id item_list_image
 id item_list_text
 id item_touch_helper_previous_elevation
+id item_tv_tv
 id item_tv_tv_amount_tv
 id item_tv_tv_title_tv
+id item_tv_view
 id iv_bga_adapter_empty_view_icon
 id iv_toast_icon
 id labeled
@@ -1719,6 +1721,7 @@ layout item_banner_image
 layout item_bgab_tv
 layout item_icon_tv
 layout item_list
+layout item_tv
 layout item_tv_tv
 layout mtrl_layout_snackbar
 layout mtrl_layout_snackbar_include
