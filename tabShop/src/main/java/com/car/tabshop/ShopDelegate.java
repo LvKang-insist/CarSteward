@@ -2,16 +2,11 @@ package com.car.tabshop;
 
 import android.view.View;
 
-import androidx.appcompat.widget.AppCompatTextView;
-
 import com.car.core.delegate.BottomItemDelegate;
 import com.car.core.mvp.factory.CreatePresenter;
 import com.car.core.mvp.mvpdefault.DefaultContract;
 import com.car.core.mvp.mvpdefault.DefaultPresenterImpl;
 import com.car.ui.delegate.shoplist.BaseShopListDelegate;
-import com.hjq.toast.ToastUtils;
-
-import butterknife.BindView;
 
 /**
  * @author 345 QQ:1831712732
@@ -38,4 +33,10 @@ public class ShopDelegate extends BottomItemDelegate<DefaultPresenterImpl>
     public void bindView(View view) {
         getSupportDelegate().loadRootFragment(R.id.delegate_shop_layout, new BaseShopListDelegate());
     }
+
+    public void getTitle(){
+
+    }
+
+
 }
