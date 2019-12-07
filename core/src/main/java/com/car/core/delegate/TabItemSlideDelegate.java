@@ -27,6 +27,8 @@ import java.util.Map;
 
 import butterknife.BindView;
 
+import static androidx.fragment.app.FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT;
+
 /**
  * @author 345 QQ:1831712732
  * @name MvpFrame
@@ -129,7 +131,11 @@ public abstract class TabItemSlideDelegate<P extends IBasePresenter> extends Bas
             }
         }
 
-        mViewPager.setAdapter(new TabItemSlideAdapter(getChildFragmentManager(), 0));
+        /*
+         * Android X 后 Viewpager 适配器加入了 第二个参数
+         * 作用是 ：在加载的时候旁边页面的 onResume 不会执行
+         */
+        mViewPager.setAdapter(new TabItemSlideAdapter(getChildFragmentManager(), BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT));
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {

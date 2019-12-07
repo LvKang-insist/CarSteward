@@ -10,6 +10,7 @@ import com.car.core.mvp.factory.CreatePresenter;
 import com.car.core.mvp.mvpdefault.DefaultPresenterImpl;
 import com.car.core.mvp.view.BaseMvpActivity;
 import com.car.detegatemanager.BottomDelegate;
+import com.car.detegatemanager.BottomSlideDelegate;
 import com.gyf.immersionbar.BarHide;
 import com.gyf.immersionbar.ImmersionBar;
 
@@ -26,7 +27,7 @@ public class ExampleActivity extends BaseMvpActivity {
 
     @Override
     public BaseDelegate setRootDelegate() {
-        return new BottomDelegate();
+        return new BottomSlideDelegate();
     }
 
     @Override
