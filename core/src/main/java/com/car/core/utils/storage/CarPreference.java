@@ -474,10 +474,9 @@ public class CarPreference {
     /**
      * 获取 经度，默认西安钟楼
      *
-     * @param context
      * @return
      */
-    public static String getLongitude(Context context) {
+    public static String getLongitude() {
         return getAppPreference(USER).getString("longitude", "108.94702");
     }
 
@@ -495,10 +494,9 @@ public class CarPreference {
     /**
      * 获取纬度
      *
-     * @param context
      * @return
      */
-    public static String getLatitude(Context context) {
+    public static String getLatitude() {
         return getAppPreference(USER).getString("latitude", "34.259432");
     }
 
@@ -520,5 +518,15 @@ public class CarPreference {
      */
     public static String getAreaId() {
         return getAppPreference(USER).getString("areaId", BaseUrl.DEFAULTCITYAREAID);
+    }
+
+    public static void putMyCar(String myCar) {
+        getAppPreferenceEdit(USER)
+                .putString("myCar", myCar)
+                .commit();
+    }
+
+    public static String getMyCar() {
+        return getAppPreference(USER).getString("myCar", "暂无爱车");
     }
 }

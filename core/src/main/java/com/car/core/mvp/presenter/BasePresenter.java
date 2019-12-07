@@ -42,7 +42,10 @@ public abstract class BasePresenter<V extends IBaseView, M extends BaseModel>
      */
     protected abstract M attachModel();
 
-
+    /**
+     * 动态代理，如果 V 层为 null。则取消调用
+     * @return
+     */
     public V getView() {
         return (V) Proxy.newProxyInstance(viewRef.get().getClass().getClassLoader(), viewRef.get().getClass().getInterfaces(), new InvocationHandler() {
             @Override

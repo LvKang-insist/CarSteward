@@ -23,8 +23,6 @@ import com.car.core.utils.bean.BusinessScopeAndShopListBean;
 import com.car.core.utils.dimen.DimenUtil;
 import com.car.core.utils.storage.CarPreference;
 import com.car.core.utils.util.BusinessScope;
-import com.car.core.utils.util.BusinessScopeList;
-import com.car.core.utils.util.Code;
 import com.car.core.utils.util.RequestParam;
 import com.car.ui.R;
 import com.car.ui.R2;
@@ -68,7 +66,6 @@ public class BaseShopListDelegate extends BaseMvpDelegate<ShopListPresenterImpl>
     private String mTitle;
     private String mBusinessScope;
     private ListPopupWindow mPopWindwo;
-    private List<String> city;
 
     @OnClick({R2.id.base_delegate_shop_select_city,
             R2.id.base_delegate_shop_select_service,
@@ -86,11 +83,10 @@ public class BaseShopListDelegate extends BaseMvpDelegate<ShopListPresenterImpl>
         list.add("换轮胎");
         if (id == OnSelectType.TYPE_CITY_ID) {
             mCityLine.setVisibility(View.VISIBLE);
-            DefaultSelectAdapter adapter = new DefaultSelectAdapter(city, getContext(), R.layout.item_tv);
+            DefaultSelectAdapter adapter = new DefaultSelectAdapter(list, getContext(), R.layout.item_tv);
             showPopWindow(adapter);
         } else if (id == OnSelectType.TYPE_SERVICE_ID) {
-            DefaultSelectAdapter adapter = new DefaultSelectAdapter(BusinessScopeList.getBusinessScopeNames(),
-                    getContext(), R.layout.item_tv);
+            DefaultSelectAdapter adapter = new DefaultSelectAdapter(list, getContext(), R.layout.item_tv);
             showPopWindow(adapter);
             mServiceLine.setVisibility(View.VISIBLE);
         } else if (id == OnSelectType.TYPE_SORT_ID) {
@@ -107,7 +103,6 @@ public class BaseShopListDelegate extends BaseMvpDelegate<ShopListPresenterImpl>
     private BaseShopListDelegate(String title, String businessScope) {
         this.mTitle = title;
         this.mBusinessScope = businessScope;
-        city = new ArrayList<>();
     }
 
     public static BaseShopListDelegate newInstance(@NonNull String title, @NonNull String businessScope) {
@@ -189,12 +184,8 @@ public class BaseShopListDelegate extends BaseMvpDelegate<ShopListPresenterImpl>
         if (mRefreshLayout.isRefreshing()) {
             mRefreshLayout.setRefreshing(false);
         }
-        if (bean.getStatus() == Code.SUCCESS) {
-            BusinessScopeAndShopListBean.DataBean data = bean.getData();
-            for (int i = 0; i < data.getCity().size(); i++) {
-                city.add(data.getCity().get(i).getAreaName());
-            }
-        }
+
+
     }
 
     private void showPopWindow(BaseAdapter adapter) {
@@ -208,8 +199,4 @@ public class BaseShopListDelegate extends BaseMvpDelegate<ShopListPresenterImpl>
         mPopWindwo.show();
         mPopWindwo.setOnDismissListener(this::defaultSetting);
     }
-
-
-
-
 }

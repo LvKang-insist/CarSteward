@@ -35,8 +35,6 @@ public class DefaultSelectAdapter extends CarBaseAdapter<String> {
         textView.setOnClickListener(v -> ToastUtils.show(list.get(position)));
         if (position == list.size() - 1) {
             viewHolder.findViewById(R.id.item_tv_view).setVisibility(View.GONE);
-        } else {
-            viewHolder.findViewById(R.id.item_tv_view).setVisibility(View.INVISIBLE);
         }
     }
 }

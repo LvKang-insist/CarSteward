@@ -5,6 +5,7 @@ import android.view.View;
 import androidx.annotation.CallSuper;
 import androidx.annotation.UiThread;
 import androidx.appcompat.widget.AppCompatTextView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import butterknife.Unbinder;
 import butterknife.internal.DebouncingOnClickListener;
 import butterknife.internal.Utils;
@@ -33,6 +34,7 @@ public class BaseShopListDelegate_ViewBinding implements Unbinder {
     target.mServiceLine = Utils.findRequiredView(source, R.id.base_delegate_shop_select_service_line, "field 'mServiceLine'");
     target.mSortLine = Utils.findRequiredView(source, R.id.base_delegate_shop_select_sort_line, "field 'mSortLine'");
     target.mFiltrateLine = Utils.findRequiredView(source, R.id.base_delegate_shop_select_filtrate_line, "field 'mFiltrateLine'");
+    target.mRefreshLayout = Utils.findRequiredViewAsType(source, R.id.base_delegate_shop_refresh, "field 'mRefreshLayout'", SwipeRefreshLayout.class);
     view = Utils.findRequiredView(source, R.id.base_delegate_shop_select_city, "method 'selectClick'");
     view7f0b0046 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
@@ -79,6 +81,7 @@ public class BaseShopListDelegate_ViewBinding implements Unbinder {
     target.mServiceLine = null;
     target.mSortLine = null;
     target.mFiltrateLine = null;
+    target.mRefreshLayout = null;
 
     view7f0b0046.setOnClickListener(null);
     view7f0b0046 = null;

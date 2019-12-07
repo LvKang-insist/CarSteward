@@ -1,6 +1,7 @@
 R_DEF: Internal format may change without notice
 local
 drawable select_top_arrow
+drawable title_top_arrow
 id base_delegate_shop_default
 id base_delegate_shop_recycler
 id base_delegate_shop_refresh
@@ -16,8 +17,11 @@ id base_delegate_shop_select_service_tv
 id base_delegate_shop_select_sort
 id base_delegate_shop_select_sort_line
 id base_delegate_shop_select_sort_tv
+id item_tv_tv
+id item_tv_view
 id ll_content
 layout base_delegate_shop_list
+layout item_tv
 string app_name
 string default_sort
 string filtrate
