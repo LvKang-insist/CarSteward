@@ -27,7 +27,6 @@ android {
             keyAlias = 'CarSteward'
             keyPassword 'nulicarsteward'
         }
-
     }
     buildTypes {
         release {
@@ -41,7 +40,19 @@ android {
         targetCompatibility = '1.8'
     }
 
-
+    applicationVariants.all { variant ->
+        variant.outputs.all {
+            def buildType = variant.buildType.name
+            //获取当前时间的"YYYY-MM-dd"格式。
+            def createTime = new Date().format("YYYY-MM-dd HH-mm-ss", TimeZone.getTimeZone("GMT+08:00"))
+            //只对Release包起作用，如果不是Release包则不变更输出路径，否则可能导致AS无法自动安装debug包。
+            if (buildType == "release") {
+                outputFileName = "/CarSteward-replace-${createTime}.apk"
+            } else if (buildType == "debug") {
+                outputFileName = "/CarSteward-debug-${createTime}.apk"
+            }
+        }
+    }
     walle {
         // 指定渠道包的输出路径
         apkOutputFolder = new File("${project.buildDir}/outputs/channels");
@@ -61,8 +72,6 @@ android {
 dependencies {
     implementation project(path: ':core')
     implementation project(path: ':detegateManager')
-
-
     implementation 'com.tencent.bugly:crashreport_upgrade:1.4.2'
     implementation 'com.tinkerpatch.sdk:tinkerpatch-android-sdk:1.2.14'
     implementation 'com.tencent.bugly:nativecrashreport:3.7.1'
