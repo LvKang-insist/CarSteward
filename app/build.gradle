@@ -46,9 +46,9 @@ android {
             //获取当前时间的"YYYY-MM-dd"格式。
             def createTime = new Date().format("YYYY-MM-dd HH-mm-ss", TimeZone.getTimeZone("GMT+08:00"))
             if (buildType == "release") {
-                outputFileName = "CarSteward-replace-${createTime}.apk"
+                outputFileName = "CarSteward-replace-${createTime}-${APP_VERSION}.apk"
             } else if (buildType == "debug") {
-                outputFileName = "CarSteward-debug-${createTime}.apk"
+                outputFileName = "CarSteward-debug-${createTime}-${APP_VERSION}.apk"
             }
         }
     }

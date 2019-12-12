@@ -5,7 +5,7 @@ ext{
     min_sdk_version = 15
     target_sdk_version = 29
     version_code = 1
-    version_name = API_VERSION
+    version_name = APP_VERSION
     build_tools_version = "29.0.2"
 
 
