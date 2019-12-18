@@ -1,0 +1,45 @@
+import groovy.json.JsonOutput
+
+task writeTask {
+    //为 task 指定输入
+    inputs.property('versionName', version_name)
+    inputs.property('versionCode', version_code)
+    inputs.property('versionInfo', "---------")
+    //为 task 指定输出
+    outputs.file this.destFile
+    doLast {
+        def map = inputs.getProperties()
+        File file = outputs.getFiles().getSingleFile()
+        def versionMsg = new VersionMsg(map)
+        def json = JsonOutput.toJson(versionMsg)
+        if (file.text != null && file.text.size() >= 0) {
+            def lines =
+                    file.readLines()
+            def lengths = lines.size() //一共多少行
+            file.withWriter {
+                writer ->
+                    if (lengths == 0) {
+                        writer.append("[")
+                        //将json串格式化后写入
+                        writer.append("${JsonOutput.prettyPrint(json)}\n")
+                    } else {
+                        for (int i = 0; i < lines.size(); i++) {
+                            if (i == lengths - 1) {
+                                writer.append(",")
+                                break
+                            }
+                            writer.append(lines[i] + "\n")
+                        }
+                        writer.append("${JsonOutput.prettyPrint(json)}\n")
+                    }
+                    writer.append("]")
+            }
+        }
+    }
+}
+
+class VersionMsg {
+    String versionName
+    String versionCode
+    String versionInfo
+}

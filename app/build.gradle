@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'walle'
 apply from: 'tinker-support.gradle'
+
 android {
     compileSdkVersion compile_sdk_version
     buildToolsVersion build_tools_version
@@ -74,4 +75,17 @@ dependencies {
     implementation 'com.tencent.bugly:crashreport_upgrade:1.4.2'
     implementation 'com.tinkerpatch.sdk:tinkerpatch-android-sdk:1.2.14'
     implementation 'com.tencent.bugly:nativecrashreport:3.7.1'
+}
+
+
+this.project.afterEvaluate {
+    Project pro ->
+        def buildTask = pro.tasks.getByName('build')
+        if (buildTask == null) {
+            throw GradleException('the build task is not fond')
+        }
+        buildTask.doLast {
+            //build 执行完成后
+            writeTask.execute()
+        }
 }
