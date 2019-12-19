@@ -1,6 +1,6 @@
-if (isDebug.toBoolean()){
+if (isDebug.toBoolean()) {
     apply plugin: 'com.android.application'
-}else {
+} else {
     apply plugin: 'com.android.library'
 }
 apply plugin: 'com.jakewharton.butterknife'
@@ -33,11 +33,13 @@ android {
         targetCompatibility = '1.8'
     }
 
+
     sourceSets {
         main {
+            //指定从哪个目录读取 manifest
             if (isDebug.toBoolean()) {
                 manifest.srcFile 'src/debug/AndroidManifest.xml'
-            }else {
+            } else {
                 manifest.srcFile 'src/main/AndroidManifest.xml'
             }
         }

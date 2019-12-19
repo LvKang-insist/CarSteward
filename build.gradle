@@ -15,8 +15,6 @@ buildscript {
         classpath 'com.meituan.android.walle:plugin:1.1.6'
         //bugly
         classpath "com.tencent.bugly:tinker-support:1.2.1"
-
-
     }
 }
 
