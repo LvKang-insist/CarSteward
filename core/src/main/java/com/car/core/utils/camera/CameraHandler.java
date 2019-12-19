@@ -84,6 +84,7 @@ public class CameraHandler implements View.OnClickListener {
         } else {
             imageUri = Uri.fromFile(tempFile);
         }
+
         CameraImageBean.getInstance().setPath(imageUri);
         CameraImageBean.getInstance().setFile(tempFile);
 

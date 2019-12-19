@@ -11,3 +11,9 @@ sourceSets {
         }
     }
 }
+dependencies {
+    //gradle sdk
+    implementation gradleApi()
+    //groovy sdk
+    implementation localGroovy()
+}

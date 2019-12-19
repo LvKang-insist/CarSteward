@@ -19,7 +19,6 @@ public class LatteCamera {
                 FileUtil.getFileNameByTime("IMG","jpg")).getPath());
     }
 
-
     public static void start(PermissionCheckerDelegate delegate){
         new CameraHandler(delegate).beginCameraDialog();
     }
