@@ -1,14 +1,11 @@
-ext{
+ext {
 
     compile_sdk_version = 29
     min_sdk_version = 15
     target_sdk_version = 29
-    version_code = 1
+    version_code = 2
     version_name = APP_VERSION
+    version_info = "版本更新信息"
     build_tools_version = "29.0.2"
 
-    destFile = file('releases.json')
-    if (destFile != null && !destFile.exists()) {
-        destFile.createNewFile()
-    }
 }

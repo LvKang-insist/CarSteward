@@ -1,2 +1,1 @@
-include ':app', ':core', ':detegateManager', ':tabHome', ':tabShop', ':tabDiscover', ':tabMall', ':tabMine', ':ui', ':srcplugin'
-rootProject.name = 'CarSteward'
+include ":app", ":core", ":detegateManager", ":tabDiscover", ":tabHome", ":tabMall", ":tabShop", ":ui", ":tabMine", ":buildSrc"

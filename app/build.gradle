@@ -1,6 +1,10 @@
 apply plugin: 'com.android.application'
 apply plugin: 'walle'
+apply plugin: 'com.car.srcplugin'
 apply from: 'tinker-support.gradle'
+
+
+def buildType = "test"
 
 android {
     compileSdkVersion compile_sdk_version
@@ -15,7 +19,6 @@ android {
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         flavorDimensions "versionCode"
-
     }
     // jenkins 不能打包的问题
     lintOptions {
@@ -43,7 +46,7 @@ android {
 
     applicationVariants.all { variant ->
         variant.outputs.all {
-            def buildType = variant.buildType.name
+            buildType = variant.buildType.name
             //获取当前时间的"YYYY-MM-dd"格式。
             def createTime = new Date().format("YYYY-MM-dd HH-mm-ss", TimeZone.getTimeZone("GMT+08:00"))
             if (buildType == "release") {
@@ -85,14 +88,9 @@ dependencies {
 }
 
 
-this.project.afterEvaluate {
-    Project pro ->
-        def buildTask = pro.tasks.getByName('build')
-        if (buildTask == null) {
-            throw GradleException('the build task is not fond')
-        }
-        buildTask.doLast {
-            //build 执行完成后
-            writeTask.execute()
-        }
+releaseInfo {
+    versionCode String.valueOf(version_code)
+    versionName version_name
+    versionInfo "新版本发布"
+    fileName buildType
 }

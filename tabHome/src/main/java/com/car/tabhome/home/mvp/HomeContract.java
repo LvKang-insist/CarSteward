@@ -2,7 +2,6 @@ package com.car.tabhome.home.mvp;
 
 import com.car.core.mvp.presenter.IBasePresenter;
 import com.car.core.mvp.view.IBaseView;
-import com.car.core.utils.bean.DataBean;
 import com.car.core.utils.bean.GetStylesBean;
 
 import java.util.WeakHashMap;
