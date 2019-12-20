@@ -55,6 +55,13 @@ android {
             } else if (type == "debug") {
                 outputFileName = "CarSteward-debug-${createTime}-${APP_VERSION}.apk"
             }
+            releaseInfo {
+                println "------------ info"
+                versionCode String.valueOf(version_code)
+                versionName version_name
+                versionInfo "新版本发布"
+                buildType type.capitalize()
+            }
         }
     }
     walle {
@@ -79,6 +86,8 @@ android {
             jniLibs.srcDirs = ['libs']
         }
     }
+
+
 }
 dependencies {
     implementation project(path: ':core')
@@ -88,13 +97,5 @@ dependencies {
     implementation 'com.tencent.bugly:nativecrashreport:3.7.1'
 }
 
-releaseInfo {
-    println "------------ info"
-    versionCode String.valueOf(version_code)
-    versionName version_name
-    versionInfo "新版本发布"
-    buildType type
-}
-gradle.buildFinished {
 
-}
+

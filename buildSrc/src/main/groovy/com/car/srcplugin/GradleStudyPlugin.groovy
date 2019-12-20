@@ -27,7 +27,6 @@ class GradleStudyPlugin implements Plugin<Project> {
                 if (buildType == null || buildType.isEmpty()) {
                     return
                 }
-                println "--------------" + buildType
                 def buildTask = pro.tasks.getByName("assemble${buildType}")
                 if (buildTask == null) {
                     throw GradleException('the build task is not fond')
