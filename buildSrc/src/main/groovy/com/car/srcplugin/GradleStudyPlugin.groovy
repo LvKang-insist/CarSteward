@@ -17,11 +17,18 @@ class GradleStudyPlugin implements Plugin<Project> {
     void apply(Project project) {
         //通过在外边定义 ReleaseInfo 闭包，完成对 ReleaseInfoExtension 的初始化
         project.extensions.create('releaseInfo', ReleaseInfoExtension)
+        println "执行"
         //创建 Task
         ReleaseInfoTask task = project.tasks.create('replaceInfoTask', ReleaseInfoTask)
         project.afterEvaluate {
             Project pro ->
-                def buildTask = pro.tasks.getByName('build')
+                String buildType = project.extensions.releaseInfo.buildType
+                println "--------" + buildType
+                if (buildType == null || buildType.isEmpty()) {
+                    return
+                }
+                println "--------------" + buildType
+                def buildTask = pro.tasks.getByName("assemble${buildType}")
                 if (buildTask == null) {
                     throw GradleException('the build task is not fond')
                 }

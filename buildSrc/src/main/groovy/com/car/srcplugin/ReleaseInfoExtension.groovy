@@ -4,13 +4,6 @@ class ReleaseInfoExtension {
     String versionCode
     String versionName
     String versionInfo
-    String fileName
+    String buildType
 
-    @Override
-    String toString() {
-        "versionCode = ${versionCode}\n" +
-                "versionName = ${versionName}\n" +
-                "versionInfo = ${versionInfo}\n" +
-                "fileName = ${fileName}"
-    }
 }

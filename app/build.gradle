@@ -4,7 +4,7 @@ apply plugin: 'com.car.srcplugin'
 apply from: 'tinker-support.gradle'
 
 
-def buildType = "test"
+def type
 
 android {
     compileSdkVersion compile_sdk_version
@@ -46,12 +46,13 @@ android {
 
     applicationVariants.all { variant ->
         variant.outputs.all {
-            buildType = variant.buildType.name
+            type = variant.buildType.name
+            println "------------var   " + type
             //获取当前时间的"YYYY-MM-dd"格式。
             def createTime = new Date().format("YYYY-MM-dd HH-mm-ss", TimeZone.getTimeZone("GMT+08:00"))
-            if (buildType == "release") {
+            if (type == "release") {
                 outputFileName = "CarSteward-replace-${createTime}-${APP_VERSION}.apk"
-            } else if (buildType == "debug") {
+            } else if (type == "debug") {
                 outputFileName = "CarSteward-debug-${createTime}-${APP_VERSION}.apk"
             }
         }
@@ -87,10 +88,13 @@ dependencies {
     implementation 'com.tencent.bugly:nativecrashreport:3.7.1'
 }
 
-
 releaseInfo {
+    println "------------ info"
     versionCode String.valueOf(version_code)
     versionName version_name
     versionInfo "新版本发布"
-    fileName buildType
+    buildType type
+}
+gradle.buildFinished {
+
 }

@@ -28,17 +28,17 @@ class ReleaseInfoTask extends DefaultTask {
     /**
      * 将 Extension 类中的信息写入到指定的文件中
      */
-    public void upDataInfo() {
+     void upDataInfo() {
         String versionNameMsg = project.extensions
                 .releaseInfo.versionName
         String versionCodeMsg = project.extensions
                 .releaseInfo.versionCode
         String versionInfoMsg = project.extensions
                 .releaseInfo.versionInfo
-        String fileName = project.extensions
-                .releaseInfo.fileName
+        String buildType = project.extensions
+                .releaseInfo.buildType
 
-        File file = project.file(fileName + ".json")
+        File file = project.file(buildType + ".json")
         if (file != null && !file.exists()) {
             file.createNewFile()
         }
