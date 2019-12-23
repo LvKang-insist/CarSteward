@@ -3,9 +3,6 @@ apply plugin: 'walle'
 apply plugin: 'com.car.srcplugin'
 apply from: 'tinker-support.gradle'
 
-
-def type
-
 android {
     compileSdkVersion compile_sdk_version
     buildToolsVersion build_tools_version
@@ -25,8 +22,8 @@ android {
         abortOnError false
     }
     signingConfigs {
-        config {
-            storeFile file('..\\app\\CarSteward.jks')
+        release {
+            storeFile file('app\\CarSteward.jks')
             storePassword 'nulicarsteward'
             keyAlias = 'CarSteward'
             keyPassword 'nulicarsteward'
@@ -36,33 +33,30 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.config
+            signingConfig signingConfigs.release
+        }
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
     compileOptions {
         sourceCompatibility = '1.8'
         targetCompatibility = '1.8'
     }
-
-    applicationVariants.all { variant ->
-        variant.outputs.all {
-            type = variant.buildType.name
-            println "------------var   " + type
-            //获取当前时间的"YYYY-MM-dd"格式。
-            def createTime = new Date().format("YYYY-MM-dd HH-mm-ss", TimeZone.getTimeZone("GMT+08:00"))
-            if (type == "release") {
-                outputFileName = "CarSteward-replace-${createTime}-${APP_VERSION}.apk"
-            } else if (type == "debug") {
-                outputFileName = "CarSteward-debug-${createTime}-${APP_VERSION}.apk"
+    applicationVariants.all {
+        variant ->
+            def type
+            variant.outputs.all {
+                type = variant.buildType.name
+                //获取当前时间的"YYYY-MM-dd"格式。
+                def createTime = new Date().format("YYYY-MM-dd HH-mm-ss", TimeZone.getTimeZone("GMT+08:00"))
+                if (type == "release") {
+                    outputFileName = "CarSteward-replace-${createTime}-${APP_VERSION}.apk"
+                } else if (type == "debug") {
+                    outputFileName = "CarSteward-debug-${createTime}-${APP_VERSION}.apk"
+                }
             }
-            releaseInfo {
-                println "------------ info"
-                versionCode String.valueOf(version_code)
-                versionName version_name
-                versionInfo "新版本发布"
-                buildType type.capitalize()
-            }
-        }
     }
     walle {
         // 指定渠道包的输出路径
@@ -86,8 +80,13 @@ android {
             jniLibs.srcDirs = ['libs']
         }
     }
-
-
+}
+upDataInfo {
+    versionCode String.valueOf(version_code)
+    versionName version_name
+    versionInfo version_info
+    //默认 Release
+    buildType "Debug"
 }
 dependencies {
     implementation project(path: ':core')
