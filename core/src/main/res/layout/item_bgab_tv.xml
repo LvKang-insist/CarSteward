@@ -23,6 +23,8 @@
         app:badge_textSize="8dp"
         app:badge_verticalMargin="0dp" />
 
+
+
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/item_bgab_tv_tv"
         android:layout_width="wrap_content"

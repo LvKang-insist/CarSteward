@@ -23,7 +23,6 @@ class GradleStudyPlugin implements Plugin<Project> {
         project.afterEvaluate {
             Project pro ->
                 String buildType = project.extensions.releaseInfo.buildType
-                println "--------" + buildType
                 if (buildType == null || buildType.isEmpty()) {
                     return
                 }
