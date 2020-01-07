@@ -1,17 +1,17 @@
 package com.car.srcplugin
 
 class VersionInfo {
-    private List<RelaseInfoBean> relaseInfo;
+    private List<UpDataInfoBean> updataInfo;
 
-    public List<RelaseInfoBean> getRelaseInfo() {
-        return relaseInfo;
+    public List<UpDataInfoBean> getSetUpDataInfo() {
+        return updataInfo;
     }
 
-    public void setRelaseInfo(List<RelaseInfoBean> relaseInfo) {
-        this.relaseInfo = relaseInfo;
+    public void setSetUpDataInfo(List<UpDataInfoBean> relaseInfo) {
+        this.updataInfo = relaseInfo;
     }
 
-    public static class RelaseInfoBean {
+    public static class UpDataInfoBean {
         /**
          * versionName :
          * versionCode :
