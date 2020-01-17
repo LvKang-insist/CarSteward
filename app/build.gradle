@@ -23,7 +23,7 @@ android {
     }
     signingConfigs {
         release {
-            storeFile file('app\\CarSteward.jks')
+            storeFile file('CarSteward.jks')
             storePassword 'nulicarsteward'
             keyAlias = 'CarSteward'
             keyPassword 'nulicarsteward'

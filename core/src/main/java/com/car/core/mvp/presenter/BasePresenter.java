@@ -3,6 +3,7 @@ package com.car.core.mvp.presenter;
 import android.os.Bundle;
 
 import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.OnLifecycleEvent;
 
@@ -25,7 +26,7 @@ import java.lang.reflect.Proxy;
  * @description P层基类 需要被继承，内部对生命周期进行代理，可直接在 P 层使用生命周期
  */
 public abstract class BasePresenter<V extends IBaseView, M extends BaseModel>
-        implements IBasePresenter<V> {
+        implements IBasePresenter<V>, LifecycleObserver {
 
     private WeakReference<V> viewRef;
 
@@ -44,6 +45,7 @@ public abstract class BasePresenter<V extends IBaseView, M extends BaseModel>
 
     /**
      * 动态代理，如果 V 层为 null。则取消调用
+     *
      * @return
      */
     public V getView() {
@@ -125,10 +127,12 @@ public abstract class BasePresenter<V extends IBaseView, M extends BaseModel>
 
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     public void onMvpCreate() {
+
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
     public void onMvpStart() {
+
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
@@ -141,7 +145,12 @@ public abstract class BasePresenter<V extends IBaseView, M extends BaseModel>
 
     @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
     public void onMvpStop() {
+
     }
+
+
+
+
 
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
     public void onMvpDestroy() {
