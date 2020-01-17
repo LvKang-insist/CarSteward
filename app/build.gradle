@@ -1,8 +1,11 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-android'
 apply plugin: 'walle'
 apply plugin: 'com.car.srcplugin'
 apply from: 'tinker-support.gradle'
-
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 android {
     compileSdkVersion compile_sdk_version
     buildToolsVersion build_tools_version
@@ -94,7 +97,9 @@ dependencies {
     implementation 'com.tencent.bugly:crashreport_upgrade:1.4.2'
     implementation 'com.tinkerpatch.sdk:tinkerpatch-android-sdk:1.2.14'
     implementation 'com.tencent.bugly:nativecrashreport:3.7.1'
+
 }
+
 
 
 

@@ -1,8 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/delegate_shop_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/delegate_shop_layout"
     android:orientation="vertical">
 
-</LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/delegate_shop_iv"
+        android:layout_width="match_parent"
+        android:layout_height="300dp" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/delegate_shop_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>

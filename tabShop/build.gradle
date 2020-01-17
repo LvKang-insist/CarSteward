@@ -4,6 +4,8 @@ if (isDebug.toBoolean()){
     apply plugin: 'com.android.library'
 }
 apply plugin: 'com.jakewharton.butterknife'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion compile_sdk_version
@@ -50,3 +52,4 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.1.0'
     implementation project(path: ':ui')
 }
+

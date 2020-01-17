@@ -1,5 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'com.jakewharton.butterknife'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 android {
     compileSdkVersion compile_sdk_version
     buildToolsVersion "29.0.2"
@@ -37,4 +39,5 @@ dependencies {
     implementation project(path: ':core')
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.1.0'
 }
+
 

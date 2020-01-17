@@ -1,4 +1,6 @@
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion compile_sdk_version
@@ -36,5 +38,4 @@ dependencies {
         implementation project(path: ':tabMine')
         implementation project(path: ':tabDiscover')
     }
-
 }

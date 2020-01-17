@@ -1,5 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'com.jakewharton.butterknife'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 android {
 
     compileSdkVersion compile_sdk_version
@@ -52,10 +54,10 @@ dependencies {
     api 'me.yokeyword:fragmentationx:1.0.1'
 
     //网络请求依赖
-    api 'com.squareup.okhttp3:okhttp:3.12.0'
-    api 'com.squareup.retrofit2:retrofit:2.3.0'
+    api 'com.squareup.okhttp3:okhttp:3.14.0'
+    api 'com.squareup.retrofit2:retrofit:2.6.2'
     api 'com.squareup.retrofit2:converter-scalars:2.3.0'
-    api 'com.squareup.retrofit2:converter-gson:2.3.0'
+    api 'com.squareup.retrofit2:converter-gson:2.6.2'
 
     //RxJava
     api 'io.reactivex.rxjava2:rxjava:2.2.8'
@@ -116,4 +118,12 @@ dependencies {
     //多渠道
     api 'com.meituan.android.walle:library:1.1.6'
 
+    api "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+    //协程
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.1"
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.1"
+
+}
+repositories {
+    mavenCentral()
 }
