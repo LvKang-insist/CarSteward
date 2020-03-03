@@ -15,6 +15,12 @@ android {
         versionName version_name
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
+//显示声明指出注解
+        javaCompileOptions {
+            annotationProcessorOptions {
+                includeCompileClasspath true
+            }
+        }
     }
     // jenkins 不能打包的问题
     lintOptions {
@@ -98,8 +104,11 @@ dependencies {
     api 'com.blankj:utilcode:1.23.7'
 
     //权限管理
-    api 'com.github.hotchemi:permissionsdispatcher:3.1.0'
-    annotationProcessor 'com.github.hotchemi:permissionsdispatcher-processor:3.1.0'
+//    api 'com.github.hotchemi:permissionsdispatcher:3.1.0'
+//    annotationProcessor 'com.github.hotchemi:permissionsdispatcher-processor:3.1.0'
+
+    api('com.github.hotchemi:permissionsdispatcher:3.1.0')
+    annotationProcessor  'com.github.hotchemi:permissionsdispatcher-processor:3.1.0'
 
     //解决方法超过 65536
     api 'com.android.support:multidex:1.0.3'

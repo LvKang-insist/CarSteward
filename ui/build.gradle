@@ -17,6 +17,12 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
+        //显示声明指出注解
+        javaCompileOptions {
+            annotationProcessorOptions {
+                includeCompileClasspath true
+            }
+        }
     }
     // jenkins 不能打包的问题
     lintOptions {
@@ -37,7 +43,7 @@ android {
 
 dependencies {
     implementation project(path: ':core')
-    annotationProcessor 'com.jakewharton:butterknife-compiler:10.1.0'
+    annotationProcessor  'com.jakewharton:butterknife-compiler:10.1.0'
 }
 
 

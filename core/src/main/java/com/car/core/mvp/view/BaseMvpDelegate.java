@@ -95,6 +95,11 @@ public abstract class BaseMvpDelegate<P extends IBasePresenter> extends Permissi
         }
         initToolbar();
 //        setImmersion(R.color.colorPrimaryDark);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
         bindView(rootView);
     }
 
