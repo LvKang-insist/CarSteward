@@ -1,1 +1,5 @@
-include ":app", ":core", ":detegateManager", ":tabDiscover", ":tabHome", ":tabMall", ":tabShop", ":ui", ":tabMine", ":buildSrc"
+include ":app"
+//library
+include ":core", ":detegateManager", ":tabDiscover", ":tabHome", ":tabMall", ":tabShop", ":ui", ":tabMine", ":buildSrc"
+//app module
+include ':module:ModuleTabMine'
